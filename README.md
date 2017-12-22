@@ -1,5 +1,8 @@
-# 下方有一些链接可以点击一下
-* This is an [resume]("./blog/resume.md")
-* This is an [resume]("./blog/index.html")
-* Gum.
-* Booze.
+## [这里有一些链接](https://github.com/Composur/resume)
+
+
+- #### __[resume](https://github.com/Composur/resume/blob/master/blog/resume.md)__
+- #### __[当输入URL并按下回车的时候发生了什么](https://github.com/Composur/resume/blob/master/blog/http.md)__
+
+
+
