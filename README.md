@@ -5,7 +5,7 @@
 
 - #### __[当输入URL并按下回车的时候发生了什么](https://github.com/Composur/resume/blob/master/blog/http.md)__
 
-- #### __[详解git reset](https://github.com/Composur/resume/blob/master/blog/http.md)__
+- #### __[详解git reset](https://github.com/Composur/resume/blob/master/blog/git_reset.md)__
 
 
 
