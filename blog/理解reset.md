@@ -22,6 +22,8 @@
     router.delete('/:id',   deleteUser);//删除资源
 
     ```
+
+    
 ###  简单来说reset是一种软件架构风格。是对资源的表述性状态迁移，即资源(文本、图片等)在网络中以某种形式进行状态转移；如果一个架构符合REST原则，那么它就是RESTful架构
 
 >[详情查看阮一峰老师博客](http://www.ruanyifeng.com/blog/2011/09/restful)
