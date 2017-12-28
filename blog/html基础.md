@@ -1,8 +1,8 @@
 常见浏览器有哪些？哪些内核？
 ### 如图所示最近一年浏览器市场份额统计
-![图片](//video.jirengu.com/FtfJOmpOI4lD1TxqU0TnKlzLMv4w)
+![图片](./img/browser.jpg)
 ### 常见的浏览器内核与js引擎
-![图片](//video.jirengu.com/FkAGbMRyP98a17PWxMlQNoX0xlVR)
+![图片](./img/browser_kernel.jpg)
 doctype有什么作用？怎么写？
 ###  首先<!DOCTYPE>告诉浏览器当前的HTML(或XHTML)文档是哪一个版本应该以何种规范去解析文档。Doctye是一条声明，而不是一个标签；是一个文档类型声明简称‘DTD’.
 页面出现了乱码，是怎么回事？如何解决？
