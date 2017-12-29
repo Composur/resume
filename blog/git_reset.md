@@ -9,3 +9,12 @@
 
 * 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
 
+## git pull 和 git fetch 的区别
+- 来一张珍藏的图
+ ![](./img/git_pull.jpg)
+- git pull = git fetch + merge
+- git fetch 拿到了远程所有分支的更新
+- merge 动作的默认目标是当前分支
+- merge 动作的来源则取决于你是否有 tracking
+
+
