@@ -5,9 +5,12 @@
 
 - #### __[当输入URL并按下回车的时候发生了什么](https://github.com/Composur/resume/blob/master/blog/http.md)__
 
-- #### __[记录遇到的git相关的问题](https://github.com/Composur/resume/blob/master/blog/%E7%90%86%E8%A7%A3reset.md)__
+- #### __[什么事RESTful架构风格](https://github.com/Composur/resume/blob/master/blog/%E7%90%86%E8%A7%A3reset.md)__
 
 - #### __[html基础](https://github.com/Composur/resume/blob/master/blog/html%E5%9F%BA%E7%A1%80.md)__
+
+- #### __[遇到的git问题](https://github.com/Composur/resume/blob/master/blog/git_reset.md)__
+
 
 
 
