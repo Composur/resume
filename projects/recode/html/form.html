@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+    <style>
+        .test-border{
+            border: 1px solid red;
+        }
+        label{
+            /*border: 1px solid green;*/
+        }
+        .form-item{
+            display: block;
+            margin: 20px;
+            /*border: 1px solid black;*/
+        }
+        .form-text{
+        }
+    </style>
+</head>
+
+<body>
+<header class="test-border">
+    <h2>header</h2>
+</header>
+
+<body class="test-border">
+<section>
+    <h3>this is section title</h3>
+    <form action="/submit" method="post">
+        <div class="form-item">
+            <label for="username">用户名：</label>
+            <input type="text" name="username" id="username" class="form-text">
+        </div>
+        <div class="form-item">
+            <label for="password">密　码：</label>
+            <!--<div class="form-field">-->
+                <input type="password" name="password" id="password" class="form-text">
+                <!--<span class="form-error">对不起，该用户名已经被占用</span>-->
+            <!--</div>-->
+        </div>
+        <div class="form-item">
+            <label for="">性别</label>
+            <input type="radio" name="gender" id="meal" value="meal"><label for="meal">男</label>
+            <input type="radio" name="gender" id="female" value="femeal"><label for="female">女</label>
+        </div>
+        <div class="form-item">
+            <label for="">爱好</label>
+            <input type="checkbox" name="bobby" value="dota" id="dota"><label for="dota">dota</label>
+            <input type="checkbox" name="bobby" value="travel" id="travel"><label for="travel">旅游</label>
+            <input type="checkbox" name="bobby" value="pet" id="pet"><label for="pet">宠物</label>
+        </div>
+        <div class="form-item">
+            <label for="textarea">评论：</label>
+            <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-item">
+            <label for="my-car">我的car</label>
+            <select name="car" id="my-car">
+                <option value="X5">X5</option>
+                <option value="benz">C200L</option>
+                <option value="ATENZA">阿特兹</option>
+                <option value="CX-5">CX-5</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <input type="submit" value="提交">
+        </div>
+    </form>
+</section>
+</body>
+<footer class="test-border">
+    this is footer
+</footer>
+</body>
+
+</html>
