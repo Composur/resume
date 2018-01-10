@@ -1,0 +1,44 @@
+/.idea
+/node_modules
+/migrations/.migrate
+/.vscode
+
+#VC files
+binding.sln
+*c_cpp_properties.json
+*.suo
+*.vcxproj.filters
+*.vcxproj.user
+*.ipch
+*.ilk
+*.opendb
+*.VC*.db*
+*.idb
+*.gypi
+*.*log
+*.lic
+*.key
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.tlog
+*.map
+*.exp
+
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Software-specific
+/public/uploads/*.xls*
+/public/uploads/*.pdf*
+/public/uploads/*.zip*
+/public/report_upload/*.xls*
+/public/report_upload/*.pdf*
+/public/report_upload/*.zip*
+/public/report_upload/*.htm*
