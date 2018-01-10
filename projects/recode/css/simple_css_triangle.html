@@ -10,55 +10,38 @@
         }
         .triangle {
             width: 0;
-            border-top: 40px solid #1F09FF;
-            border-right: 40px solid  #FEFF80;
-            border-bottom: 40px solid #288B00;
-            border-left: 40px solid #F40000;
+            border: 40px solid transparent;
             margin-top: 30px;
         }
         .triangle-down{
-            border-right: 40px solid transparent;
-            border-bottom: 40px solid transparent;
-            border-left: 40px solid transparent;
+            border-top: 40px solid #1F09FF;
         }
         .triangle-left{
-            border-top: 40px solid transparent;
-            border-right: 40px solid transparent;
-            border-bottom: 40px solid transparent;
-        }
-        .triangle-right{
-            border-top: 40px solid transparent;
-            border-bottom: 40px solid transparent;
-            border-left: 40px solid transparent;
-        }
-        .triangle-up{
-            border-top: 40px solid transparent;
-            border-right: 40px solid  transparent;
-            border-left: 40px solid transparent;
-        }
-        .triangle-left-down{
-            border-top: 40px solid transparent;
-            border-right: 40px solid transparent;
-            border-bottom: 40px solid #F40000;
             border-left: 40px solid #F40000;
         }
-        .triangle-right-down{
-            border-top: 40px solid transparent;
-            border-right: 40px solid  #288B00;
+        .triangle-right{
+            border-right: 40px solid  #FEFF80;
+        }
+        .triangle-up{
             border-bottom: 40px solid #288B00;
-            border-left: 40px solid transparent;
+        }
+        .triangle-left-down{
+            border-bottom: 40px solid #F40000;
+        }
+        .triangle-right-down{
+            border-right: 40px solid  #288B00;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="triangle"></div>
+    <div class="triangle triangle-up triangle-left triangle-right triangle-down"></div>
     <div class="triangle triangle-down"></div>
     <div class="triangle triangle-left"></div>
     <div class="triangle triangle-right"></div>
     <div class="triangle triangle-up"></div>
-    <div class="triangle triangle-left-down"></div>
-    <div class="triangle triangle-right-down"></div>
+    <div class="triangle triangle-left triangle-left-down"></div>
+    <div class="triangle  triangle-up triangle-right-down"></div>
 </div>
 
 </body>
