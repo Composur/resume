@@ -17,14 +17,22 @@
       <file leaf-file-name="simple_css.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/simple_css.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="32" column="45" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="57" selection-end-column="7" />
+            <state relative-caret-position="208">
+              <caret line="8" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>style</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>btn</replace>
+    </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -40,8 +48,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="283" />
-    <option name="y" value="135" />
+    <option name="x" value="285" />
+    <option name="y" value="350" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -137,12 +145,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515562787659</updated>
-      <workItem from="1515562788895" duration="2095000" />
+      <workItem from="1515562788895" duration="3683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2095000" />
+    <option name="totallyTimeSpent" value="3683000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -179,8 +187,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/css/simple_css.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="32" column="45" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="57" selection-end-column="7" />
+        <state relative-caret-position="208">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="7" />
           <folding />
         </state>
       </provider>
