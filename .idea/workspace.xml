@@ -12,8 +12,39 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD:.idea/workspace.xml
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+=======
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="simple_css.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/simple_css.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="8" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>style</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>btn</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/css/simple_css.html" />
+      </list>
+    </option>
+>>>>>>> f8e7af3ef1be7e1983bd714a431f9346b456ce5f:projects/recode/.idea/workspace.xml
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -21,9 +52,15 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD:.idea/workspace.xml
   <component name="ProjectFrameBounds">
     <option name="x" value="363" />
     <option name="y" value="91" />
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="285" />
+    <option name="y" value="350" />
+>>>>>>> f8e7af3ef1be7e1983bd714a431f9346b456ce5f:projects/recode/.idea/workspace.xml
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -105,13 +142,22 @@
       <created>1515576370938</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD:.idea/workspace.xml
       <updated>1515576370938</updated>
       <workItem from="1515576372199" duration="244000" />
+=======
+      <updated>1515562787659</updated>
+      <workItem from="1515562788895" duration="3683000" />
+>>>>>>> f8e7af3ef1be7e1983bd714a431f9346b456ce5f:projects/recode/.idea/workspace.xml
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD:.idea/workspace.xml
     <option name="totallyTimeSpent" value="244000" />
+=======
+    <option name="totallyTimeSpent" value="3683000" />
+>>>>>>> f8e7af3ef1be7e1983bd714a431f9346b456ce5f:projects/recode/.idea/workspace.xml
   </component>
   <component name="ToolWindowManager">
     <frame x="363" y="91" width="1400" height="1000" extended-state="0" />
@@ -144,4 +190,17 @@
     <breakpoint-manager />
     <watches-manager />
   </component>
+<<<<<<< HEAD:.idea/workspace.xml
+=======
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/css/simple_css.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+>>>>>>> f8e7af3ef1be7e1983bd714a431f9346b456ce5f:projects/recode/.idea/workspace.xml
 </project>
