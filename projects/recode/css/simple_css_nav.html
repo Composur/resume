@@ -7,7 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Simple_Nav</title>
     <style>
-        *{margin: 0;padding: 0;list-style: none;text-decoration: none}
+        *{margin: 0;padding: 0;list-style: none;text-decoration: none;color: black}
+        h1{
+            text-align: center;
+            margin: 50px;
+        }
         .nav{
             width: 600px;
             margin: 0 auto;
@@ -16,54 +20,112 @@
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)!important;
         }
         .nav>li{
-            font-size: 14px;
             display: inline-block;
-            cursor: pointer;
-            padding: 8px 16px;
         }
         .nav a{
             color: #000;
+            display: block;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 16px;
         }
-        .nav li:hover{
+        .nav li a:hover{
             background:rgb(204,204,204);
         }
         .more-show{
             position: relative;
         }
         .nav-child{
-            background: #F1F1F1;
+            background: #fff;
             display: none;
             position: absolute;
-            right: 0px;
         }
         .nav li:hover>ul{
             display: block;
         }
-        .nav-child li{
-            font-size: 14px;
-            padding:4px 6px;
+        /*第二个*/
+        .layout{
+            width: 600px;
+            margin: 0 auto;
+            background: #F1F1F1;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)!important;
         }
-        .more-show:hover{
-            background: red;
-        }
+        .h-navbar{
 
+        }
+        .h-navbar li{
+            float: left;
+            position: relative;
+        }
+        .h-navbar li a{
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+        }
+        .h-navbar li a:hover{
+            background:rgb(204,204,204);
+        }
+        .h-navbar .children{
+            position: absolute;
+            background: #FFF;
+            top: 100%;
+            display: none;
+        }
+        .children a{
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+        }
+        .h-navbar>li:hover .children{
+            display: block;
+        }
+        .children a:hover{
+            background:rgb(204,204,204);
+        }
+        .clearfix:after{
+            content: ".";
+            height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul class="nav">
-                <li><a href="javascript:;">首页</a></li>
-                <li><a href="javascript:;">作品</a></li>
-                <li class="more-show"><a href="javascript:;">更多</a>
-                    <ul class="nav-child">
-                        <li><a href="javascript:;">GitHub</a></li>
-                        <li><a href="javascript:;">博客</a></li>
-                        <li><a href="javascript:;">知乎</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <section>
+            <h1>二级导航用ul>li;li用inline-block;</h1>
+            <nav>
+                <ul class="nav">
+                    <li><a href="javascript:;">首页</a></li>
+                    <li><a href="javascript:;">作品</a></li>
+                    <li class="more-show"><a href="javascript:;">更多</a>
+                        <ul class="nav-child">
+                            <li><a href="javascript:;">GitHub</a></li>
+                            <li><a href="javascript:;">博客</a></li>
+                            <li><a href="javascript:;">知乎</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+        <section>
+            <h1>二级导航用div；用float；hover设置在了a上</h1>
+            <div class="layout clearfix">
+                <ul class="h-navbar">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">作品</a></li>
+                    <li>
+                        <a href="#">更多</a>
+                        <div class="children">
+                            <a href="#">GitHub</a>
+                            <a href="#">博客</a>
+                            <a href="#">知乎</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </header>
 </body>
 
