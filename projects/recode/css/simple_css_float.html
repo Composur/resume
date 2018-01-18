@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css_simple_alert</title>
+    <style>
+        .wrap {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        .alert {
+            color: #fff;
+            padding: 1px 16px;
+            line-height: 1.5;
+            border-radius: 3px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .alert.congratulation {
+            background: #5AAF4B;
+        }
+
+        .alert.information {
+            background: #3F97F6;
+        }
+
+        .alert.danger {
+            background: #EA402F;
+        }
+
+        .alert.waring {
+            background: #F79700;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="alert congratulation">
+        <span class="close">×</span>
+        <h3>test</h3>
+        <p>test</p>
+    </div>
+    <div class="alert information">
+        <span class="close">×</span>
+        <h3>test</h3>
+        <p>test</p>
+    </div>
+    <div class="alert danger">
+        <span class="close">×</span>
+        <h3>test</h3>
+        <p>test</p>
+    </div>
+    <div class="alert waring">
+        <span class="close">×</span>
+        <h3>test</h3>
+        <p>test</p>
+    </div>
+</div>
+</body>
+<script>
+    window.onload = function () {
+        var close=function () {
+            var allclose = document.querySelectorAll('.close')
+            var allalert = document.querySelectorAll('.alert')
+            for (var i = 0; i < allclose.length; i++) {
+                (function (i) {
+                    allclose[i].onclick = function () {
+                        if (window.confirm("确定删除吗?")) {
+                            allalert[i].remove()
+                        }
+                    }
+                })(i)
+            }
+        }
+        close()
+    }
+
+</script>
+</html>
