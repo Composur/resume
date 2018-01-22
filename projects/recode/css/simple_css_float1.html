@@ -1,0 +1,120 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .layout {
+            width: 1000px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            border: 1px solid black;
+        }
+
+        .content h1 {
+            color: #666;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .container:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .container .h-card {
+            float: left;
+            margin: 30px 0 0 25px;
+            list-style: none;
+            width: 300px;
+            box-shadow: 0 0 5px 2px rgba(76, 66, 63, 0.3);
+        }
+        .h-card>img {
+            width: 100%;
+            opacity: 0.75;
+        }
+        .h-card>img:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .h-card .detail {
+            padding: 1px 16px;
+        }
+
+        .h-card .detail h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .h-card .detail p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .h-card .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layout content">
+    <h1>风景列表</h1>
+    <ul class="container">
+        <li class="h-card">
+            <img src="../images/pic01.jpg" alt="">
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+        <li class="h-card">
+            <img src="../images/pic01.jpg" alt="">
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+        <li class="h-card">
+            <img src="../images/pic01.jpg" alt="">
+
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+    </ul>
+    <ul class="container">
+        <li class="h-card">
+           <img src="../images/pic01.jpg" alt="">
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+        <li class="h-card">
+           <img src="../images/pic01.jpg" alt="">
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+        <li class="h-card">
+           <img src="../images/pic01.jpg" alt="">
+            <div class="detail text-center">
+                <p>风景如画</p>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+
+</html>
