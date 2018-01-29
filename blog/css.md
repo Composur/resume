@@ -7,5 +7,8 @@
   ![](./img/fix_width_height.jpg)
 - vertical-align实现居中（div中的img）
   ![](./img/vertical-align.jpg)
+- 设置父容器display:table-cell；lvertical-align:middle(只对两种格式生效一种是行内元素另一种是表格元素)
+
+
 
 
