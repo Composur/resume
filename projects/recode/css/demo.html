@@ -8,46 +8,55 @@
     <title>index</title>
     <link rel="stylesheet" href="./common.css">
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_559588_vxguatao8ugnwmi.css">
 </head>
 <body>
     <header>
         <a  class="logo"  href="#"><img src="https://cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="logo"></a>
-        <ul>
+        <ul class="navbar clearfix">
+            <li class="active"><a href="#">首页</a></li>
             <li><a href="#">发现</a></li>
-            <li><a href="#">关注</a></li>
             <li><a href="#">消息</a> <span class="tip">99+</span>
                 <ul class="child">
-                    <li><a href="#"><span class="iconfont icon-comment"></span>评论</a></li>
+                    <li><a href="#"><span class="iconfont icon-comment"></span>评论<span class="tip">10+</span></a></li>
                     <li><a href="#"><span class="iconfont icon-message"></span>简信</a></li>
                     <li><a href="#"><span class="iconfont icon-follow"></span>关注</a></li>
                 </ul>
             </li>
         </ul>
-       <div class="search">
-           <form action="#">
-               <input type="text"><span class="iconfont icon-search"></span>
-           </form>
-           <div class="labels">
-               <h3>热门搜索</h3>
-               <a href="#" class="change"><span class="iconfont icon-refresh"></span>换一批</a>
-               <a href="#" class="label">比特币1</a>
-               <a href="#" class="label">比特币2</a>
-               <a href="#" class="label">比特币3</a>
-               <a href="#" class="label">比特币5</a>
-           </div>
+       <div class="search clearfix">
+           <!-- <form action="#"> -->
+               <input id="input" class="search-input" type="text"><span class="iconfont icon-search"></span>
+           <!-- </form> -->
+          <div class="search-panel clearfix">
+            <h3>热门搜索
+                <a href="#" class="change"><span class="iconfont icon-refresh"></span>换一批</a>                
+            </h3>
+            <div class="labels">
+                <a href="#" class="label">比特币1</a>
+                <a href="#" class="label">比币2</a>
+                <a href="#" class="label">比特币3</a>
+                <a href="#" class="label">比特币3</a>
+                <a href="#" class="label">比特币3</a>
+                <a href="#" class="label">比特币3</a>
+                <a href="#" class="label">比币5</a>
+            </div>
+          </div>
        </div>
-        <div class="extra">
+        <div class="extra clearfix">
             <a href="" class="iconfont icon-changeword"></a>
             <div class="user">
-                <img src="avatar" alt="头像"><span class="down iconfont icon-down"></span>
+            <div class="userinfo">    
+                <img class="avatar" src="../images/avatar.jpg" alt="头像"><span class="iconfont icon-down"></span>
+            </div>
                 <div class="child">
                     <a class="iconfont icon-user" href="#">用户</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
+                    <a href="#">密码</a>
+                    <a href="#">等等</a>
+                    <a href="#">等等</a>
                 </div>
             </div>
-            <a class="action-write" href="#"><span class="iconfont icon-write"></span>写文章</a>
+            <a class="action-write" href="#"><span class="iconfont icon-write"></span>写文章</a>                                                
         </div>
     </header>
     <section>
@@ -56,4 +65,5 @@
     </section>
     <footer></footer>
 </body>
+<script src="./index.js"></script>
 </html>
