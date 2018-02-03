@@ -2,7 +2,9 @@ header {
     border-bottom: 1px solid #ccc;
     height: 56px;
     line-height: 56px;
-    /* padding: 20px 0; */
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 header::after {
@@ -63,6 +65,7 @@ header .navbar .child {
     box-shadow: 0 2 rgba(0, 0, 0, 0.3);
     background: #ccc;
     display: none;
+    z-index: 255;
 }
 
 header .navbar>li:hover .child {
@@ -263,7 +266,14 @@ header .extra .user .child a:hover {
 }
 
 /* main 轮播 */
-
+main{
+    width: 630px;
+}
+section {
+    width: 950px;
+    height: 100%;
+    margin: 0 auto;
+}
 .carousel {
     position: relative;
     width: 630px;
@@ -326,4 +336,89 @@ header .extra .user .child a:hover {
 }
 .carousel:hover .carousel-arrow{
     display: block;
+}
+/* main hot-labels */
+
+main .hot-labels{
+    margin-top: 26px;
+    border: 1px solid blue;
+    width: 630px;
+    text-align: justify;
+}
+main .hot-labels .hotlabels{
+    display: inline-block;
+    /* border: 1px solid red; */
+    margin: 20px 10px 10px 10px;
+    background: #ccc;
+    border-radius: 5px;
+}
+main .hot-labels .hotlabels img{
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+main .hot-labels .hotlabels .hot-labels-name{
+    display: inline-block;
+   font-size: 14PX;
+    vertical-align: middle;
+}
+main .hot-labels .hotlables-more{
+    font-size: 14px;
+}
+/* main content */
+main .content{
+    border: 1px red solid;
+}
+.content li{
+    position: relative;
+    width: 100%;
+    margin: 0 0 17px;
+    padding: 0 2px 17px 0;
+    border-bottom: 1px solid #f0f0f0;
+    word-wrap: break-word;
+}
+.content li.content-list-item{
+    min-height: 140px;
+}
+.content li.content-list-item .wrap-img{
+    position: absolute;
+    top: 50%;
+    margin-top: -68px;
+    right: 0;
+    width: 150px;
+    height: 120px;
+}
+.content li.content-list-item .wrap-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+
+}
+.content li.content-list-item .content-detail{
+    padding-right: 160px;
+}
+.content-detail .author{
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+.content-detail .author .avatar{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px 0 0;
+}
+.avatar{
+    
+}
+/* main aside */
+aside {
+    width: 300px;
+    height: 100%;
+    float: right;
+    border: 1px solid red;
+}
+aside img{
+    width: 100%;
+    height: 100%;
 }
