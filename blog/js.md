@@ -37,7 +37,6 @@ xhr.send(null)
 + reflow是回流对整个页面重排改变元素的几何位置大小等
 + repaint不一定触发reflow但reflow一定触发repaint
 
-
 ### let和const
 + let的作用域为{let xx=xx} 在作用域中不能够在 let xx 不能再let xx 前调用 xx 
 + const和let一样除了cost是常量不能够重复赋值以外（只能够赋值一次且必须赋值）
@@ -45,3 +44,10 @@ xhr.send(null)
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
 + 复杂类型（引用类型）
+### NaN 
++ NaN(not a number)是一个全局对象的属性、不可配置、不可写在ES5中
++ typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
++ 一般用typeof value === 'number' && isNaN(value); 来判断一个值是否是NaN
+### ==与===有什么区别？
++ “==”是相等运算符只判断值是否相等，不管双等号两侧的数据类型，比较的时候会发生数据类型的转换，赋值表达式不具有比较作用
++ “===”是严格相等运算符即判断等号两侧的数据类型是否一致（不一致直接返回false），又判断value是否相等，比较的时候不会发生数据类型的转换

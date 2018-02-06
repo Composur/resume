@@ -56,3 +56,16 @@ console.log(1+1);
 console.log("2"+"4");  
 console.log(2+"4"); 
 console.log(+"4");
+
+type(NaN)
+
+if(NaN===NaN){
+    console.log('nna')
+}else{
+    console.log('ff')
+}
+
+console.log(undefined==null)//true
+console.log(undefined===null)//false
+type(undefined)
+type(null)
