@@ -38,3 +38,7 @@ xhr.send(null)
 ### let和const
 + let的作用域为{let xx=xx} 在作用域中不能够在 let xx 不能再let xx 前调用 xx 
 + const和let一样除了cost是常量不能够重复赋值以外（只能够赋值一次且必须赋值）
+
+### javascript中数据类型
++ 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
++ 复杂类型（引用类型）
