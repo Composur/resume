@@ -31,8 +31,11 @@ xhr.send(null)
 
 ### Repaint和Reflow
 + 二者的目的都是展现一个新的页面样貌
++ 网页生成的时候至少会渲染一次，渲染就需要从新生成布局和从新绘制前者叫重排（reflow）后者叫重绘（repaint）
++ 从新渲染触发的条件（修改DOM、修改样式表、用户事件）
 + repaint针对屏幕的中的一部分重新绘制（背景颜色等等，不改变该元素的位置大小）
 + reflow是回流对整个页面重排改变元素的几何位置大小等
++ repaint不一定触发reflow但reflow一定触发repaint
 
 
 ### let和const
