@@ -9,6 +9,10 @@
 
 - #### __[html基础](https://github.com/Composur/resume/blob/master/blog/html%E5%9F%BA%E7%A1%80.md)__
 - #### __[css基础](https://github.com/Composur/resume/blob/master/blog/css.md)__
+- #### __[js笔记](https://github.com/Composur/resume/blob/master/blog/js.md)__
+
+
+
 
 - #### __[遇到的git问题](https://github.com/Composur/resume/blob/master/blog/git_reset.md)__
 
