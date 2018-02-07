@@ -28,6 +28,11 @@ xhr.send(null)
 + 解析JavaScript脚本，主要是通过DOM API 和CSSOM API来操作DOM Tree 和CSS Rule Tree
 + 解析完成后通过DOMTree和CSSTree来构造Rendering Tree，它并不等同于DOM树，浏览器计算每个元素的位置这个又叫layout和reflow
 + 最后调用操作系统的Native GUI的API进行绘制
+- 解析 HTML 标签, 构建 DOM 树
+- 解析 CSS 标签, 构建 CSSOM 树
+- 把 DOM 和 CSSOM 组合成 渲染树 (render tree)
+- 在渲染树的基础上进行布局, 计算每个节点的几何结构
+- 把每个节点绘制到屏幕上 (painting)
 
 ### Repaint和Reflow
 + 二者的目的都是展现一个新的页面样貌
@@ -49,5 +54,19 @@ xhr.send(null)
 + typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
 + 一般用typeof value === 'number' && isNaN(value); 来判断一个值是否是NaN
 ### ==与===有什么区别？
-+ “==”是相等运算符只判断值是否相等，不管双等号两侧的数据类型，比较的时候会发生数据类型的转换，赋值表达式不具有比较作用
++ “==”是比较强制类型转换之后的结果，“===”则是直接比较
++ “==”比较的时候会发生数据类型的转换当和一个Boolean值进行比较得时候javascript会将这个Boolean值转换为number类型再进行比较，赋值表达式不具有比较作用
 + “===”是严格相等运算符即判断等号两侧的数据类型是否一致（不一致直接返回false），又判断value是否相等，比较的时候不会发生数据类型的转换
++ 一些特殊的比较示例
+    ```
+    false == ""  // true
+    false == []  // true
+    false == {}  // false
+    "" == 0      // true
+    "" == []     // true
+    "" == {}     // false
+    0 == []      // true
+    0 == {}      // false
+    0 == null    // false
+
+    ```
