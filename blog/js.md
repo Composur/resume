@@ -70,3 +70,9 @@ xhr.send(null)
     0 == null    // false
 
     ```
+### null和undefined
++ 二者在if语句中会自动转换为false
+### Boolean
++ 除了undefined、null、false、0、NaN、""/'' 都会转换为true
++ 空数组[]和空对象对应的Boolean值都是true
+
