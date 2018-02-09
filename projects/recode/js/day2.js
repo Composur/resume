@@ -27,4 +27,6 @@ log('')
 log('oo')   
 log(Object==Object)   
 log(Number(true)===1)   
-log(Number(" "))   
+log(Number(" "))
+
+log("null array"+[].valueOf())
