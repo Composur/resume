@@ -11,6 +11,8 @@ function fn1() {
     }
     var a = 2
     return fn3
+
+    
 }
 var fn = fn1()
 // log(fn)
