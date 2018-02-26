@@ -12,7 +12,7 @@ function fn1() {
     var a = 2
     return fn3
 
-    
+
 }
 var fn = fn1()
 // log(fn)
@@ -28,3 +28,4 @@ arr.pop()
 log(arr)
 arr.splice(1,1,2)
 log(arr)
+// add
