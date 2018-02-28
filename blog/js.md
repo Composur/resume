@@ -76,3 +76,4 @@ xhr.send(null)
 + 除了undefined、null、false、0、NaN、""/'' 都会转换为true
 + 空数组[]和空对象对应的Boolean值都是true
 
+
