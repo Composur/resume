@@ -77,3 +77,40 @@ xhr.send(null)
 + 空数组[]和空对象对应的Boolean值都是true
 
 
+### 作用域
+
++ 在整个JavaScript中，全局变量的作用处处都存在。定义在script块中，在function函数外
++ 局部变量的作用是局部性的，在函数的内部或函数参数定义时，作用范围是从函数开始到结尾在{}中
+
+### 立即执行函数表达式
++ 在JavaScript里每个函数，调用时，都会创建一个新的执行上下文，函数提供的上下文又提供了一个非常简单的方法去创建私有变量
++ 定义一个函数var fn=function(){}（这是函数表达式）;function fn(){}（这是函数声明）,当调用时需要在后面加上一个'()'使用不带圆括号的的函数名是访问函数的指针，而非调用的函数，因为函数是对象，函数名是指针
++ 函数声明和函数表达式除了什么时候可以通过变量访问函数这一点区别之外二者的语法是等价的
++ 将函数声明包含在圆括号里面构成了一个函数表达式(function(){})(),当圆括号出现在函数的末尾想要调用函数时。它将函数当成是声明函数
++ 当圆括号包裹函数时，它会默认将函数当作表达式去解析，而不是去声明
++ 它的作用就是隔离作用域（减少全局变量防止变量污染），es6之前JS不提供块级作用域只能用函数作用域模拟
++ 还有就是立即调用后就被回收了，var test(function(){doXXX return})()里面可以做事情不影响外面，就是一个块级作用域
+
+#### 作用域链
+
+我们先看一下闭包是如何工作的
+```
+var currentScope = 0; 
+(function () {
+  var currentScope = 1, one = 'scope1';
+  alert(currentScope);
+  (function () {
+    var currentScope = 2, two = 'scope2';
+    alert(currentScope);
+    (function () {
+      var currentScope = 3, three = 'scope3';
+      alert(currentScope);
+      alert(one + two + three); 
+    }());
+  }());
+}());
+```
+- **上面的嵌套函数时会形成闭包，当父函数立即执行后，内部函数也可以引用其外部封闭函数中存在的变量**
+- **JavaScript通过遍历的方式来查找变量**
+- **在第三个函数中，第二个、第一个、和全局的声明的currentScope的变量被隐藏，其值保持不变，第三个又声明了currentScope当访问该范围的是此currentScope作为此立即执行函数表达式的作用域链中的第一个**
+
