@@ -127,3 +127,29 @@ var currentScope = 0; // global scope
     }());
   }());
 }());
+
+
+// deepCopy
+
+function deepCopy(parent,child){
+  var child=child || {}
+  for(var i in parent){
+   if(typeof parent[i]==='object'){
+      c[i]=(parent[i].construstor===Array?[]:{})
+      deepCopy(parent[i],child[i])
+   }else{
+       child[i]=parent[i]
+   }
+  }
+}
+function deepCopy(parent,child){
+  var child=child || {}
+ for(var i in parent){
+     if(typeof parent.constructor==='object'){
+         child[i]=(parent[i].constructor===Arry?[]:{})
+     }else{
+         child[i]=parent[i]
+ }
+
+}
+}
