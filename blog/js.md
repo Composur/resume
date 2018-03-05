@@ -122,4 +122,13 @@ var currentScope = 0;
 ```
 var newObj=JSON.parse(JSON.stringify(oldObject))
 ```
-
+#### JSON规范
++ 首先json是一种用于数据交换的文本格式，是一种文本格式
++ json类型对值和类型有严格的规范
++ 复杂类型不能是function、regexp、date
++ 简单类型只有四种基本类型，string、number、null、Boolean
++ 字符串必须使用双引号表示、不能使用单引号表示
++ 对象的键名必须放到双引号的后面
++ 数组或对象最后一个成员的后面,不能加逗号
++ 空数组和空对象也是合格的JSON值,null也是合格的json值
++ JSON对象提供了两种方法JSON.stringfiy()和JSON.parse()
