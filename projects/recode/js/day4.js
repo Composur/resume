@@ -300,3 +300,11 @@ var sum=reduce_c(arr,function(num1,num2){
 log(sum)
 
 
+log('包括最小的不包含最大的')
+function getMiddleNum(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+var test=getMiddleNum(299,899)
+log(test)
+
+
