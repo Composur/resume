@@ -132,3 +132,19 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + 数组或对象最后一个成员的后面,不能加逗号
 + 空数组和空对象也是合格的JSON值,null也是合格的json值
 + JSON对象提供了两种方法JSON.stringfiy()和JSON.parse()
+
+#### 事件
++ javascript采用异步事件驱动编程模型
++ 事件的三种模型：事件冒泡、事件捕获、DOM事件流（事件捕获阶段、处于目标阶段、事件冒泡阶段，首先发生的是事件捕获、为截取事件提供机会、然后实际目标接受事件，最后是冒泡阶段）
++ 事件处理程序，事件侦听器（listener）就是响应某个事件的方法N
+#### 事件传播机制
++ 事件冒泡（事件开始由较为具体的元素接收，然后逐级向上传播到较为不具体的元素）
++ 事件捕获（不太具体的结点更早的接收事件，最具体的元素最后接收到事件，和事件冒泡相反）
++ DOM2事件（DOM2事件的三个阶段，事件捕获阶段、处于目标阶段、事件冒泡阶段、首先发生事件捕获、然后为截取事件提供机会、然后是目标接收事件、最后事冒泡阶段）
+![事件冒泡](http://7xpvnv.com2.z0.glb.qiniucdn.com/4bc08396-78b0-48e3-a8bb-f846e86e9d73) ![事件捕获](http://7xpvnv.com2.z0.glb.qiniucdn.com/0faaa7bb-5dcf-4f3c-93ff-62b134d987dd) ![DOM2事件流](http://7xpvnv.com2.z0.glb.qiniucdn.com/8ddedb2e-f55e-4872-bd36-79c44b71d3f1)
+
+
+### 阻止传播
++ event.preventDefault() 如果事件可以取消，则取消该事件，但是不影响事件的下一步传播
++ event.stopPropagation()阻止捕获和冒泡阶段中当前事件的进一步传播
++ event.target()事件代理，或则事件委托在子元素的上级结点（一般是父节点）处理子元素的上的触发事件

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件</title>
+</head>
+
+<style>
+    .container,
+    .box,
+    .target{
+      border: 1px solid;
+      padding: 10px;
+    }  
+  </style>
+  <button id="btn">click</button>
+
+  <div class="container">
+    container
+    <div class="box">
+      box
+      <div class="target">target</div>
+    </div>
+  </div>
+
+  <script>
+
+  function $(selector){
+    return document.querySelector(selector)
+  }
+// 一个DOM事件可以分为捕获过程，触发过程，冒泡过程
+  var btn = $('#btn')
+  btn.onclick = function (e){
+   console.log(e) 
+  }
+  btn.addEventListener('click', function(evt){
+    console.log(this)
+    console.log(btn)
+    console.log(evt.target)
+  })
+
+  $('.container').addEventListener('click', function(e){
+    console.log('当DOM事件发生时，它会从Windows结点一路向下跑到触发元素的父节点为止')
+    console.log('contianer click.. in 捕获阶段')
+  }, true)
+  $('.box').addEventListener('click', function(e){
+    //e.stopPropagation()
+    console.log('当DOM事件发生时，它会从Windows结点一路向下跑到触发元素的父节点为止')
+    console.log('box click.. in 捕获阶段')
+  }, true)
+  $('.target').addEventListener('click', function(e){
+  console.log('这里是事件触发的过程')
+    console.log('target click.. in 捕获阶段')
+  }, true)
+
+  $('.container').addEventListener('click', function(e){
+    console.log('事件代码执行完毕，浏览器会从触发事件的父节点一路冒泡到window元素')
+    console.log('contianer click.. in 冒泡阶段')
+  }, false)
+  $('.box').addEventListener('click', function(e){
+    //e.stopPropagation()
+    console.log('事件代码执行完毕，浏览器会从触发事件的父节点一路冒泡到window元素')
+    console.log('box click.. in 冒泡阶段')
+  }, false)
+  $('.target').addEventListener('click', function(e){
+    console.log('这里是事件触发的过程')
+    console.log('target click.. in 冒泡阶段')
+  }, false)    
+
+
+  </script>
+
+</html>

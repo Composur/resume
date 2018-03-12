@@ -1,2 +1,9 @@
-var log=console.log.bind(console)
-module.exports=log
+
+module.exports={
+    log=function(){
+        return console.log.bind(console)
+    },
+    $=function($){
+        return document.queryselector($)
+    }
+}
