@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bom</title>
+</head>
+<body>
+
+<img src="https://www.baidu.com/img/bd_logo1.png" alt="" class="img">
+<script>
+    const log = console.log.bind(console);
+    const img = document.querySelector('.img');
+
+    log(img.naturalHeight);
+    log(img.naturalWidth);
+    //      兼容性良好,有时候会返回0
+    log(img.offsetHeight);
+    log(img.offsetWidth);
+    //        IE8以下不支持，返回的是个对象包含width和height
+    log(img.getBoundingClientRect().width);
+    log(img.getBoundingClientRect().height);
+
+    //      判断手机类型
+
+    function isAndroid() {
+        return  isAndroid=/Android/.test(navigator.userAgent);
+    }
+
+    function isIphone() {
+        return isIphone = /iPhone/.test(navigator.userAgent);
+    }
+
+    function isIpad() {
+        return isIpad=/ipad/.test(navigator.userAgent);
+    }
+
+    function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent);
+    }
+</script>
+</body>
+</html>
