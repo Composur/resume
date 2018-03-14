@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tab选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .wrap {
+            box-sizing: border-box;
+            border: 1px solid red;
+            display: inline-block;
+        }
+
+        .wrap .tab-head li {
+            border: 1px solid seagreen;
+            float: left;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .wrap .tab-head li.active {
+            background: grey;
+            color: #fff;
+        }
+
+        .wrap .tab-head::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .wrap .tab-content li {
+            display: none;
+        }
+
+        .wrap .tab-content li.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="tab-head">
+        <li class="active">选项卡1</li>
+        <li>选项卡2</li>
+        <li>选项卡3</li>
+    </ul>
+    <ul class="tab-content">
+        <li class="active">选项卡的内容1</li>
+        <li>选项卡的内容2</li>
+        <li>选项卡的内容3</li>
+    </ul>
+</div>
+</body>
+<script>
+    const log = console.log.bind(console);
+    const $ = ($) => {
+        return document.querySelector($)
+    };
+    const $$ = ($) => {
+        return document.querySelectorAll($)
+    };
+    const tabHead = $$('.tab-head li');
+    const tabContent = $$('.tab-content li');
+
+    tabHead.forEach((li) => {
+        li.onclick = () => {
+
+//             tabHeader切换
+            tabHead.forEach((li) => {
+                li.classList.remove('active')
+            });
+
+            li.classList.add('active');
+
+//              tabContent切换
+
+
+            for (let i = 0; i < tabHead.length; i++) {
+                if(tabHead[i]===li){
+                    index=i
+                }
+            }
+            tabContent.forEach((li) => {
+                li.classList.remove('active')
+            });
+            tabContent[index].classList.add('active')
+
+
+        };
+
+    });
+
+
+</script>
+</html>

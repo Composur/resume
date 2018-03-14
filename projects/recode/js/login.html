@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册|登陆</title>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: url("../images/login-bg.jpg") no-repeat;
+            background-size: cover
+        }
+
+        header {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            cursor: pointer;
+        }
+
+        .fa.fa-user-circle {
+            font-size: 50px;
+
+        }
+
+        .model-wrap {
+            display: none;
+        }
+
+        .model {
+            position: absolute;
+            /* width: 500px; */
+            /* border: 1px solid red; */
+            left: 50%;
+            top: 50%;
+            /* margin-left: -250px;
+            margin-top: -250px; */
+            transform: translate(-50%, -50%);
+            /* background-color: #fff; */
+            box-shadow: 1px 3px 4px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        .model .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .model.model-login .errorMsg {
+            color: #ff9800;
+            font-size: 12px;
+            border: 1px solid red;
+        }
+
+        .model .tabs {
+            text-align: center;
+            color: gray;
+            margin-bottom: -20px;
+            margin-top: 30px;
+        }
+
+        .model .tabs a {
+            font-size: 20px;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .model .tabs a.active {
+            border-bottom: 2px solid #444;
+            color: #444;
+        }
+
+        .model .content {
+            padding: 20px 40px;
+        }
+
+        .model .input-filed {
+            width: 100%;
+        }
+
+        .model .input-filed input[type=text], .model .input-filed input[type=submit], .model .input-filed input[type=username], .model .input-filed input[type=password] {
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 24px;
+            margin-top: 20px;
+            padding: 5px 50px;
+        }
+
+        .model .content .input-filed .fa {
+            position: relative;
+            top: 52px;
+            left: 18px;
+        }
+
+        .model-wrap.login .model-login,
+        .model-wrap.register .model-register {
+            transform: translate(-50%, -50%) rotateY(0deg);
+            backface-visibility: hidden;
+            transition: 1s;
+        }
+
+        .model-wrap.login .model-register,
+        .model-wrap.register .model-login {
+            transform: translate(-50%, -50%) rotateY(180deg);
+            backface-visibility: hidden;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <a href="#" class="index-login">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        <!-- <span>登陆|注册</span> -->
+    </a>
+</header>
+<main class="main">
+    <div class="model-wrap login">
+        <div class="model model-login">
+            <a href="#" class="close fa fa-times">
+                <!-- <i class="" aria-hidden="true"></i> -->
+            </a>
+            <div class="tabs">
+                <a href="#" class="login active">登录</a>
+                <a href="#" class="register">注册</a>
+            </div>
+            <div class="content">
+                <div class="errorMsg">error</div>
+                <form action="#" method="post">
+                    <div class="input-filed">
+                        <label for="user">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </label>
+                        <input type="username">
+                    </div>
+                    <div class="input-filed">
+                        <label for="password">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </label>
+                        <input type="password">
+                    </div>
+                    <div class="input-filed">
+
+                        <input type="submit" value="登录">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="model model-register">
+            <a href="#" class="close fa fa-times">
+                <!-- <i class="" aria-hidden="true"></i> -->
+            </a>
+            <div class="tabs">
+                <a href="#" class="login">登录</a>
+                <a href="#" class="register active">注册</a>
+            </div>
+            <div class="content">
+                <div class="errorMsg"></div>
+                <form action="#" method="post">
+                    <div class="input-filed">
+                        <label>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <!-- <span>用户名：</span> -->
+                        </label>
+                        <input type="username" placeholder="请输入用户名">
+                    </div>
+                    <div class="input-filed">
+                        <label >
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <!-- <span>密码：</span> -->
+                        </label>
+                        <input type="password" placeholder="请输入密码">
+                    </div>
+                    <div class="input-filed">
+                        <label >
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                            <!-- <span>请再次输入密码：</span> -->
+                        </label>
+                        <input type="password" placeholder="请再次输入密码">
+                    </div>
+                    <div class="input-filed">
+                        <input type="submit" value="注册">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script>
+    var log = console.log.bind(console);
+    var $ = function ($) {
+        return document.querySelector($)
+    };
+    var $$ = function ($) {
+        return document.querySelectorAll($)
+    }
+    var index_login = $('.index-login');
+    var model_wrap = $('.model-wrap');
+    var close_login = $('.close-login')
+    var close = $$('.close')
+    // log(login)
+    var close_register = $('.close-register')
+    index_login.addEventListener('click', function (e) {
+        e.stopPropagation()
+        model_wrap.style.display = 'block'
+    }, false);
+    //    close_login.addEventListener('click', function () {
+    //        model_wrap.style.display = 'none'
+    //    }, false)
+    //    close_register.addEventListener('click', function () {
+    //        model_wrap.style.display = 'none'
+    //    }, false)
+    //    close.forEach(function (node) {
+    //        node.onclick=function () {
+    //            model_wrap.classList.remove('login')
+    //            model_wrap.classList.add('register')
+    //        }
+    //    })
+    model_wrap.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (e.target.classList.contains('login')) {
+            model_wrap.classList.remove('register')
+            model_wrap.classList.add('login')
+        }
+        if (e.target.classList.contains('register')) {
+            model_wrap.classList.remove('login')
+            model_wrap.classList.add('register')
+        }
+        if (e.target.classList.contains('close')) {
+            model_wrap.style.display = 'none'
+        }
+    }, false);
+    document.addEventListener('click', () => {
+        model_wrap.style.display = 'none'
+    }, false);
+
+    $('.model-login form').addEventListener('submit', function (e) {
+        e.preventDefault()
+        log($('.model .input-filed input[type=username]').value)
+        if (!/^\w{3,8}$/.test($('.model .input-filed input[type=username]').value)) {
+
+            $('.model.model-login .errorMsg').innerText = '用户名需输入3-8个字符，包括字母数字下划线'
+
+            return false
+        }
+        log($('.model .input-filed input[type=password]').value)
+        if (!/^\w{6,10}$/.test($('.model-login input[name=password]').value)) {
+            $('.model.model-login .errorMsg').innerText = '密码需输入6-10个字符，包括字母数字下划线'
+            return false
+        }
+        this.submit()
+    })
+
+    $('.model-register form').addEventListener('submit', function (e) {
+        e.preventDefault()
+
+        if (/^\w{3,8}$/.test($('.model-register input[name=username]').value)) {
+            log('test')
+            
+            $('.model-register .errorMsg').innerText = '用户名需输入3-8个字符，包括字母数字下划线'
+
+            return false
+        }
+        if (/^hunger$|^ruoyu$/.test($('.model-register input[name=username]').value)) {
+            $('.model-register .errorMsg').innerText = '用户名已存在'
+            return false
+        }
+        if (!/^\w{6,10}$/.test($('.model-register input[name=password]').value)) {
+            $('.model-register .errorMsg').innerText = '密码需输入6-10个字符，包括字母数字下划线'
+            return false
+        }
+        if ($('.model-register input[name=password]').value !== $('.model-register input[name=password2]').value) {
+            $('.model-register .errorMsg').innerText = '两次输入的密码不一致'
+            return false
+        }
+        this.submit()
+    })
+</script>
+
+</html>
