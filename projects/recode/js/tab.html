@@ -74,15 +74,18 @@
     const tabContent = $$('.tab-content li');
 
     tabHead.forEach((li) => {
-        li.onclick = () => {
+        li.onclick =function() {
 
 //             tabHeader切换
             tabHead.forEach((li) => {
                 li.classList.remove('active')
             });
 
-            li.classList.add('active');
-
+            this.classList.add('active');
+//            tabHead.forEach(()=> {
+//                li.classList.remove('active')
+//            });
+//            li.classList.add('active');
 //              tabContent切换
 
 

@@ -148,3 +148,30 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + event.preventDefault() 如果事件可以取消，则取消该事件，但是不影响事件的下一步传播
 + event.stopPropagation()阻止捕获和冒泡阶段中当前事件的进一步传播
 + event.target()事件代理，或则事件委托在子元素的上级结点（一般是父节点）处理子元素的上的触发事件
+
+### BOM
++ BOM有多个对象组成，其中window对象是BOM最顶层的对象，其它对象都是该对象的子对象
++ 判断浏览器的类型
+```
+/ Opera 8.0+
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+// Blink engine detection
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+```
