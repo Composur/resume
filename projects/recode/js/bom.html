@@ -1,44 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bom</title>
 </head>
+
 <body>
 
-<img src="https://www.baidu.com/img/bd_logo1.png" alt="" class="img">
-<script>
-    const log = console.log.bind(console);
-    const img = document.querySelector('.img');
+    <img src="https://www.baidu.com/img/bd_logo1.png" alt="" class="img">
+    <script>
+        const log = console.log.bind(console);
+        const img = document.querySelector('.img');
 
-    log(img.naturalHeight);
-    log(img.naturalWidth);
-    //      兼容性良好,有时候会返回0
-    log(img.offsetHeight);
-    log(img.offsetWidth);
-    //        IE8以下不支持，返回的是个对象包含width和height
-    log(img.getBoundingClientRect().width);
-    log(img.getBoundingClientRect().height);
+        log(img.naturalHeight);
+        log(img.naturalWidth);
+        //      兼容性良好,有时候会返回0
+        log(img.offsetHeight);
+        log(img.offsetWidth);
+        //        IE8以下不支持，返回的是个对象包含width和height
+        log(img.getBoundingClientRect().width);
+        log(img.getBoundingClientRect().height);
 
-    //      判断手机类型
+        //      判断手机类型
 
-    function isAndroid() {
-        return  isAndroid=/Android/.test(navigator.userAgent);
-    }
+        function isAndroid() {
+            return isAndroid = /Android/.test(navigator.userAgent);
+        }
 
-    function isIphone() {
-        return isIphone = /iPhone/.test(navigator.userAgent);
-    }
+        function isIphone() {
+            return isIphone = /iPhone/.test(navigator.userAgent);
+        }
 
-    function isIpad() {
-        return isIpad=/ipad/.test(navigator.userAgent);
-    }
+        function isIpad() {
+            return isIpad = /ipad/.test(navigator.userAgent);
+        }
 
-    function isIOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent);
-    }
-</script>
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent);
+        }
+
+
+        // localStorage
+
+        var Storage = (function () {
+            return {
+
+                set: function (key, value, expireSeconds) {
+                    localStorage[key] = JSON.stringify({
+                        value: value,
+                        expired: expireSeconds === undefined ? undefined : Date.now() + 1000 *
+                            expireSeconds
+                    })
+                },
+                get: function (key) {
+                    if (localStorage[key] === undefined) {
+                        return `没有${key}这个字段`
+                    }
+                    var o = JSON.parse(localStorage[key])
+                    if (o.expired === undefined || Date.now() < o.expired) {
+                        return o.value
+                    } else {
+                         // 可否替换成 localStorage.removeItem[key]
+                        delete localStorage[key]
+                    }
+                }
+            }
+        })()
+
+
+        var storage = {
+            set: function (key, value, expireSeconds) {
+                return localStorage[key] = JSON.stringify({
+                    value: value,
+                    expired: expired === undefined ? undefined : Date.now() + 1000 * expireSeconds
+                })
+            },
+            get:function(key){
+                if(localStorage[key]===undefined){
+                    return `没有${key}这个字段`
+                }
+                var obj=JSON.parse(localStorage[key])
+                if(value.expired===undefined||Date.now()<obj.expired){
+                    return obj.value
+                }else{
+                    // 可否替换成 localStorage.removeItem[key]
+                    localStorage.removeItem[key]
+                }
+            }
+        }
+
+        Storage.set('name', '饥人谷')
+        Storage.set('age', 2, 30); //设置 name 字段存储的值为'饥人谷'
+        Storage.set('teachers', ['ruoyu', 'fangfang', 'tom'], 60)
+
+        log(Storage.get('name')) // ‘饥人谷’
+        log(Storage.get('age')) //  如果不超过30秒，返回数字类型的2；如果超过30秒，返回 undefined，并且 localStorage 里清除 age 字段
+        log(Storage.get('teachers')) //  如果不超过30秒，返回数字类型的2；如果超过30秒，返回 undefined，并且 localStorage 里清除 age 字段
+        log(Storage.get('teacher')) //  如果不超过30秒，返回数字类型的2；如果超过30秒，返回 undefined，并且 localStorage 里清除 age 字段
+        //如果不超过60秒，返回数组； 如果超过60秒，返
+    </script>
 </body>
+
 </html>
