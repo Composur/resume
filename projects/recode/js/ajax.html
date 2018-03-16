@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX</title>
+</head>
+<body>
+    <p>Ajax脚本发起HTTP通信的代名词</p>
+
+    <script>
+        const log=console.log.bind(console)
+        log('ajax脚本发起HTTP通信的代名词')
+
+        var xhr=new XMLHttpRequest()
+       
+        xhr.onreadystatechange=function(){
+            // 通信成功时状态值为4
+            if(xhr.readyState===4){
+                if(xhr.status===200){
+                    log(xhr.responseText)
+                }else{
+                    log(xhr.statusText)
+                }
+            }
+        }
+        xhr.onerror=function(e){
+            console.error(xhr.statusText)
+        }
+        // open用于指定HTTP动词、请求的网址、是否异步
+        // xhr.open('GET','http://39.108.57.80:8000/images/logo-small.png',true)
+        xhr.open('GET','http://api.jirengu.com/weather.php',true)
+
+        xhr.send()
+    </script>
+</body>
+</html>
