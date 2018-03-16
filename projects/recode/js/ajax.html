@@ -1,38 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>AJAX</title>
 </head>
+
 <body>
     <p>Ajax脚本发起HTTP通信的代名词</p>
 
     <script>
-        const log=console.log.bind(console)
+        const log = console.log.bind(console)
         log('ajax脚本发起HTTP通信的代名词')
 
-        var xhr=new XMLHttpRequest()
-       
-        xhr.onreadystatechange=function(){
+        var xhr = new XMLHttpRequest()
+
+        xhr.onreadystatechange = function () {
             // 通信成功时状态值为4
-            if(xhr.readyState===4){
-                if(xhr.status===200){
+            if (xhr.readyState === 4) {
+                // if (xhr.status === 200) {
+                if (xhr.status >= 200 || xhr.status < 300 || xhr.status === 304) {
                     log(xhr.responseText)
-                }else{
+                } else {
                     log(xhr.statusText)
                 }
             }
         }
-        xhr.onerror=function(e){
+        xhr.onerror = function (e) {
             console.error(xhr.statusText)
         }
         // open用于指定HTTP动词、请求的网址、是否异步
         // xhr.open('GET','http://39.108.57.80:8000/images/logo-small.png',true)
-        xhr.open('GET','http://api.jirengu.com/weather.php',true)
+        xhr.open('GET', 'http://api.jirengu.com/weather.php', true)
+
+           // 追中状态
+           xhr.onreadystatechange = function () {
+            switch (xhr.readyState) {
+                case 1:
+                    log('open')
+                    break;
+                case 2:
+                    log('header_received')
+                    break;
+                case 3:
+                    log('loading')
+                    break;
+                case 4:
+                    log('done')
+                    break;
+                default:
+                    log('error')
+            }
+        }
+
 
         xhr.send()
+
+
+
+
+        function sendAjax() {
+            //构造表单数据
+            var formData = new FormData();
+            formData.append('username', 'johndoe');
+            formData.append('id', 123456);
+            //创建xhr对象 
+            var xhr = new XMLHttpRequest();
+            //设置xhr请求的超时时间,超过这个时间主动触发ontimeout事件，主动结束该请求
+            xhr.timeout = 3000;
+            //设置响应返回的数据格式
+            xhr.responseType = "text";
+            //创建一个 post 请求，采用异步，这里只是创建了一个链接
+            xhr.open('POST','/server' , true);
+
+            //注册相关事件回调处理函数
+            xhr.onload = function (e) {
+                if (this.status == 200 || this.status == 304) {
+                    alert(this.responseText);
+                }
+            };
+            xhr.ontimeout = function (e) {
+                log('超时')
+            };
+            xhr.onerror = function (e) {
+                log('error')
+            };
+            xhr.upload.onprogress = function (e) {
+                return `${e}`
+            };
+
+
+            var data={
+                name:'xu',
+                age:20,
+                address:'sz'
+            }
+
+            function test(){
+                var arr=[]
+                for(var key in data){
+                    arr.push(key+'='+data[key])
+                }
+                return arr.join('&')
+            }
+
+            //发送数据，请求开始
+            xhr.send(test());
+        }
+        sendAjax()
+
+
+
+     
     </script>
 </body>
+
 </html>
