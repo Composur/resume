@@ -4,43 +4,49 @@ var fs = require('fs')
 var url = require('url')
 
 var router = {
-  '/getData': function(req, res){
-      var pathObj = url.parse(req.url, true)
+  '/getData': function (req, res) {
+    var pathObj = url.parse(req.url, true)
+    
+    console.log(pathObj)
 
-      var page = pathObj.query.page
-      var result
+    var page = pathObj.query.page
+    var result
 
-      if(page == 1){
-       result = [1,2,3]
-      }
-      if(page == 2){
-        result = [4,5,6]
-      }
-      
-      res.write(JSON.stringify(result))
-      res.end()    
+    if (page == 1) {
+      result = [1, 2, 3]
+    }
+    if (page == 2) {
+      result = [4, 5, 6]
+    }
+
+    res.write(JSON.stringify(result))
+    res.end()
   },
-  '/hello': function(req, res){
+  '/hello': function (req, res) {
     res.end('hello world')
-  } 
+  },
+  '/say': function (req, res) {
+    res.end('你好!')
+  }
 }
 
-
-var server = http.createServer(function(req, res){
+var server = http.createServer(function (req, res) {
+  res.setHeader('Content-Type', 'text/html;charset=utf-8')
+  // res.setHeader('Content-Type','text/html; charset=utf-8')
   var staticPath = path.join(__dirname, 'www')
   var pathObj = url.parse(req.url, true)
   var filePath = path.join(staticPath, pathObj.pathname)
-  try{
-    var fileContent = fs.readFileSync(filePath,'binary')
+  try {
+    var fileContent = fs.readFileSync(filePath, 'binary')
     res.write(fileContent, 'binary')
     res.end()
-  }catch(e){
+  } catch (e) {
 
-    if(router[pathObj.pathname]){
+    if (router[pathObj.pathname]) {
       router[pathObj.pathname](req, res)
-    }else{
+    } else {
       res.writeHead(404, 'not found')
-      res.end('not found')      
+      res.end('not found')
     }
   }
 

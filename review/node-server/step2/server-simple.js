@@ -8,7 +8,8 @@ http.createServer(function(req, res){
 
   var pathObj = url.parse(req.url, true)
   console.log(pathObj)
-
+  res.setHeader('Content-Type','text/html;charset=UTF-8')
+  
   switch (pathObj.pathname) {
     case '/getWeather':
       var ret
@@ -30,7 +31,7 @@ http.createServer(function(req, res){
       res.end( fs.readFileSync(__dirname + '/static/user.tpl' ))
       break;
     default:
-      res.end( fs.readFileSync(__dirname + '/static' + pathObj.pathname) )
+      res.end( fs.readFileSync(__dirname + '/static/index.html') )
   }
 }).listen(8080)
 
