@@ -113,7 +113,83 @@
 
 
 
-     
+
+    function get(callback){
+        var xhr=new XMLHttpRequest()
+        xhr.open('GET','./data.json',true)
+       xhr.onload=function(){
+        if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+            callback(JSON.parse(this.responseText))
+        }
+       }
+        xhr.send()
+    }
+   get(function(data){
+       log(data)
+   })
+
+
+   function post(){
+       var xhr= new XMLHttpRequest()
+       xhr.open('POST',"/server",true)
+       xhr.onload=function(){
+           if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+                //do    
+           }
+       }
+       var data=[]
+       xhr.send(data)
+   }
+
+
+//    封装一个Ajax
+
+
+
+function ajax(obj){
+    var type=obj.type||'GET'
+    var url=obj.url
+    var dataType=obj.dataType||'json'
+    var onsuccess=obj.onsuccess||function(){}
+    var  onerror=obj.onerror||function(){}
+    var data=obj.data||{}
+
+
+    // 请求的参数 
+
+    var datastr=[]
+
+    for(var key in datastr){
+        datastr.push(`key=${datastr[key]}`)
+    }
+    datastr.join('&')
+  
+    if(obj.type==='GET'){
+        url+='?'+datastr
+    }
+
+    var xhr=new XMLHttpRequest()
+    xhr.open(type,url,true)
+
+    xhr.onload=function(){
+      if(xhr.status>=200&&xhr.status<300||xhr.readyState==304){
+          if(dataType=='json'){
+              onsuccess(JSON.parse(this.responseText))
+          }else(
+              onsuccess(this.responseText)
+          )
+      }else{
+          onerror()
+      }
+    }
+    xhr.onerror=onerror
+    if(type==='POST'){
+        xhr.send(datastr)
+    }else{
+        xhr.send()
+    }
+}
+
     </script>
 </body>
 

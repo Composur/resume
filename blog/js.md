@@ -187,3 +187,48 @@ var isBlink = (isChrome || isOpera) && !!window.CSS;
 ### Ajax
 + 我们使用XMLHttpRequest()对象来发送Ajax请求
 + xhr.status（200、304等）是服务器的一个状态，xhr.readyState是一个交互的过程(1:'open'2:'header_received'3:'loading'4:'done')
+```
+function ajax(obj){
+    var type=obj.type||'GET'
+    var url=obj.url
+    var dataType=obj.dataType||'json'
+    var onsuccess=obj.onsuccess||function(){}
+    var  onerror=obj.onerror||function(){}
+    var data=obj.data||{}
+
+
+    // 请求的参数 
+
+    var datastr=[]
+
+    for(var key in datastr){
+        datastr.push(`key=${datastr[key]}`)
+    }
+    datastr.join('&')
+  
+    if(obj.type==='GET'){
+        url+='?'+datastr
+    }
+
+    var xhr=new XMLHttpRequest()
+    xhr.open(type,url,true)
+
+    xhr.onload=function(){
+      if(xhr.status>=200&&xhr.status<300||xhr.readyState==304){
+          if(dataType=='json'){
+              onsuccess(JSON.parse(this.responseText))
+          }else(
+              onsuccess(this.responseText)
+          )
+      }else{
+          onerror()
+      }
+    }
+    xhr.onerror=onerror
+    if(type==='POST'){
+        xhr.send(datastr)
+    }else{
+        xhr.send()
+    }
+}
+```
