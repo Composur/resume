@@ -24,7 +24,7 @@ var pathobj=url.parse(req.url,true)
 
     console.log(req.url)
 
-
+    
     if(req.url==='/'){
         res.end( fs.readFileSync(__dirname + '/index.html') )
     }
