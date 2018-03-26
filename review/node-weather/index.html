@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天气预报</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            color: #fff;
+            font: 14px/1.5 Arial;
+        }
+
+        ul,
+        li {
+            list-style: none
+        }
+
+        .cover {
+            background: url()
+        }
+
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+            zoom: 1;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            /* background: no-repeat url(http://www.ekaterinburg.tv/images/images_city/em52.jpg); */
+            background-size: cover;
+            filter: blur(5px);
+        }
+        section{
+            position: relative;
+            margin: 100px auto;
+        }
+        section .cover{
+            height: 500px;
+            /* background: no-repeat url(http://www.ekaterinburg.tv/images/images_city/em52.jpg); */
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="cover">
+            <div class="location"></div>
+            <div class="suggestion"></div>
+        </div>
+        <div class="detail">
+            <div class="current">
+                <div class="time"></div>
+            </div>
+            <div class="future">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+
+</script>
+</html>
