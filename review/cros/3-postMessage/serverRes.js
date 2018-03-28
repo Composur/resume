@@ -8,3 +8,26 @@ app.use(express.static(__dirname + '/staticRes')); //3001端口的静态文件�
 app.listen(responsePort, function () {
     console.log('Responser is listening on port '+ responsePort);
 });
+
+// var http=require('http')
+// var path=require('path')
+// var fs=require('fs')
+// var url=require('url')
+// var port=3001
+// var app=http.createServer(function(req,res){
+//    var pathObj=url.parse(req.url,true)
+//     console.log(pathObj)
+//    switch(pathObj.pathname){
+//         case'/':
+//         res.end(fs.readFileSync(__dirname+'/staticRes/index.html'))
+//         break;
+
+//         default:
+//         res.end(fs.readdirSync(__dirname+'/staticRes/index.html'))
+//    }
+// },true)
+
+// app.listen(port,function(e){
+//     console.log(e)
+//     console.log(port)
+// })
