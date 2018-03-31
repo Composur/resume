@@ -117,6 +117,7 @@ xhr.send(null)
 ### let和const
 + let的作用域为{let xx=xx} 在作用域中不能够在 let xx 不能再let xx 前调用 xx 
 + const和let一样除了cost是常量不能够重复赋值以外（只能够赋值一次且必须赋值）
++ 能用const就不用let
 
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
@@ -148,6 +149,10 @@ xhr.send(null)
 + 除了undefined、null、false、0、NaN、""/'' 都会转换为true
 + 空数组[]和空对象对应的Boolean值都是true
 
+### Array
++ forEach(item)让数组中每一项做一件事
++ map让数组通过计算产生一个新数组
++ 
 
 ### 作用域
 
@@ -164,7 +169,8 @@ xhr.send(null)
 + 还有就是立即调用后就被回收了，var test(function(){doXXX return})()里面可以做事情不影响外面，就是一个块级作用域
 
 #### 作用域链
-
++ 有两种作用域,函数作用域和全局作用域
++ 闭包:函数连同它作用域上的变量,共同构成了闭包,为了封装数、暂存数据。
 我们先看一下闭包是如何工作的
 ```
 var currentScope = 0; 
@@ -186,13 +192,112 @@ var currentScope = 0;
 - **JavaScript通过遍历的方式来查找变量**
 - **在第三个函数中，第二个、第一个、和全局的声明的currentScope的变量被隐藏，其值保持不变，第三个又声明了currentScope当访问该范围的是此currentScope作为此立即执行函数表达式的作用域链中的第一个**
 - 函数在执行的过程中，先从自己内部内部找变量
-- 如果找不到，再从创建当前函数所在的作用域去找，以此往上
+- 如果找不到，再从创建当前函数所在的作用域(词法作用域)去找，以此往上
 - 注意找的是变量当前的状态
 + 深拷贝和浅拷贝（首相明白基本类型，像number，string、Boolean。复杂类型array、object）
 + 浅拷贝拷贝和被拷贝对象的指针指向相同的地址，修改其中的任意一个值另一个值都会随之变化，这就是浅拷贝
 + 深拷贝（完全复制了一份）当拷贝对象放到了新的内存中有了新的地址，和被拷贝对象的不同，修改任意值另一个不会发生改变
 ```
 var newObj=JSON.parse(JSON.stringify(oldObject))
+```
+
+
+#### this
++ 在全局执行上下文中（在任何函数体外部），this都指代全局对象（window,nodejs环境是global），上下文就是函数的执行环境
++ 在函数内部this的值取决于函数被调用的方式
++ 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
+```
+function add(c, d) {
+  return this.a + this.b + c + d;
+}
+
+var o = {a: 1, b: 3};
+
+// 第一个参数是作为‘this’使用的对象
+// 后续参数作为参数传递给函数调用
+add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
+
+// 第一个参数也是作为‘this’使用的对象
+// 第二个参数是一个数组，数组里的元素用作函数调用中的参数
+add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+```
++ 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
+
+#### bind call apply
++ 函数的绑定，函数作用参数传递的同时，可以存储函数的作用域
++ bind的实现是对作用域的绑定，第一个参数表示作用域，更改作用域不执行参数,还可以传递参数,执行bind后返回了一个新的函数，可以用来改变回调函数的作用域,bind的实现利用call和apply
+```
+function bind(fn, content) {
+    // bind(返回的函数，绑定函数，传入的参数)
+    var args=Array.prototype.slice.call(arguments,2)
+    // 返回一个新的函数
+    return function () {
+        // 获取执行函数时传递的参数
+        var lave=Array.prototype.slice.call(arguments)
+        //把原来的参数与fn的参数拼接
+        var nowArr=args.concat(lave)
+        fn().apply(content, nowArr)
+    }
+}
+bind('当前函数','绑定的作用域函数',arguments)
+
+var log=bind(console.log,console)//log()
+
+var log =  console.log.bind(console)//log()
+```
++ call和apply，都是在使用（使用即执行）的时候改变作作用域，第一个参数都表示作用域，一旦改变作用域函数就执行了
+```
+var obj = {
+    speed: 0
+}
+
+function call() {
+    console.log(this.speed)
+}
+
+var newCall = call.bind(obj, undefined) //返回新函数
+newCall() //o
+call() //undefined
+call.call(obj, undefined) //0
+call.apply(obj, [undefined]) //0
+```
+
++ call从第二个参数开始表示传递参数
++ apply第二个参数是数组（每一个成员表示一个将被传入的参数）
+#### 函数柯里化
++ 一个接收多个参数的函数，我们可以一个一个传递参数，当函数执行的时候传递剩余的参数
++ 增强函数的适用性，类似于重载（重载是在内部实现的，柯里化是在外部实现的）
+```
+/**
+ * 函数柯里化
+ */
+
+ function curry(fn,content){
+    // 将传入的参数，转化为数组
+    var args=Array.prototype.slice.call(arguments,1)
+    return function(){
+        
+        // 剩余传递的参数用户添加的
+        var laveArgs=Array.prototype.slice.call(arguments)
+
+        // 数组拼接
+        var  nowArr=args.concat(laveArgs)
+        return fn.apply(null.nowArr)
+    }
+ }
+```
+#### create实现一个原子的继承
+```
+function create(obj){
+    //寄生工厂模式
+    // 实现寄生类
+    function Fn(){}
+    //让类的原型继承参数对象
+    Fn.prototype=obj
+    // 返回这个实例化对象
+    return new Fn()
+ }
+var xiaoming=create(person)
 ```
 #### JSON规范
 + 首先json是一种用于数据交换的文本格式，是一种文本格式
