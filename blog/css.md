@@ -10,7 +10,7 @@
 - 设置父容器display:table-cell；vertical-align:middle(只对两种格式生效一种是行内元素另一种是表格元素)
 
 #### BFC是什么
-+ 块级格式化上下文（block formatting context)是盒模型的渲染区域，并且有自己的一套渲染规则，它定义了容器中的元素如何的定位以及和其它元素的相互作用关系；且与不影响容器外部的布局
++ 块级格式化上下文(block formatting context)是盒模型的渲染区域，并且有自己的一套渲染规则，它定义了容器中的元素如何的定位以及和其它元素的相互作用关系；且与不影响容器外部的布局
 #### 如何产生BFC
 + 页面的根元素
 + float不为none
@@ -29,6 +29,10 @@
 + 取其二者的最大值
 #### 阻止外边距合并
 + 当两个元素分属于不同的BFC的时候不会发生生合并
++ 给发生合并的元素中间加上一个空div用border或则设置display:table/flex
+```
+<div style='border:0.1px solid red'></div>
+```
 + 1[Demo](http://js.jirengu.com/faveyijubi/1/edit)
 #### css hack
 + 由于不同厂商和版本的不同，导致了不同浏览器对css的渲染不完全一样，针对不同的浏览器写不同的css使页面在不同的浏览器展现相同的效果

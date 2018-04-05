@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浮动的影响</title>
+    <style>
+        .parent{
+            background:black;
+            width:100px;
+            height: 100px;
+        }
+        .float{
+            float: left;
+            width: 100px;
+            height:100px;
+            background: green;
+        }
+        .child{
+            width: 100px;
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+<div class="parent">
+    <div class="float">浮动元素</div>    
+    <div class="child">子元素</div>
+</div>    
+</body>
+</html>

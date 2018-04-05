@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,19 +49,20 @@
         }
     </style>
 </head>
+
 <body>
-<div class="wrap">
-    <ul class="tab-head">
-        <li class="active">选项卡1</li>
-        <li>选项卡2</li>
-        <li>选项卡3</li>
-    </ul>
-    <ul class="tab-content">
-        <li class="active">选项卡的内容1</li>
-        <li>选项卡的内容2</li>
-        <li>选项卡的内容3</li>
-    </ul>
-</div>
+    <div class="wrap">
+        <ul class="tab-head">
+            <li class="active">选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+        </ul>
+        <ul class="tab-content">
+            <li class="active">选项卡的内容1</li>
+            <li>选项卡的内容2</li>
+            <li>选项卡的内容3</li>
+        </ul>
+    </div>
 </body>
 <script>
     const log = console.log.bind(console);
@@ -74,36 +76,29 @@
     const tabContent = $$('.tab-content li');
 
     tabHead.forEach((li) => {
-        li.onclick =function() {
+        li.onclick = function () {
 
-//             tabHeader切换
+          //tabHeader切换
             tabHead.forEach((li) => {
                 li.classList.remove('active')
             });
 
             this.classList.add('active');
-//            tabHead.forEach(()=> {
-//                li.classList.remove('active')
-//            });
-//            li.classList.add('active');
-//              tabContent切换
-
-
             for (let i = 0; i < tabHead.length; i++) {
-                if(tabHead[i]===li){
-                    index=i
+                if (tabHead[i] === li) {
+                    index = i 
                 }
             }
+            
             tabContent.forEach((li) => {
                 li.classList.remove('active')
             });
+    
             tabContent[index].classList.add('active')
-
-
         };
 
     });
-
-
 </script>
 </html>
+
+
