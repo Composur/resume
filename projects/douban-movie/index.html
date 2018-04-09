@@ -142,7 +142,7 @@
             display: flex;
         }
 
-        footer .active {
+        footer>div.active {
             color: red;
         }
 
@@ -156,8 +156,8 @@
 
 <body>
     <main>
-        <section>
-            <div id="Top250">
+        <section id="Top250">
+            <div class="container">
                 <!-- <div class="item">
                 <a href="#">
                     <div class="cover">
@@ -175,7 +175,27 @@
             </div> -->
             </div>
         </section>
-        <section>2</section>
+        <section id="northDirection">
+            <!-- <div class="item">
+               
+                    <a href="#">
+                        <div class="cover">
+                            <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1910813120.jpg" alt="">
+                        </div>
+                        <div class="detail">
+                            <h2>霸王别姬</h2>
+                            <div class="extra">
+                                <span class="score">9.3分 </span> /1000收藏</div>
+                            <div class="extra">1994 / 剧情、爱情</div>
+                            <div class="extra">导演 / 张艺谋</div>
+                            <div class="extra">主演 / 剧情、爱情、剧情、爱情</div>
+                        </div>
+                    </a>
+
+              
+            </div> -->
+
+        </section>
         <section>3</section>
         <div class="loading">
             <!-- <span class="iconfont icon-loading"></span> -->
@@ -205,136 +225,7 @@
     </footer>
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
-<script>
-    var log = console.log.bind(console)
-    // tab切换
-    $('footer div').on('click', function () {
-        var _index = $(this).index()
-        $('section').hide().eq(_index).fadeIn()
-    })
-    // 获取data
-    var startNum = 0
-    // 加锁，防止多次请求
-    var isLoading = false
-    getData()
-
-    function getData() {
-        // 当执行的过程中又一次的getData请求的话此时的isLoading=true请求就会return掉
-        if (isLoading) return
-        isLoading = true
-        // 请求的时候加载loading
-        $('.loading').show()
-        $.ajax({
-            url: 'http://api.douban.com/v2/movie/top250',
-            type: 'get',
-            data: {
-                start: startNum,
-                count: 10
-            },
-            dataType: 'jsonp'
-        }).done(function (data) {
-            console.log(data)
-            setData(data)
-            startNum += 10
-        }).fail(function (error) {
-            console.log(error)
-        }).always(function () {
-            // 请求结束设置为false getData时执行请求
-            isLoading = false
-            // 请求结束去除loading
-            $('.loading').hide()
-        })
-    }
-
-    function setData(data) {
-        data.subjects.forEach(movie => {
-            var tpl =
-                ` <div class="item">
-                <a href="#">
-                    <div class="cover">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail">
-                        <h2></h2>
-                        <div class="extra">
-                            <span class="score"></span><span></span></div>
-                        <div class="extra"><span class='year'></span> / <span class='type'></span></div>
-                        <div class="extra">导演 <span class='director'></span></div>
-                        <div class="extra">主演 /<span class='starring'></span></div>
-                    </div>
-                </a>
-            </div>`
-            var $node = $(tpl)
-            $node.find('.cover img').attr('src', movie.images.medium)
-            $node.find('.detail h2').text(movie.title)
-            $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
-            $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
-            $node.find('.year').text(movie.year)
-            $node.find('.type').text(movie.genres.join('、'))
-            $node.find('.director').text(function () {
-                var nameArr = []
-                movie.directors.forEach((name) => {
-
-                    nameArr.push(name.name)
-                })
-                return nameArr.join('、')
-            })
-            $node.find('.starring').text(function () {
-                var StarringArr = []
-                movie.casts.forEach((name) => {
-
-                    StarringArr.push(name.name)
-                })
-                return StarringArr.join('、')
-            })
-            $('#Top250').append($node)
-        });
-    }
-    // 加载更多
-    // 函数节流,以最后一次的请求为准
-    var clock;
-    $('main').scroll(
-        function () {
-            if (clock) {//第一次是undefined不执行
-                clearTimeout(clock)//400毫秒以内的再次请求清除前一次以最后一次为准，节省流量
-            }
-            clock = setTimeout(function () {
-                function loadMore() {
-                    if ($('main').height() + $('main').scrollTop() + 10 >= $('section').eq(0).height()) {
-                        getData()
-                    }
-                }
-            }, 400)
-        }
-    )
-
-    // 代码重构,减少全局变量
-    var app={
-        // 初始化
-        init:function(){
-            this.bind()
-            this.start()      
-        },
-        // 绑定事件
-        bind:function(){
-
-        },
-        start:function(){
-
-        },
-        getData:function(){
-
-        },
-        setData:function(){
-
-        },
-        render:function(){
-
-        }
-    }
-</script>
-<p>
-
-</p>
+<!-- <script src="./v01.js"></script> -->
+<script src="./v02.js"></script>
 
 </html>
