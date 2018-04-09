@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>douban-movie</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_619954_d8u82qfedhjmj9k9.css">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        body {
+            font-size: 12px;
+            line-height: 1.2;
+            background-color: #fff;
+        }
+
+        main {
+            height: calc(100vh - 50px);
+            background: #fff;
+            ;
+            overflow: scroll;
+            /* ios上增加弹性 */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        main>section {
+            display: none;
+        }
+
+        main>section:first-child {
+            display: block;
+        }
+
+        .item {
+            border-bottom: 1px solid grey;
+            padding: 4px;
+        }
+
+        .item>a {
+            display: block;
+            display: flex;
+        }
+
+        .item .cover {
+            width: 76px;
+        }
+
+        .item .cover img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .item .detail {
+            margin-left: 20px;
+        }
+
+        .item .detail h2 {
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .item .detail .extra {
+            margin-top: 5px;
+            color: gray;
+        }
+
+        .item .detail .extra .score {
+            color: red;
+        }
+
+        .loading {
+            text-align: center;
+            display: none;
+        }
+
+        .spinner {
+            margin: 20px auto 0;
+            width: 80px;
+            text-align: center;
+        }
+
+        .spinner>div {
+            width: 18px;
+            height: 18px;
+            background-color: #333;
+
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
+            }
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+
+        footer {
+            border-top: 1px solid gray;
+            height: 50px;
+            width: 100%;
+            display: flex;
+        }
+
+        footer .active {
+            color: red;
+        }
+
+        footer>div {
+            flex-grow: 1;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div id="Top250">
+                <!-- <div class="item">
+                <a href="#">
+                    <div class="cover">
+                        <img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1910813120.jpg" alt="">
+                    </div>
+                    <div class="detail">
+                        <h2>霸王别姬</h2>
+                        <div class="extra">
+                            <span class="score">9.3分 </span> /1000收藏</div>
+                        <div class="extra">1994 / 剧情、爱情</div>
+                        <div class="extra">导演 / 张艺谋</div>
+                        <div class="extra">主演 / 剧情、爱情、剧情、爱情</div>
+                    </div>
+                </a>
+            </div> -->
+            </div>
+        </section>
+        <section>2</section>
+        <section>3</section>
+        <div class="loading">
+            <!-- <span class="iconfont icon-loading"></span> -->
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="active">
+            <span class="iconfont icon-NorthDirection">
+                <span>AMSS1</span>
+            </span>
+        </div>
+        <div>
+            <span class="iconfont icon-top">
+                <span>AMSS2</span>
+            </span>
+        </div>
+        <div>
+            <span class="iconfont icon-search">
+                <span>AMSS3</span>
+            </span>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
+<script>
+    var log = console.log.bind(console)
+    // tab切换
+    $('footer div').on('click', function () {
+        var _index = $(this).index()
+        $('section').hide().eq(_index).fadeIn()
+    })
+    // 获取data
+    var startNum = 0
+    // 加锁，防止多次请求
+    var isLoading = false
+    getData()
+
+    function getData() {
+        // 当执行的过程中又一次的getData请求的话此时的isLoading=true请求就会return掉
+        if (isLoading) return
+        isLoading = true
+        // 请求的时候加载loading
+        $('.loading').show()
+        $.ajax({
+            url: 'http://api.douban.com/v2/movie/top250',
+            type: 'get',
+            data: {
+                start: startNum,
+                count: 10
+            },
+            dataType: 'jsonp'
+        }).done(function (data) {
+            console.log(data)
+            setData(data)
+            startNum += 10
+        }).fail(function (error) {
+            console.log(error)
+        }).always(function () {
+            // 请求结束设置为false getData时执行请求
+            isLoading = false
+            // 请求结束去除loading
+            $('.loading').hide()
+        })
+    }
+
+    function setData(data) {
+        data.subjects.forEach(movie => {
+            var tpl =
+                ` <div class="item">
+                <a href="#">
+                    <div class="cover">
+                        <img src="" alt="">
+                    </div>
+                    <div class="detail">
+                        <h2></h2>
+                        <div class="extra">
+                            <span class="score"></span><span></span></div>
+                        <div class="extra"><span class='year'></span> / <span class='type'></span></div>
+                        <div class="extra">导演 <span class='director'></span></div>
+                        <div class="extra">主演 /<span class='starring'></span></div>
+                    </div>
+                </a>
+            </div>`
+            var $node = $(tpl)
+            $node.find('.cover img').attr('src', movie.images.medium)
+            $node.find('.detail h2').text(movie.title)
+            $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
+            $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
+            $node.find('.year').text(movie.year)
+            $node.find('.type').text(movie.genres.join('、'))
+            $node.find('.director').text(function () {
+                var nameArr = []
+                movie.directors.forEach((name) => {
+
+                    nameArr.push(name.name)
+                })
+                return nameArr.join('、')
+            })
+            $node.find('.starring').text(function () {
+                var StarringArr = []
+                movie.casts.forEach((name) => {
+
+                    StarringArr.push(name.name)
+                })
+                return StarringArr.join('、')
+            })
+            $('#Top250').append($node)
+        });
+    }
+    // 加载更多
+    // 函数节流,以最后一次的请求为准
+    var clock;
+    $('main').scroll(
+        function () {
+            if (clock) {//第一次是undefined不执行
+                clearTimeout(clock)//400毫秒以内的再次请求清除前一次以最后一次为准，节省流量
+            }
+            clock = setTimeout(function () {
+                function loadMore() {
+                    if ($('main').height() + $('main').scrollTop() + 10 >= $('section').eq(0).height()) {
+                        getData()
+                    }
+                }
+            }, 400)
+        }
+    )
+
+    // 代码重构,减少全局变量
+    var app={
+        // 初始化
+        init:function(){
+            this.bind()
+            this.start()      
+        },
+        // 绑定事件
+        bind:function(){
+
+        },
+        start:function(){
+
+        },
+        getData:function(){
+
+        },
+        setData:function(){
+
+        },
+        render:function(){
+
+        }
+    }
+</script>
+<p>
+
+</p>
+
+</html>

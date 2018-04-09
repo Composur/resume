@@ -53,6 +53,16 @@
 + modernizr用来检测HTML5和css3的新特性，在页面加载的时候会检测浏览器支持和不支持的特性且在html中会加入对应的类名,方便我们针对不兼用的样式hack
 + postcss 一个插件提供了一种方式用JavaScript来处理css；需要和其它打包、构建工具一起使用
 
+### 宽度与高度
++ 自然流中div中的默认的高是由它内部文档流中（内联元素从左到右依次排列）高度的总和决定的
++ 如果父元素没有什么东西（没有border）挡住子元素的margin那么会发生上下margin合并
++ 脱离文档流的含义就是在计算元素高度的时候不计算脱离元素的高度（position:absolute/fixed; float:; ）
++ span元素的高度是由行高决定的，span元素的宽度是由content、margin、border、padding决定的
++ 1:1的div
+```
+div{border:1px solid red;padding-top:100%;}
+```
+
  
 
 
