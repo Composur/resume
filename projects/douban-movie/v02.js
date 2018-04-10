@@ -4,6 +4,51 @@ var log = console.log.bind(console)
  var Helper = {
     isToEnd: function($viewport, $content){
       return $viewport.height() + $viewport.scrollTop() +10 > $content.height()
+    },
+    createNode:function(movie){
+        // data.subjects.forEach(movie => {
+            var tpl =
+                ` <div class="item">
+            <a href="#">
+                <div class="cover">
+                    <img src="" alt="">
+                </div>
+                <div class="detail">
+                    <h2></h2>
+                    <div class="extra">
+                        <span class="score"></span><span></span></div>
+                    <div class="extra"><span class='year'></span> / <span class='type'></span></div>
+                    <div class="extra">导演 <span class='director'></span></div>
+                    <div class="extra">主演 /<span class='starring'></span></div>
+                </div>
+            </a>
+        </div>`
+            var $node = $(tpl)
+            $node.find('.cover img').attr('src', movie.images.medium)
+            $node.find('.detail h2').text(movie.title)
+            $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
+            $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
+            $node.find('.year').text(movie.year)
+            $node.find('.type').text(movie.genres.join('、'))
+            $node.find('.director').text(function () {
+                var nameArr = []
+                movie.directors.forEach((name) => {
+
+                    nameArr.push(name.name)
+                })
+                return nameArr.join('、')
+            })
+            $node.find('.starring').text(function () {
+                var StarringArr = []
+                movie.casts.forEach((name) => {
+
+                    StarringArr.push(name.name)
+                })
+                return StarringArr.join('、')
+            })
+            // _this.$container.find('.container').append($node)
+            return $node;
+        // });
     }
   }
 
@@ -67,48 +112,9 @@ var log = console.log.bind(console)
      },
      render: function (data) {
          var _this=this
-         data.subjects.forEach(movie => {
-             var tpl =
-                 ` <div class="item">
-             <a href="#">
-                 <div class="cover">
-                     <img src="" alt="">
-                 </div>
-                 <div class="detail">
-                     <h2></h2>
-                     <div class="extra">
-                         <span class="score"></span><span></span></div>
-                     <div class="extra"><span class='year'></span> / <span class='type'></span></div>
-                     <div class="extra">导演 <span class='director'></span></div>
-                     <div class="extra">主演 /<span class='starring'></span></div>
-                 </div>
-             </a>
-         </div>`
-             var $node = $(tpl)
-             $node.find('.cover img').attr('src', movie.images.medium)
-             $node.find('.detail h2').text(movie.title)
-             $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
-             $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
-             $node.find('.year').text(movie.year)
-             $node.find('.type').text(movie.genres.join('、'))
-             $node.find('.director').text(function () {
-                 var nameArr = []
-                 movie.directors.forEach((name) => {
-
-                     nameArr.push(name.name)
-                 })
-                 return nameArr.join('、')
-             })
-             $node.find('.starring').text(function () {
-                 var StarringArr = []
-                 movie.casts.forEach((name) => {
-
-                     StarringArr.push(name.name)
-                 })
-                 return StarringArr.join('、')
-             })
-             _this.$container.find('.container').append($node)
-         });
+         data.subjects.forEach(function(data){
+            _this.$content.append(Helper.createNode(data))
+          })
      },
      isToBottom: function () {
          return this.$container.find('.container').height() <= this.$container.height() + this.$container.scrollTop() +
@@ -119,6 +125,7 @@ var log = console.log.bind(console)
  var northDirection = {
     init: function () {
         this.$container = $('#northDirection')
+        this.$content=this.$container.find('.container')
         this.bind()
         this.start()
         this.isLoading = false
@@ -174,49 +181,11 @@ var log = console.log.bind(console)
     },
     render: function (data) {
         var _this=this
-        data.subjects.forEach(movie => {
-            movie=movie.subject
-            var tpl =
-                ` <div class="item">
-            <a href="#">
-                <div class="cover">
-                    <img src="" alt="">
-                </div>
-                <div class="detail">
-                    <h2></h2>
-                    <div class="extra">
-                        <span class="score"></span><span></span></div>
-                    <div class="extra"><span class='year'></span> / <span class='type'></span></div>
-                    <div class="extra">导演 <span class='director'></span></div>
-                    <div class="extra">主演 /<span class='starring'></span></div>
-                </div>
-            </a>
-        </div>`
-            var $node = $(tpl)
-            $node.find('.cover img').attr('src', movie.images.medium)
-            $node.find('.detail h2').text(movie.title)
-            $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
-            $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
-            $node.find('.year').text(movie.year)
-            $node.find('.type').text(movie.genres.join('、'))
-            $node.find('.director').text(function () {
-                var nameArr = []
-                movie.directors.forEach((name) => {
-
-                    nameArr.push(name.name)
-                })
-                return nameArr.join('、')
-            })
-            $node.find('.starring').text(function () {
-                var StarringArr = []
-                movie.casts.forEach((name) => {
-
-                    StarringArr.push(name.name)
-                })
-                return StarringArr.join('、')
-            })
-            _this.$container.find('.container').append($node)
-        });
+        
+        data.subjects.forEach(function(data){
+            data=data.subject
+           _this.$content.append(Helper.createNode(data))
+         })
     },
     isToBottom: function () {
         return this.$container.find('.container').height() <= this.$container.height() + this.$container.scrollTop() +
@@ -226,14 +195,13 @@ var log = console.log.bind(console)
  var search = {
     init: function () {
         this.$container = $('#search-wrap')
+        this.$content=this.$container.find('.container')
         this.bind()
-        // this.start()
         this.isLoading = false
         this.startNum = 0
         this.finish = false
         this.isToBottom()
         this.keyworld=''
-
     },
     bind: function () {
         var _this = this
@@ -241,16 +209,18 @@ var log = console.log.bind(console)
             _this.start()
         })
         this.btn=this.$container.find('.btn').click(function(){
+            _this.$content.empty()
             _this.keyworld=_this.$container.find('.input-search').val()
             _this.start()        
         })
 
        this.keydown=this.$container.find('.input-search').keydown(function(){
-            if ( event.which == 13 ) {
+            if ( event.keyCode === 13 ) {
                 event.preventDefault();
-               }
-               _this.keyworld=_this.$container.find('.input-search').val()
-               _this.start()      
+                _this.$content.empty()
+                _this.keyworld=_this.$container.find('.input-search').val()
+                _this.start()      
+               }           
         })
         
     },
@@ -295,47 +265,7 @@ var log = console.log.bind(console)
     render: function (data) {
         var _this=this
         data.subjects.forEach(movie => {
-            // movie=movie.subject
-            var tpl =
-                ` <div class="item">
-            <a href="#">
-                <div class="cover">
-                    <img src="" alt="">
-                </div>
-                <div class="detail">
-                    <h2></h2>
-                    <div class="extra">
-                        <span class="score"></span><span></span></div>
-                    <div class="extra"><span class='year'></span> / <span class='type'></span></div>
-                    <div class="extra">导演 <span class='director'></span></div>
-                    <div class="extra">主演 /<span class='starring'></span></div>
-                </div>
-            </a>
-        </div>`
-            var $node = $(tpl)
-            $node.find('.cover img').attr('src', movie.images.medium)
-            $node.find('.detail h2').text(movie.title)
-            $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')
-            $node.find('.detail .extra>span').eq(1).text(' / ' + movie.collect_count + ' 收藏')
-            $node.find('.year').text(movie.year)
-            $node.find('.type').text(movie.genres.join('、'))
-            $node.find('.director').text(function () {
-                var nameArr = []
-                movie.directors.forEach((name) => {
-
-                    nameArr.push(name.name)
-                })
-                return nameArr.join('、')
-            })
-            $node.find('.starring').text(function () {
-                var StarringArr = []
-                movie.casts.forEach((name) => {
-
-                    StarringArr.push(name.name)
-                })
-                return StarringArr.join('、')
-            })
-            _this.$container.find('.container').append($node)
+            _this.$content.append(Helper.createNode(movie))
         });
     },
     isToBottom: function () {
