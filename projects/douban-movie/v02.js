@@ -7,7 +7,6 @@ var log = console.log.bind(console)
     }
   }
 
-
  var top250 = {
      init: function () {
          this.$container = $('#Top250')
@@ -21,7 +20,6 @@ var log = console.log.bind(console)
      bind: function () {
          var _this = this
         this.$container.scroll(function(){
-            log('scroll')
             if(!_this.finish && Helper.isToEnd(_this.$container,_this.$content)){
                 _this.start()
             }
@@ -246,6 +244,15 @@ var log = console.log.bind(console)
             _this.keyworld=_this.$container.find('.input-search').val()
             _this.start()        
         })
+
+       this.keydown=this.$container.find('.input-search').keydown(function(){
+            if ( event.which == 13 ) {
+                event.preventDefault();
+               }
+               _this.keyworld=_this.$container.find('.input-search').val()
+               _this.start()      
+        })
+        
     },
     start: function () {
         var _this = this

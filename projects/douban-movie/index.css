@@ -14,22 +14,19 @@ body {
     background-color: #fff;
 }
 
-main {
-    height: calc(100vh - 50px);
-    background: #fff;
-    ;
-    overflow: scroll;
-    /* ios上增加弹性 */
-    -webkit-overflow-scrolling: touch;
-}
-
 main>section {
+    height: calc(100vh - 45px);
+    padding: 10px;
+    background: #fff;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch; /*ios 上增加弹性*/
+  }
+  main>section{
     display: none;
-}
-
-main>section:first-child {
+  }
+  main section:first-child{
     display: block;
-}
+  }
 
 .item {
     border-bottom: 1px solid grey;
