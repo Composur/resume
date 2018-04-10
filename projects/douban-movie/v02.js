@@ -126,19 +126,20 @@ var log = console.log.bind(console)
     init: function () {
         this.$container = $('#northDirection')
         this.$content=this.$container.find('.container')
-        this.bind()
-        this.start()
         this.isLoading = false
         this.startNum = 0
         this.finish = false
-        this.isToBottom()
+        this.bind()    
+        this.start()
 
     },
     bind: function () {
         var _this = this
-        this.$container.find('.container').scroll(function () {
-            _this.start()
-        })
+       this.$container.scroll(function(){
+            if(!_this.finish && Helper.isToEnd(_this.$container,_this.$content)){
+                _this.start()
+            }
+       })
     },
     start: function () {
         var _this = this
