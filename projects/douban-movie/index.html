@@ -8,150 +8,7 @@
     <title>douban-movie</title>
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_619954_d8u82qfedhjmj9k9.css">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        a {
-            text-decoration: none
-        }
-
-        body {
-            font-size: 12px;
-            line-height: 1.2;
-            background-color: #fff;
-        }
-
-        main {
-            height: calc(100vh - 50px);
-            background: #fff;
-            ;
-            overflow: scroll;
-            /* ios上增加弹性 */
-            -webkit-overflow-scrolling: touch;
-        }
-
-        main>section {
-            display: none;
-        }
-
-        main>section:first-child {
-            display: block;
-        }
-
-        .item {
-            border-bottom: 1px solid grey;
-            padding: 4px;
-        }
-
-        .item>a {
-            display: block;
-            display: flex;
-        }
-
-        .item .cover {
-            width: 76px;
-        }
-
-        .item .cover img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .item .detail {
-            margin-left: 20px;
-        }
-
-        .item .detail h2 {
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .item .detail .extra {
-            margin-top: 5px;
-            color: gray;
-        }
-
-        .item .detail .extra .score {
-            color: red;
-        }
-
-        .loading {
-            text-align: center;
-            display: none;
-        }
-
-        .spinner {
-            margin: 20px auto 0;
-            width: 80px;
-            text-align: center;
-        }
-
-        .spinner>div {
-            width: 18px;
-            height: 18px;
-            background-color: #333;
-
-            border-radius: 100%;
-            display: inline-block;
-            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-        }
-
-        .spinner .bounce1 {
-            -webkit-animation-delay: -0.32s;
-            animation-delay: -0.32s;
-        }
-
-        .spinner .bounce2 {
-            -webkit-animation-delay: -0.16s;
-            animation-delay: -0.16s;
-        }
-
-        @-webkit-keyframes sk-bouncedelay {
-            0%,
-            80%,
-            100% {
-                -webkit-transform: scale(0)
-            }
-            40% {
-                -webkit-transform: scale(1.0)
-            }
-        }
-
-        @keyframes sk-bouncedelay {
-            0%,
-            80%,
-            100% {
-                -webkit-transform: scale(0);
-                transform: scale(0);
-            }
-            40% {
-                -webkit-transform: scale(1.0);
-                transform: scale(1.0);
-            }
-        }
-
-        footer {
-            border-top: 1px solid gray;
-            height: 50px;
-            width: 100%;
-            display: flex;
-        }
-
-        footer>div.active {
-            color: red;
-        }
-
-        footer>div {
-            flex-grow: 1;
-            text-align: center;
-            line-height: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -176,6 +33,9 @@
             </div>
         </section>
         <section id="northDirection">
+            <div class="container">
+
+            </div>
             <!-- <div class="item">
                
                     <a href="#">
@@ -196,7 +56,14 @@
             </div> -->
 
         </section>
-        <section>3</section>
+        <!-- 搜索 -->
+        <section id="search-wrap">
+           <input type="text" class="input-search">
+           <button class="btn">搜索</button>
+            <div class="container">
+                    
+            </div>
+        </section>
         <div class="loading">
             <!-- <span class="iconfont icon-loading"></span> -->
             <div class="spinner">
