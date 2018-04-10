@@ -16,6 +16,8 @@
 
 - #### __[遇到的git问题](https://github.com/Composur/resume/blob/master/blog/git_reset.md)__
 
+- #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
+
 
 
 
