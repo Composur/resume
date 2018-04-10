@@ -85,7 +85,7 @@ var log = console.log.bind(console)
          // 请求的时候加载loading
          $('.loading').show()
          $.ajax({
-             url: 'http://api.douban.com/v2/movie/top250',
+             url: 'https://api.douban.com/v2/movie/top250',
              type: 'get',
              data: {
                  start: _this.startNum,
@@ -154,7 +154,7 @@ var log = console.log.bind(console)
         // 请求的时候加载loading
         $('.loading').show()
         $.ajax({
-            url: 'http://api.douban.com/v2/movie/us_box',
+            url: 'https://api.douban.com/v2/movie/us_box',
             type: 'get',
             // data: {
             //     start: _this.startNum,
@@ -238,7 +238,7 @@ var log = console.log.bind(console)
         // 请求的时候加载loading
         $('.loading').show()
         $.ajax({
-            url: 'http://api.douban.com/v2/movie/search',
+            url: 'https://api.douban.com/v2/movie/search',
             type: 'get',
             data: {
                 q: _this.keyworld
