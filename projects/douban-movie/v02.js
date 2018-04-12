@@ -92,7 +92,7 @@ var log = console.log.bind(console)
                  count: 10
              },
              dataType: 'jsonp'
-         }).done(function (data) {
+         }).done(function (data) {  
              console.log(data)
              _this.render(data)
              this.startNum += 10
