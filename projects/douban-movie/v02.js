@@ -24,6 +24,7 @@ var log = console.log.bind(console)
             </a>
         </div>`
             var $node = $(tpl)
+            $node.find('a').attr('href', movie.alt)
             $node.find('.cover img').attr('src', movie.images.medium)
             $node.find('.detail h2').text(movie.title)
             $node.find('.detail .extra>span').eq(0).text(movie.rating.average + '分')

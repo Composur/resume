@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>waterfall</title>
+</head>
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .container img {
+        position: absolute;
+    }
+</style>
+
+<body>
+    <!-- 
+        1、图片大小不一致的情况下
+     -->
+    <div class="container">
+        <!-- 因为要js操作img需要给img绝对定位 -->
+        <img src="http://via.placeholder.com/250x100" alt="350x150">
+        <img src="http://via.placeholder.com/250x150" alt="350x150">
+        <img src="http://via.placeholder.com/250x170" alt="350x150">
+        <img src="http://via.placeholder.com/250x140" alt="350x150">
+        <img src="http://via.placeholder.com/250x250" alt="350x150">
+        <img src="http://via.placeholder.com/250x200" alt="350x150">
+        <img src="http://via.placeholder.com/250x100" alt="350x150">
+        <img src="http://via.placeholder.com/250x90" alt="350x150">
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    /*
+            1、获取每列图片的数量，计算每列放置多少图片
+            2、初始化img的height array
+        */
+    var log = console.log.bind(console)
+    var colcount
+    var colHeightArr = []
+    colcount = Math.floor($('.container').width() / $('.container img').outerWidth(true))
+    log(colcount)
+    colHeightArr.length=$('.container img').length
+    for (var i = 0; i < colHeightArr.length; i++) {
+        colHeightArr[i] = 0
+    }
+    // 加载后找出最小的
+    $('.container img').on('load',function(){
+        var minValue=0
+        var minIndex
+      for(var i=0;i<colHeightArr.length;i++){
+            log(colHeightArr[i])
+      }
+        
+    })
+</script>
+
+</html>

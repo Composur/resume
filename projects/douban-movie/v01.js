@@ -69,6 +69,7 @@ function setData(data) {
                 </a>
             </div>`
             var $node = $(tpl)
+            $node.find('a').attr('href', movie.alt)
             $node
                 .find('.cover img')
                 .attr('src', movie.images.medium)
