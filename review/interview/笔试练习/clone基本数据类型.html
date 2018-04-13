@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>克隆基本数据类型</title>
+</head>
+<body>
+<ul>
+    <li>Number</li>
+    <li>String</li>
+    <li>Boolean</li>
+    <li>
+        <dl>
+            <dt>Object</dt>
+            <dd>Function</dd>
+            <dd>Array</dd>
+            <dd>Date</dd>
+        </dl>
+    </li>
+    <li>Null</li>
+    <li>Undefined</li>
+</ul>
+<script>
+    object.prototype.clone=function () {
+        var o=this.constructor===Array?[]:{};
+        for(var e in this){
+            o[e]=typeof this[e]==="object"?this[e].clone():this[e];
+        }
+        return o;
+    };
+    function clone(obj) {
+        var buf;
+        if(obj instanceof Array){
+            buf=[];
+
+        }
+       var i=0;
+        i<obj.length;
+    }
+
+</script>
+</body>
+</html>

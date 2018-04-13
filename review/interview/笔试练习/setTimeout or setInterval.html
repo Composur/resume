@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //第一个以执行时间为准第
+    //二个以定时器设定的时间为准
+    //第一个考虑了函数本身执行的时间，会在执行完毕之后过10ms触发。第二个无论上次调用是否执行完毕10ms之后触发。-->
+    <!--第一种方法可以防止js线程阻塞-->
+    function myTimeoutFunction() {
+//        doStuff();
+        console.log("gg");
+        setTimeout(myTimeoutFunction, 1000);
+    }
+    myTimeoutFunction();
+
+
+    //settimeout要执行完代码块才重置定时器，setinterval每隔10ms就开始执行代码块，不管上一趟程序有没有跑玩;
+    //二者有何不同 js是单线程所以setInterval也会执行完然后不会存在上一个interval未执行完成就开始执行下一个interval的情况。最极端的情况是上一个interval刚执行完成就立即执行下一个interval，
+    // 而出现这种情况的条件之一是仅当代码的执行时间大于了设定的延迟时间
+    function myTimeoutFunction() {
+//        doStuff();
+        console.log("fe")
+    }
+//    myTimeoutFunction();
+    setInterval(myTimeoutFunction, 1000);
+
+
+    console.log(navigator.userAgent);
+
+
+    for (var i = 1; i <= 3; i++) {
+        setTimeout(function () {
+            console.log(i);//4,4,4
+        }, 0);
+    }
+
+    for(var i=1;i<=3; i++){
+        setTimeout((function (i) {
+            console.log(i);//1.2.3
+        })(i),0)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function date() {
+        var time=new Date();
+        var year=time.getFullYear(),
+                mou=time.getMonth()+1,
+                day=time.getDate();
+        mou=mou<10?"0"+mou:mou;
+        day=day<10?"0"+day:day;
+        document.write(year+'--'+mou+'--'+day);
+    }
+    date();
+</script>
+</body>
+</html>

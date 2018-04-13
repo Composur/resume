@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+</head>
+<style>
+    li {
+        cursor: pointer;
+    }
+</style>
+<body>
+<button onclick="st()">用闭包实现程序的暂停执行功能</button>
+<script>
+    /**
+     *用闭包实现程序的暂停执行功能
+     */
+
+    var st = (function() {
+        alert(1);
+        alert(2);
+            var a='我是闭包！';
+        return function() {
+//            点击后触发的部分
+            alert(a);
+            alert(a);
+        }
+
+    })();
+</script>
+
+
+
+
+<p>
+    首先:闭包就是能访问其它函数内部变量的函数
+    1.什么情况下会发生闭包，
+    闭包的创建依赖于函数
+
+
+    js中function即可以用于函数定义，又可以用于类的定义，这样我们就可以通过闭包，来实现生成类的类。也就是说类的实例是一个类。
+    2.为什么需要闭包，(遇到需要动态存储变化的数据,alert(li的index))
+    什么场景下需要:
+
+    1.在动态执行环境中，数据实时地发生变化，为了保持这些非持久型变量的值，我们用闭包这种载体来存储这些动态数据。这就是闭包的作用。
+    也就说遇到需要存储动态变化的数据或将被回收的数据时，我们可以通过外面再包裹一层函数形成闭包来解决。
+    当然，闭包会导致很多外部函数的调用对象不能释放，滥用闭包会使得内存泄露，
+    2.用闭包模拟私有方法
+
+    这样我们就可以通过闭包，来实现生成类的类
+    闭包可以读取函数内部的变量,让这些变量始终保持在内存中
+
+    闭包闭了谁，
+    怎么释放被闭包的变量内存
+    ，闭包的优点是什么，
+    缺点是什么
+
+    <script>
+        var s=document.getElementsByTagName()
+    </script>
+
+</p>
+<p>下面这个 ul，如何点击每一列的时候 alert 其 index?</p>
+<ul id="test">
+
+    <li>这是第一条</li>
+
+    <li>这是第二条</li>
+
+    <li>这是第三条</li>
+
+</ul>
+<script>
+
+
+    /**
+     * 1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，
+     * 否则会造成网页的性能问题，在IE中可能导致内存泄露。
+     * 解决方法是，在退出函数之前，将不使用的局部变量全部删除。
+     2）闭包会在父函数外部，改变父函数内部变量的值。
+     所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），
+     把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+     * /
+
+     /*闭包就是能够读取其他函数内部变量的函数。*/
+    var test = document.getElementById("test").getElementsByTagName("li");
+    console.log(test);
+    for (var i = 0; i < test.length; i++) {
+        test[i].index = i;
+//            闭包
+        test[i].onclick = (function () {
+            return function (i) {
+                alert(i);
+            }
+        })(i);
+    }
+
+
+    //    var b = function () {
+    //        var n = 12450;
+    //        var x = function () {
+    //            alert(n);
+    //        };
+    //        x() ;//12450
+    //        return x
+    //    };
+    //
+    //    var a = b();
+    //    a() ;//12450
+
+    var name = "The Window";
+    var object = {
+        name: "My Object",
+        getNameFunc: function () {
+            return function () {
+//                匿名函数的执行环境具有全局性,this对象指向的是window
+                console.log(this)//this是window
+                return this.name;//
+            };
+        }
+    };
+    console.log(object.getNameFunc()());
+    alert(object.getNameFunc()());//The Window
+
+
+    var name = "The Window";
+    var object = {
+        name: "My Object",
+        getNameFunc: function () {
+            console.log(this)//Object
+            var that = this;//this是object
+            return function () {
+                return that.name;
+            };
+        }
+    };
+    alert(object.getNameFunc()());//My Object
+
+
+    function count() {
+        var arr = [];
+        for (var i = 1; i <= 3; i++) {
+
+            /**
+             * 返回闭包时牢记的一点就是：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+             * */
+            arr.push(function () {
+                return i * i;
+            });
+        }
+        return arr;
+    }
+
+    var results = count();
+    var f1 = results[0];
+    var f2 = results[1];
+    var f3 = results[2];
+    console.log(f1(), f2(), f3());//16 16 16
+
+
+    function count1() {
+        var arr = [];
+        for (var i = 1; i <= 3; i++) {
+            /* (function (i) {
+             arr.push(function () {
+             return i * i;
+             });
+             })(i);//1,4,9*/
+            /**
+             * 返回闭包时牢记的一点就是：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+             * 如果一定要引用循环变量怎么办？方法是再创建一个函数，用该函数的参数绑定循环变量当前的值，
+             * 无论该循环变量后续如何更改，已绑定到函数参数的值不变：n绑定了i
+             * */
+            arr.push((function (n) {
+                return function () {
+                    return n * n;
+                }
+            })(i));
+        }
+        return arr;
+    }
+
+    var results1 = count1();
+    var f11 = results1[0];
+    var f22 = results1[1];
+    var f33 = results1[2];
+    console.log(f11(), f22(), f33());//16 16 16
+
+
+    function fun(n, o) {
+        console.log(o);
+        return {
+            fun: function (m) {
+//                最内层的return出去的fun函数不是第二层fun函数，是最外层的fun函数
+                return fun(m, n);
+            }
+        };
+    }
+    //第一个fun(0)是在调用第一层fun函数。第二个fun(1)是在调用前一个fun的返回值的fun函数，所以：
+
+    //第后面几个fun(1),fun(2),fun(3),函数都是在调用第二层fun函数。
+    var a = fun(0);//undefined
+    a.fun(1);//0
+    a.fun(2);//0
+    a.fun(3);//0
+    var b = fun(0).fun(1).fun(2).fun(3);//undefined,0,1,2
+
+    var c = fun(0).fun(1);//undefined,0
+
+    c.fun(2);//1
+    c.fun(3);//1
+
+</script>
+</body>
+`
+</html>

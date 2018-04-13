@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分割字符串的方式及适用场景</title>
+</head>
+<body>
+
+<script>
+    var str="www.baidu.com/?page";
+    // 1、字符串剪裁
+    var demo1=str.substring(0, str.indexOf("?page"));
+    console.log(demo1);//www.baidu.com/
+    // 2、正则表达式
+    var demo2=str.replace(/\?page/g, "");
+    console.log(demo2);//www.baidu.com/
+    // 3、字符串分拆、合并
+    var demo3=str.split("?page").join("");
+    console.log(demo3);//www.baidu.com/
+    /*上面这段代码从代码量来说“正则表达式”最优秀;
+    从代码执行效率来说： “字符串剪裁”法最高(Chrome中“正则表达式”效率最高)，split法最次;
+    从可扩展性上来说，“正则表达式”法最优。具体使用那种方案视具体的需求环境而定。
+    */
+</script>
+</body>
+</html>

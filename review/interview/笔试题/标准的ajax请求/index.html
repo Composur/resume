@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq标准的ajax请求</title>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+<script>
+    $(function () {
+        $.ajax({
+            type:'get',
+            url:'./package.json',
+            dataType:'json',//返回格式为json
+            async:true,//请求是否为异步，默认true异步
+            data:{'id':'value'},
+            before:function (data) {
+//                请求处理前
+                console.log(data)
+            },
+            success:function (data) {
+//              请求成功时
+                console.log(data);//json对象
+            },
+            complete:function (data) {
+//                请求完成时
+                console.log(data.responseText)
+            },
+            error:function () {
+//                请求是失败时
+                console.log();
+            }
+        })
+    })
+</script>
+</body>
+</html>

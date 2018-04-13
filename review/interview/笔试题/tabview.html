@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+</head>
+<style>
+    .container{
+        width: 1200px;
+        margin: 0 auto;
+    }
+    span{
+        background: aquamarine;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    li{
+        float: left;
+        margin-left: -40px;
+        border: 1px solid red;
+        width: 300px;
+        list-style: none;
+        display: none;
+    }
+</style>
+<body>
+<div class="container">
+    <ul>
+        <div>
+            <span >tab1</span>
+            <span >tab2</span>
+            <span >tab3</span>
+        </div>
+        <ul>
+            <li> ajax:无刷新的异步请求(通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。)是多种技术的组合,本质上是一个浏览器端的技术交互模式:</li>
+            <li> 正常循环加事件的话，所有弹出的i是同一个变量，都是公用一个存储地址，所以每次弹出的内容一样，
+                用闭包的话就相当于每循环一次的时候，i变量都是一个局部变量，这样循环几次就会有几个不同的变量，分别于li对应。
+            </li>
+        </ul>
+    </ul>
+</div>
+<script>
+    var tab1=document.getElementsByTagName('span');
+    var li=document.getElementsByTagName('li');
+    for(var i=0;i<li.length;i++){
+        tab1[i].index=i;
+        tab1[i].onclick=function () {
+           for(var i=0;i<li.length;i++){
+               li[i].style.display='none';
+           }
+           li[this.index].style.display='block';
+        }
+    }
+</script>
+</body>
+</html>

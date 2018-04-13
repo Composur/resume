@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    window.onload()方法是必须等到页面内包括图片的所有元素加载完毕后才能执行。
+    $(document).ready()是 DOM 结构绘制完毕后就执行，不必等到加载完毕。
+</p>
+
+<script>
+    function ready(fn) {
+        if (document.addEventListener) { //标准浏览器 3
+            document.addEventListener('DOMContentLoaded', function () {
+
+                //注销事件, 避免反复触发
+                document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+
+                fn(); //执行函数
+            }, false);
+//            IE
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function () {
+                        if (document.readyState == 'complete') {
+                            document.detachEvent('onreadystatechange', arguments.callee);
+                            fn(); //函数 执行
+                        }
+                    }
+            );
+        }
+    }
+</script>
+</body>
+</html>

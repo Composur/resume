@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三角形和品字型</title>
+</head>
+<style>
+    .div1 {
+        /*把上左右三条边隐藏掉*/
+        width: 0;
+        height: 0;
+        /*border-width: 200px;*/
+        /*border-style: solid;*/
+        border: 300px solid;
+        border-color: transparent transparent red transparent;
+
+    }
+    .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px solid;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+    }
+</style>
+<body>
+<div class="div1"></div>
+<div class="caret"></div>
+</body>
+</html>

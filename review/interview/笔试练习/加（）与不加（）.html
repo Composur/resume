@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function test(str) {
+        str+=1;
+       return str;
+    }
+    var demo1=test(1);
+    console.log(demo1);//2 返回的是执行函数得到的值
+
+    var demo2=test;
+    console.log(demo2);//function test() 返回的是函数体本身
+</script>
+</body>
+</html>

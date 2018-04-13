@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建一个对象原型和这个原型的实例</title>
+</head>
+<body>
+
+<script>
+    //<!--下面的例子创建了一个对象原型，Person，和这个原型的实例，You。-->
+    function Person(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+    var you=new Person();
+    you.name="test1";
+    you.age="25";
+</script>
+</body>
+</html>

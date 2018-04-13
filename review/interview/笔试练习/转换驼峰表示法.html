@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function change(arr) {
+        var arr1=arr.split("-");
+        for(var i=1;i<arr1.length;i++){
+             arr1[i]=arr1[i].charAt(0).toUpperCase()+arr1[i].substr(1,arr1[i].length-1);
+             arr=arr1.join("");
+        }
+        return arr;
+    }
+//    var test=change("few-fe-f-e-ef-e");
+//    alert(test);
+</script>
+</body>
+</html>

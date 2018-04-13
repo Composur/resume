@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>把一个数组arr按照指定的数组大小size分割成若干个数组块。</title>
+</head>
+<body>
+
+<script>
+    function chunk(arr, size) {
+        // Break it up.
+
+        var str = arr.join("");
+        console.log(str);
+        var ar = [];
+        for (var i = 0; i < str.length / size; i++) {
+            for (var i = 0; i < size; i++) {
+                ar.push(str[i]);
+            }
+
+        }
+
+
+        console.log(ar);
+        var ar = str.split();
+        return arr;
+    }
+
+    chunk(["a", "b", "c", "d","e"], 4);
+
+
+
+
+
+</script>
+</body>
+</html>

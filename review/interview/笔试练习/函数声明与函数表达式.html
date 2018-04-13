@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数声明与函数表达式</title>
+</head>
+<body>
+
+<script>
+
+
+    function foo() {
+        var y; // 提升变量y的申明
+        var x = 'Hello, ' + y;
+        console.log(x);//hello undefined
+        y = 'Bob';
+    }
+    foo();
+    /*解析器会先读取函数声明，并使其在执行任何代码之前可以调用*/
+/*除了什么时候可以通过变量访问函数这一点区别外，它们在语法上是等价的*/
+    //   1、函数声明
+    alert(test1(1, 1));//2
+    //   因为函数声明会提升到了源代码树的顶部
+    function test1(a, b) {
+        return a + b;
+    }
+    //    2、函数表达式
+    alert(test2(1, 1))// TypeError: test2 is not a function[详细了解]
+    var test2 = function (a, b) {
+        return a + b;
+    };
+
+
+
+
+
+</script>
+</body>
+</html>

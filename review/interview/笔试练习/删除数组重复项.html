@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除数组中的重复项</title>
+</head>
+<body>
+
+<script>
+    function delRepeat(str) {
+        var len=str.length;
+        var json={};
+        var arr=[];
+        for(var i=0;i<len;i++){
+            if(!json[str[i]]){
+                arr.push(str[i]);
+                json[str[i]]=1;
+            }
+        }
+        return arr;
+    }
+    console.log(delRepeat([1,2,3,3,4,4,5,5,6,1,9,3,25,4]));
+    //Array [ 1, 2, 3, 4, 5, 6, 9, 25 ]
+</script>
+</body>
+</html>

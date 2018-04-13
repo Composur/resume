@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>减少全局变量采用名字空间的方法进行命名</title>
+</head>
+<body>
+<script>
+    /**
+     * 减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中
+     * */
+    /*唯一的全局变量*/
+    var myVar={};
+    myVar.name="demo1";
+    myVar.age=100;
+    myVar.fn=function () {
+        /*do....*/
+    }
+</script>
+</body>
+</html>

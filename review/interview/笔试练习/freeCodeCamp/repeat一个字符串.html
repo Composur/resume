@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重复打印字符串</title>
+</head>
+<body>
+
+<script>
+    function repeat(str, num) {
+        // repeat after me
+        var arr=[];
+        if(num<0){
+            return "";
+        }else {
+            for(var i=0;i<num;i++){
+                document.write(str);
+                arr.push(str);
+            }
+            console.log(arr.join(""));
+            return arr.join("");
+        }
+
+
+    }
+    repeat("*", 3)
+    repeat("abc", 3);
+    repeat("abc", 4)
+    repeat("abc", 1)
+    repeat("*", 8)
+    repeat("abc", -2)
+</script>
+</body>
+</html>

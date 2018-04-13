@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缩短字符串用...表示</title>
+</head>
+<body>
+
+<script>
+    function truncate(str, num) {
+        // Clear out that junk in your trunk
+        if(str.length>num&&num>3){
+            var ns=str.slice(0,num-3)+"...";
+            console.log(ns);
+            return ns;
+        }else if(str.length>num&&num<3){
+            var ns=str.slice(0,num)+"...";
+            console.log(ns);
+            return ns;
+        }else if (str.length==num||num-str.length>1&&num-str.length<3){
+            console.log(str);
+            return str;
+        }else if(str.length<=num){
+            str=str+"...";
+            console.log(str);
+            return str;
+        }
+
+        return ns;
+    }
+    truncate("A-", 1);
+    truncate("Absolutely Longer", 2)
+</script>
+</body>
+</html>

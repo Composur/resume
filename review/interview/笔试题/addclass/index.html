@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>给元素增加一个class</title>
+</head>
+<body>
+<script>
+    function addClass(element,newClassName){
+        var add=element.className.split(' ');
+        add.push(newClassName);
+        element.className=add.join(' ');
+    }
+</script>
+</body>
+</html>

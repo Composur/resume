@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>截取字符串</title>
+</head>
+<body>
+<script>
+    function truncate(str, num) {
+        // Clear out that junk in your trunk
+        if(str.length>num){
+            var s=str.splice(num,str.length-num,"...");
+            console.log(s);
+
+        }
+        return str;
+    }
+
+    truncate("A-tisket a-tasket A green and yellow basket", 11);
+</script>
+</body>
+</html>

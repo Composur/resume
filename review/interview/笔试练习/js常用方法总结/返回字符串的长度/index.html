@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回字符串的长度</title>
+</head>
+<body>
+<script>
+    function arrLength(str) {
+        var a=0;
+        for(var i=0;i<str.length;i++){
+            if(str.charCodeAt(i)>255){
+                a+=2;
+            }else {
+                a++;
+            }
+        }
+        return a;
+    }
+    var str='xu通';
+    console.log(arrLength(str));
+    console.log(str.charAt(0));
+</script>
+</body>
+</html>

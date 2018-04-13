@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回数组中最大的数</title>
+</head>
+<body>
+
+<script>
+    var add = function(a,b){
+        return a+b;
+    };
+    var args = [2,3];
+    alert(add.apply("",args));
+    alert(add.call("",2,354));
+
+    alert(Math.max.apply(Math,args));
+</script>
+</body>
+</html>

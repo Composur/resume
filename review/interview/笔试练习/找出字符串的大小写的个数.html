@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //任意给定的一串字符，统计字符串里面的大写字母和小写字母的个数
+
+    var str1="ffejaGHUIguigGiuguiguiGGUGgiG",
+            arr3=[],
+            low=0,
+            up=0,
+            other=0;
+    str1.split("");
+    arr3=str1.split("");
+    //    console.log(arr3);
+    for(var i=0;i<arr3.length;i++){
+        if(arr3[i]>="a"&&arr3[i]<="z"){
+            low++;
+        }else if(arr3[i]>="A"&&arr3[i]<="Z"){
+            up++;
+        }else {
+            other++;
+        }
+    }
+    console.log(low);
+    console.log(up);
+    console.log(other);
+
+
+    function lowAndUp(str) {
+        var len=str.length,
+                low=0,
+                up=0,
+                other=0;
+        for(var i=0;i<len;i++){
+            var val=str.charAt(i)
+            if (val>="a"&&val<="z"){
+                low++;
+            }else if(val>="A"&&val<="Z"){
+                up++;
+            }else {
+                other++;
+            }
+        }
+        return lowAndUp;
+    }
+    lowAndUp("ffejaGHUIguigGiuguiguiGGUGgiG");
+    console.log(low);
+    console.log(up);
+    console.log(other);
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字符串与控制台打印</title>
+</head>
+<body>
+    <!--讲一个字符串最为参数传入,然后返回一个字符串,相对原来每个字符串间多了一个空格-->
+    <script>
+        function spacify(args){
+            return args.split('').join(' ');
+        }
+//        接下来如何将这个函数直接作用在一个字符串对象上
+        String.prototype.spacify=function () {
+            return args.split('').join(' ');
+        };
+//        函数声明和函数表达式的区别
+                /**
+                 *1.函数声明要有表示符,也就是函数名,表达式可以没有
+                 * 2.函数声明会提前
+                 * 函数声明是在预执行期执行的，就是说函数声明是在浏览器准备执行代码的时候执行的。
+                 * 因为函数声明在预执行期被执行，所以到了执行期，函数声明就不再执行
+                 * （人家都执行过了自然就不再执行了）。
+                 * 3.函数声明属于不请自来,函数表达式是什么时候遇到什么时候执行
+                 */
+//                对arguments的理解程度
+//        用函数实现一个简单的控制台输出
+        function log(args){
+            return console.log(args);
+        }
+
+
+// 如果传入多个参数呢
+        function log() {
+            return console.log.apply(console,arguments);
+        }
+//        如果希望返回的字符串前统一加上一个固定的字符串
+        function log() {
+            var args=Array.prototype.slice.call(arguments);
+            args.unshift('app');
+            console.log.apply(console,args);
+        }
+        log('hello world');
+    </script>
+    <style>
+        .overlay {  position: fixed;  left: 0;  right: 0;  bottom: 0;  top: 0;  background: rgba(0,0,0,.8);
+        }
+        .overlay article {  position: absolute;  left: 50%;  top: 50%;  margin: -200px 0 0 -200px;  width: 400px;  height: 400px;
+        }
+    </style>
+</body>
+    <div class="overlay">
+        <article>
+            <script>
+
+            </script>
+        </article>
+    </div>
+</html>

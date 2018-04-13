@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>判断字符串是否以指定的字符结尾</title>
+</head>
+<body>
+<script>
+    /*检查一个字符串(str)是否以指定的字符串(target)结尾。
+
+     如果是，返回true;如果不是，返回false。*/
+    function confirmEnding(str, target) {
+        // "Never give up and good luck will find you."
+        // -- Falcor
+//        substr() 方法返回一个字符串中从指定位置开始到指定字符数的字符。
+//        slice() 方法可从已有的数组中返回选定的元素。
+//        slice()方法可提取字符串的某个部分，并以新的字符串返回被提取的部分。
+       var strend=str.substr(str.length-target.length,str.length);
+        console.log(strend);
+        if(strend===target){
+            return true
+        }else {
+            return false
+        }
+//        return str;
+    }
+    confirmEnding("Bastian name", "name");
+</script>
+</body>
+</html>

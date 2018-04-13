@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="test-list">
+    <li>JavaScript</li>
+    <li>Swift</li>
+    <li>HTML</li>
+    <li>ANSI C</li>
+    <li>CSS</li>
+    <li>DirectX</li>
+</ul>
+<script>
+    var ul=document.getElementById('test-list');
+    var lis=document.getElementsByTagName('li');
+    for(var i=0;i<lis.length;i++){
+        if(!i%2==0){
+            ul.removeChild(lis[i])
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    //设定倒数秒数
+    var t = 2;
+    //显示倒数秒数
+    function showTime(){
+        t -= 1;
+        document.getElementById('showtimes').innerHTML= t;
+        if(t==0){
+            var browserName=navigator.appName;
+            if (browserName=="Netscape") {
+                var opened=window.open('about:blank','_self');
+                opened.opener=null;
+                opened.opener.close();
+            } else if(browserName=="Microsoft Internet Explorer") {
+                window.opener=null;
+                window.open('','_self');
+                window.close();
+            }
+////            location.href='error404.asp';
+//            window.opener=null;
+////            window.open('','_self');
+//            window.close();
+//            close();
+        }
+        //每秒执行一次,showTime()
+        setTimeout("showTime()",1000);
+    }
+    //执行showTime()
+    showTime();
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            /*position: relative;*/
+        }
+
+        .div1 {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left:50%;
+            /*margin-top: -100px;*/
+            /*!*margin-left:-100px;*!*/
+            background: red;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            -o-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+
+        .div2 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid gray;
+            border-top: none;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .div3 {
+            width:600px;
+            height:600px;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            background:gray;
+        }
+        /*.div3:before{*/
+            /*content:'';*/
+            /*display:inline-block;*/
+            /*vertical-align:middle;*/
+            /*text-align: center;*/
+            /*height:100%;*/
+        /*}*/
+        /*.div3{*/
+            /*width:600px;*/
+            /*height:600px;*/
+            /*color:red;*/
+            /*background:yellow;*/
+        /*}*/
+        .left{
+            float: left;
+            width: 200px;
+            height: 100%;
+            background: #000;
+            color: white;
+            display: inline-block;
+        }
+        .right{
+            height: 100%;
+            background: red;
+            color: white;
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container clearfix">
+    <div class="div1">
+        31.如何让一个div在页面中垂直居中?
+    </div>
+    <div class="div2">
+        32.请你缩写方法写出1px 实线 灰色 上面无边框的矩形边框样式?
+    </div>
+    <div class="div3">
+        33.请用div+css写出文字水平垂直居中,图片水平垂直居中的样式及布局?
+    </div>
+    <div style="clear: both"></div>
+</div>
+<h1>左侧固定,右侧自适应</h1>
+<div class="left">左侧content</div>
+<div class="right">
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+    右侧content右侧content右侧content右侧content右侧content右侧content右侧content右侧content
+</div>
+</body>
+</html>

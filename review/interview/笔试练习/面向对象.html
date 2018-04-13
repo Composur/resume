@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象的思想</title>
+</head>
+<style>
+    .div{
+        width: 200px;
+        height: 200px;
+        background: #c40000;
+        position: absolute;
+        display: none;
+    }
+</style>
+<body>
+<p>
+        把面向过程的函数 改写成面向对象的写法：
+        首先不能有函数嵌套，可以有全局变量
+        window.onload -->   构造函数
+        初始化函数     -->        初始化整个对象
+        变量          -->      属性
+        函数          -->      方法
+        函数没有嵌套
+</p>
+
+<div id="div1" style="">
+    <input type="button" value="btn1" id="btn1">
+    <input type="button" value="btn2" id="btn2">
+    <input type="button" value="btn3" id="btn3">
+    <div class="div">div1</div>
+    <div class="div">div2</div>
+    <div class="div">div3</div>
+</div>
+<script>
+
+/*方法：方法*/
+
+  /*  <!--function Dog() {-->
+        <!--this.wow=function () {-->
+            <!--alert("wow");-->
+        <!--};-->
+
+
+<!--//        通过调用this.yelp进行调用this.wow-->
+        <!--this.yelp=function () {-->
+            <!--this.wow();-->
+        <!--}-->
+    <!--}-->
+
+    <!--function MadDog() {-->
+        <!--this.yelp=function () {-->
+            <!--var self=this;-->
+            <!--setInterval(function () {-->
+                <!--self.wow();-->
+            <!--},500)-->
+        <!--}-->
+    <!--}-->
+    <!--MadDog.prototype=new MadDog();-->
+    <!--MadDog.yelp();-->*/
+
+</script>
+</body>
+</html>

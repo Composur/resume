@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回Yoonapi</title>
+</head>
+<body>
+
+<script>
+    var json = {
+        "query": {
+            "count": 1,
+            "created": "2017-05-22T12:38:05Z",
+            "lang": "zh-CN",
+            "results": {
+                "channel": {
+                    "units": {"distance": "mi", "pressure": "in", "speed": "mph", "temperature": "F"},
+                    "title": "Yahoo! Weather - Beijing, Beijing, CN",
+                    "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/",
+                    "description": "Yahoo! Weather for Beijing, Beijing, CN",
+                    "language": "en-us",
+                    "lastBuildDate": "Mon, 22 May 2017 08:38 PM CST",
+                    "ttl": "60",
+                    "location": {"city": "Beijing", "country": "China", "region": " Beijing"},
+                    "wind": {"chill": "63", "direction": "15", "speed": "7"},
+                    "atmosphere": {"humidity": "88", "pressure": "1010.0", "rising": "0", "visibility": "16.1"},
+                    "astronomy": {"sunrise": "4:53 am", "sunset": "7:29 pm"},
+                    "image": {
+                        "title": "Yahoo! Weather",
+                        "width": "142",
+                        "height": "18",
+                        "link": "http://weather.yahoo.com",
+                        "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+                    },
+                    "item": {
+                        "title": "Conditions for Beijing, Beijing, CN at 08:00 PM CST",
+                        "lat": "39.90601",
+                        "long": "116.387909",
+                        "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/",
+                        "pubDate": "Mon, 22 May 2017 08:00 PM CST",
+                        "condition": {
+                            "code": "26",
+                            "date": "Mon, 22 May 2017 08:00 PM CST",
+                            "temp": "62",
+                            "text": "Cloudy"
+                        },
+                        "forecast": [{
+                            "code": "11",
+                            "date": "22 May 2017",
+                            "day": "Mon",
+                            "high": "70",
+                            "low": "60",
+                            "text": "Showers"
+                        }, {
+                            "code": "34",
+                            "date": "23 May 2017",
+                            "day": "Tue",
+                            "high": "79",
+                            "low": "55",
+                            "text": "Mostly Sunny"
+                        }, {
+                            "code": "32",
+                            "date": "24 May 2017",
+                            "day": "Wed",
+                            "high": "89",
+                            "low": "59",
+                            "text": "Sunny"
+                        }, {
+                            "code": "32",
+                            "date": "25 May 2017",
+                            "day": "Thu",
+                            "high": "90",
+                            "low": "62",
+                            "text": "Sunny"
+                        }, {
+                            "code": "32",
+                            "date": "26 May 2017",
+                            "day": "Fri",
+                            "high": "89",
+                            "low": "62",
+                            "text": "Sunny"
+                        }, {
+                            "code": "34",
+                            "date": "27 May 2017",
+                            "day": "Sat",
+                            "high": "94",
+                            "low": "64",
+                            "text": "Mostly Sunny"
+                        }, {
+                            "code": "34",
+                            "date": "28 May 2017",
+                            "day": "Sun",
+                            "high": "96",
+                            "low": "69",
+                            "text": "Mostly Sunny"
+                        }, {
+                            "code": "30",
+                            "date": "29 May 2017",
+                            "day": "Mon",
+                            "high": "87",
+                            "low": "71",
+                            "text": "Partly Cloudy"
+                        }, {
+                            "code": "30",
+                            "date": "30 May 2017",
+                            "day": "Tue",
+                            "high": "89",
+                            "low": "66",
+                            "text": "Partly Cloudy"
+                        }, {
+                            "code": "47",
+                            "date": "31 May 2017",
+                            "day": "Wed",
+                            "high": "91",
+                            "low": "66",
+                            "text": "Scattered Thunderstorms"
+                        }],
+                        "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/26.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Cloudy\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Mon - Showers. High: 70Low: 60\n<BR /> Tue - Mostly Sunny. High: 79Low: 55\n<BR /> Wed - Sunny. High: 89Low: 59\n<BR /> Thu - Sunny. High: 90Low: 62\n<BR /> Fri - Sunny. High: 89Low: 62\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2151330/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n(provided by <a href=\"http://www.weather.com\" >The Weather Channel</a>)\n<BR />\n]]>",
+                        "guid": {"isPermaLink": "false"}
+                    }
+                }
+            }
+        }
+    };
+
+console.log(json.query);
+
+//    var json1={
+//        name:"demo",
+//        age:"demo1",
+//        add:["fe",45.354,343],
+//        fn:function () {
+//            return fn;
+//        }
+//    };
+//    var arr1=JSON.stringify(json1);
+//    console.log(JSON.parse(arr1));
+    var arr=JSON.stringify(json);
+    console.log(JSON.parse(arr).query.results.channel.item.forecast[5].text);
+
+
+    function Demo(name) {
+        this.name=name;
+        console.log(this);//Demo
+    }
+    var demo1=new Demo("xiaoming");//new 后 this指向了demo1 默认返回this
+    console.log(this);//window
+</script>
+</body>
+</html>

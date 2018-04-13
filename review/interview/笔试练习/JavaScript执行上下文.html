@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数执行中的上下文</title>
+</head>
+<body>
+<p>作用域:和调用函数访问变量的能力有关</p>
+<p>上下文:与this有关调用当前可执行代码的引用</p>
+<script>
+    console.log(x);//会打印出function x(){} 函数声明会提升到顶部
+    var x = 10;
+
+    console.log(x);//10
+    x = 20;
+
+    function x() {}
+    console.log(x); //20
+
+    if(true){
+        var a = 1;
+    }else{
+        var b = true;
+    }
+
+    console.log(a);//1
+    console.log(b);//undefined
+
+    function pet(name) {
+        this.name=name;
+        this.speak=function () {
+            console.log(this.name);
+        }
+    }
+    function Dog(names) {
+        pet.call(this,names);
+    }
+//    for (var i in pet.prototype) {
+//        dog.prototype[i] =pet.prototype[i];
+//    }
+    var demo=new Dog('test');
+//    console.log(demo.name);
+//    console.log(demo.name);
+    console.log(demo.speak());
+</script>
+</body>
+</html>

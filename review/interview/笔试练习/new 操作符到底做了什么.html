@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>new 操作符到底做了什么</title>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <h3>new 操作符到底做了什么</h3>
+        <ul>
+            <dt>首先，new操作符为我们创建一个新的空对象，然后this变量指向该对象， 让实例化对象可以访问构造函数的属性和发方法
+            </dt>
+            <dd>其次，空对象的原型指向函数的原型，</dd>
+            <dd>最后，改变构造函数内部的this的指向</dd>
+        </ul>
+    </div>
+</body>
+<script>
+    /*
+                        var obj = {}; //创建一个新的空对象this对象就指向了该变量
+                        obj.__proto__ = fn.prototype; //空对象的原型指向函数的原型
+                        console.log(obj.__proto__); //object{};
+                        fn.call(obj); //改变构造函数this的内部指向 obj继承了fn的属性和方法
+                    */
+
+
+    function Person(name, age) {
+        this.name = name
+        this.age = age
+        this.sayName = function () {
+            console.log(this.name)
+        }
+    }
+    // 1、首先创建一个空对象、然后执行Person，操作this，this指向这个空对象、默认返回这个对象、赋值给Tom
+    var Tom = new Person('tom', 18)
+    console.log(Tom.sayName())
+
+
+    // [].forEach.call($$("*"), function (a) {
+    //     a.style.outline = "1px solid #" + (~~(Math.random() * (1 << 24))).toString(16)
+    // })
+</script>
+
+</html>

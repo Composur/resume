@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据类型的引用细节</title>
+</head>
+<body>
+<script>
+    var a=new Object();
+    a.value=1;
+    b=a;
+    b.value=2;
+//    这是一个引用类型，变量中保存的其实是一个指针，先从栈中读取内存地址 （指向堆内存中的值）
+//    无论操作谁都是2因为它们是相等的
+    alert(a.value);
+
+    function comb(b){
+
+        b[0]=2;
+          a[0]=2;
+
+    }
+    var a=[1,2];
+     comb(a);
+    console.log(a);//[2,3]
+//    驼峰表示
+     function combo(msg){
+         var arr=msg.split("-");
+         for(var i=1;i<arr.length;i++){
+            arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+         }
+         msg=arr.join("");
+         console.log(msg);
+         return msg;
+     }
+     combo("get-element-by-id");
+</script>
+</body>
+</html>

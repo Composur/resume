@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>声明提升</title>
+</head>
+<body>
+
+<script>
+    /*定义了一个叫Foo的函数*/
+    function Foo() {
+        getName = function () {
+            alert(1);
+            console.log(1);
+        };
+        return this; //this指向的是Window
+    }
+    /*Foo创建一个叫getName的静态属性存储了一个匿名函数*/
+    Foo.getName = function () {
+        alert(2);
+        console.log(2);
+    };
+    /*Foo的原型对象新创建一个getName的匿名函数*/
+    Foo.prototype.getName = function () {
+        alert(3);
+        console.log(3);
+    };
+    /*表达式创建一个getName的匿名函数*/
+    var getName = function () {
+        alert(4);
+        console.log(4);
+    };
+    /*用函数声明创建一个叫getName的函数*/
+    function getName() {
+        alert(5);
+        console.log(5);
+    }
+
+    //请写出以下输出结果：
+
+    /*访问Foo函数上存储的静态属性*/
+    Foo.getName();//2
+
+
+    /*直接调用 getName 函数 访问上下文中叫getName的函数*/
+    getName();//4 var 和function提升 最后访问到的会覆盖先访问到的访问的顺序为 1>5>2>3>4
+
+
+    //先执行Foo函数 Foo函数返回this对象this指向window也就是返回了window对象
+    /**
+     *  Foo函数的第一句  getName = function () { alert (1); };  是一句函数赋值语句，
+     注意它没有var声明，所以先向当前Foo函数作用域内寻找getName变量，没有。
+     再向当前函数作用域上层，即外层作用域内寻找是否含有getName变量，
+     找到了，也就是第二问中的alert(4)函数，将此变量的值赋值为 function(){alert(1)}。
+     此处实际上是将外层作用域内的getName函数修改了。
+
+     注意：此处若依然没有找到会一直向上查找到window对象，若window对象中也没有getName属性，就在window对象中创建一个getName变量
+     相当于执行了window.getName()）然后调用Foo函数的返回值对象的getName属性函数
+     * */
+    Foo().getName();//1
+
+
+    getName();//1 本来是4但是执行到这里的时候已经被window.getName()修改为1了
+
+
+    /**
+     * js的运算符优先级问题
+     * ()>.>new
+     *
+
+     /*等价于 new(Foo.getName)();*/
+    new Foo.getName();//2
+
+
+    /*等价于(new Foo()).getName() 同理 new Date().getTime()*/
+    new Foo().getName();//3 先执行new Foo() 返回实例化对象的值 此时返回的是this
+    //    因为在Foo构造函数中没有为实例化对象添加任何属性，
+    // 遂到当前对象的原型对象（prototype）中寻找getName，找到了。
+
+
+    /*等价于 new (new Foo()初始化Foo的实例化对象 this).getName把原型上的getName函数作为
+     * 构造函数在进行 new操作
+     * */
+     new new Foo().getName();//3
+
+
+    var a = 2;
+    function hoist() {
+        console.log(a);//undefined
+        var a = 1;
+        console.log(a);//1
+    }
+    hoist();
+
+
+    //等价于下面 打印A的时候a只是声明未定义
+
+    //函数声明与变量声明会被 JavaScript 引擎隐式地提升到当前作用域的顶部，
+    // 但是只提升名称不会提升赋值部分
+
+    var a = 2;
+    function hoist() {
+        var a;
+        console.log(a);
+        a = 1;
+        console.log(a);
+    }
+
+
+    (function (a) {
+        console.log(a);//function a(){}
+        var a = 10;
+
+        function a() {
+        };
+    }(100))
+
+</script>
+</body>
+</html>

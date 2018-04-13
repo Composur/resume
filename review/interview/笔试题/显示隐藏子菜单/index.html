@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击父菜单显示隐藏子菜单</title>
+</head>
+<style>
+    dt{
+        cursor: pointer;
+    }
+</style>
+<body>
+<dl>
+    <dt>父菜单</dt>
+    <dd>子菜单</dd>
+    <dd>子菜单</dd>
+    <dd>子菜单</dd>
+    <dd>子菜单</dd>
+</dl>
+<script>
+    var dt=document.getElementsByTagName('dt')[0];
+    var dd=document.getElementsByTagName('dd');
+    var temp=true;
+    dt.onclick=function () {
+        if(temp){
+            for(var i=0;i<dd.length;i++){
+                dd[i].style.display='none';
+            }
+            temp=false;
+        }else {
+            for(var i=0;i<dd.length;i++){
+                dd[i].style.display='block';
+            }
+            temp=true;
+        }
+    }
+</script>
+</body>
+</html>

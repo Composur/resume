@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手机类型的判断</title>
+</head>
+<body>
+<script>
+    var BrowserInfo = {
+        userAgent: navigator.userAgent.toLowerCase(),
+        isAndroid: Boolean(navigator.userAgent.match(/android/ig)),
+        isIphone: Boolean(navigator.userAgent.match(/iphone|ipod/ig)),
+        isIpad: Boolean(navigator.userAgent.match(/ipad/ig)),
+        isWeixin: Boolean(navigator.userAgent.match(/MicroMessenger/ig)),
+    }
+    console.log(BrowserInfo.userAgent);
+</script>
+</body>
+</html>

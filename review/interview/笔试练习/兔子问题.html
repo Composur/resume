@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+ var result=[];
+    function fn(n) {
+        if(n==1){
+            return 1; //第一个月一对兔子
+        }else if(n==2){
+            return 2;
+        }else {
+            if(result[n]){
+                return n;
+            }else {
+//                callee引用该函数的函数体内当前正在执行的函数
+                result[n]=arguments.callee(n-1)+arguments.callee(n-2);
+                return result[n];
+            }
+        }
+    }
+    console.log(fn(10));
+
+ function fib(n){
+     if(n==1||n==2){
+         return 1;
+     }
+     return fbnq(n-1)+fbnq(n-2);
+ }
+ fbnq(10);
+</script>
+</body>
+</html>

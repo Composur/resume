@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    if (!String.prototype.trim) {
+
+        String.prototype.trim = function () {
+
+            return this.replace(/^\s+/, "").replace(/\s+$/, "");
+        }
+    }
+//    var str = " \t\n test string ".trim();
+//    alert(str == "test string");
+
+
+
+    function clearTrim(str) {
+
+        if (!String.prototype.trim) {
+
+            String.prototype.trim = function () {
+
+                return this.replace(/^\s+/g, "").replace(/\s+$/g, "");
+            }
+        }
+        console.log(str.trim());
+    }
+    clearTrim(" fhei    hfiojaeg h tgejo3 7u59g nrkg ")
+</script>
+</body>
+</html>

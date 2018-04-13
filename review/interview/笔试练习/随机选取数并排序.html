@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>随机排序</title>
+</head>
+<body>
+
+<script>
+    function paixu() {
+        var arr=[], temp=0;
+        function random() {
+            for(var i=0;i<10;i++){
+//                选取随机的十个数字
+                arr[i]=parseInt(Math.random()*100);
+            }
+            console.log(arr);
+        }
+    random();
+//        得到数组arr
+//        进行冒泡排序两两比较
+        function maopao() {
+            for(var i=0;i<arr.length;i++){
+                for(var j=0;j<arr.length-i-1;j++){
+                    if(arr[j]>arr[j+1]){
+                        temp=arr[j];
+                        arr[j]=arr[j+1];
+                        arr[j+1]=temp;
+                    }
+                }
+            }
+            console.log(arr);
+        }
+        maopao();
+    }
+    paixu();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<body>
+<button id="btn">dianji</button>
+<script>
+//    (function (url) {
+//        var json={};
+//        var map = url.slice(url.indexOf("?")+1).split("&");
+//        console.log(map);//Array [ "a=1", "b=2", "c=", "d=xxx", "e" ]
+//        for (var i = 0; i < map.length; i++) {
+//            var key=map[i].split("=")[0];
+//            var value=map[i].split('=')[1];
+//            console.log((map[i].split("=")[0]));// a,b,c,d,e
+//         if(!json[key]){//如果json中不存在对应的键的值
+////            让分割数组的第二(ˇˍˇ)项赋值给第一项 就输出为json格式
+//             json[key] = value;//进行对应的赋值
+//            }
+//        }
+//        console.log(json);
+//        return json;
+//    })("http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e");
+function parseQueryString(url) {
+    var json={};
+    var nurl=url.slice(url.indexOf('?')+1).split('&');
+    for(var i=0;i<nurl.length;i++){
+        var key=nurl[i].split('=')[0];
+        var value=nurl[i].split('=')[1];
+        if(!json[key]){
+            json[key]=value
+        }
+    }
+    return json;
+}
+var obj=parseQueryString("http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e");
+console.log(obj);
+//   $(function () {
+//       $('#btn').click(function () {
+////           console.log(decodeURIComponent(window.location.href));
+//           var url=decodeURIComponent(window.location.href);
+//           var nurl=url.slice(url.indexOf('?')+1);
+////           console.log(nurl);
+//          console.log(JSON.stringify(nurl))
+//       })
+//   })
+</script>
+</body>
+</html>

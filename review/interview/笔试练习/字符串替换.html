@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    /*将字符串” <tr><td>{$id}</td><td>{$name}</td></tr>”中的{$id}替换成
+    10，{$name}替换成 Tony （使用正则表达式）*/
+
+    function change(str) {
+
+        alert( str.replace(/{\$id}/gi,'10').replace(/{\$name}/gi,'Tony'));
+    }
+    change('<tr><td>{$id}</td><td>{$name}</td></tr>');
+</script>
+</body>
+</html>

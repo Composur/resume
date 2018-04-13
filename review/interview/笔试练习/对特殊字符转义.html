@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对特殊字符转义</title>
+</head>
+<body>
+
+<script>
+    function escape(str) {
+       return str.replace(/[<>"&]/g,function run(match) {
+           switch (match){
+               case "<":
+                   return "&lt";
+               case ">":
+                   return "&gt";
+               case "&":
+                   return "&amp";
+               case '\'':
+                   return "&quot";
+           }
+       });
+
+    }
+    var test=escape("&");
+    document.write(test);
+</script>
+</body>
+</html>

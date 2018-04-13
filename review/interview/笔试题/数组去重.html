@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组去重</title>
+</head>
+<body>
+<script>
+    function demo(arr) {
+        var json={};
+        var narr=[];
+        for(var i=0;i<arr.length;i++){
+            if(!json[arr[i]]){
+                json[arr[i]]=true;
+                narr.push(arr[i]);
+            }
+        }
+        return narr;
+    }
+
+    function uniqArray2(arr) {
+        var obj = {};
+        for (var i = 0, len = arr.length; i < len; i++) {
+            obj[arr[i]] = true;
+        }
+        return Object.keys(obj);
+    }
+    const arr=demo([3,54,5,345,45,3,3]);
+    console.log(arr);
+    var arr1=uniqArray2([3,54,5,345,45,3,3])
+    console.log(arr1);//从小到大的排列
+</script>
+</body>
+</html>

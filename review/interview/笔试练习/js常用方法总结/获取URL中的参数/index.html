@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取URL中的参数</title>
+</head>
+<body>
+<script>
+    var tmp = window.open("about:blank", "", "fullscreen=1")
+    tmp.moveTo(0, 0);
+    tmp.resizeTo(screen.width + 20, screen.height);
+    tmp.focus();
+    tmp.location.href = 'http://www.che168.com/pinggu/eva_' + msgResult.message[0] + '.html';
+
+    var config_ = "left=0,top=0,width=" + (window.screen.Width) + ",height=" + (window.screen.Height);
+    window.open('http://www.che168.com/pinggu/eva_' + msgResult.message[0] + '.html', "winHanle", config_);
+    //模拟form提交打开新页面
+    var f = document.createElement("form");
+    f.setAttribute('action', 'http://www.che168.com/pinggu/eva_' + msgResult.message[0] + '.html');
+    f.target = '_blank';
+    document.body.appendChild(f);
+    f.submit();
+</script>
+</body>
+</html>

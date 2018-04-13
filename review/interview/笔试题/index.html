@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    1. ajax的创建过程?
+    <script>
+        function ajax() {
+//           第一步:创建对象!
+            var xmlHttp;
+            if (window.XMLHttpRequest) {
+                xmlHttp = new XMLHttpRequest();
+            } else {
+                xmlHttp = new ActiveXObject('MicroSoft.XMLHTTP');//兼容IE6
+            }
+
+        }
+            //           第三步:服务器接受响应并返回值.
+//            需在调用open之前指定onreadystatechange确保跨浏览器兼容性
+            xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                console.log(xmlHttp.responseText);
+            }
+                //           第二步:向服务器发送请求!
+                xmlHttp.open('get', 'package.json', true);//启动一个请求准备发送 true是异步
+                //            发送特定的请求
+                xmlHttp.send();
+
+        }
+        ajax();
+    </script>
+
+
+    2. 纯css画三角形?
+    <style>
+        .trigon {
+            border: 50px solid;
+            width: 0;
+            height: 0;
+            border-color: transparent transparent red transparent;
+            cursor: pointer;
+        }
+    </style>
+<div class="trigon"></div>
+
+
+3. 事件代理/委托?事件侦听函数?
+事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+</ul>
+<script>
+
+    window.onload = function () {
+        var oUl = document.getElementById("ul");
+        oUl.onclick = function () {
+            var target = EventUtil.getTarget();
+            if (target.nodeName.toLowerCase() == 'li') {
+                alert(123);
+                alert(target.innerHTML);
+            }
+        }
+    };
+
+    var EventUtil = {
+        addHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + type, handler);
+            } else {
+                element['on' + type] = handler;//可以不写
+            }
+        },
+        getEvent: function () {
+            return event ? event : window.event;
+        },
+        getTarget: function () {
+            return event.target || event.srcElement;
+        },
+        removerHandler: function (element, type, handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+                element.detachEvent('on' + type, handler);
+            } else {
+                element['on' + type] = null;
+            }
+        },
+        stopPropagation: function (event) {
+            if (event.stopPropagation) {
+                event.stopPropagation()
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    }
+
+</script>
+
+
+4. Css选择器,继承,优先?
+
+选择器有{派生选择器(HTML标签声明),ID选择器,类选择器,属性选择器,后代,群组等}
+优先级:id>class>HTML
+可以继承的有:width和height不会继承的一般都是字体的属性等
+
+5.
+<script>
+    //定义一个叫Foo的函数
+    function Foo() {
+        getName = function () {
+//            alert(1);
+            console.log(1);
+        };
+        return this;//function(){alert(1)}
+    }
+//    创建一个静态属性存储一个匿名函数
+    Foo.getName=function () {
+//        alert(2);//去自身找
+    };
+//    在Foo的原型对象上创建一个getName的匿名函数
+    Foo.prototype.getName = function () {
+//        alert(3);//原型找
+    };
+//    用函数变量表达式创建一个getName的匿名函数
+    var getName = function () {
+//        alert(4);//函数提升最后调用
+    };
+//    声明一个getName的函数
+    function getName() {
+//        alert(5);//函数提升
+    }
+
+
+//    访问的顺序为 1>5>2>3>4
+    //请写出以下输出结果：
+    Foo.getName();//2 访问Foo上存储的静态变量
+    getName();//4 直接调用getName函数(访问当前作用域中叫getName的函数,表达式最后调用覆盖函数提升的5)
+    Foo().getName();//1
+    getName();//3 相当于window.getName(); 本来应该是4但是已经被修改为1
+    new Foo.getName();//2 new(Foo.getName)() 等价于Foo.getName();也就是2
+    new Foo().getName();//3(new Foo()Foo构造函数中没有为实例化对象添加任何属性).getName()原型上有3
+    new new Foo().getName();//3 new(new Foo()).getName();
+</script>
+
+6.简述HTML5的新特性,HTML5移除了哪些元素,如何处理HTML5新标签的浏览器兼容性问题?
+以及如何区分HTML和HTML5?
+    新特性:主要是关于图像,位置,存储,多任务等功能的增加.
+    拖拽(drag and drop)api
+    语义化标签(header nav footer aside article section)
+    音频视频(audio video)
+    地理(geolocation)
+    画布(canvas)
+    本地离线存储(持久化存储localStorage 会话存储sessionStorage(用于跟踪用户的状态))
+    表单控件(calender date time email url search)
+    新的技术 webSocket(让浏览器和服务器之间可以建立无限制全双工的的通信,任何一方都可以主动向对方发消息)
+    全双工(发送数据的同时也能接收数据,二者同步进行,打电话)
+    半双工(对讲机,一个时间段只能有一个动作发生)
+
+    移除的元素:big center font s tt u; frame frameset
+
+    兼容性:IE6/7/8通过document.createElement() 产生新标签
+    直接使用成熟的框架、使用最多的是html5shim框架
+<!--[if lt IE 9]>
+<script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<nav>test</nav>
+<![endif]-->
+    区分:DOCTYPE声明\新增的结构元素\功能元素 告诉浏览器按照那种规范解析
+
+    7.如何实现浏览器内多个标签页之间的通信?
+        1.localStorage.setItem(key,value);
+        2.使用cookie+setInterval
+    <input id="name">
+<input type="button" id="btn" value="发送">
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    /**
+     *第一种方法 使用localStorage.setItem()存储
+     * localstorge在一个标签页里被添加、修改或删除时，都会触发一个storage事件，
+     * 通过在另一个标签页里监听storage事件，即可得到localstorge存储的值，实现不同标签页之间的通信。
+     */
+
+        $(function () {
+        $("#btn").click(function () {
+            var name = $("#name").val();
+//         Storage.prototype.setItem = function(key,data) {};
+            localStorage.setItem("name", name);
+            console.log(name);
+        });
+    });
+
+//
+//
+    /** 在其他页面监听的代码
+     $(function(){
+            window.addEventListener("storage", function(event){
+            console.log(event.key + "=" + event.newValue);
+        });
+     });
+    /
+
+    /**
+     * 第二种方法:使用cookie+setInterval
+     * 将要传递的信息存储在cookie中，每隔一定时间读取cookie信息，即可随时获取要传递的信息。
+     */
+
+//    $(function(){
+//        $("#btn").click(function(){
+//            var name=$("#name").val();
+//            document.cookie="name="+name;
+//        });
+//    });
+</script>
+
+    8.javaScript的数据类型有哪些?说说JavaScript的基本规范?
+    基本数据类型:Number,String,Object,Boolean, Null,Undefined,Symbol(符号 第六版新增)
+    Object:{Function,Array,Date,RegExp}
+    内置类型:Error
+    基本规范:1.减少全局污染.2.使用var声明 3.for循环(len=arr.length) 4.用'==='代替'=='
+            5.不适用eval() 6.统一缩进 7.花括号{} 8.命名规则 驼峰命名 9.多写注释
+
+    9.css3有哪些新特性?
+    css3实现圆角(border-radius:5px)
+            阴影(box-shadow:5px)
+       文字特效(text-shadow)
+        线性渐变(gradient)
+        旋转(transform)
+    transform:rotate(5deg) scale(0.5,0.8) translate(0px,50px) skew(-9deg,0deg)
+
+
+
+    10.同步和异步的区别,如何创建一个ajax?
+    同步(顺序处理):同步需要等待返回结果才能继续 同步是在一条直线的队列上
+    异步(并行处理):异步不必等待，一般需要监听异步的结果 异步各走各的
+<script>
+    function ajax() {
+//         初始化对象
+        var http;
+        if(window.XMLHttpRequest){
+            http=new XMLHttpRequest();
+        }else{
+            http = new ActiveXObject('MicroSoft.XMLHTTP');//兼容IE6
+        }
+//        处理文件
+        http.open('get','package.json',true);
+//      进行状态改变
+        http.onreadystatechange=function () {
+            if(http.readyState=4&&http.status==200){
+               var json=http.responseText;
+//                var name=JSON.parse(json);
+                console.log(name.name)
+            }
+        };
+//        发送数据
+        http.send();
+
+    }
+    ajax();
+</script>
+
+    11.JavaScript实现继承的方式?
+        a.构造函数的继承:(使用call()和apply(this,[])将父对象的构造函数绑定在子对象上
+    在子对象上加上 Parent.call(this,arguments);
+)
+        b.原型继承:child.prototype=new parent()
+                child.constructor=child;
+
+        c.利用空对象: function extend(parent,child) {
+                        var F=function(){};
+                        F.prototype=parent.prototype();
+                        child.prototype=new F();
+                        child.prototype.constructor=child;
+                    }
+
+        非构造函数的继承
+                使用object
+                或者使用深拷贝(即拷贝基本类型的数据,又进行对象和数组的拷贝)
+<script>
+   function extend(parent,child) {
+       var F=function(){};
+       F.prototype=parent.prototype();
+       child.prototype=new F();
+       child.prototype.constructor=child;
+   }
+
+//   非构造函数的继承
+//   把子对象的prototype指向父对象
+    function object(parent) {
+        function F() {}
+        F.prototype=parent;
+        return new F();
+    }
+    var child=object(parent);
+    child.XX; //xx是父对象的属性
+
+
+
+//    深拷贝 非
+    function deepCopy(p,c) {
+        var c=c||{};
+         for(var i in p){
+            if(typeof p[i]=='object'){
+//                判断是数组还是对象
+                c[i]=(p[i].constructor==Array)?[]:{};
+//                进行递归
+                deepCopy(p[i],c[i]);
+            }else {
+                c[i]=p[i];
+            }
+        }
+        return c;
+    }
+</script>
+12.cookie,sessionStorage和localStorage的区别以及他们的优缺点?
+    cookie:Cookie其实是浏览器一中的技术(存储cookie是浏览器提供得一项功能)
+    sessionStorage:会话级别的存储在会话关闭后数据消失;在同一个会话页面才能访问并且当
+    会话结束,数据也会随即销毁
+    localStorage:持久化本地存储,需要手动清理.否则永不过期.
+    cookie的作用是与服务器进行交互,作为http规范的一部分而存在.
+    Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；
+    Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
+    cookie的通信流程:设置(服务端客户端均可)cookie=>cookie被添加到request header=>服务端接到cookie
+    cookie(name=username,expires=new Date().getTime(),domain=,path=/,secure,httponly)
+    cookie选项包括：expires、domain、path、secure、HttpOnly。
+
+13.导入样式使用link和@import有什么区别?
+    link(可定义RSS,定义rel等)属于XHTML标签,和页面一起加载,支持js改变样式,无兼容性
+    @import完全是css提供的一种样式(只能加载css),等到页面全部下载完再加载.
+    link方式的样式的权重 高于@import的权重.
+CSS 权重优先级顺序简单表示为：
+!important > 行内样式 > ID > 类、伪类、属性 > 标签名 > 继承 > 通配符
+class 可继承、(字体,颜色的属性)   font-size font-family color, 列表 UL LI DL DD DT 可继承;
+
+*   不可继承 ：border padding margin width height ;
+
+*   优先级就近原则，样式定义最近者为准;
+
+*   载入样式以最后载入的定位为准
+
+
+14.使用cookie的优缺点?
+    优点:极高的扩展性和可用性,所有浏览器都可以用
+    缺点:1.cookie是存储在客户端的,所以cookie可以被读取,挪用和修改,容易被劫持.(大小也受限制4kb)
+        2.其它伪装站点可以直接获取客户端的cookie
+
+15.ajax是什么?ajax的交互模式?同步和异步的区别?如何解决跨域问题?
+    ajax:无刷新的异步请求(通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。)是多种技术的组合,本质上是一个浏览器端的技术.
+    交互模式:1.触发事件.2.创建XHR对象.3.向服务器发送请求.4.服务器响应,5.返回数据到创建的对象,6.返回对象的回调函数
+    跨域问题:利用jsonp跨域请求,动态生成script元素,通过其src属性,向服务器发送请求,服务器接受处理,
+    服务器通过回调函数向客户端返回数据
+
+
+16.什么是闭包?下面这个ul,如何点击每一列的时候alert其index?
+
+正常循环加事件的话，所有弹出的i是同一个变量，都是公用一个存储地址，所以每次弹出的内容一样，
+用闭包的话就相当于每循环一次的时候，i变量都是一个局部变量，这样循环几次就会有几个不同的变量，分别于li对应。
+<ul id="test">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<script>
+
+   var aLi=document.getElementById('test').getElementsByTagName('li');
+    for(var i=0;i<aLi.length;i++){
+        aLi[i].index=i;
+            aLi[i].onclick=(function (i) {
+              return function () {
+                  console.log(i);
+              }
+            })(i)
+    }
+
+
+</script>
+
+17.你如何去实现这个Tabview?(实现一个选项卡)
+           for(var i=0;i<len;i++){
+           tab1[i].index=i;
+           tab1[i].onclick=function () {
+           for(var i=0;i<len;i++){
+           li[i].style.display='none';
+           }
+           li[this.index].style.display='block';
+           }
+       }
+18.怎样使用事件以及IE和DOM事件模型之间存在的哪些主要区别?
+    ie:IE11以下 事件冒泡
+    其它:事件冒泡 也支持一种事件捕获
+    事件流的三个阶段:事件捕获 目标阶段 事件冒泡 大多浏览器从window对象开始传播事件
+
+    如何使用:
+            1.HTML中的事件处理程序(事件绑定) 在HTML元素中绑定onclick事件
+            2.DOM0级  document.onclick=function(){} (触发元素相同的话)只执行最后一个元素的onclick
+            3.DOM2级  addEventListener(type,handler,false(true为捕获阶段))
+        在IE中(IE11一下版本)
+            attachEvent('on'+type,handler);
+    差别:
+
+        参数的差别:attachEvent()的第一个参数比addEventListener()多了一个on,且
+        没有第三个参数,这是因为IE不支持事件捕获.
+
+        事件处理函数作用域的区别:
+            IE中的事件处理程序属于全局作用域,其内部的this指向是window
+            DON级的事件处理程序的作用域是元素的作用域,其内部this的指向是所属的元素
+        事件对象event的差别:
+            阻止冒泡:cancelBubble=true; stopPropagation();
+            阻止元素默认事件:returnValue=false; preventDefault();
+            事件目标:srcElement; target;
+
+
+
+19.get(url)返回json?
+    <button id="getjson" style="background:red; width: 10px;height: 10px">getjson</button>
+<script>
+    $('#getjson').click(function () {
+        function parseQueryString(url) {
+            var json={};
+            var nurl=url.slice(url.indexOf('?')+1).split('&');
+            for(var i=0;i<nurl.length;i++){
+                var key=nurl[i].split('=')[0];
+                var value=nurl[i].split('=')[1];
+                if(!json[key]){
+                    json[key]=value;
+                }
+            }
+            return json;
+        }
+        var obj=parseQueryString("http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e");
+        console.log(obj);
+    })
+
+</script>
+20.列举HTML中的行元素和块元素.
+    行元素:span,input,img,i,label,a,button,br,small,strong,em,b,select,
+    块元素:div,p,ol,ul,dl,dt,hr,dd,form,h1`h6,li,table,tbody,th,tr,
+21.form的input有哪些类型?各是做什么处理用的?
+    text
+    button
+    submit
+    date
+    email
+    password
+    file
+    hidden(隐藏域)
+    CheckBox
+    radio
+    image
+    reset
+
+
+
+
+
+22.HTML5有哪些新特性?
+
+    新特性:主要是关于图像,位置,存储,多任务等功能的增加.
+    拖拽(drag and drop)api
+    语义化标签(header nav footer aside article section)
+    音频视频(audio video)
+    地理(geolocation)
+    画布(canvas)
+    本地离线存储(持久化存储localStorage 会话存储sessionStorage)
+    表单控件(calender date time email url search)
+    新的技术 webSocket
+
+    移除的元素:big center font s tt u; frame frameset
+
+    兼容性:IE6/7/8通过document.createElement() 产生新标签
+    直接使用成熟的框架、使用最多的是html5shim框架
+
+
+23.css的选择符有哪些?哪些属性可以继承?内联和import哪个优先级高?
+    !important > 行内样式 > ID > 类、伪类、属性 > 标签名 > 继承 > 通配符
+    class 可继承、   font-size font-family color, 列表 UL LI DL DD DT 可继承;
+
+    *   不可继承 ：border padding margin width height ;
+
+    *   优先级就近原则，样式定义最近者为准;
+
+    *   载入样式以最后载入的定位为准
+
+24.css定位方式有哪些?position属性的值有哪些?他们之间的区别是什么?
+    position:relative;absolute;fixed;
+    relative:(遵循常规流)相对于自身的位置进行定位;不会影响任何元素
+    absolute:(脱离常规流)相对于离她最近的含有定位的祖先元素进行定位;不会影响任何元素margin值不会折叠
+    fixed:相对于浏览器窗口进行定位;同上!
+    center:定位祖先元素的中心点为参考 在其中水平垂直居中
+    page:
+    sticky:
+25.css代码优化?
+    减少页面请求和css解析次数，提高页面响应速度
+    1.加载性能,(压缩,减少文件体积,减少阻塞加载)
+    2.选择器性能(规范化,可维护性,健壮性)
+        规范化
+        1、尽量将样式写在单独的css文件里面，在head元素中引用
+        2、不使用@import
+        3、避免使用复杂的选择器，层级越少越好
+        4、精简页面的样式文件，去掉不用的样式(合并成一个文件,样式可以被浏览器缓存)
+        5.利用css代码的继承 color font-size font-family 不可以继承的 position display float
+        可维护性:
+            1.命名和备注
+            2.提取重复样式
+            3.书写顺序(位置,大小,文字属性,背景,其它)
+                (1)位置属性(position, top, right, z-index, display, float等)　　
+                (2)大小(width, height, padding, margin)　　
+                (3)文字系列(font, line-height, letter-spacing, color- text-align等)　　
+                (4)背景(background, border等)　　
+                (5)其他(animation, transition等)
+    3.渲染性能(主要是css3中动画效果的使用)是重点
+
+26.test{height:25px;line-height:25px}
+这段代码在IE和火狐浏览器中高度显示是否一样?why?写出实际高度?
+27.找问题?
+<p>&nbsp;&nbsp;前端工程师写HTML,也写js.<br><br>&nbsp;&nbsp;我说:<br>最基础的HTML+css
+    1.标签没有闭合 在HTML里p是可选闭合 在XHTML里必须闭合
+    2.&nbsp;是不合理的用css进行控制,结构和样式分离
+    3.用p代替两个br
+    4.语义化标签  <q>最基础的HTML+css</q>
+    <p>前端工程师写HTML也写js<p>我说</p><q>最基础的HTML+css</q></p>
+
+28.ajax是什么?同步和异步的区别?如何解决跨域的问题?
+    ajax(AsynchronousJavascript+XML)异步传输+js+XML
+    ajax:无刷新的异步请求(通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。
+    这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。)
+    是多种技术的组合,本质上是一个浏览器端的一种技术.
+    ajax:只要是JS调用异步通讯组件并使用格式化的数据来更新web页面上的内容或操作过程，那么我们用的方法就可算是AJAX。
+    同步顺序执行  异步并行处理(向服务器发送请求的时候我们不必等待结果,而是同时可以做其它的事情)
+
+1.同步与异步同步和异步关注的是消息通信机制 (synchronous communication/ asynchronous
+communication)
+所谓同步，就是在发出一个*调用*时，在没有得到结果之前，该*调用*就不返回。但是一旦调用返回，就得到返回值了。换句话说，就是由*调用者*主动等待这个*调用*的结果。
+
+而异步则是相反，*调用*在发出之后，这个调用就直接返回了，所以没有返回结果。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在*调用*发出后，*被调用者*通过状态、通知来通知调用者，或通过回调函数处理这个调用。
+
+2. 阻塞与非阻塞
+阻塞和非阻塞关注的是程序在等待调用结果（消息，返回值）时的状态
+阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。
+非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。
+
+
+
+29.简述一下cookie的操作,并写出知道的cookie的属性?
+    cookie的操作:
+封装cookie的添加，删除，查询方法
+cookie是存储在浏览器端的，可以用于存储sessionID，也可以用于自动登陆，记住密码等是浏览器的一种技术用来标识用户身份信息
+
+    setCooke=>cookie被添加到request header=>服务端收到cookie
+    cookie选项包括：expires、domain、path、secure、HttpOnly。
+
+30.网页中实现一个计算当年还剩多少天的倒计时?
+显示为"xx年还剩xx天xx时xx分xx秒"
+<script>
+    function times() {
+        var time=new Date().getTime();
+
+    }
+</script>
+31.如何让一个div在页面中垂直居中?
+
+32.请你缩写方法写出1px 实线 灰色 上面无边框的矩形边框样式?
+33.请用div+css写出文字水平垂直居中,图片水平垂直居中的样式及布局?
+34.请用div+css写出左侧固定(width:200px),右侧自适应的页面布局?
+    margin-left: 200px;
+35.写出五中css浏览器兼容性的写法?
+    *{}
+    -webkit- ，针对safari，chrome浏览器的内核CSS写法
+    -moz-，针对firefox浏览器的内核CSS写法
+    -ms-，针对ie内核的CSS写法
+    -o-，针对Opera内核的CSS写法
+
+    常见的浏览器内核引擎以及具体应用：
+    Trident： IE浏览器；
+    Gecko： Firefox浏览器；
+    webkit： Safari，Google Chrome，遨游3，猎豹，百度浏览器；
+    Presto：Opera的内核，但由于市场选择问题，主要应用于手机平台——Opera mini
+
+
+
+36.jQuery的绑定事件有几种,列出并说出优缺点?
+    可以向匹配的元素绑定一个或者多个事件处理器
+    bind()bind方法只能给当前存在的元素绑定事件 绑定到所有选出来的元素上
+    live()live方法则正好弥补了bind方法的这个缺陷 绑定一次绑定到dom上
+    degelate()可以选择把这个事件放到哪个元素上了，可以有效的减小你所要查找的元素；
+可以用在动态添加的元素上。
+    on()提供了一种统一绑定事件的方法,可以用.on()来代替上述的3种方法
+    on是在dom树加载后，对元素的绑定，和bind一样属于后期绑定，
+    但是会在事件执行之后移除元素的绑定事件，事件只执行一次。
+37.写出至少三种js浏览器兼容性的写法?
+    1.IE使用innerText，而Firefox使用textContent来设置元素文本内容。
+    2. mX = event.x ? event.x : event.pageX;
+    3.attachEvent和addEventListener
+    4.event=event||window.event
+38.写出js内存泄漏的问题?
+    内存泄漏:不再用到的内存没有及时的释放,就叫做内存泄漏!
+    循环引用：一个DOM对象被多个Javascript对象引用就可能会引发内存泄露
+闭包的作用：  1 使得内部变量能够在外部访问
+            2 使用局部变量能保留在内存中
+            3 可以避免名称冲突
+    js闭包的应用：
+            1.js模拟排序算法过程遇到的问题。我要输出每一次插入排序后的数组
+            2.每个<li></li>结点绑定click事件弹出循环的索引值(用原生js写轮播改变下标背景的时候)
+            3.用闭包实现程序的暂停执行用闭包实现程序的暂停执行功能
+    DOM插入顺序：
+39.谈谈你对js闭包的理解?
+    闭包:闭包就是能访问其它函数内部变量的函数
+    作用:闭包可以读取函数内部的变量,让这些变量始终保持在内存中
+    /**
+    * 1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，
+    * 否则会造成网页的性能问题，在IE中可能导致内存泄露。
+    * 解决方法是，在退出函数之前，将不使用的局部变量全部删除。
+    2）闭包会在父函数外部，改变父函数内部变量的值。
+    返回闭包时牢记的一点就是：返回函数不要引用任何循环变量，或者后续会发生变化的变量。
+    所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），
+    把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+    * /
+40.js面向对象的几种方式?
+    1.工厂模式
+    2.原型模式
+    3.构造函数模式
+    4.混合模式
+41.打印结果?
+    for(var i=0;i<3;i++){
+        setTimeout((function(i){
+            return function(){
+            console.log(i);//0,1,2
+        }
+        })(i),0)
+            console.log(i);//0,1,2
+    }
+42.xhtml和html有什么区别?
+    xhtml必须被正确的嵌套,元素必须被正确的关闭,标签名必须用小写字母,文档必须要有跟元素
+43.行内元素有哪些?块级元素有哪些?css的盒子模型?
+    行内元素:a,b,strong,i,em,select,input,br,label,abbr,q,textarea,
+    块级元素:div,p,ol,dl,ul,li,dt,dd,table,tbody,tr,td,h1`h6,hr,options,form
+    <dd>fef</dd>  <dt>dtte</dt> 是块元素
+    盒子模型:content,padding,border,margin,
+44.css的引入方式有哪些?link和import的区别?
+    1.内联引入.
+    2.嵌入引入.
+    3.链接方式
+    4.导入方式.@import url(style.css);
+区别:
+    区别1：link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS。
+
+　　区别2：link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。
+
+　　区别3：link是XHTML标签，无兼容问题；@import是在CSS2.1提出的，低版本的浏览器不支持。
+
+　　区别4：link支持使用Javascript控制DOM去改变样式；而@import不支持。
+
+45.前端页面有哪三层构成?作用是什么?
+    结构层 HTML 样式层 css 行为层 js
+    结构层:由 HTML 或 XHTML 之类的标记语言负责创建对网页内容的语义含义做出了描述
+    样式成: CSS 对“如何显示有关内容”的问题做出了回答
+    行为层:内容应该如何对事件做出反应
+46.浏览器的内核有哪些?
+    常见的浏览器内核引擎以及具体应用：
+    Trident： IE浏览器；
+    Gecko： Firefox浏览器；
+    webkit： Safari，Google Chrome，遨游3，猎豹，百度浏览器；
+    Presto：Opera的内核，但由于市场选择问题，主要应用于手机平台——Opera mini
+47.css reset的用途和作用?
+
+48.清除浮动的方式及优缺点?
+    <div style="clear: both"></div>//有违结构与表现的分离，不推荐使用
+    <br clear="all">//有违结构与表现的分离，不推荐使用
+    <div style="overflow: hidden">父容器上</div>//内容增多时候容易造成不会自动换行导致内容被隐藏掉
+    <div style="overflow: auto">父容器上</div>//多个嵌套后，firefox某些情况会造成内容全选
+    .clearfix:after{content:'.';height:0;display:'block';clear:'both';visibility:'hidden'}
+    .clearfix{*zoom:1}//复用不当会增加代码量
+49.ajax请求的get和post的区别?
+    Get请求的目的是给予服务器一些参数,以便从服务器获取列表.例如:list.aspx?page=1,表示获取第一页的数据
+    Post请求的目的是向服务器发送一些参数,例如form中的内容.
+    1.使用Get请求时,参数在URL中显示,而使用Post方式,则不会显示出来
+    2.使用Get请求发送数据量小,Post请求发送数据量大
+    1.get请求需注意缓存问题,post请求不需担心这个问题
+    2.post请求必须设置Content-Type值为application/x-form-www-urlencoded
+    get如果请求url没有变化，取出缓存，提高效率；请求会缓存到浏览器中，
+        可以通过历史记录查看用户信息，安全性低；
+
+    post传送变化的数据显示，变动性访问；
+
+    get通过url地址传送数据，数据量不能超过1024byte；
+
+    post作为http消息的实体内容传送到服务器中，传送数据量可以很大；
+
+    get传送数据要经过encodeURIComponent编码，防止乱码。
+
+    get方式，服务器端用Request.QueryString获取变量的值；
+
+    post方式，服务器端用Request.Form获取提交的数据
+
+
+50.闭包是什么?有什么特性?对页面的影响?
+    闭包:能访问其它函数内部变量的函数
+    特性:读取函数内部的变量,使变量的值常驻内存
+    影响:使用不当易造成内存泄漏,闭包的返回值不应是一个变量
+51.事件委托是什么?
+    事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。
+52.如何阻止默认冒泡和冒泡事件?
+<script>
+    //阻止冒泡
+    function stopBubble(e) {
+        if(e && e.stopPropagation){
+            e.stopPropagation();
+        } else {
+            window.event.cancelBubble = true;
+        }
+    }
+    // 阻止浏览器的默认事件
+    function stopDefault(e){
+        if(e && e.preventDefault) {
+            e.preventDefault();
+        } else {
+            window.event.returnValue = false;
+        }
+        return false;
+    }
+</script>
+53.编写一个数组去重的方法?
+<script>
+    function demo(arr) {
+        var json={};
+        var narr=[];
+        for(var i=0;i<arr.length;i++){
+            if(!json[arr[i]]){
+                json[arr[i]]=true;
+                narr.push(arr[i]);
+            }
+        }
+        return narr;
+    }
+    const arr=demo([3,54,5,345,45,3,3]);
+    console.log(arr);
+</script>
+54.Doctype作用?标准模式与兼容模式的区别?
+    作用:告诉浏览器按照何种规范解析文档
+    标准模式:一该浏览器支持的最高标准运行.
+    兼容模式:页面以宽松的向后兼容的方式显示.模拟低版本浏览器的行为
+55.对浏览器内核的理解?
+    Trident： IE浏览器；
+    Gecko： Firefox浏览器；
+    webkit： Safari，Google Chrome，遨游3，猎豹，百度浏览器；
+    Presto：Opera的内核，但由于市场选择问题，主要应用于手机平台——Opera mini
+56.HTML5的新特性?如何理解HTML5新标签兼容性问题?区分HTML和HTML5?
+    新特性:主要是关于图像,位置,存储,多任务等功能的增加.
+    拖拽(drag and drop)api
+    语义化标签(header nav footer aside article section)
+    音频视频(audio video)
+    地理(geolocation)
+    画布(canvas)
+    本地离线存储(持久化存储localStorage 会话存储sessionStorage)
+    表单控件(calender date time email url search)
+    新的技术 webSocket
+
+    移除的元素:big center font s tt u; frame frameset
+
+    兼容性:IE6/7/8通过document.createElement() 产生新标签
+    直接使用成熟的框架、使用最多的是html5shim框架
+57.js有哪些内置对象?
+    Arguments 函数参数集合
+    Array 数组
+    Boolean 布尔对象
+    Date 日期时间
+    Error 异常对象
+    Function 函数构造器
+    Math 数学对象
+    Number 数值对象
+    Object 基础对象 对象是js中提供所有js对象通用的功能(内置的类型都被抽象出一组公有的方法和属性,拥有这些个特性的东西就是Object)  从数据结构上来说对象是一个无序的集合
+            Object的valueOf返回指定对象的原始值
+            我们一般使用的都是object的实例
+            constructor是对object的扩展,它的原始类型是Function,他也是Object
+
+    RegExp 正则表达式对象
+    String 字符串对象
+    global 全局对象
+58.eval是做什么的?
+    eval()方法就像是一个完整的js解析器,只接受一个参数即要执行的js代码
+59.dom的如何操作节点的几种方式?
+
+1.访问/获取节点
+    document.getElementById(id);　　　　　　　　 　　//返回对拥有指定id的第一个对象进行访问
+    document.getElementsByName(name);　　　　　　//返回带有指定名称的节点集合　　 注意拼写:Elements
+    document.getElementsByTagName(tagname); 　　//返回带有指定标签名的对象集合　  注意拼写：Elements
+    document.getElementsByClassName(classname);  //返回带有指定class名称的对象集合 注意拼写：Elements
+    2.创建节点/属性
+    document.createElement(eName);　　//创建一个节点
+    document.createAttribute(attrName); //对某个节点创建属性
+    document.createTextNode(text);　　　//创建文本节点
+    3.添加节点
+    document.insertBefore(newNode,referenceNode);　 //在某个节点前插入节点
+    parentNode.appendChild(newNode);　　　　　　　　//给某个节点添加子节点
+    4.复制节点
+    cloneNode(true | false);　　//复制某个节点  参数：是否复制原节点的所有属性
+    5.删除节点
+    parentNode.removeChild(node);　　//删除某个节点的子节点 node是要删除的节点
+    注意：为了保证兼容性，要判断元素节点的节点类型(nodeType)，若nodeType==1，再执行删除操作。通过这个方法，就可以在 IE和 Mozilla 完成正确的操作。
+
+60.http状态码的含义?
+
+    200：服务器响应正常。表示请求成功,请继续发送请求。
+    304：该资源在上次请求之后没有任改何修（这通常用于浏览器的缓存机制，使用GET请求时尤其需要注意）。
+    400：无法找到请求的资源，请求有误，请求的内容无法被服务器执行。
+    401：访问资源的权限不够，没有进行身份验证（或者无权访问）。
+    403：没有权限访问资源。
+    404：需要访问的资源不存在（没有找到）。
+    405：需要访问的资源被禁止。
+    407：访问的资源需要代理身份验证。
+    414：请求的URL太长。
+    500：服务器内部错误。
+    502：网关错误。
+    503：暂时不能处理请求，可以过些时候再试。
+    505：HTTP版本不受支持,可以禁用此版本。
+    总体说：
+    400-499：问题出在客户端。
+    500-599：问题出在服务器端。
+61.性能优化的几种方法?
+    Yslow 23条优化规则
+    1.减少http的请求次数//尽量合并图片、CSS、JS为一个文件只发送一次请求
+    2.使用cdn
+    3.避免空href和scr//览器渲染的时候会把当前页面的URL作为它们的属性值，从而把页面的内容加载进来作为它们的值
+    4.使用gzip压缩内容
+    5.把css放到顶部(优先渲染页面),把js放到body底部(加载js时会对后续的资源造成阻塞阻碍其它资源的下载)
+62.哪些常见的操作会造成内存泄漏?
+    1.闭包
+63.call()和apply()的区别及作用?
+    1.call()和apply()都是调用一个对象的一个方法,让另一个对象替换当前对象.
+    apply()把参数打包成Array再传入；
+    call()把参数按顺序传入。
+64.new操作符到底干了什么?
+    1.实例化一个空对象,然后this的变量指向该对象
+    2.让实例化的对象可以访问构造函数的属性和方法
+        function FakeClass(){var s;this.a=1;};
+        var obj = {};
+        FakeClass.apply(obj);
+        obj.__proto__ = FakeClass.prototype;
+65.null和undefined的区别?
+    1.undefined类型只有一个值,就是undefined.在使用var声明变量但未对其加以初始化时后的值
+    就是此处有值,但还未初始化(声明没有赋值,函数没有返回值,对象没有赋值)
+    2.null表示没有对象,即此处不应该有对象,值就是null,表示不是对象,或者作为原型链的终点
+
+66.用js改变页面中元素的高度会触发浏览器的什么行为?造成的影响?如何解决?
+
+
+67.css动画第一个延时2秒后面的依次出现?
+
+68.spa的优缺点?
+    1.拥有桌面应用的及时性.可移植与可访问.
+    2.用户体验好,快无需加载页面,快速响应
+    3.对服务器的压力小
+    4.良好的前后端分离.
+    5.对js水平要求较高
+
+    缺点:1.不利于SEO.2.初次加载用时较多.3.比较难学
+69.cdn是什么?(Content Delivery Network)
+，即内容分发网络。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定.通过放置的节点服务器,使用户就近取得所需的内容,提高用户访问网站的响应速度
+</p>
+
+<script>
+//    var s=do
+    for (var i = 0; i < 3; i++) {
+        setTimeout((function (i) {
+            return function () {
+                console.log(i);//0,1,2,
+            }
+        })(i), 0);
+        console.log(i);//0,1,2,
+    }
+
+    console.log(null == undefined);//true
+    console.log(null instanceof Object);//false
+    console.log(null);//false
+
+</script>
+
+
+70、组件化
+    页面上的每个 独立的 可视/可交互区域视为一个组件；
+    每个组件对应一个工程目录，组件所需的各种资源都在这个目录下就近维护；
+    由于组件具有独立性，因此组件与组件之间可以 自由组合；
+    页面只不过是组件的容器，负责组合组件形成功能完整的界面；
+    当不需要某个组件，或者想要替换组件时，可以整个目录删除/替换。
+71、创建对象
+    js中没有类的概念 可以使用
+    1 单体对象法  var obj={} ||  var obj =new Object
+    2 工厂方法   function createObj(){
+    var obj = new Object(); //创建对象
+    3 构造函数方式
+
+72、弹出层组件的设计
+    弹出层组件设计：使用 angularjs 的自定义指令
+        angular.module('myApp', [])
+            .directive('myDirective', function () {
+            // 指令操作代码放在这里
+            return{
+                restrict: 'A',
+                replace: true,
+                template: 'content'
+            }
+        });
+</body>
+</html>

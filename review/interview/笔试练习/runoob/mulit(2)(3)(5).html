@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    有函数multi(2)(3)(4)=24，算法是2X3X4=24。
+    求解multi函数。
+</p>
+<script>
+//    function mulit(n) {
+//        function fn(x) {
+//            return mulit(n*x);
+//        }
+//        fn.toString=function () {
+//            return n;
+//        };
+//       return fn;
+//    }
+//    console.log(mulit(2)(3)(4)+1);
+
+//function curry (fn) {
+//    var slice = Array.prototype.slice,
+//            old_args = slice.call(arguments, 1);
+//    return function () {
+//        var new_args = slice.call(arguments),
+//                args = old_args.concat(new_args);
+//        return fn.apply(null, args);
+//    }
+//}
+//var baseFun = function(a, b, c){
+//    return a * b * c;
+//};
+//var multi =curry(baseFun);
+//console.log(multi(2)(3)(4));
+function mulit(a) {
+    return function (b) {
+        return function (c) {
+            return a*b*c;
+        }
+    }
+}
+console.log(mulit(2)(3)(4));
+</script>
+</body>
+</html>

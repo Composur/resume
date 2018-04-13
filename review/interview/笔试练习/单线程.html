@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //Javascript 事件处理器在线程空闲之前不会运行 js是 单线程
+    for (var i = 1; i <= 3; i++) {
+        setTimeout(function () {
+            console.log(i);// 4 4 4
+        },0);
+    };
+
+
+
+    //    想要输出1,2,3可以改为立即执行函数()();这样的写法
+    for (var i = 1; i <= 3; i++) {
+        setTimeout((function () {
+//            console.log(i);// 1,2,3
+        })(),0)
+    };
+
+
+//
+//    for (var i = 1; i <= 3; i++) {
+//        setTimeout((function (a) { //改成立即执行函数 3
+//            console.log(a);
+//        })(i), 0);
+//    };
+
+    for (var i = 1; i <= 3; i++) {
+        setTimeout(function () {
+            console.log(i);//4,4,4;
+        }, 0);
+    }
+    for (var i = 1; i <= 3; i++) {
+        //想打印1,2,3写立即执行函数setTimeout((fun)(),0)
+       setTimeout((function () {
+            console.log(i);
+        })(),1000)
+
+//        (function (i) {
+//            setTimeout(function () {
+//                console.log(i);
+//            },0)
+//        })(i);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二分法查找</title>
+</head>
+<body>
+<script>
+    /*方法一*/
+    function binarrySearch(arry, start, stop, num) {
+        if (stop - start == 1) {
+            if (arry[stop] == num) {
+                return stop;
+            }
+            if (arry[start] == num) {
+                return start;
+            }
+            return -1;
+        }
+        var center = Math.floor((stop + start) / 2);
+        if (arry[center] != num) {
+            return num > arry[center] ? binarrySearch(arry, center, stop, num) : binarrySearch(arry, start, center, num);
+        }
+        return center;
+    }
+    var arry = [0, 1, 2, 4, 5, 6, 7, 8];
+
+    console.log(binarrySearch(arry, 0, arry.length, 8));
+
+    /*方法二*/
+//    var arr = [0, 1, 2, 4, 5, 6, 7, 8];
+    var arr = [7];
+//    var arr2 = [88, 77, 66, 55, 44, 33, 22, 11];
+    var arr2 = [88, 77];
+
+    BinarySearch(arr2, 77);
+    BinarySearch(arr, 7);
+
+    function BinarySearch(arr, target) {
+        var s = 0;
+        var e = arr.length - 1;
+        var m = Math.floor((s + e) / 2);//取得中间的值
+        console.log(m);
+        var sortTag = arr[s] <= arr[e];//确定排序顺序
+
+        while (s < e && arr[m] !== target) {
+            if (arr[m] > target) {
+                sortTag && (e = m - 1);
+                !sortTag && (s = m + 1);
+            } else {
+                !sortTag && (e = m - 1);
+                sortTag && (s = m + 1);
+            }
+            m = Math.floor((s + e) / 2);
+        }
+
+        if (arr[m] == target) {
+            console.log('找到了,位置%s', m);
+            return m;
+        } else {
+            console.log('没找到');
+            return -1;
+        }
+
+    }
+</script>
+</body>
+</html>

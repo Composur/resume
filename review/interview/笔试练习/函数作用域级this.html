@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对函数作用域上下文和this的理解</title>
+</head>
+<body>
+
+<script>
+    var test={
+        "count":1,
+        "getDemo":function () {
+            return this.count;
+        }
+    };
+    console.log(test.getDemo());//1
+    var fn=test.getDemo;
+//    fn是在 winodw 的上下文中被执行的，所以会访问不到 count 属性
+    console.log(fn());//undefined
+
+//正确的方法是使用 Function.prototype.bind
+    var fn=test.getDemo.bind(test);
+    console.log(fn);//function bound getDemo()
+
+
+//var x=100;
+    function f1(x) {
+        alert(x);
+    }
+
+    function f2() {
+        var x=100;
+        f1(x);
+    }
+    f2();
+</script>
+</body>
+</html>

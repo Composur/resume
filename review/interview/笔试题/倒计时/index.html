@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+<header class="header">
+    <div class="nav-wrap">
+        <h1 class="logo">
+            <a href="task0002_1.html"><img src="img/logo.png" alt="logo" width="200px"></a>
+        </h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="task0002_1.html">小练习1</a></li>
+                <li><a href="task0002_2.html">小练习2</a></li>
+                <li><a href="task0002_3.html">小练习3</a></li>
+                <li><a href="task0002_4.html">小练习4</a></li>
+                <li><a href="task0002_5.html">小练习5</a></li>
+            </ul>
+        </nav>
+    </div>
+    <a class="icon-github" href="https://github.com/DIYgod" target="_blank"><img src="img/icon-github.png"></a>
+</header>
+<div class="center">
+    <h2>小练习2 <a class="instruction" target="_blank" href="https://github.com/baidu-ife/ife/tree/master/task/task0002#%E5%B0%8F%E7%BB%83%E4%B9%A02">任务要求</a></h2>
+    <input type="text" class="myText" placeholder="在此按照格式YYYY-MM-DD输入年月日">
+    <div class="deal">
+        <button onclick="countTime()">提交</button>
+        <button onclick="reset()">重置</button>
+        <div class="error"></div>
+    </div>
+</div>
+</body>
+<script>
+    function countTime() {
+        var text = $('.myText').value;
+        text = trim(text);                            // 去掉多余的空格
+        var time = text.split('-');                   // 分割
+
+        if (time.length !== 3) {                      // 错误处理
+            $('.error').innerHTML = '请按照特定的格式YYYY-MM-DD输入';
+        }
+        else {
+            t = setTimeout('countTime()', 1000);          // 一秒执行一次
+
+            $('.error').innerHTML = '';               // 删除旧元素
+            if ($('.result')) {
+                $('.center').removeChild($('.result'));
+            }
+
+            var endDate = new Date();
+            //设置传进来的时间
+            endDate.setFullYear(time[0], time[1] - 1, time[2]);
+            // console.log(endDate.setFullYear(time[0], time[1] - 1, time[2]))
+            endDate.setHours(0, 0, 0, 0);
+            // console.log(endDate.setHours(0, 0, 0, 0))
+            var today  = new Date();
+            //将来的时间减去现在的时间
+            var diff = endDate - today;
+
+            if (diff <= 0) {
+                $('.error').innerHTML = '请输入一个将来的时间';
+                clearTimeout(t);
+                return;
+            }
+            //一秒等于1000毫秒
+            var p_diffDay = diff / (24 * 60 * 60 * 1000);
+            var diffDay = Math.floor(p_diffDay);
+            var p_diffHour = (p_diffDay - diffDay) * 24;
+            var diffHour = Math.floor(p_diffHour);
+            var p_diffMin = (p_diffHour - diffHour) * 60;
+            var diffMin = Math.floor(p_diffMin);
+            var p_diffSec = (p_diffMin - diffMin) * 60;
+            var diffSec = Math.floor(p_diffSec);
+
+            var result = document.createElement('div');
+            result.className = 'result';
+            $('.center').appendChild(result);
+            var h3 = document.createElement('h3');
+            h3.innerHTML = '倒计时：';
+            result.appendChild(h3);
+            var pTime = document.createElement('p');
+            pTime.innerHTML = '距离' + time[0] + '年' + time[1] + '月' + time[2] + '日还有' + diffDay + '天' + diffHour + '小时' + diffMin + '分' + diffSec + '秒';
+            result.appendChild(pTime);
+        }
+    }
+
+    function reset() {
+        clearTimeout(t);
+        $('.error').innerHTML = '';
+        $('.myText').value = '';
+        if ($('.result')) {
+            $('.center').removeChild($('.result'));
+        }
+    }
+</script>
+</html>

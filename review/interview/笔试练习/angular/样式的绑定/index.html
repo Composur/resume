@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="my">
+<head>
+    <meta charset="UTF-8">
+    <title>angular样式的绑定</title>
+    <script src="../angular.1.4.8.min.js"></script>
+    <style>
+        li{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul class="list-group" ng-controller="ListCtrl">
+    <li ng-repeat="item in items" ng-class="{true:'list-group-item active', false: 'list-group-item'}[item==selectedItem]" ng-click="select(item)">
+        {{item.title}}
+    </li>
+    <button ng-show="selectedItem">有选中项的时候可以点我</button>
+    <button ng-hide="selectedItem">没有选中项的时候可以点我</button>
+</ul>
+<div ng-controller="RegionCtrl">
+
+
+
+    <ul class="list-group">
+        <select class="form-control col-md-6" ng-model="selectedProvince" ng-options="province for province in provinceArr"></select>
+        <li ng-repeat="province in provinceArr" ng-class="{true:'list-group-item active', false: 'list-group-item'}[province==selectedProvince]" ng-click="selectProvince(province)">
+            {{province}}
+        </li>
+    </ul>
+    <ul class="list-group">
+        <select class="form-control col-md-6" ng-model="selectedCity" ng-options="city for city in cityArr"></select>
+        <li ng-repeat="city in cityArr" ng-class="{true:'list-group-item active', false: 'list-group-item'}[city==selectedCity]" ng-click="selectCity(city)">
+            {{city}}
+        </li>
+    </ul>
+
+</div>
+</body>
+<script>
+    var myapp=angular.module('my',[]);
+    myapp.controller('ListCtrl',['$scope',function ($scope) {
+        $scope.items = [];
+
+        for (var i=0; i<10; i++) {
+            $scope.items.push({
+                title:i
+            });
+        }
+        $scope.selectedItem = $scope.items[0];
+
+        $scope.select = function(item) {
+            $scope.selectedItem = item;
+        };
+    }])
+    myapp.controller('RegionCtrl',['$scope',function ($scope) {
+        $scope.provinceArr = ["江苏", "云南"];
+        $scope.cityArr = [];
+
+        $scope.$watch("selectedProvince", function(province) {
+            // 真正有用的代码在这里，实际场景中这里可以是调用后端服务查询的关联数据
+            switch (province) {
+                case "江苏": {
+                    $scope.cityArr = ["南京", "苏州"];
+                    break;
+                }
+                case "云南": {
+                    $scope.cityArr = ["昆明", "丽江"];
+                    break;
+                }
+            }
+        });
+
+        $scope.selectProvince = function(province) {
+            $scope.selectedProvince = province;
+        };
+
+        $scope.selectCity = function(city) {
+            $scope.selectedCity = city;
+        };
+    }])
+
+</script>
+</html>

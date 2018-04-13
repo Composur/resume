@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .ani{
+        width: 480px;
+        height: 320px;
+        margin: 50px auto;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        background-size:cover;
+        background-position: center;
+        -webkit-animation-name:"loops";
+        -webkit-animation-duration: 20s;
+        -webkit-animation-iteration-count: infinite;
+    }
+    @-webkit-keyframes loops {
+        0%{
+            /*background:url("../../images/banner.jpg");*/
+            background: #000;
+        }
+        20%{
+            /*background:url("../../images/protoType.jpg");*/
+            background: palegreen;
+        }
+        40%{
+            /*background:url("../../images/banner.jpg");*/
+            background:hotpink;
+        }
+        60%{
+            /*background:url("../../images/proto.png");*/
+            background: yellowgreen;
+        }
+        80%{
+            /*background:url("../../images/files-x.png");*/
+            background: firebrick;
+        }
+        100%{
+            /*background:url("../../images/banner.jpg");*/
+            background: antiquewhite;
+        }
+    }
+
+</style>
+<body>
+<div class="ani"></div>
+</body>
+</html>

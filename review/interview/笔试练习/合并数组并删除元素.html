@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    <!--合并数组后从第二项开始删除一个元素-->
+    ( function test() {
+        var arr=[12,5,5,56,561,45]
+        var arr2=[45,54,4,564,56,45,4]
+        var add=arr.concat(arr2);
+        add.splice(1,1);
+        console.log(add);
+    })();
+</script>
+</body>
+</html>

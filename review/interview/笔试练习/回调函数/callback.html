@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回调函数</title>
+</head>
+<body>
+<p>回调函数是作为一个变量传递给另外一个函数的函数,她在主体函数执行完之后执行</p>
+<script>
+//函数A有一个参数是函数B,函数B会在函数A执行完成之后被调用执行
+function  a(callback){
+    alert('a');
+    callback.call(this);//或者是 callback（）,  callback.apply(this),看个人喜好
+}
+function  b(){
+    alert('b');
+}
+//调用
+a(b);//先弹出a在弹出b
+</script>
+</body>
+</html>

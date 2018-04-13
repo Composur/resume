@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<body>
+<script type="text/javascript">
+    //监听index页面input的val的变化并控制台打印
+    $(function(){
+        window.addEventListener("storage", function(event){
+            console.log(event.key + "=" + event.newValue);
+        });
+    });
+
+//    $(function(){
+//        function getCookie(key) {
+//            return JSON.parse("{\"" + document.cookie.replace(/;\s+/gim,"\",\"").replace(/=/gim, "\":\"") + "\"}")[key];
+//        }
+//        setInterval(function(){
+//            console.log("name=" + getCookie("name"));
+//        }, 1000);
+//    });
+
+
+//    function ajax() {
+////           第一步:创建对象!
+//        var xmlHttp;
+//        if (window.XMLHttpRequest) {
+//            xmlHttp = new XMLHttpRequest();
+//        } else {
+//            xmlHttp = new ActiveXObject('MicroSoft.XMLHTTP');//兼容IE6
+//        }
+////           第三步:服务器接受响应并返回值.
+//        xmlHttp.onreadystatechange = function () {
+//            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+//               var json=JSON.parse(xmlHttp.responseText);
+//                console.log(json);
+//            }
+//        };
+////           第二步:向服务器发送请求!
+//        xmlHttp.open('get', 'package.json', true);
+//        xmlHttp.send();
+//    }
+//    ajax();
+    function ajax() {
+//         初始化对象
+        var http1;
+        if(window.XMLHttpRequest){
+            http1=new XMLHttpRequest();
+        }else{
+            http1 = new ActiveXObject('MicroSoft.XMLHTTP');//兼容IE6
+        }
+
+//      进行状态改变
+        http1.onreadystatechange=function () {
+            if(http1.readyState=4&&http1.status==200){
+                var json=http1.responseText;
+                var name=JSON.parse(json);
+                console.log(name);
+                console.log(http1.responseText)
+            }
+        };
+
+//        发送数据//        处理文件
+        http1.open('get','package.json',true);
+        http1.send();
+
+    }
+    ajax();
+</script>
+</body>
+</html>

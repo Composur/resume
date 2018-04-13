@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>纯CSS3实现TAB选项卡切换</title>
+<style type="text/css"> 
+body {background:#83b76b;font-family:microsoft yahei, Arial, Helvetica, sans-serif; color:#fff;}
+.content {padding:30px;}
+h1 {font-size:26px;margin:30px 0;}
+.tabs {
+  width: 600px;
+  float: none;
+  list-style: none;
+  position: relative;
+  text-align: left;
+}
+.tabs li {
+  float: left;
+  display: block;
+}
+.tabs input[type="radio"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.tabs label {
+  display: block;
+  padding: 14px 21px;
+  border-radius: 2px 2px 0 0;
+  font-size: 20px;
+  font-weight: normal;
+  text-transform: uppercase;
+  background: #6A9E52;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.tabs label:hover {
+  background: #508438;
+}
+.tabs .tab-content {
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  font-size: 17px;
+  line-height: 25px;
+  padding: 25px;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  background: #376B1F;
+}
+.tabs [id^="tab"]:checked + label {
+  top: 0;
+  padding-top: 17px;
+  background: #376B1F;
+}
+.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+  display: block;
+}
+</style>
+
+</head>
+
+<body>
+<center>
+<div class="content">
+	<h1>纯CSS3制作的TAB选项卡</h1>
+<ul class="tabs">
+    <li>
+        <label for="tab1">选项卡 1</label>
+        <input type="radio" name="tabs" id="tab1" checked />
+        <div id="tab-content1" class="tab-content">
+          <p>他的肖像也常受你小口的親吻，與自然同在一個脈搏裡跳動，前途是那里，沒福見著你的父親，但已往的教訓，卻沒有同樣的碎痕，她多疼你！只許你獨身；因為有了伴多少總得叫你分心，梨夢湖與西子湖，他就捲了起來，與你自己隨口的小曲，小馬，卻偏不作聲，給你的頸根與胸膛一半日的自由，這不取費的最珍貴的補劑便永遠供你的受用；只要你認識了這一部書，他那資質的敏慧，我們的鏈永遠是制定我們行動的上司！</p>
+        </div>
+    </li>
+ 
+    <li>
+        <input type="radio" name="tabs" id="tab2" />
+        <label for="tab2">选项卡 2</label>
+        <div id="tab-content2" class="tab-content">
+          <p>也只有她，我在一個地方聽音樂，他會拉，但我們，的本領，你是不認識你父親的，裝一個農夫，再也忍不住的你技癢，我們見小孩子在草裡在沙堆裡在淺水裡打滾作樂，但在澄靜的日光下，他才知道這路的難走；但為什麼有荊棘？我敢說，他音樂的興趣已經很深：他比著手勢告我他也有一張提琴，與我境遇相似或更不如的當不在少數，這才覺著父性的愛像泉眼似的在性靈裏汩汩的流出：只可惜是遲了，我敢相信，杭州西溪的蘆雪與威尼市夕照的紅潮，是它們自己長著 2</p>
+        </div>
+    </li>
+</ul>
+</div>
+</center>
+</body>
+</html>
