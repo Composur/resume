@@ -206,6 +206,7 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + 在全局执行上下文中（在任何函数体外部），this都指代全局对象（window,nodejs环境是global），上下文就是函数的执行环境
 + 在函数内部this的值取决于函数被调用的方式
 + 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
++ (()=>{console.log(this)})()//this===windows.this 跳出箭头函数本身去外层find this
 ```
 function add(c, d) {
   return this.a + this.b + c + d;
@@ -220,6 +221,35 @@ add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
 // 第一个参数也是作为‘this’使用的对象
 // 第二个参数是一个数组，数组里的元素用作函数调用中的参数
 add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+```
+
+```
+var app = {
+    fn1() {
+        setTimeout(function(){
+            console.log(this)
+        }, 10)
+    },
+    fn2() {
+        setTimeout(()=>{
+            console.log(this)
+        },20)
+    },
+    fn3() {
+        setTimeout((function(){
+            console.log(this)
+        }).bind(this), 30)        
+    },
+    fn4: ()=> {
+        setTimeout(()=>{
+            console.log(this)
+        },40)        
+    }
+}
+    app.fn1()//Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+    app.fn2()//{fn1: ƒ, fn2: ƒ, fn3: ƒ, fn4: ƒ}
+    app.fn3()//{fn1: ƒ, fn2: ƒ, fn3: ƒ, fn4: ƒ}
+    app.fn4()//Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
 ```
 + 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
 
