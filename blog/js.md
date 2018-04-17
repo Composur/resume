@@ -223,6 +223,46 @@ add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
 ```
 + 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
 
+
+### 原型和原型链
+![原型图](./img/prototype.svg)
+```
+    var log=console.log.bind(console)
+    // 构造函数
+    // Person中有个prototype
+    function Person(name,age){
+            this.name=name
+            this.age=age
+            this.sayName=function(){
+                console.log(this.name)
+        }
+    }
+    // new出来的p1中有个__proto__
+    // __porto__又指向Person的prototype
+    // 创建一个对象或是创建一个实例 new的过程给this赋值就是给这个对象赋值，完成以后把这个对象return出来赋值给p1
+    // 通过new方法创建的对象会有一个__proto__的属性
+    var p1=new Person('xiaoqi',18)
+    log(p1.sayName())
+
+```
++ 变量是属性，函数是方法
++ 任何对象，都有创建者，这个创建者是个函数，普通的对象都是Object创建的
++ 创建这个对象的__proto__属性执行构造函数的prototype
++ 例如数组是Array创建的，调用数组的方法[1,2].join()查找[1,2].proto.join()查找Arry.prototype.join().那么Array又是谁创建的,Array.prototype又是谁创建的
++ 一个对象查找自己的方法属性的时候先从自己的本身去找，然后找自己的原型__proto__,再去从创建它的那个函数的prototype去找，然后去Object.prototype上去找，最后找Object.prototype.__proto__===null找不到的结果
+
+```
+    Array.__proto__===Function.__proto__
+    Function.__proto__===Function.__proto__
+    Array.prototype.__proto__===Object.prototype
+    Object.prototype.__proto__===null
+```
+
+### 继承
++ 继承就是一个对象直接使用另一个对象的属性和方法
++ Object.create()
+
+
 #### bind call apply
 + 函数的绑定，函数作用参数传递的同时，可以存储函数的作用域
 + bind的实现是对作用域的绑定，第一个参数表示作用域，更改作用域不执行参数,还可以传递参数,执行bind后返回了一个新的函数，可以用来改变回调函数的作用域,bind的实现利用call和apply

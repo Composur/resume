@@ -83,7 +83,7 @@
         //     }
         // }
 
-        function tab(container) {
+        function Tab(container) {
             this.init = function (container) {
                 this.container = container
                 this.span = this.container.querySelectorAll('span')
@@ -107,8 +107,8 @@
             this.init(container)
             this.bind()
         }
-        new tab(document.querySelectorAll('.container')[0])
-        new tab(document.querySelectorAll('.container')[1])                
+        new Tab(document.querySelectorAll('.container')[0])
+        new Tab(document.querySelectorAll('.container')[1])                
     </script>
 </body>
 

@@ -35,7 +35,7 @@
             console.log(this.name)
         }
     }
-    // 1、首先创建一个空对象、然后执行Person，操作this，this指向这个空对象、默认返回这个对象、赋值给Tom
+    // 1、当new的时候首先会创建一个空对象、然后执行Person，操作this，this指向这个空对象、默认返回这个对象、赋值给Tom
     var Tom = new Person('tom', 18)
     console.log(Tom.sayName())
 
