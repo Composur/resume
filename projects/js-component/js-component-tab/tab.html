@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0
+    }
+
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    span {
+        border: 1px solid gray;
+        cursor: pointer;
+        display: block;
+        float: left;
+    }
+
+    .spanActive {
+        background: #ccc;
+    }
+
+    .clearfix::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    li {
+        float: left;
+        margin-left: -40px;
+        border: 1px solid red;
+        width: 300px;
+        height: 200px;
+        list-style: none;
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <ul>
+            <div class="clearfix">
+                <span class="spanActive">tab1</span>
+                <span>tab2</span>
+                <span>tab3</span>
+            </div>
+            <ul class="clearfix">
+                <li class="active">content1</li>
+                <li>content2</li>
+                <li>content3</li>
+            </ul>
+        </ul>
+    </div>
+    <hr>
+    <div class="container">
+        <ul>
+            <div class="clearfix">
+                <span class="spanActive">tab1</span>
+                <span>tab2</span>
+                <span>tab3</span>
+            </div>
+            <ul class="clearfix">
+                <li class="active">content1</li>
+                <li>content2</li>
+                <li>content3</li>
+            </ul>
+        </ul>
+    </div>
+
+</body>
+<script src="tab.js"></script>
+</html>

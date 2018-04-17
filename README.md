@@ -18,6 +18,8 @@
 
 - #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
 
+- #### __[js-components](https://composur.github.io/resume/projects/douban-movie/index.html)__
+
 
 
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串倒序</title>
+</head>
+
+<body>
+    <script>
+        var str = 'hel lo jirengu'
+        String.prototype.reverse=function(str){
+            var arr=[]
+            console.log(str.length)
+            for(var i=0;i<str.length;i++){
+                arr.push(str[i])
+            }
+            return arr.reverse().join('')
+        }
+        console.log(str.reverse(str))
+    </script>
+</body>
+
+</html>
