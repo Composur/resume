@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>核辐射警告标示</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            /* width: 800px;
+            margin: 0 auto;
+            border: 1px solid red; */
+            
+        }
+
+        .circle {
+            /* position: absolute; */
+            /* or fixed*/
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: yellow;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+        }
+
+        .dot {
+            width: 100px;
+            height: 100px;
+            border-left: 1px solid #000;
+            border-top: 1px solid #000;
+            background: #fff;
+            display: inline-block;
+            transform: rotateZ(45deg);
+            position: absolute;
+            /* top: -6px; */
+            /* margin: 10px; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1、水平垂直居中，标志是一个60°的扇形黄、黑相间的圆 -->
+    <img src="./img07.jpg " alt="">
+    <div class="wrap">
+        <div class="circle">
+            <span class="dot"></span>
+            <!-- <span class="dot">2</span>
+            <span class="dot">3</span>
+            <span class="dot">4</span> -->
+        </div>
+    </div>
+</body>
+
+</html>
