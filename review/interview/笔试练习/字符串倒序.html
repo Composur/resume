@@ -11,13 +11,20 @@
 <body>
     <script>
         var str = 'hel lo jirengu'
-        String.prototype.reverse=function(str){
-            var arr=[]
+        String.prototype.reverse = function (str) {
+            var arr = []
             console.log(str.length)
-            for(var i=0;i<str.length;i++){
+            for (var i = 0; i < str.length; i++) {
                 arr.push(str[i])
             }
             return arr.reverse().join('')
+        }
+        console.log(str.reverse(str))
+
+
+        var str = 'hel lo jirengu'
+        String.prototype.reverse = function (str) {
+            return str.split('').reverse().join('')
         }
         console.log(str.reverse(str))
     </script>
