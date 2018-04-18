@@ -1,0 +1,55 @@
+section.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(230, 0, 18);
+    padding: 16px 10px;
+}
+
+section.topbar .logo>svg {
+    vertical-align: top;
+    width: 142px;
+    height: 25px;
+}
+
+section.topbar .download {
+    color: #fff;
+    display: inline-block; 
+    font-size: 15px;
+    padding: 4px 7px;
+    line-height: 20px;
+    position: relative;
+}
+section.topbar .download::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 200%;
+    height: 200%;
+    border-radius: 50px;
+    border: 1px solid #fff;
+    transform: scale(0.5);
+    transform-origin:0 0; 
+}
+
+section.gloableTab{
+
+}
+section.gloableTab .tabs{
+    border-bottom:1px solid #ccc;
+}
+section.gloableTab .tabs li{
+    display: flex;
+    justify-content: space-between;
+    /* display: inline-block; */
+    align-items: center;
+}
+
+section.playlists {}
+
+section.song {}
+
+section.art {}
+
+.tab-contents
