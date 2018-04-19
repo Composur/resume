@@ -3,21 +3,21 @@ section.topbar {
     justify-content: space-between;
     align-items: center;
     background: rgb(230, 0, 18);
-    padding: 16px 10px;
+    padding: 3.9vw 1.4vh;
 }
 
 section.topbar .logo>svg {
     vertical-align: top;
-    width: 142px;
-    height: 25px;
+    width: 34.3vw;
+    height: 3.4vh;
 }
 
 section.topbar .download {
     color: #fff;
     display: inline-block; 
-    font-size: 15px;
-    padding: 4px 7px;
-    line-height: 20px;
+    font-size: 3.6vw;
+    padding: 1vw 1vh;
+    line-height: 2.7vh;
     position: relative;
 }
 section.topbar .download::after{
@@ -37,13 +37,15 @@ section.gloableTab{
 
 }
 section.gloableTab .tabs{
-    border-bottom:1px solid #ccc;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 section.gloableTab .tabs li{
-    display: flex;
-    justify-content: space-between;
-    /* display: inline-block; */
-    align-items: center;
+   /* background: red; */
+}
+section.gloableTab .tabs .active{
+    background: red;
 }
 
 section.playlists {}
@@ -52,4 +54,9 @@ section.song {}
 
 section.art {}
 
-.tab-contents
+.tab-contents>li{
+    display: none;
+}
+.tab-contents>li.active{
+    display: block;
+}
