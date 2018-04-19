@@ -75,7 +75,7 @@ section.gloableTab .tabs>li.active>.text::after{
 section.playlists {
     padding-top: 20px;
 }
-section.playlists>.recommend{
+.sectionTitle{
     position: relative;
     padding-left: 9px;
     font-size: 17px;
@@ -83,7 +83,7 @@ section.playlists>.recommend{
     line-height: 20px;
     margin-bottom: 8px;
 }
-section.playlists>.recommend::after{
+.sectionTitle::after{
     content: '';
     position: absolute;
     height: 20px;
@@ -91,6 +91,7 @@ section.playlists>.recommend::after{
     width: 2px;
     background: #d33a31;
 }
+
 
 section.playlists>.songs{
     display: flex;
@@ -113,14 +114,72 @@ section.playlists>.songs>li>p{
     padding: 6px 2px 0 4px;
     line-height: 1.2;
     font-size: 13px;
+    
 }
 section.song {}
 
-section.art {}
+section.song>.new-songs>li{
+    /* background: pink; */
+    padding: 6px 0 6px 10px;
+    position: relative;
+}
+section.song>.new-songs>li::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    transform: scale(0.5);
+    transform-origin: 0 0;
+}
+section.song>.new-songs>li>h3{
+    font-size: 17px;
+    color: #333;
+}
+    
+section.song>.new-songs>li>p{
+    font-size: 12px;
+    color: #888;
+}
+section.song>.new-songs>li>.playBtn{
+    position: absolute;
+    padding: 0 10px;
+    right: 0;
+    top:25%;
+    transform: scale(1.75);
+    color: rgba(0, 0, 0, .3);
+}
 
 
-
-
+section.art {
+    background: url('../img/recommand_bg_2x.png') no-repeat;
+    position: relative;
+    padding-top: 50%;
+    margin-top: 4px; 
+    background-size: cover;
+}
+section.art>.artWrap{
+    padding-top: 20%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 1;
+}
+section.art>.artWrap>.logo>svg{
+    margin: 0 auto;
+    width: 200px;
+}
+section.art>.artWrap>p{
+    color: #888;
+    font-size: 12px;
+    line-height: 16px;
+    transform: scale(.75)
+}
 
 .tab-contents>li {
     display: none;
