@@ -369,6 +369,12 @@ function create(obj){
  }
 var xiaoming=create(person)
 ```
+
+### Promise（es6原生对象）
++ 简单来说Promise就是一个容器，里面保存着未来才会结束的事件（通常是一个异步操作）
++ Promise有三种状态padding（进行中）、fulfilled（成功）、rejected（fulfilled）promise对象的改变只有从pending变为fulfilled或rejected，改变后状态就凝固了，然后在.then(result)就会得到这个结果
+
+
 #### JSON规范
 + 首先json是一种用于数据交换的文本格式，是一种文本格式
 + json类型对值和类型有严格的规范

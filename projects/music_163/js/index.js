@@ -1,4 +1,4 @@
-$('.tabs').on('click','li',function(e){
+$('.container .tabs').on('click','li',function(e){
     let $li=$(e.currentTarget)
     let $index=$li.index()
     $li.addClass('active').siblings().removeClass('active')
