@@ -61,12 +61,10 @@ section.gloableTab .tabs li {
     width: 33.333333%;
     text-align: center;
     background: #fff;
-    ;
 }
 
 section.gloableTab .tabs>li.active {
     color: #d33a31;
-    ;
 }
 
 section.gloableTab .tabs>li.active>.text {
@@ -229,9 +227,9 @@ section.art>.artWrap>p {
 .tab-contents>li {
     /* padding: 2px; */
     display: none;
-    /* overflow: scroll; */
+    overflow: scroll;
     /*ios 上增加弹性*/
-    /* -webkit-overflow-scrolling: touch;  */
+    -webkit-overflow-scrolling: touch; 
 }
 
 .tab-contents>li.active {
