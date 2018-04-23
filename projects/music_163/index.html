@@ -8,10 +8,11 @@
     <title>music-163</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
+    <!-- <link rel="stylesheet" href="./node_modules/loaders.css/loaders.css"> -->
+    <link rel="stylesheet" href="./css/loaders.css">
 </head>
 
 <body>
-
     <div class="container">
 
         <div class="fixedTop">
@@ -112,21 +113,11 @@
                 <section class="song">
                     <h2 class="sectionTitle">最新音乐</h2>
                     <ul class="new-songs">
-                        <li>
-                            <h3>起风了
-                                <!-- <small>起风了</small> -->
-                            </h3>
-                            <p>
-                                <span class="musixSq indexIcon"></span>
-                                <span>张靓颖 邓紫棋《雨蝶》</span>
-                                <span>王牌对王牌3【综艺风向标】</span>
-                            </p>
-                            <a class="playBtn" href="123">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-17"></use>
-                                </svg>
-                            </a>
-                        </li>
+                            <div class="loader-inner ball-pulse">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                            </div>
                     </ul>
                 </section>
                 <section class="art">
@@ -242,10 +233,34 @@
      
 
    // 查询
+
         var query = new AV.Query('Song');
             query.find().then(function(data){
-                console.log(data["0"].attributes.name)
-                console.log(data["0"].attributes.url)
+                $('.loader-inner').remove()
+                data.forEach(songItme => {
+                    let songObj=songItme.attributes
+                    let songName=songObj.name
+                    let songSinger=songObj.singer
+                    let songUrl=songObj.url
+                    let li=`
+                    <li>
+                            <h3>${songName}
+                                <!-- <small>起风了</small> -->
+                            </h3>
+                            <p>
+                                <span class="musixSq indexIcon"></span>
+                                <span>${songSinger}</span>
+                            </p>
+                            <a class="playBtn" href="123">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-17"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    `
+                    $('.new-songs').append(li)     
+                });
+              
             })
     
     </script>
