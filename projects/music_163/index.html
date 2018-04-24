@@ -76,37 +76,37 @@
                             <div class="cover">
                                 <img src="./img/img01.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>雷鬼音乐在中国</p>
                         </li>
                         <li>
                             <div class="cover">
                                 <img src="./img/img02.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>就向流星许个心愿，以后我们都要快乐</p>
                         </li>
                         <li>
                             <div class="cover">
                                 <img src="./img/img03.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>有美一人，婉如清扬【女声】</p>
                         </li>
                         <li>
                             <div class="cover">
                                 <img src="./img/img03.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>【古风】高燃和妖气满满大合集</p>
                         </li>
                         <li>
                             <div class="cover">
                                 <img src="./img/img05.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>一人之下第二季( TV size )</p>
                         </li>
                         <li>
                             <div class="cover">
                                 <img src="./img/img06.jpg" alt="">
                             </div>
-                            <p>歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述歌曲描述</p>
+                            <p>2017年度最热新歌TOP100</p>
                         </li>
                     </ol>
                 </section>
@@ -177,10 +177,29 @@
                 </section>
             </li>
             <li class="page2">
-                <h2>热歌榜</h2>
+                <!-- <h2>热歌榜</h2> -->
+                <div class="hotWrap">
+                        <div class="hotMusic">
+                                
+                         </div>
+                </div>
             </li>
-            <li class="page3">
-                <h2>搜索</h2>
+            <li class="page3 active">
+                <div class="inputCover">
+                        <!-- <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-search"></use>
+                        </svg> -->
+                        <input id="search" class="search" type="text" placeholder="搜索歌曲、歌手、专辑">
+
+                </div>
+                <div class="loader-inner ball-pulse">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                </div>
+                <ul class="search-songs">
+                        
+                 </ul>
             </li>
         </ul>
 
@@ -202,35 +221,7 @@
         // 创建
         var SongsObject = AV.Object.extend('Song');
         // var Song = new SongsObject();
-        // var Song1 = new SongsObject();
-        // var Song2 = new SongsObject();
-        // var Song3 = new SongsObject();
-        // var Song4 = new SongsObject();
-        // Song.save({
-        //     name:'凉凉',
-        //     url:'http://mp3.qqmusic.cc/yq/200380820.mp3',
-        //     singer:'杨宗纬、张碧晨'
-           
-        // }).then(function (object) {
-        //     alert('add success!')
-        // })
-        // Song1.save({
-        //     name:'纸短情长',
-        //     url:'http://mp3.qqmusic.cc/yq/213470055.mp3',
-        //     singer:'买辣椒也用券'
-           
-        // }).then(function (object) {
-        //     alert('add success!')
-        // })
-        // Song2.save({
-        //     name:'PLAET',
-        //     url:'http://mp3.qqmusic.cc/yq/102699343.mp3',
-        //     singer:'买辣椒也用券'
-           
-        // }).then(function (object) {
-        //     alert('add success!')
-        // })
-     
+      
 
    // 查询
 
@@ -262,7 +253,43 @@
                 });
               
             })
-    
+            $('#search').change(function(e){
+                var $input=$(e.currentTarget)
+                var $val=$input.val().trim()
+                var query = new AV.Query('Song')
+                query.contains('name',$val)
+                query.find().then((data)=>{
+                    $('.search-songs').empty()
+                    console.log(data)    
+                    if (data.length===0) {
+                        $('.search-songs').text('结果不存在')
+                    } else {
+
+                        data.forEach((item)=>{
+                           let searchObj=item.attributes
+                            let li=`
+                    <li>
+                            <h3>${searchObj.name}
+                                <!-- <small>起风了</small> -->
+                            </h3>
+                            <p>
+                                <span class="musixSq indexIcon"></span>
+                                <span>${searchObj.singer}</span>
+                            </p>
+                            <a class="playBtn" href="123">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-17"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    ` ;
+                     $('.search-songs').append(li)       
+                        })
+                   
+                    }
+
+                })
+            })
     </script>
 </body>
 
