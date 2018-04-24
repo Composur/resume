@@ -113,11 +113,11 @@
                 <section class="song">
                     <h2 class="sectionTitle">最新音乐</h2>
                     <ul class="new-songs">
-                            <div class="loader-inner ball-pulse">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                            </div>
+                        <div class="loader-inner ball-pulse">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </ul>
                 </section>
                 <section class="art">
@@ -179,30 +179,32 @@
             <li class="page2">
                 <!-- <h2>热歌榜</h2> -->
                 <div class="hotWrap">
-                        <div class="hotMusic">
-                                
-                         </div>
+                    <div class="hotMusic">
+
+                    </div>
                 </div>
             </li>
-            <li class="page3 active">
+            <li class="page3">
                 <div class="inputCover">
-                        <!-- <svg class="icon" aria-hidden="true">
+                    <!-- <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-search"></use>
                         </svg> -->
-                        <input id="search" class="search" type="text" placeholder="搜索歌曲、歌手、专辑">
+                    <input id="search" class="search" type="text" placeholder="搜索歌曲、歌手、专辑">
 
                 </div>
                 <div class="loader-inner ball-pulse">
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <ul class="search-songs">
-                        
-                 </ul>
+               <section class="song">
+                    <ul class="search-songs new-songs">
+                            
+                    </ul>
+               </section>
             </li>
         </ul>
-
+             
     </div>
     <script src="https://at.alicdn.com/t/font_619954_dp4dhg7722o6r.js"></script>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
@@ -221,20 +223,21 @@
         // 创建
         var SongsObject = AV.Object.extend('Song');
         // var Song = new SongsObject();
-      
 
-   // 查询
 
+        // 查询
         var query = new AV.Query('Song');
-            query.find().then(function(data){
-                $('.loader-inner').remove()
-                data.forEach(songItme => {
-                    let songObj=songItme.attributes
-                    let songName=songObj.name
-                    let songSinger=songObj.singer
-                    let songUrl=songObj.url
-                    let li=`
-                    <li>
+        query.find().then(function (data) {
+            $('.loader-inner').remove()
+            data.forEach(songItme => {
+                let songObj = songItme.attributes
+                let songName = songObj.name
+                let songSinger = songObj.singer
+                let songUrl = songObj.url
+                let li =
+                    `
+                   <a href='./song.html?id=${songItme.id}'>                   
+                        <li>
                             <h3>${songName}
                                 <!-- <small>起风了</small> -->
                             </h3>
@@ -247,49 +250,68 @@
                                     <use xlink:href="#icon-17"></use>
                                 </svg>
                             </a>
-                        </li>
+                        </li>                   
+                </a>
                     `
-                    $('.new-songs').append(li)     
-                });
-              
-            })
-            $('#search').change(function(e){
-                var $input=$(e.currentTarget)
-                var $val=$input.val().trim()
+                $('.new-songs').append(li)
+            });
+
+        })
+       
+        /*          
+            0、歌曲搜索    
+            1、使用函数节流，不让发那么多次的请求
+            2、使用定时器让在规定的时间内再次触发定时器的时候，重置定时器
+        */
+        let timer = null
+        $('#search').on('input', function (e) {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                timer = null
+                let $inputVal = $(e.currentTarget).val()
                 var query = new AV.Query('Song')
-                query.contains('name',$val)
-                query.find().then((data)=>{
+                query.contains('name', $inputVal)
+                query.find().then((data) => {
                     $('.search-songs').empty()
-                    console.log(data)    
-                    if (data.length===0) {
-                        $('.search-songs').text('结果不存在')
-                    } else {
+                        if (data.length === 0) {
+                            $('.search-songs').text('结果不存在')
+                        } else {
+                            data.forEach((item) => {
+                                let songObj = item.attributes
+                                let songName = songObj.name
+                                let songSinger = songObj.singer
+                                let songUrl = songObj.url
+                                let $node=`
+                                
+                                <li data-id=${item.id}>
+                                    <a href='./song.html?id=${item.id}'>                   
+                                        <h3>${songName}</h3>
+                                        <p>
+                                            <span class="musixSq indexIcon"></span>
+                                            <span>${songSinger}</span>
+                                        </p>
+                                        <a class="playBtn" href="123">
+                                            <svg class="icon" aria-hidden="true">
+                                                <use xlink:href="#icon-17"></use>
+                                            </svg>
+                                        </a>
+                                    </a>           
+                              </li>           
+                                
+                                
+                                `
+                                $('.search-songs').append($node)           
+                            })
 
-                        data.forEach((item)=>{
-                           let searchObj=item.attributes
-                            let li=`
-                    <li>
-                            <h3>${searchObj.name}
-                                <!-- <small>起风了</small> -->
-                            </h3>
-                            <p>
-                                <span class="musixSq indexIcon"></span>
-                                <span>${searchObj.singer}</span>
-                            </p>
-                            <a class="playBtn" href="123">
-                                <svg class="icon" aria-hidden="true">
-                                    <use xlink:href="#icon-17"></use>
-                                </svg>
-                            </a>
-                        </li>
-                    ` ;
-                     $('.search-songs').append(li)       
-                        })
-                   
-                    }
+                        }
 
-                })
-            })
+                    })
+            }, 400);
+
+        })
+       
     </script>
 </body>
 
