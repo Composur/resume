@@ -1,41 +1,90 @@
+let log = console
+    .log
+    .bind(console)
+
 function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
+    if (!url) 
+        url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
+    if (!results) 
+        return null;
+    if (!results[2]) 
+        return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$id=getParameterByName('id')
-var APP_ID = '0Lc0J2TfU5z7XktxsbvcwwqM-gzGzoHsz';
-var APP_KEY = 'pEqMag3135aDG1aFssRBUdhW';
+getData('Song')
 
-AV.init({
-    appId: APP_ID,
-    appKey: APP_KEY
-});
-   // 查询
-   var query = new AV.Query('Song');
-    query.get($id).then(function(data){
-        var dataObj=data.attributes
-        console.log(dataObj.url)
-        var audio=$( ".play" ).add(`
-        <audio
-        src="${dataObj.url}"
-        autopla>
-        Your browser does not support the <code>audio</code> element.
-      </audio>
-        `)
-        var lyric=dataObj.lyric.split('\n')
+// 查询
+function getData(Obj) {
 
-        var regRN = /\n/g;
-         d = dataObj.lyric.replace(regRN,"<br/>");
-        $('.lyric').text(d)
+    var APP_ID = '0Lc0J2TfU5z7XktxsbvcwwqM-gzGzoHsz';
+    var APP_KEY = 'pEqMag3135aDG1aFssRBUdhW';
 
-        console.log(d.split('\n'))
-        // console.log(lyric.length)
-        console.log(('\n'+dataObj.lyric).split('\n'))
+    AV.init({appId: APP_ID, appKey: APP_KEY});
+
+    var query = new AV.Query(Obj);
+    var $id = getParameterByName('id')
+    query .get($id).then(function (data) {
+        var dataObj = data.attributes
+        songsPlay(dataObj)
+        songLyric(dataObj)
     })
-   
+    
+       
+
+}
+
+// 歌曲操作
+function songsPlay(dataObj) {
+    // 播放
+    var audio = document.createElement('audio')
+    audio.src = `${dataObj.url}`
+    audio.play()
+
+    // 点击整个背景播放/暂停,同时play图标消失
+    var clock = false
+    $('.cover').click(function (e) {
+        e.preventDefault();
+        if (clock) {
+            audio.play()
+            $('.img-play span').removeClass('play-btn')
+            $('.img-play').removeClass('pause')
+            clock = false
+        } else {
+            audio.pause()
+            $('.img-play span').addClass('play-btn')
+            $('.img-play').addClass('pause')
+            clock = true
+        }
+    })
+}
+
+//歌词操作
+function songLyric(dataObj) {
+    // 得到歌词数组
+    var lyricA = dataObj .lyric.split('\n')  
+    // 匹配
+    var regex = /^\[(.+)\](.*)$/g
+    var arr=[]
+    lyricA.forEach(function (str) {
+        var test=str.split(']')
+        test[0]=test[0].substring(1)
+        var regex=/(\d)+:([\d.]+)/
+        var matchs=test[0].match(regex)
+        var min=matchs[1]
+        var seconds=matchs[2]
+        arr.push({
+            time:min*60+seconds,
+            words:test[1]
+        })
+    })
+    console.log(arr)
+}
+
+var app={
+    init:function(){}
+        
+}

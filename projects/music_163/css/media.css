@@ -1,0 +1,34 @@
+
+@media screen and (min-width:360px) {
+    .disk .circle {
+        width: 296px;
+        height: 296px;
+    }
+    .disk .circle .img-wrap .play-btn{
+        width: 56px;
+        height:56px ;
+    }
+    .cover>.point{
+        width: 96px;
+        height: 137px;
+    }
+}
+
+@media screen and (min-width:414px) {
+    .disk .circle {
+        width: 342px;
+        height: 342px;
+    }
+    .disk .circle .img-wrap .play-btn{
+        width: 65px;
+        height: 65px;
+        background: url('../img/play_btn_3x.png') no-repeat;
+        background-size: contain;
+    }
+    .cover>.point{
+        width: 110px;
+        height: 157px;
+        background: url('../img/needle-plus.png') no-repeat;
+        background-size: contain;
+    }
+}
