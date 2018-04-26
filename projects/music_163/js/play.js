@@ -101,17 +101,24 @@ function songLyric(dataObj) {
         var $pA=$('.detail-scroll>p')
         var $pTop
         for(var i=0;i<arr.length;i++){
+            // if($pA.eq(i).attr('class')=='active'){
+            //     $pA.eq(i).removeClass('active')
+            // }
+
             if(arr[i+1]!==undefined&&nowTime>=arr[i].time&&nowTime<arr[i+1].time){
                 // 得到当前行距上面的top
                 $pTop=$pA.eq(i)
+                $pTop.addClass('active').prev().removeClass('active')
+                console.log(arr[i].words)
                 break
             }
+           
         }
         if($pTop){
             var detailTop=$('.lyric .detail-scroll').offset().top
             var pTop=$pTop.offset().top
             var lineHeight=$('.lyric .detail').height()/3
-            var nowTop=pTop-detailTop-lineHeight
+            var nowTop=pTop-detailTop-lineHeight    
             $('.lyric .detail-scroll').css('transform',`translateY(-${nowTop}px)`)
         }
     },500)

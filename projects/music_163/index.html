@@ -118,6 +118,7 @@
                             <div></div>
                             <div></div>
                         </div>
+
                     </ul>
                 </section>
                 <section class="art">
@@ -180,9 +181,19 @@
                 <!-- <h2>热歌榜</h2> -->
                 <div class="hotWrap">
                     <div class="hotMusic">
-
+                           
                     </div>
                 </div>
+                <section class="song">
+                        <!-- <h2 class="sectionTitle">最新音乐</h2> -->
+                        <ul class="new-songs">
+                            <div class="loader-inner ball-pulse">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </ul>
+                    </section>
             </li>
             <li class="page3">
                 <div class="inputCover">
@@ -211,6 +222,7 @@
     <script src="./node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/index.js"></script>
     <script>
+      $(document).ready(function(){
         var APP_ID = '0Lc0J2TfU5z7XktxsbvcwwqM-gzGzoHsz';
         var APP_KEY = 'pEqMag3135aDG1aFssRBUdhW';
 
@@ -235,7 +247,7 @@
                 let songUrl = songObj.url
                 let li =
                     `
-                   <a href='./song.html?id=${songItme.id}'>                   
+                   <a href='./song.html?id=${songItme.id}' class='play'>                   
                         <li>
                             <h3>${songName}
                                 <!-- <small>起风了</small> -->
@@ -244,7 +256,7 @@
                                 <span class="musixSq indexIcon"></span>
                                 <span>${songSinger}</span>
                             </p>
-                            <a class="playBtn" href="123">
+                            <a class="playBtn">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-17"></use>
                                 </svg>
@@ -252,8 +264,14 @@
                         </li>                   
                 </a>
                     `
+                // let li ='<div href="./song.html?id=" class="play"\><li> <h3>${songName}</h3><p><span class="musixSq indexIcon"></span><span>${songSinger}</span><a class="playBtn"></p><svg class="icon" aria-hidden="true"><use xlink:href="#icon-17"></use></svg></a></li></div>'  
+
                 $('.new-songs').append(li)
+                
             });
+            $('.play').click(function(){
+                console.log('test')
+            })
 
         })
        
@@ -310,6 +328,9 @@
             }, 400);
 
         })
+
+        
+      })
     </script>
 </body>
 

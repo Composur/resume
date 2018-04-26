@@ -52,8 +52,8 @@ section.gloableTab .tabs {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
-    line-height: 40px;
+    font-size: 4vw;
+    line-height: 6vh;
     border-bottom: 1px solid #ccc;
 }
 
@@ -103,14 +103,14 @@ section.playlists {
     position: relative;
     padding-left: 9px;
     font-size: 17px;
-    height: 20px;
-    line-height: 20px;
+    height: 3vh;
+    line-height: 3vh;
 }
 
 .sectionTitle::after {
     content: '';
     position: absolute;
-    height: 20px;
+    height: 3vh;
     left: 0;
     width: 2px;
     background: #d33a31;
@@ -195,7 +195,7 @@ section.song .musixSq {
     margin-right: 3px;
 }
 
-section.song>.new-songs>li>.playBtn {
+.playBtn {
     position: absolute;
     padding: 0 10px;
     right: 0;
@@ -225,7 +225,7 @@ section.art>.artWrap {
 
 section.art>.artWrap>.logo>svg {
     margin: 0 auto;
-    width: 200px;
+    width:40vw;
 }
 
 section.art>.artWrap>p {
@@ -245,7 +245,7 @@ section.art>.artWrap>p {
 
 .tab-contents>li.active {
     display: block;
-    margin-top:32vw;
+    margin-top:14.4vh;
 }
 /* hotMusic page2 */
 .tab-contents>li .page3{
@@ -256,19 +256,21 @@ section.art>.artWrap>p {
     padding-top: 38.9%;
     overflow: hidden;
     background: url('../img/hot_music_bg_2x.jpg') no-repeat;
-    background-size: cover;
-    z-index: 200;
+    background-size: contain;
 }
 
 .hotMusic{
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 6.9vw;
+    top: 3.9vh;
     bottom: 0;
     right: 0;
+    width: 37.9vw;
+    height: 10vh;
     background: url('../img/index_icon_2x.png') no-repeat;
-    background-size: 166px 97px;
-    background-position: -7px -22px;
+    background-size: 44.3vw 14.5vh;
+    background-position: -24px -30px;
+    overflow: hidden;
 }
 
 /* search page3 */
@@ -277,6 +279,7 @@ section.art>.artWrap>p {
     padding: 0 30px;
     background: #ebecec;
     border-radius: 30px;
+    margin:10px;;
 }
 .search{
     height: 30px;
