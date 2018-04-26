@@ -2,7 +2,8 @@ let log = console
     .log
     .bind(console)
 
-function getParameterByName(name, url) {
+
+    function getParameterByName(name, url) {
     if (!url) 
         url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -38,9 +39,10 @@ function getData(Obj) {
 }
 
 // 歌曲操作
+var audio = document.createElement('audio')
 function songsPlay(dataObj) {
+
     // 播放
-    var audio = document.createElement('audio')
     audio.src = `${dataObj.url}`
     audio.play()
 
@@ -64,12 +66,15 @@ function songsPlay(dataObj) {
 
 //歌词操作
 function songLyric(dataObj) {
+    //添加歌曲名称
+    var $span=$(`<span>${dataObj.name}</span>`)
+    $('.lyric-h2').append($span)
     // 得到歌词数组
-    var lyricA = dataObj .lyric.split('\n')  
+    var lyricA = dataObj.lyric.split('\n') 
     // 匹配
-    var regex = /^\[(.+)\](.*)$/g
+    // var regex = /^\[(.+)\](.*)$/g
     var arr=[]
-    lyricA.forEach(function (str) {
+    lyricA.forEach(function (str,index) {
         var test=str.split(']')
         test[0]=test[0].substring(1)
         var regex=/(\d)+:([\d.]+)/
@@ -77,14 +82,39 @@ function songLyric(dataObj) {
         var min=matchs[1]
         var seconds=matchs[2]
         arr.push({
-            time:min*60+seconds,
+            time:Number(Number(min*60)+Number(seconds),2).toFixed(2),
             words:test[1]
         })
+       
     })
-    console.log(arr)
+    var nowTime=audio.currentTime
+    for(var i=0;i<arr.length;i++){
+        var $p=$('<p/>')
+        $p.attr('data-time',arr[i].time).text(arr[i].words)
+        $('.detail-scroll').append($p)
+    }
+
+
+    setInterval(()=>{
+        // return
+        var nowTime=audio.currentTime
+        var $pA=$('.detail-scroll>p')
+        var $pTop
+        for(var i=0;i<arr.length;i++){
+            if(arr[i+1]!==undefined&&nowTime>=arr[i].time&&nowTime<arr[i+1].time){
+                // 得到当前行距上面的top
+                $pTop=$pA.eq(i)
+                break
+            }
+        }
+        if($pTop){
+            var detailTop=$('.lyric .detail-scroll').offset().top
+            var pTop=$pTop.offset().top
+            var lineHeight=$('.lyric .detail').height()/3
+            var nowTop=pTop-detailTop-lineHeight
+            $('.lyric .detail-scroll').css('transform',`translateY(-${nowTop}px)`)
+        }
+    },500)
 }
 
-var app={
-    init:function(){}
-        
-}
+console.log()

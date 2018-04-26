@@ -94,5 +94,28 @@
     text-align: center;
     color: #fff;
 }
+.lyric h2 span{
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.1;
+    color: #fefefe;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
+.lyric .detail{
+    margin-top:10px; 
+    /* border: 1px solid red; */
+    height: 72px;
+    overflow: hidden;
+    padding: 0 35px;
+}
+.lyric .detail-scroll{
+    transition: 0.3s;
+}
 
+.lyric .detail-scroll p{
+    line-height: 1.5;
+    font-size: 16px;
+}
