@@ -68,6 +68,7 @@
         </div>
 
         <ul class="tab-contents noCollapse">
+
             <li class="page1 active">
                 <section class="playlists">
                     <h2 class="recommend sectionTitle">推荐歌单</h2>
@@ -236,9 +237,10 @@
         // var Song = new SongsObject();
 
 
-        // 查询
+        // 查询数据库展示歌曲
         var query = new AV.Query('Song');
         query.find().then(function (data) {
+
             $('.loader-inner').remove()
             data.forEach(songItme => {
                 let songObj = songItme.attributes
@@ -247,8 +249,7 @@
                 let songUrl = songObj.url
                 let li =
                     `
-                   <a href='./song.html?id=${songItme.id}' class='play'>                   
-                        <li>
+                        <a href='./song.html?id=${songItme.id}' class='play'>             
                             <h3>${songName}
                                 <!-- <small>起风了</small> -->
                             </h3>
@@ -256,23 +257,19 @@
                                 <span class="musixSq indexIcon"></span>
                                 <span>${songSinger}</span>
                             </p>
-                            <a class="playBtn">
+                            <span class="playBtn">
                                 <svg class="icon" aria-hidden="true">
                                     <use xlink:href="#icon-17"></use>
                                 </svg>
-                            </a>
-                        </li>                   
-                </a>
+                            </span>
+                        </a>
+
                     `
                 // let li ='<div href="./song.html?id=" class="play"\><li> <h3>${songName}</h3><p><span class="musixSq indexIcon"></span><span>${songSinger}</span><a class="playBtn"></p><svg class="icon" aria-hidden="true"><use xlink:href="#icon-17"></use></svg></a></li></div>'  
 
                 $('.new-songs').append(li)
                 
             });
-            $('.play').click(function(){
-                console.log('test')
-            })
-
         })
        
         /*          
@@ -281,7 +278,8 @@
             2、使用定时器让在规定的时间内再次触发定时器的时候，重置定时器
         */
         let timer = null
-        $('#search').on('input', function (e) {
+        // $('#search').on('input', function (e) {
+        $('#search').change( function (e) {
             if (timer) {
                 clearTimeout(timer)
             }
@@ -293,7 +291,7 @@
                 query.find().then((data) => {
                     $('.search-songs').empty()
                         if (data.length === 0) {
-                            $('.search-songs').text('结果不存在')
+                            $('.search-songs').text('结果不存在,数据库只有前面展示的四首歌')
                         } else {
                             data.forEach((item) => {
                                 let songObj = item.attributes
@@ -301,22 +299,18 @@
                                 let songSinger = songObj.singer
                                 let songUrl = songObj.url
                                 let $node=`
-                                
+                              
                                 <li data-id=${item.id}>
-                                    <a href='./song.html?id=${item.id}'>                   
+                                        <a href='./song.html?id=${item.id}'>            
                                         <h3>${songName}</h3>
                                         <p>
                                             <span class="musixSq indexIcon"></span>
                                             <span>${songSinger}</span>
                                         </p>
-                                        <a class="playBtn" href="123">
-                                            <svg class="icon" aria-hidden="true">
-                                                <use xlink:href="#icon-17"></use>
-                                            </svg>
-                                        </a>
-                                    </a>           
+                                      
+                                    </a>         
                               </li>           
-                                
+                          
                                 
                                 `
                                 $('.search-songs').append($node)           
