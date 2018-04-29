@@ -291,7 +291,7 @@
                 query.find().then((data) => {
                     $('.search-songs').empty()
                         if (data.length === 0) {
-                            $('.search-songs').text('结果不存在,数据库只有前面展示的四首歌')
+                            $('.search-songs').text('结果不存在,目前数据中只有首页展示的四首歌！')
                         } else {
                             data.forEach((item) => {
                                 let songObj = item.attributes

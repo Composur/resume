@@ -1,8 +1,7 @@
 {
-    "url":[
-        {"借我":""},
-        {"纸短情长":"http://mp3.qqmusic.cc/yq/213470055.mp3"},
-        {"后来的我们":"http://mp3.qqmusic.cc/yq/213726584.mp3"},
-        {"PLAET":"http://mp3.qqmusic.cc/yq/102699343.mp3"}
+    "songs":[
+        {"name":"起风了","url":"qifengle.mp3","singer":"买辣椒也用券","syric":"我是歌词，哈哈哈哈！"},
+        {"name":"起风了","url":"qifengle.mp3","singer":"买辣椒也用券","syric":"我是歌词，哈哈哈哈！"},
+        {"name":"起风了","url":"qifengle.mp3","singer":"买辣椒也用券","syric":"我是歌词，哈哈哈哈！"}
     ]
 }
