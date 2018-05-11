@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%=title%> </title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+  <body>
+    <div id="header">
+      <!-- <a class="add-note" title="添加笔记" href="/api/notes/add"><span class="fa fa-plus"></span> 添加</a> -->
+      <a class="add-note" title="添加笔记" href="#"><span class="fa fa-plus"></span> 添加</a>
+      <ul class="user-area">
+        <% if (isLogin){ %>
+          <li><img src="<%=user.avatar %>" alt=""></li>
+          <li><span title="<%=user.username %> "> <%=user.username %></span></li>
+          <li><span class="line"> | </span> </li>
+          <li><a class="logout" href="/auth/logout">注销</a></li>
+          <%} else { %>
+          <li><a class="login" title="GitHub登录" href="/auth/github"> GitHub登录</a>
+          </li>
+          <% } %>
+      </ul>
+
+    </div>
+    <div id="content">
+
+    </div>
+
+    <div class="stars"></div>
+    <script src="javascripts/index.js"></script>
+  </body>
+</html>
