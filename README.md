@@ -23,7 +23,7 @@
 - #### __[网易云音乐移动端查看](https://composur.github.io/resume/projects/music_163/index.html)__
 
 
-- #### __[备忘录](https://composur.github.io/resume/projects/music_163/index.html)__
+- #### __[备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)__
 
 
 
