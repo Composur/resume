@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --config webpack.config.js"
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js",
+    "watch": "onchange \"resume01/**/*.js\" -- npm run webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "onchange": "^4.0.0",
+    "vue": "^2.5.16",
     "webpack": "^4.8.2"
   },
   "devDependencies": {
