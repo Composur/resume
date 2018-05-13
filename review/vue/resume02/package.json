@@ -16,6 +16,7 @@
     "webpack": "^4.8.2"
   },
   "devDependencies": {
+    "less-loader": "^4.1.0",
     "webpack-cli": "^2.1.3"
   }
 }

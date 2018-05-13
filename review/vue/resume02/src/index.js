@@ -1,5 +1,6 @@
 import bar from './bar'
 import Vue from  'vue'
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -13,8 +14,6 @@ var app = new Vue({
     //     //     i+=1
     //     // },1000)
     // }
-
-
     created: function(){
         // onbeforeunload文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload
         window.onbeforeunload = ()=>{
