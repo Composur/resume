@@ -16,7 +16,7 @@
         </div>
         <ul class="todos">
             <li v-for="item in todoList">
-               <input type="checkbox" name="" id="" v-model="item.done">  {{ item.title }}
+               <input  class="checkbox" type="checkbox" name="" id="" v-model="item.done">  {{ item.title }}
                <span v-if="item.done">已完成</span>
                <span v-else>未完成</span>
                <button v-on:click.once="removeTodo(item)">X</button>  <!-- 👈 加了一个按钮 -->

@@ -1,5 +1,8 @@
 *{margin: 0;padding: 0;box-sizing: border-box;}
 a,li{list-style:none}
+
+
+/* input样式 */
 .app{
     width: 1200px;
     height: auto;
@@ -14,4 +17,10 @@ a,li{list-style:none}
 }
 .app li{
     border: 1px solid black;
+}
+
+/* ul，li样式 */
+
+.todos .checbox{
+    
 }
