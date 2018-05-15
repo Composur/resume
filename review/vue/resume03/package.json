@@ -1,0 +1,22 @@
+{
+  "name": "webpack-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js --watch",
+    "watch": "onchange \"**/*.js\" -- npm run webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "onchange": "^4.0.0",
+    "vue": "^2.5.16",
+    "webpack": "^4.8.2"
+  },
+  "devDependencies": {
+    "less-loader": "^4.1.0",
+    "webpack-cli": "^2.1.3"
+  }
+}

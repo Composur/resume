@@ -1,0 +1,26 @@
+*{margin: 0;padding: 0;box-sizing: border-box;}
+a,li{list-style:none}
+
+
+/* input样式 */
+.app{
+    width: 1200px;
+    height: auto;
+    border: 1px solid red;
+    text-align: center;
+}
+.app input{
+    outline: none;
+    border: 2px solid grey;
+    font-size: 20px;
+    font-weight: bold;
+}
+.app li{
+    border: 1px solid black;
+}
+
+/* ul，li样式 */
+
+.todos .checbox{
+    
+}

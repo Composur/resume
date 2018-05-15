@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./src/css/index.css">
+    <title>todos</title>
+</head>
+
+<body>
+    <div id="app" class="app">
+        <div class="newTask">
+            <input type="text" v-model='newTodo' v-on:keypress.enter='addTodo'>
+        </div>
+        <ul class="todos">
+            <li v-for="item in todoList">
+               <input  class="checkbox" type="checkbox" name="" id="" v-model="item.done">  {{ item.title }}
+               <span v-if="item.done">已完成</span>
+               <span v-else>未完成</span>
+               <span>创建时间{{item.createdAt}}</span>
+               <button v-on:click.once="removeTodo(item)">X</button>  <!-- 👈 加了一个按钮 -->
+            </li>
+        </ul>
+    </div>
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
