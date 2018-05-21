@@ -1,6 +1,10 @@
 import bar from './bar'
 import Vue from  'vue'
-
+// 存储服务
+var AV = require('leancloud-storage');
+var { Query, User } = AV;
+// 实时消息服务
+var { Realtime, TextMessage } = require('leancloud-realtime');
 var app = new Vue({
     el: '#app',
     data: {
