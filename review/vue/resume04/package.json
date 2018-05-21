@@ -5,11 +5,15 @@
   "author": "Composur <xutongxw@163.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "./node_modules/.bin/webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "node-sass": "^4.9.0",
+    "normalize.css": "^8.0.0",
+    "nrm": "^1.0.2",
+    "scss-loader": "0.0.1",
     "vue": "^2.5.2"
   },
   "devDependencies": {
@@ -37,6 +41,7 @@
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
+    "sass-loader": "^7.0.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
