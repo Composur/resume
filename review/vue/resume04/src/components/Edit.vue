@@ -12,21 +12,11 @@
         </div>
         <div class="panels">
             <ul>
-                 <li :class="{active:currentTab===0}">
-                    tab1
+
+                 <li v-for="i in [0,1,2,3,4]" :class="{active:currentTab===i}">
+                     <h1>tab{{i}}</h1>
                 </li>
-                <li :class="{active:currentTab===1}">
-                    tab2
-                </li>
-                <li :class="{active:currentTab===2}">
-                    tab3
-                </li>
-                <li :class="{active:currentTab===3}">
-                    tab5
-                </li>
-                <li :class="{active:currentTab===4}">
-                    tab5
-                </li>
+              
             </ul>
         </div>
     </div>
@@ -37,7 +27,8 @@ export default {
   data() {
     return {
       currentTab: 0,
-      icons:['id-card-o','work','study','trophy','custom-phone']
+      icons:['id-card-o','work','study','trophy','custom-phone'],
+      penelsTitle:[]
     };
   }
 };
