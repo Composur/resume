@@ -1,61 +1,31 @@
 <template>
     <div id="edit" class="edit">
         <div class="tabs">
+
             <ul>
-               <li  v-bind:class="{active:currentTab===1}" @click="currentTab=1">
+                 <li v-for=" i in [0,1,2,3,4]"  v-bind:class="{active:currentTab===i}" @click="currentTab=i">
                        <svg class="icon" aria-hidden="true">
-                             <use xlink:href="#icon-id-card-o"></use>
-                        </svg>
-                </li>
-              <li  v-bind:class="{active:currentTab===2}" @click="currentTab=2">
-                       <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-work"></use>
-                        </svg>
-                </li>
-               <li  v-bind:class="{active:currentTab===3}" @click="currentTab=3">
-                       <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-study"></use>
-                        </svg>
-                </li>
-               <li  v-bind:class="{active:currentTab===4}" @click="currentTab=4">
-                       <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-trophy"></use>
-                        </svg>
-                </li>
-              <li  v-bind:class="{active:currentTab===5}" @click="currentTab=5">
-                       <svg class="icon" aria-hidden="true">
-             <use xlink:href="#icon-custom-phone"></use>
-            </svg>
-                </li>
-                <li  v-bind:class="{active:currentTab===6}" @click="currentTab=6">
-                       <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-custom-phone"></use>
+                             <use :xlink:href="`#icon-${icons[i]}`"></use>
                         </svg>
                 </li>
             </ul>
         </div>
         <div class="panels">
             <ul>
-                <li :class="{active:currentTab===1}">
+                 <li :class="{active:currentTab===0}">
                     tab1
                 </li>
-                <li :class="{active:currentTab===2}">
+                <li :class="{active:currentTab===1}">
                     tab2
                 </li>
-                <li :class="{active:currentTab===3}">
+                <li :class="{active:currentTab===2}">
                     tab3
                 </li>
-                <li :class="{active:currentTab===4}">
-                    tab4
-                </li>
-                <li :class="{active:currentTab===5}">
+                <li :class="{active:currentTab===3}">
                     tab5
                 </li>
-                <li :class="{active:currentTab===6}">
-                    tab6
-                </li>
-                <li :class="{active:currentTab===7}">
-                    tab7
+                <li :class="{active:currentTab===4}">
+                    tab5
                 </li>
             </ul>
         </div>
@@ -66,7 +36,8 @@
 export default {
   data() {
     return {
-      currentTab: 0
+      currentTab: 0,
+      icons:['id-card-o','work','study','trophy','custom-phone']
     };
   }
 };
