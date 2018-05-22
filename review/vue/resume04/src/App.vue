@@ -37,7 +37,7 @@ html,body{
   overflow: hidden;
 }
 .topbar {
-  background: red;
+  /* background: red; */
   border: 1px black solid;
 }
 main {

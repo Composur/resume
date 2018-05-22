@@ -12,5 +12,7 @@
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        align-items: center;
+        font-size: 20px;;
     }
 </style>
