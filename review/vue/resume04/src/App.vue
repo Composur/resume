@@ -38,18 +38,21 @@ html,body{
 }
 .topbar {
   /* background: red; */
-  border: 1px black solid;
+  /* border: 1px black solid; */
+  margin: 8px;
 }
 main {
   display:flex;
   flex: 1;
 }
 main .edit {
-  width: 20em;
-  border: 1px solid yellow;
+  width: 30em;
+  border: 1px solid red;
+  margin: 8px 4px 8px 8px;
 }
 main .preview {
   flex: 1;
   border: 1px solid green;
+   margin: 8px 8px 8px 4px;
 }
 </style>
