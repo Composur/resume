@@ -13,50 +13,22 @@
         <div class="panels">
             <ul>
                  <li  :class="{active:currentTab===0}">
-                     <h1>个人信息</h1>
-                     <el-form :label-position="labelPosition"  :model="profile" >
-                      <el-form-item label="姓名">
-                        <el-input v-model="profile.name"></el-input>
-                      </el-form-item>
-                      <el-form-item label="年龄">
-                        <el-input v-model="profile.age"></el-input>
-                      </el-form-item>
-                      <el-form-item label="地址">
-                        <el-input v-model="profile.city"></el-input>
-                      </el-form-item>
-                    </el-form>
+                    <person v-bind:profile="profile"/>
                 </li>
                 <li :class="{active:currentTab===1}">
-                  <h1>工作经历</h1>
-                  <el-form :label-positons='labelPosition' :model="experience">
-                   <div v-for="work  in experience">
-                      <el-form-item label="公司名称">
-                        <el-input v-model="work.company"></el-input>
-                      </el-form-item>
-                      <el-form-item label="职位名称">
-                        <el-input v-model="work.jobTitle"></el-input>
-                      </el-form-item>
-                      <el-form-item label="主要职责">
-                        <el-input v-model="work.jobDetail"></el-input>
-                      </el-form-item>
-                   </div>
-                  </el-form>
+                 <work v-bind:experience="experience"/>
                 </li>
                 <li :class="{active:currentTab===2}">
-                  <h1>教育经历</h1>
-                 <el-form :label-positons='labelPosition' :model="educated">
-                   <div v-for="educated  in educated">
-                      <el-form-item label="学校名称">
-                        <el-input v-model="educated.school"></el-input>
-                      </el-form-item>
-                      <el-form-item label="学历">
-                        <el-input v-model="educated.degree"></el-input>
-                      </el-form-item>
-                      <el-form-item label="其它">
-                        <el-input v-model="educated.other"></el-input>
-                      </el-form-item>
-                   </div>
-                  </el-form>
+                  <study v-bind:educated="educated"/>
+                </li>
+                <li :class="{active:currentTab===3}">
+                 <project v-bind:educated="educated"/>
+                </li>
+                <li :class="{active:currentTab===4}">
+                  <winning v-bind:educated="educated"/>
+                </li>
+                <li :class="{active:currentTab===5}">
+                  <other v-bind:educated="educated"/>
                 </li>
             </ul>
         </div>
@@ -64,7 +36,25 @@
 </template>
 
 <script>
+
+import work from './edit/work'
+import study from './edit/study'
+import project from './edit/project'
+import person from './edit/person'
+import winning from './edit/winning'
+import other from './edit/other'
+
+
 export default {
+  components:{
+    person,
+    work,
+    study,
+    project,
+    winning,
+    other,
+    other
+  },
   data() {
     return {
       currentTab: 0,
@@ -79,9 +69,14 @@ export default {
       experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
       educated:[{school:'tinghua',degree:'本科',other:'其它'}]
     };
-    methods:{
-      
-    }
+  },
+  methods:{
+      addExperience(){
+        this.experience.push({company:'baidu',jobTitle:'dev',jobDetail:'tester'})
+      },
+      romoveExperience(index){
+        this.experience.splice(index,1)
+      }   
   }
 };
 </script>
@@ -92,14 +87,14 @@ export default {
   -moz-box-shadow: 2px 2px 2px 2px #ccc;
   box-shadow: 2px 2px 2px 2px #ccc;
   display: flex;
-  overflow: hidden;
+  height: 100%;
   > .tabs {
     width: 4em;
     background: burlywood;
+    height: 100%;
     > ul {
       margin-top: 1em;
       > li {
-        width: 100%;
         height: 4em;
         border: 1px solid black;
         text-align: center;
@@ -117,7 +112,9 @@ export default {
   > .panels {
     flex: 1;
     border: 1px solid indigo;
-    > ul {
+    height: 100%;
+    overflow: auto;
+    > ul {   
       > li {
         display: none;
       }
