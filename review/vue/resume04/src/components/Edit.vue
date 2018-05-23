@@ -3,7 +3,7 @@
         <div class="tabs">
 
             <ul>
-                 <li v-for=" i in [0,1,2,3,4]"  v-bind:class="{active:currentTab===i}" @click="currentTab=i">
+                 <li v-for=" i in [0,1,2,3,4,5]"  v-bind:class="{active:currentTab===i}" @click="currentTab=i">
                        <svg class="icon" aria-hidden="true">
                              <use :xlink:href="`#icon-${icons[i]}`"></use>
                         </svg>
@@ -12,11 +12,52 @@
         </div>
         <div class="panels">
             <ul>
-
-                 <li v-for="i in [0,1,2,3,4]" :class="{active:currentTab===i}">
-                     <h1>tab{{i}}</h1>
+                 <li  :class="{active:currentTab===0}">
+                     <h1>个人信息</h1>
+                     <el-form :label-position="labelPosition"  :model="profile" >
+                      <el-form-item label="姓名">
+                        <el-input v-model="profile.name"></el-input>
+                      </el-form-item>
+                      <el-form-item label="年龄">
+                        <el-input v-model="profile.age"></el-input>
+                      </el-form-item>
+                      <el-form-item label="地址">
+                        <el-input v-model="profile.city"></el-input>
+                      </el-form-item>
+                    </el-form>
                 </li>
-              
+                <li :class="{active:currentTab===1}">
+                  <h1>工作经历</h1>
+                  <el-form :label-positons='labelPosition' :model="experience">
+                   <div v-for="work  in experience">
+                      <el-form-item label="公司名称">
+                        <el-input v-model="work.company"></el-input>
+                      </el-form-item>
+                      <el-form-item label="职位名称">
+                        <el-input v-model="work.jobTitle"></el-input>
+                      </el-form-item>
+                      <el-form-item label="主要职责">
+                        <el-input v-model="work.jobDetail"></el-input>
+                      </el-form-item>
+                   </div>
+                  </el-form>
+                </li>
+                <li :class="{active:currentTab===2}">
+                  <h1>教育经历</h1>
+                 <el-form :label-positons='labelPosition' :model="educated">
+                   <div v-for="educated  in educated">
+                      <el-form-item label="学校名称">
+                        <el-input v-model="educated.school"></el-input>
+                      </el-form-item>
+                      <el-form-item label="学历">
+                        <el-input v-model="educated.degree"></el-input>
+                      </el-form-item>
+                      <el-form-item label="其它">
+                        <el-input v-model="educated.other"></el-input>
+                      </el-form-item>
+                   </div>
+                  </el-form>
+                </li>
             </ul>
         </div>
     </div>
@@ -27,9 +68,20 @@ export default {
   data() {
     return {
       currentTab: 0,
-      icons:['id-card-o','work','study','trophy','custom-phone'],
-      penelsTitle:[]
+      icons:['id-card-o','work','study','project','trophy','custom-phone'],
+      penelsTitle:[],
+      labelPosition: 'top',
+      profile: {
+        name: '',
+        age: '',
+        city: ''
+      },
+      experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
+      educated:[{school:'tinghua',degree:'本科',other:'其它'}]
     };
+    methods:{
+      
+    }
   }
 };
 </script>
