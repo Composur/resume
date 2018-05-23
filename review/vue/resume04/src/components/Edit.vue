@@ -16,7 +16,7 @@
                     <person v-bind:profile="profile"/>
                 </li>
                 <li :class="{active:currentTab===1}">
-                 <work v-bind:experience="experience"/>
+                 <work v-bind:experience="experience"  v-bind:labels="{company:'公司',jobTitle:'职位名称',jobDetail:'主要职责'}"/>
                 </li>
                 <li :class="{active:currentTab===2}">
                   <study v-bind:educated="educated"/>
@@ -52,7 +52,6 @@ export default {
     study,
     project,
     winning,
-    other,
     other
   },
   data() {
@@ -67,7 +66,7 @@ export default {
         city: ''
       },
       experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
-      educated:[{school:'tinghua',degree:'本科',other:'其它'}]
+      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}]
     };
   },
   methods:{
