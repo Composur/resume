@@ -15,6 +15,8 @@
 
 - #### __[备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)__
 
+- #### __[vue-resume](https://composur.github.io/resume/review/vue/resume04/index.html)__
+
 
 - #### __[当输入URL并按下回车的时候发生了什么](https://github.com/Composur/resume/blob/master/blog/http.md)__
 
