@@ -1,14 +1,15 @@
 <template>
-    <div id="Preview" class="preview">
-        
+    <div id="Preview" class="preview" v-model:profile="profile">
+    <h1>test</h1>
     </div>
 </template>
 
 
 <script>
+// 传入数据
+import test from './Edit'
     export default{
         props:['profile','experience','educated','projects','winning','other']
-
     }
 </script>
 

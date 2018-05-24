@@ -12,23 +12,23 @@
         </div>
         <div class="panels">
             <ul>
-                 <li  :class="{active:currentTab===0}">
-                    <person v-bind:profile="profile" title="个人信息"/>
+                <li  :class="{active:currentTab===0}">
+                    <person v-bind:profile="resume.profile" title="个人信息"/>
                 </li>
                 <li :class="{active:currentTab===1}">
-                 <work v-bind:experience="experience"  v-bind:labels="{company:'公司',jobTitle:'职位名称',jobDetail:'主要职责'}"/>
+                 <work v-bind:experience="resume.experience"  v-bind:labels="{company:'公司',jobTitle:'职位名称',jobDetail:'主要职责'}"/>
                 </li>
                 <li :class="{active:currentTab===2}">
-                  <study v-bind:educated="educated"/>
+                  <study v-bind:educated="resume.educated"/>
                 </li>
                 <li :class="{active:currentTab===3}">
-                 <project v-bind:projects="projects"/>
+                 <project v-bind:projects="resume.projects"/>
                 </li>
                 <li :class="{active:currentTab===4}">
-                  <winning v-bind:winning="winning"/>
+                  <winning v-bind:winning="resume.winning"/>
                 </li>
                 <li :class="{active:currentTab===5}">
-                  <other v-bind:other="other"/>
+                  <other v-bind:other="resume.other"/>
                 </li>
             </ul>
         </div>
@@ -46,6 +46,7 @@ import other from './edit/other'
 
 
 export default {
+  props:['resume'],
   components:{
     person,
     work,
@@ -60,16 +61,16 @@ export default {
       icons:['id-card-o','work','study','project','trophy','custom-phone'],
       penelsTitle:[],
       labelPosition: 'top',
-      profile: {
-        name: '',
-        age: '',
-        city: ''
-      },
-      experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
-      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      projects:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      winning:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      other:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      // profile: {
+      //   name: '',
+      //   age: '',
+      //   city: ''
+      // },
+      // experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
+      // educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      // projects:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      // winning:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      // other:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
     };
   },
   methods:{

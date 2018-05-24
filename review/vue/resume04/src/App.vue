@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png"> -->
     <Topbar class="topbar"/>
     <main>
-        <Edit class="edit"/>
+        <Edit class="edit" v-bind:resume="resume"/>
         <Preview class="preview"/>
     </main>
   </div>
@@ -15,6 +15,23 @@ import Edit from "./components/Edit";
 import Preview from "./components/Preview";
 
 export default {
+  data(){
+    return{
+      resume:{
+         profile: {
+        name: '',
+        age: '',
+        city: ''
+      },
+      experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
+      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      projects:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      winning:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      other:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+
+      },
+    }
+  },
   name: "App",
   components: {
     Topbar,
