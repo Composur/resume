@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{previewMode:previewMode}">
     <!-- <img src="./assets/logo.png"> -->
-    <Topbar class="topbar"/>
+    <Topbar class="topbar" v-on:preview="preview"/>
     <main>
         <Edit class="edit" v-bind:resume="resume"/>
-        <Preview class="preview"/>
+        <Preview class="preview" v-bind:resume="resume" v-on:preview="preview"/>
     </main>
   </div>
 </template>
@@ -15,37 +15,53 @@ import Edit from "./components/Edit";
 import Preview from "./components/Preview";
 
 export default {
-  data(){
-    return{
-      resume:{
-         profile: {
-        name: '',
-        age: '',
-        city: ''
-      },
-      experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
-      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      projects:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      winning:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-      other:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
-
-      },
-    }
+  data() {
+    return {
+      previewMode: false,
+      resume: {
+        profile: {
+          name: "",
+          age: "",
+          city: ""
+        },
+        experience: [{ company: "", jobTitle: "", jobDetail: "" }],
+        educated: [
+          { school: "tinghua", degree: "本科", duration: "", other: "其它" }
+        ],
+        projects: [{ name: "", Duty: "", duration: "", other: "其它" }],
+        winning: [
+          { school: "tinghua", degree: "本科", duration: "", other: "其它" }
+        ],
+        other: [
+          { school: "tinghua", degree: "本科", duration: "", other: "其它" }
+        ]
+      }
+    };
   },
   name: "App",
   components: {
     Topbar,
     Edit,
     Preview
+  },
+  methods: {
+    preview() {
+      if (this.previewMode) {
+        this.previewMode = false;
+      } else {
+        this.previewMode = true;
+      }
+    }
   }
 };
 </script>
 
-<style>
-html,body{
+<style lang='scss'>
+html,
+body {
   height: 100%;
 }
-#app{
+#app {
   display: flex;
   flex-direction: column;
   /* 兼容性不好 */
@@ -53,13 +69,30 @@ html,body{
   height: 100%;
   overflow: hidden;
 }
+.previewMode {
+  background: #ccc;
+  > .topbar {
+    display: none !important;
+  }
+  > main {
+    > .edit {
+      display: none !important;
+    }
+    > .preview{
+      max-width: 800px;
+      margin: 32px auto;
+      background: #fff;
+      >.primary{
+        display: block;
+      }
+    }
+  }
+}
 .topbar {
-  /* background: red; */
-  /* border: 1px black solid; */
   margin: 8px;
 }
 main {
-  display:flex;
+  display: flex;
   flex: 1;
 }
 main .edit {
@@ -70,6 +103,7 @@ main .edit {
 main .preview {
   flex: 1;
   border: 1px solid green;
-   margin: 8px 8px 8px 4px;
+  margin: 8px 8px 8px 4px;
+  height: 100%;
 }
 </style>

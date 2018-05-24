@@ -75,7 +75,7 @@ export default {
   },
   methods:{
       addExperience(){
-        this.experience.push({company:'baidu',jobTitle:'dev',jobDetail:'tester'})
+        this.experience.push({company:'',jobTitle:'',jobDetail:''})
       },
       romoveExperience(index){
         this.experience.splice(index,1)

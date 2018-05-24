@@ -5,18 +5,18 @@
     <div v-for="(work,index)  in experience" v-bind:key="index">
         <el-button type="danger" icon="el-icon-delete" size='small' circle v-on:click="romoveExperience(index)"></el-button>
         <!--  v-bind:key="key" -->
-        <el-form-item v-for="key in keys" :label='labels[key] || key' v-bind:key="key">
-        <el-input v-model="experience[key]"></el-input>
+        <el-form-item  label='公司名称' v-bind:key="key">
+        <el-input v-model="work.company"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="职位名称">
+        <el-form-item label="职位名称">
         <el-input v-model="work.jobTitle"></el-input>
         </el-form-item>
         <el-form-item label="主要职责">
         <el-input v-model="work.jobDetail"></el-input>
-        </el-form-item> -->
+        </el-form-item>
     </div>
     </el-form>
-    <el-button type="primary" v-on:click="addExperience">添加</el-button>
+    <el-button type="primary" v-on:click="addExperience()">添加</el-button>
    </div>
 </template>
 <script>
@@ -31,9 +31,9 @@ export default {
   methods: {
     addExperience() {
       this.experience.push({
-        company: "baidu",
-        jobTitle: "dev",
-        jobDetail: "tester"
+        company: "",
+        jobTitle: "",
+        jobDetail: ""
       });
     },
     romoveExperience(index) {
