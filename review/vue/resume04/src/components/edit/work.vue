@@ -2,9 +2,10 @@
    <div>
         <h1>工作经历</h1>
     <el-form :label-positons='labelPosition' :model="experience">
-    <div v-for="(work,index)  in experience">
+    <div v-for="(work,index)  in experience" v-bind:key="index">
         <el-button type="danger" icon="el-icon-delete" size='small' circle v-on:click="romoveExperience(index)"></el-button>
-        <el-form-item v-for="key in keys" :label='labels[key]'>
+        <!--  v-bind:key="key" -->
+        <el-form-item v-for="key in keys" :label='labels[key] || key' v-bind:key="key">
         <el-input v-model="experience[key]"></el-input>
         </el-form-item>
         <!-- <el-form-item label="职位名称">
@@ -21,6 +22,7 @@
 <script>
 export default {
   props: ["experience", "labels"],
+  // 需要弄明白
   computed: {
     keys() {
       return Object.keys(this.experience[0]);

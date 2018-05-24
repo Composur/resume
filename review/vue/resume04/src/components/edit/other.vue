@@ -1,8 +1,8 @@
 <template>
     <div>
          <h1>其它</h1>
-                 <el-form :label-positons='labelPosition' :model="educated">
-                   <div v-for="educated  in educated">
+                 <el-form :label-positons='labelPosition' :model="other">
+                   <div v-for="educated  in other">
                       <el-form-item label="学校名称">
                         <el-input v-model="educated.school"></el-input>
                       </el-form-item>
@@ -18,6 +18,6 @@
 </template>
 <script>
     export default{
-        props:['educated']
+        props:['other']
     }
 </script>

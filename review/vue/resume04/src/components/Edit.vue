@@ -13,7 +13,7 @@
         <div class="panels">
             <ul>
                  <li  :class="{active:currentTab===0}">
-                    <person v-bind:profile="profile"/>
+                    <person v-bind:profile="profile" title="个人信息"/>
                 </li>
                 <li :class="{active:currentTab===1}">
                  <work v-bind:experience="experience"  v-bind:labels="{company:'公司',jobTitle:'职位名称',jobDetail:'主要职责'}"/>
@@ -22,13 +22,13 @@
                   <study v-bind:educated="educated"/>
                 </li>
                 <li :class="{active:currentTab===3}">
-                 <project v-bind:educated="educated"/>
+                 <project v-bind:projects="projects"/>
                 </li>
                 <li :class="{active:currentTab===4}">
-                  <winning v-bind:educated="educated"/>
+                  <winning v-bind:winning="winning"/>
                 </li>
                 <li :class="{active:currentTab===5}">
-                  <other v-bind:educated="educated"/>
+                  <other v-bind:other="other"/>
                 </li>
             </ul>
         </div>
@@ -66,7 +66,10 @@ export default {
         city: ''
       },
       experience:[{company:'baidu',jobTitle:'dev',jobDetail:'tester'}],
-      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}]
+      educated:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      projects:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      winning:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
+      other:[{school:'tinghua',degree:'本科',duration:'' ,other:'其它'}],
     };
   },
   methods:{

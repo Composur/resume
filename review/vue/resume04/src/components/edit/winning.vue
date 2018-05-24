@@ -1,8 +1,8 @@
 <template>
     <div>
          <h1>获奖经历</h1>
-                 <el-form :label-positons='labelPosition' :model="educated">
-                   <div v-for="educated  in educated">
+                 <el-form :label-positons='labelPosition' :model="winning">
+                   <div v-for="educated  in winning">
                       <el-form-item label="学校名称">
                         <el-input v-model="educated.school"></el-input>
                       </el-form-item>
@@ -18,6 +18,11 @@
 </template>
 <script>
     export default{
-        props:['educated']
+        props:['winning'],
+        computed:{
+          keys(){
+            return Object.keys(this.educated[0])
+          }
+        }
     }
 </script>
