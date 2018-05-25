@@ -42,7 +42,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'resume/review/vue/resume04/dist/static',
+    assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
     /**
