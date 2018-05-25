@@ -83,7 +83,7 @@ body {
       margin: 32px auto;
       background: #fff;
       >.primary{
-        display: block;
+        display: block !important;
       }
     }
   }
