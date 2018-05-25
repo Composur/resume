@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
++ [预览](https://composur.github.io/resume/review/vue/resume04/dist//index.html)
+
 ## Build Setup
 
 ``` bash
