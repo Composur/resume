@@ -1,7 +1,7 @@
 {
   "name": "webpack-test",
   "version": "1.0.0",
-  "main": "index.js", 
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --config webpack.config.js --watch",
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "leancloud-realtime": "^3.5.7",
-    "leancloud-storage": "^3.6.8",
+    "leancloud-storage": "^3.7.0",
     "onchange": "^4.0.0",
     "vue": "^2.5.16",
     "vue-cli": "^2.9.3",

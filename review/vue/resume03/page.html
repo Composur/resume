@@ -11,18 +11,66 @@
 
 <body>
     <div id="app" class="app">
-        <div class="newTask">
-            <input type="text" v-model='newTodo' v-on:keypress.enter='addTodo'>
-        </div>
-        <ul class="todos">
-            <li v-for="item in todoList">
-               <input  class="checkbox" type="checkbox" name="" id="" v-model="item.done">  {{ item.title }}
-               <span v-if="item.done">已完成</span>
-               <span v-else>未完成</span>
-               <span>创建时间{{item.createdAt}}</span>
-               <button v-on:click.once="removeTodo(item)">X</button>  <!-- 👈 加了一个按钮 -->
-            </li>
-        </ul>
+        <section id="signInAndSignUp" v-if="!currentUser">
+            <div>
+                <label>
+                    <input type="radio" name="type" value="signUp" v-model='actionType'>注册</label>
+                <label>
+                    <input type="radio" name="type" value="login" v-model='actionType'>登入</label>
+            </div>
+            <div class="signUp" v-if="actionType === 'signUp'">
+                <form @submit.prevent=signUp>
+                    <!--👈-->
+                    <div class="formRow">
+                        用户名
+                        <input type="text" v-model="formData.username">
+                        <!--👈-->
+                    </div>
+                    <div class="formRow">
+                        密码
+                        <input type="password" v-model="formData.password">
+                        <!--👈-->
+                    </div>
+                    <div class="formActions">
+                        <input type="submit" value="注册">
+                    </div>
+                </form>
+            </div>
+            <div class="login" v-if="actionType === 'login'">
+                <form @submit.prevent="login">
+                    <!--👈-->
+                    <div class="formRow">
+                        用户名
+                        <input type="text" v-model="formData.username">
+                        <!--👈-->
+                    </div>
+                    <div class="formRow">
+                        密码
+                        <input type="password" v-model="formData.password">
+                        <!--👈-->
+                    </div>
+                    <div class="formActions">
+                        <input type="submit" value="登入">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="todo" v-if="currentUser">
+                <p><button @click="logout">登出</button></p>
+            <div class="newTask">
+                <input type="text" v-model='newTodo' v-on:keypress.enter='addTodo'>
+            </div>
+            <ul class="todos">
+                <li v-for="item in todoList">
+                    <input class="checkbox" type="checkbox" name="" id="" v-model="item.done"> {{ item.title }}
+                    <span v-if="item.done">已完成</span>
+                    <span v-else>未完成</span>
+                    <span>创建时间{{item.createdAt}}</span>
+                    <button v-on:click.once="removeTodo(item)">X</button>
+                    <!-- 👈 加了一个按钮 -->
+                </li>
+            </ul>
+        </section>
     </div>
     <script src="./dist/bundle.js"></script>
 </body>
