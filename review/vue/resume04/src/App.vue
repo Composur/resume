@@ -13,7 +13,7 @@
 import Topbar from "./components/Topbar";
 import Edit from "./components/Edit";
 import Preview from "./components/Preview";
-
+import store from './store/index'
 export default {
   data() {
     return {
@@ -39,6 +39,7 @@ export default {
     };
   },
   name: "App",
+   store,
   components: {
     Topbar,
     Edit,
@@ -52,7 +53,15 @@ export default {
         this.previewMode = true;
       }
     }
-  }
+  },
+   created() {
+       let state = localStorage.getItem('state')//数据保存到localStorage
+  	  if(state){
+  	  	state = JSON.parse(state)
+  	  }
+  	  this.$store.commit('initState',state)
+  	  this.$store.commit('setUser', getAVUser())
+   }
 };
 </script>
 
