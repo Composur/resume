@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +8,100 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
- <div id="app">
-  {{ message }}
-</div>
-
-<div id="app-2">
-        <span v-bind:title="message">
-          鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </span>
-</div>
-
-<div id="li">
-    <p v-if='can'>test</p>
-</div>
+    <!-- 过渡 -->
+    <div id="app">
+        <button v-on:click='show=!show'>
+            Toggle
+        </button>
+        <transition name="fade">
+            <span v-if='show'>{{show}}</span>
+        </transition>
+    </div>
+    <div id="app-2" style="cursor:pointer;">
+        <!-- v-bind是指令 -->
+        <span v-bind:title='message'>鼠标停在这里几秒！</span>
+    </div>
+    <div id="app-3">
+        <p v-if='seen'>{{seen}}</p>
+    </div>
+    <!-- v-for -->
+    <div id="app-4">
+        <ul>
+            <li v-for='todo in todos'>{{todo.text}}</li>
+        </ul>
+    </div>
+    <!-- v-on -->
+    <div id="app-5">
+        <p>{{on}}</p>
+        <button v-on:click='changeMessage()'>changeMessage</button>
+    </div>
     <script>
         var app = new Vue({
             el: '#app',
-            data: {
-              message: 'Hello Vue!'
+            data() {
+                return {
+                    show: true
+                }
             }
-          })
-
-
-          var app2 = new Vue({
+        })
+        var app2 = new Vue({
             el: '#app-2',
-            data: {
-              message: '页面加载于 ' + new Date().toLocaleString()
+            data() {
+                return {
+                    message: `message ${new Date().toLocaleString()}`
+                }
             }
-          })
+        })
+        var app3 = new Vue({
+            el: '#app-3',
+            data() {
+                return {
+                    seen: true,
+                }
+            }
+        })
+        var app4=new Vue({
+            el:'#app-4',
+            data() {
+                return{
+                    todos:[
+                        {text:'1'},
+                        {text:'2'},
+                        {text:'3'},
+                    ]
+                }
+            }
+        })
 
-          var li=new Vue({
-              el:'#li',
-              data:{
-                  can:false
-              }
-          })
+        var app5=new Vue({
+            el:'#app-5',
+            data:{
+                on:'123',
+            },
+            methods:{
+                changeMessage(){
+                    this.on=this.on.split('').reverse().join()
+                }
+            }
+        })
     </script>
+
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fade-enter,
+        .fade-leave-to
+        /* .fade-leave-active below version 2.1.8 */
+
+            {
+            opacity: 0;
+        }
+    </style>
 </body>
+
 </html>
