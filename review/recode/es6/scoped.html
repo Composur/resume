@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const callback=[]
+        for(var i=0;i<=3;i++){
+            // 全局作用域
+            callback[i]=function(){
+                return i*2
+            }
+        }
+        
+        const callback1=[]
+        for(let i=0;i<=3;i++){
+            // 函数作用
+            callback1[i]=function(){
+                return i*2
+            }
+        }
+        console.table([callback[0](),callback[1](),callback[2]()])
+        console.table([callback1[0](),callback1[1](),callback1[2]()])
+
+
+       {
+        //    快级作用域
+        function fn(x,y,z){
+            if(y===undefined){
+                y=7
+            }
+            if(z===undefined){
+                z=42
+            }
+            return x+y+z
+
+        }
+        console.log(fn(1))
+       }
+
+       {
+        //  es6可以避免检查默认参数
+        // 对必选参数的检查
+        function fn({a,b=1,c=2}={a:checkParameter()}){
+            return a+b+c
+        }
+        console.log(fn({a:2,}))//5
+        // 参数全为空的时候
+        console.log(fn())//can\'t be empty
+
+        function checkParameter(){
+            throw new Error('can\'t be empty')
+        }
+       }
+    </script>
+</body>
+</html>
