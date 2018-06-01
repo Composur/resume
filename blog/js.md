@@ -374,6 +374,10 @@ var xiaoming=create(person)
 ### Promise（es6原生对象）
 + 简单来说Promise就是一个容器，里面保存着未来才会结束的事件（通常是一个异步操作）
 + Promise有三种状态padding（进行中）、fulfilled（成功）、rejected（fulfilled）promise对象的改变只有从pending变为fulfilled或rejected，改变后状态就凝固了，然后在.then(result)就会得到这个结果
++ Promise的构造函数接收一个执行函数，执行函数执行完同步或则异步操作后，调用它的两个参数resolve和rejected
+```
+    
+```
 
 
 #### JSON规范

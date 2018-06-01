@@ -18,3 +18,12 @@
 - merge 动作的来源则取决于你是否有 tracking
 
 
+
+### Git pull 强制覆盖本地文件
+
+```
+    git fetch --all  
+    git reset --hard origin/master 
+    git pull
+```
+
