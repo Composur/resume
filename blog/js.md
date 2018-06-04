@@ -491,4 +491,19 @@ function ajax(obj){
 }
 ```
 ### es6中的默认参数
+ + 扩展运算符...
+ + 例如下面a就是一个可变参数的列表
+ ```
+    
+{
+    function fn(...a){
+      let sum=0
+        a.forEach(item=>{
+          sum+=item*1
+        })
+      return sum
+  }
+  console.log(fn(1,2,3))   
+}
+ ```
 
