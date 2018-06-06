@@ -73,9 +73,10 @@ var app = new Vue({
                 alert(error)
             });
           },
-          login(){
+          login() {
             AV.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
-                console.log(loginedUser);
+                // console.log(loginedUser);
+                console.log(this.currentUser)
               }, function (error) {
                   alert(error)
               });
@@ -85,7 +86,7 @@ var app = new Vue({
                 this.currentUser = null
                 window.location.reload()
             },
-          getCurrentUser(){
+          getCurrentUser() {
             let current = AV.User.current()
                 if (current) {
                 let {id, createdAt, attributes: {username}} = current
