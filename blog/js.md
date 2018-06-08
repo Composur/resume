@@ -113,12 +113,7 @@ xhr.send(null)
         }
 
         ```
-
-### let和const
-+ let的作用域为{let xx=xx} 在作用域中不能够在 let xx 不能再let xx 前调用 xx 
-+ const和let一样除了cost是常量不能够重复赋值以外（只能够赋值一次且必须赋值）
-+ 能用const就不用let
-
+        
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
 + 复杂类型（引用类型）
@@ -490,20 +485,37 @@ function ajax(obj){
     }
 }
 ```
-### es6中的默认参数
- + 扩展运算符...
- + 例如下面a就是一个可变参数的列表
- ```
-    
-{
-    function fn(...a){
-      let sum=0
-        a.forEach(item=>{
-          sum+=item*1
-        })
-      return sum
-  }
-  console.log(fn(1,2,3))   
-}
- ```
+### es6相关+
 
+1. 默认参数
+    - 扩展运算符...
+    + 例如下面a就是一个可变参数的列表
+    ```
+        
+    {
+        function fn(...a){
+        let sum=0
+            a.forEach(item=>{
+            sum+=item*1
+            })
+        return sum
+    }
+    console.log(fn(1,2,3))   
+    }
+    ```
+2. let const
+    + let不可声明前置，不可声明重复
+    + const声明的常量不可改变
+    + const的功能包含let
+
+3. 解构赋值
+    + let[a,b,c]=[1,2,3]; 从数组中提取值按照对应的位置，对变量进行赋值，
+    + 等号的右边需要是数组
+    + 对象解构赋值时，赋值的是后者,x是匹配的模式，z才是变量
+    ```
+    let {x:z}={x:1,y:2}
+    log(x)//x is not defined
+    log(z)//1
+    ```
+    + 解构赋值中默认值生效条件是对象的属性值严格等于undefined
+    + 解构赋值的规则是，只要等号右边的值不是对象或者数组，就先将其转换为对象由于undefined和null无法转换为对象，所以对他们进行赋值，都会报错
