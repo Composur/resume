@@ -32,3 +32,4 @@ function obj(){
 let {a1,b1}=obj()
 
 log(a1,b1)
+
