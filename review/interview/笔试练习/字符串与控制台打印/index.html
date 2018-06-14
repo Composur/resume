@@ -5,7 +5,7 @@
     <title>字符串与控制台打印</title>
 </head>
 <body>
-    <!--讲一个字符串最为参数传入,然后返回一个字符串,相对原来每个字符串间多了一个空格-->
+    <!--讲一个字符作为参数传入,然后返回一个字符串,相对原来每个字符串间多了一个空格-->
     <script>
         function spacify(args){
             return args.split('').join(' ');
@@ -41,6 +41,36 @@
             console.log.apply(console,args);
         }
         log('hello world');
+
+
+// 关于字符串匹配
+        function isMatch(str1, str2) {
+            var mun1=0,mun2=0;
+            for(var i=0;i<str1.length;i++){
+                mun1+=(str1[i].charCodeAt()*1)
+            }
+            for(var i=0;i<str2.length;i++){
+                mun2+=(str2[i].charCodeAt()*1)
+            }
+           if(mun1==mun2){
+               return true
+           }else{
+               return false
+           }
+    }
+
+    function isMatch(str1, str2){
+    
+        return str1.split('').sort().join('') === str2.split('').sort().join('');
+}
+    
+    
+    
+
+    isMatch('something', 'ginhtemos')  // true
+    isMatch('aaa', 'aa')  //false
+    isMatch('abb', 'baa')  //false
+    isMatch('hello', 'olelh')  //true
     </script>
     <style>
         .overlay {  position: fixed;  left: 0;  right: 0;  bottom: 0;  top: 0;  background: rgba(0,0,0,.8);
