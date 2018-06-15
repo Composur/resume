@@ -1,4 +1,4 @@
-## [这里有一些链接](https://github.com/Composur/resume)
+## [记录遇到的，用到的知识点](https://github.com/Composur/resume)
 
 
 - #### __[Resume](https://github.com/Composur/resume/blob/master/blog/resume.md)__
