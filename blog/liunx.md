@@ -65,6 +65,19 @@
     + 以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:
 
     ```
-    $scp -r username@site:path localpath
+    $scp -r username@host:path localpath
     ```
+### 用户管理工具
+
++ 查看所有用户及权限
+    ```
+    more /etc/passwd
+    ```
++ 更改读写权限
+    ```
+    $chmod a+x main         对所有用户给文件main增加可执行权限
+    $chmod g+w blogs        对组用户给文件blogs增加可写权限
+    ```
+
+
 
