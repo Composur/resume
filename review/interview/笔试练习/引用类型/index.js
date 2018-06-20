@@ -15,3 +15,4 @@ function swap(x, y){
   swap(obj1, obj2)//js中所有的参数传递的都是值，不可能通过引用来传递
   console.log(obj1)  //输出什么
   console.log(obj2)  //输出什么
+
