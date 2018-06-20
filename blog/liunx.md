@@ -78,6 +78,33 @@
     $chmod a+x main         对所有用户给文件main增加可执行权限
     $chmod g+w blogs        对组用户给文件blogs增加可写权限
     ```
+### 系统管理
++ 查看liunx版本
+    ```
+    lsb_release -a
+    ```
++ 查看CPU的使用情况
 
++ 查看CPU的核的个数
+    ```
+    $cat /proc/cpuinfo | grep processor | wc -l
+    ```
++ 查看内存信息
 
+    ```
+    cat /proc/meminfo
+    ```
++ 设置系统时间
+
+    ```
+    $date -s 2018-05-05 00:00:00
+    ```
++ 设置时区
+    ```
+    tzselect
+    ```
++ 强制把系统时间写入CMOS
+    ```
+    $clock -w
+    ```
 
