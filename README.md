@@ -30,4 +30,4 @@
 
 
 
-- #### __[es6笔记](https://github.com/Composur/resume/blob/master/blog/js.md)__
+- #### __[es6笔记](https://github.com/Composur/resume/blob/master/blog/es6.md)__
