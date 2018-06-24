@@ -22,7 +22,7 @@
     let a=a //a is not defined
     ```
 + 不允许在同一个作用域内重复声明
-+ es5有var和function两种声明变量的方法，es6有let、const、import、class共六种
++ es5有var和function两种声明变量的方法，es6（包含上两种）有let、const、import、class共六种
 #### global对象
 + 浏览器中顶层对象就是window，node中是global
 + 全局环境中this会返回顶层对象，node模块和es6中this返回当前模块
