@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <p>
+        call和apply的区别: obj.call(thisObj, arg1, arg2, ...); obj.apply(thisObj, [arg1, arg2, ...]); 两者作用一致，都是把obj(即this)绑定到thisObj，这时候thisObj具备了obj的属性和方法。或者说thisObj『继承』了obj的属性和方法。
+        唯一区别是apply接受的是数组参数，call接受的是连续参数。 this 就是你 call 一个函数时，传入的 context。 如果你的函数调用形式不是 call 形式，请按照「转换代码」将其转换为 call 形式。 转换代码:
+        func(p1, p2) 等价于 func.call(undefined, p1, p2) obj.child.method(p1, p2) 等价于 obj.child.method.call(obj.child, p1, p2)//把obj绑定到obj.child使她具备obj的方法和属性
+    </p>
+    <script>
+        var obj = {
+            foo: function () {
+                console.log(this);
+            }
+        };
+        var bar = obj.foo;
+        obj.foo(); //obj
+        obj.foo.call(obj); //obj
+        bar(); //window
+        bar.call(undefined); //window
+
+        function fn() {
+            console.log(this); //window
+        }
+        fn();
+        fn.call(undefined); //window 等价于fn()
+
+
+        
+        /*在执行的过程中动态的改变this的指向*/
+        arr = [54, 36, 5, 6, 5];
+        console.log(Math.max.apply(Math, arr));
+        console.log(Math.max.call(Math, '54', '36', '6', '5'));
+        /**  另一个与apply()类似的方法是call()，唯一区别是：
+
+         apply()把参数打包成Array再传入；
+
+         call()把参数按顺序传入。
+         比如调用Math.max(3, 5, 4)，分别用apply()和call()实现如下：
+         对普通函数调用，我们通常把this绑定为null。
+         */
+
+        Math.max.apply(null, [3, 5, 4]); // 5
+        Math.max.call(null, 3, 5, 4); // 5
+
+        function add(j, k) {
+            return j + k;
+        }
+
+        function sub(j, k) {
+            return j - k;
+        }
+        //    首先二者的作用是相同的，都是调用一个对象的一个方法，以另一个对象替换当前对象
+        //    此时的sub具有了（继承了）add的属性和方法
+        //    二者的区别就是call接受的是连续的参数 apply接受的是数组参数
+        console.log(add(1, 2)); //3
+        console.log(add.call(sub, 1, 2)); //3
+        console.log(add.apply(sub, [1, 2])); //3
+        //    此时的sub具有了（继承了）add的属性和方法
+
+
+        console.log(sub(2, 1)); //1
+        console.log(sub.call(add, 2, 1)); //1  add.sub(2,1);
+        console.log(sub.apply(add, [2, 1])); //1
+    </script>
+</body>
+
+</html>
