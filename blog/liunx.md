@@ -107,4 +107,13 @@
     ```
     $clock -w
     ```
++ 查看当前时间状态
+    ```
+    timedatectl status
+    ```
++ 修改时区为上海
+
+    ```
+    timedatectl set-timezone "Asia/Shanghai"
+    ```
 ### 
