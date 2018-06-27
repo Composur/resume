@@ -2,7 +2,7 @@
 - 说明：试一下markdown
 - 手机：18682361855
 - Email：xutong1107@gmail.com/xutongxw@163.com
-- QQ/微信号：
+- QQ/微信号：791611538/18682361855
 
 ---
 
