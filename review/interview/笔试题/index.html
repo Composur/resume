@@ -381,12 +381,12 @@ class 可继承、(字体,颜色的属性)   font-size font-family color, 列表
 
 17.你如何去实现这个Tabview?(实现一个选项卡)
            for(var i=0;i<len;i++){
-           tab1[i].index=i;
-           tab1[i].onclick=function () {
+            tab1[i].index=i;
+            tab1[i].onclick=function () {
            for(var i=0;i<len;i++){
-           li[i].style.display='none';
+             li[i].style.display='none';
            }
-           li[this.index].style.display='block';
+              li[this.index].style.display='block';
            }
        }
 18.怎样使用事件以及IE和DOM事件模型之间存在的哪些主要区别?
@@ -407,7 +407,7 @@ class 可继承、(字体,颜色的属性)   font-size font-family color, 列表
 
         事件处理函数作用域的区别:
             IE中的事件处理程序属于全局作用域,其内部的this指向是window
-            DON级的事件处理程序的作用域是元素的作用域,其内部this的指向是所属的元素
+            DOM级的事件处理程序的作用域是元素的作用域,其内部this的指向是所属的元素
         事件对象event的差别:
             阻止冒泡:cancelBubble=true; stopPropagation();
             阻止元素默认事件:returnValue=false; preventDefault();
