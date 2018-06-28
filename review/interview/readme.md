@@ -25,4 +25,5 @@
     - 内联：父容器text-align:center 
     - 快级：margin-left:auto;margin-right:auto;
 - 垂直居中
-    -[七种写法](../垂直居中/)
+    -[七种写法](https://github.com/Composur/resume/tree/master/review/interview/%E7%AC%94%E8%AF%95%E7%BB%83%E4%B9%A0/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD)
+
