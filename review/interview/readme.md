@@ -22,7 +22,7 @@
 #### 如何居中？
 + 七种实现方式
  - 水平居中
-    - 内联：父容器text-align:center
+    - 内联：父容器text-align:center 
     - 快级：margin-left:auto;margin-right:auto;
 - 垂直居中
     -[七种写法](../垂直居中/)
