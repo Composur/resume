@@ -29,3 +29,18 @@
 
 ### 变量的结构赋值
 + 
+
+### class
++ es6中的class可以理解为构造函数的一种写法，必须使用new来调用，
+    ```
+        class Point{
+
+        }
+        typeof Point //function
+        Point===Point.prototype.constructor //true
+
+        使用的时候直接 new
+        let a=new Point()
+    ```
++ 一个类必须有constructor方法，constructor方法默认返回实例对象（即this），没有定义的话会被默认的添加
++ 

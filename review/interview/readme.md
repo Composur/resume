@@ -102,3 +102,114 @@ add()//2
 console.log(n)// n is not defined
 ```
 
+#### 这段代码中的this是什么？
+```
+    //看函数如何调用的
+    fn()//this 就是window
+    a.fn() //this就是a
+    a.b.c.fn() //this就是a.b.c
+    在严格模式下
+    this是undefined
+    new Object() this就是new的实例
+    ()=>console.log(this) es6中的this就是外面的this
+```
+#### 立即执行函数（用途）
++ ;(function(){})()
++ 造出一个函数作用域，防止污染全局变量
++ es6 
+    ```
+    {
+        let name
+    }
+    ```
+#### async/await语法
++ 把异步代码写成同步代码
+```
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  var result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+
+asyncCall();
+
+```
+#### 如何实现深拷贝
++ JSON来深拷贝
+    ```
+    var a={...}
+    var b=JSON.parse(JSON.stringify(a))//不支持函数
+    undefined、正则、Date...
+    ```
++ 递归的方式
+
+    ```
+        function clone(obj){
+            var newObj
+            if(!(obj instanceof Object)){
+                return obj
+            }else if(obj instanceof Array){
+                newObj=[]
+            }else if(obj instanceof Object){
+                newObj={}
+            }else if(obj instanceof Function){
+                newObj=eval(Object.toString)
+            }
+            for(var key in obj){
+                newObj[key]=clone(obj(key))
+            }
+            return newObj
+        }
+
+            
+    ```
+#### 数组去重
++ 技术排序
+
+```
+   var a=[1,2,3,45,45,3,2,1]
+    var hashTab={}
+    for(var i=0;i<a.length;i++){
+    if(a[i] in hashTab){
+        
+    }else{
+        hashTab[a[i]]=true
+    }
+    }
+    console.log(Object.keys(hashTab))
+
+```
++ Set去重
+    ``` var a=[1,2,3,45,45,3,2,1]
+         Array.from(new Set(a))
+    ```
++ 用正则实现string.trim()
+
+```
+    function strim(str){
+        str.replace(/^\s+|\s+$/,'')
+    }
+
+```
+#### 原型
++ 举例(类似一层一层查找属性的过程)
++ 查找属性过程中的__proto__就是原型链
+
+```
+var a=[1,2,3]
+a.push(4) //push就是沿着a.__proto__找的
+a=[1,2,3,4]
+a.__proto__.push===Array.prototype.push
+
+```
+#### class
++ 

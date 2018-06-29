@@ -28,3 +28,4 @@ function fn1(callback) {
 var test=new Promise((resolve,reject)=>{
     
 })
+
