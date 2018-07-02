@@ -5,6 +5,9 @@
     <title>事件模型-冒泡和捕获</title>
 </head>
 <body>
+<div id="s1">s1
+    <div id="s2">s2</div>
+</div>
 
 <script>
     const s1 = document.getElementById('s1')
@@ -13,16 +16,20 @@
     s1.addEventListener('click', function (event) {
         console.log('s1 冒泡')
     }, false)
+
+    s2.addEventListener('click', function (event) {
+        console.log('s2 冒泡')
+    }, false)
+
+
     s1.addEventListener('click', function (event) {
         console.log('s1 捕获')
     }, true)
 
     s2.addEventListener('click', function (event) {
-        console.log('s2 冒泡')
-    }, false)
-    s2.addEventListener('click', function (event) {
         console.log('s2 捕获')
     }, true)
+  
 </script>
 </body>
 </html>

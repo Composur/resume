@@ -209,7 +209,129 @@ var a=[1,2,3]
 a.push(4) //push就是沿着a.__proto__找的
 a=[1,2,3,4]
 a.__proto__.push===Array.prototype.push
-
+Array.prototype 就是a的原型(__proto__)
 ```
 #### class
-+ 
++ mdn
+
+#### JS如何实现继承
++ 原型链继承
+
+```
+function Animal(){
+    this.age=18
+}
+
+Animal.prototype.move=function(){
+
+}
+
+function  Person(){
+    Animal.apply(this,arguments)
+    this.name=name
+}
+
+
+var f=function(){}
+
+f.prototype=Animal.prototype
+
+Person.prototype=new f()
+Person.prototype.test=function(){}
+
+var tom=new Person()
+```
++ extends关键字
+
+```
+class Animal{
+  constructor(){
+    this.age=18
+  }
+  move(){}
+}
+class Person extends Animal{
+  constructor(name){
+    super()
+    this.name=name
+  }
+  tools(){}
+}
+```
+#### '=='的问题
++ (a==1 && a==2 && a==3)可能为true吗？//为true
+
+```
+    var a={
+        value:0,
+        toString(){
+            a.value+=1
+            return a.value
+        }
+    }
+```
+
+### DOM
+
+#### Dom事件模型
++ 捕获
++ 冒泡
++ 如果这个元素是被点击的元素，那么捕获不一定会在冒泡之前，就是他自身不存在冒泡
+#### 移动端的触摸事件
++ touchstart touchmove touchend touchcancel
++ 如何模拟swipe事件:记录两次touchmove的位置差，如果后一次在前一次的右面说明向右滑了
+#### 事件委托
++ 如果父元素有多个子元素，不监听子元素，而是监听父元素，看触发事件的元素是哪个子元素，这就是事件委托
++ 可以监听动态生成的子元素
++ 节省监听器
+```
+function listen(element,eventType,selector,fn){
+    element.addEventListener(eventType,e=>{
+        if(e.target.matches(selector)){
+            fn.call(el,e,el)
+        }
+    })
+}
+```
+
+### HTTP
+
++ [HTTP状态码]()
++ 200：服务器响应正常。表示请求成功,请继续发送请求。
++ 304：该资源在上次请求之后没有任何修改（这通常用于浏览器的缓存机制，使用GET请求时尤其需要注意）。
++ 400：无法找到请求的资源，请求有误，请求的内容无法被服务器执行。
++ 401：访问资源的权限不够，没有进行身份验证（或者无权访问）。
++ 403：没有权限访问资源。
++ 404：需要访问的资源不存在（没有找到）。
++ 405：需要访问的资源被禁止。
++ 407：访问的资源需要代理身份验证。
++ 414：请求的URL太长。
++ 500：服务器内部错误。
++ 502：网关错误。
++ 503：暂时不能处理请求，可以过些时候再试。
++ 505：HTTP版本不受支持,可以禁用此版本。
+##### 总体说：
++ 400-499：问题出在客户端。
++ 500-599：问题出在服务器端。
+
+#### 301和302的区别是什么?
++ 301永久重定向（浏览器会缓存，直接重定向回去）
++ 302临时重定向（浏览器不会记住，访问的时候特定的页面无法访问跳转到其它临时页面）
+#### HTTP缓存怎么做？
++ Cache-control:max-age=300
++ http://cdn.com/1.js?v=1 避开缓存
+#### Cache-Control和Etag的区别是什么？
+#### cookie session?
++ cookie 
+    + http相应通过Set-Cookie设置Cookie
+    + 浏览器访问指定的域名需要带上Cookie作为Request Header
+    + Cookie一般用来记录用户信息
++ session
+    + session是服务器端的内存
+    + session一般通过Cookie里记录sessionID实现
+    + session一般是随机数
+#### LocalStroge和Cookie的区别是什么？
++ cookie会随着请求发送到服务器端，而localstorage不会
++ cookie大小一般在4K，localstorage一般在5M
+#### GET和POST的区别？
++ GET
