@@ -334,4 +334,44 @@ function listen(element,eventType,selector,fn){
 + cookie会随着请求发送到服务器端，而localstorage不会
 + cookie大小一般在4K，localstorage一般在5M
 #### GET和POST的区别？
-+ GET
++ GET用来读数据,POST用来写数据，POST不幂等（幂等就是不管发多少次请求结果都一样）
++ 参数，GET的参数放到URl的查询参数里(有长度限制，一般是1024字节)，POST的参数（没有长度限制）放在请求体里
++ 安全，GET没有POST安全
++ 包，GET请求需要发一个包，POST需要发两个以上（POST有消息体）
+#### 跨域
++ JSONP
++ CROS
++ POSTMESSAGE
+
+### VUE
++ Vue有哪些生命周期钩子函数？
+    + beforeCreate
+    + create可以用来在一个实例被创建之后执行代码
+        ```
+            new Vue({
+                data: {
+                    a: 1
+                },
+                created: function () {
+                    // `this` 指向 vm 实例
+                    console.log('a is: ' + this.a)
+                }
+            })
+                // => "a is: 1"
+        ```
+    + mount
+    + beforeMount
+    + mounted
+    + beforeUpdate
+    + updated
+    + beforeDestory
+    + Destroyed
++ Vue组件间的通信？
+    + 爷孙（通过两对父子通信，爷->爸->儿）
+    + 父子（使用Props传递数据，试用v-on绑定自定义事件）
+    + 兄弟通信（new Vue() 作为eventBus）
++ Vuex的作用是什么?
++ VueRouter路由是什么？
++ Vue的双向绑定是如何实现的？有什么优缺点？
++ vue数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的
++ [深入响应原理](https://cn.vuejs.org/v2/guide/reactivity.html)
