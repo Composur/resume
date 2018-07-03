@@ -368,10 +368,11 @@ function listen(element,eventType,selector,fn){
     + Destroyed
 + Vue组件间的通信？
     + 爷孙（通过两对父子通信，爷->爸->儿）
-    + 父子（使用Props传递数据，试用v-on绑定自定义事件）
+    + 父子（使用Props传递数据，使用v-on绑定自定义事件）
     + 兄弟通信（new Vue() 作为eventBus）
 + Vuex的作用是什么?
 + VueRouter路由是什么？
 + Vue的双向绑定是如何实现的？有什么优缺点？
 + vue数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的
 + [深入响应原理](https://cn.vuejs.org/v2/guide/reactivity.html)
+

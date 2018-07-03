@@ -68,7 +68,10 @@
     $scp -r username@host:path localpath
     ```
 ### 用户管理工具
-
++ 查看所有用户
+    ```
+    cut -d: -f1 /etc/passwd
+    ```
 + 查看所有用户及权限
     ```
     more /etc/passwd
@@ -77,6 +80,10 @@
     ```
     $chmod a+x main         对所有用户给文件main增加可执行权限
     $chmod g+w blogs        对组用户给文件blogs增加可写权限
+    ```
++ 增加用户
+    ```
+    sudo adduser new_username
     ```
 ### 系统管理
 + 查看liunx版本
