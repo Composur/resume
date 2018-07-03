@@ -444,7 +444,7 @@ function listen(element,eventType,selector,fn){
         3、渲染HTML模板
         4、生成响应
     5、发送HTTP响应
-    6、关闭TCP连接（四次挥手）
+    6、关闭TCP连接（四次挥手） 
     7、解析HTML
     8、下载css
     9、解析css
