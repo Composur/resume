@@ -3,6 +3,8 @@
 
 - #### __[Resume](https://github.com/Composur/resume/blob/master/blog/resume.md)__
 
+- #### __[可编辑的resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)__
+
 - #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
 
 - #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
