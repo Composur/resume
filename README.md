@@ -7,6 +7,10 @@
 
 - #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
 
+
+- #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
+
+
 - #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
 
 - #### __[js-components](https://github.com/Composur/resume/tree/master/projects/js-component)__
