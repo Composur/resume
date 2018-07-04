@@ -8,7 +8,7 @@
 - #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
 
 
-- #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
+- #### __[实用代码片段](https://github.com/Composur/resume/blob/master/blog/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.md)__
 
 
 - #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
