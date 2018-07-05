@@ -43,4 +43,4 @@
         let a=new Point()
     ```
 + 一个类必须有constructor方法，constructor方法默认返回实例对象（即this），没有定义的话会被默认的添加
-+ 
++ test
