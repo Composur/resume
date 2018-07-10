@@ -157,3 +157,17 @@
     exit
 
     ```
+### 备份到FTP
+    ```
+    #!/bin/bash           
+    HOST=you-ftp-Address                   
+    USER=username                    
+    PASSWORD=pwd                    
+    ftp -inv $HOST <<EOF            
+    user $USER $PASSWORD
+    cd Ubuntu-mongoBackup/					
+    lcd /var/mongodb-data-backup/compress             
+    mput *.tar.gz                     
+    bye                     
+    EOF
+    ```
