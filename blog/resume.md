@@ -22,7 +22,7 @@
 ### 安石亚洲软件科技深圳有限公司-软件开发工程师 （2017/8-今）
 
 #### 投资回报测算系统
-负责前端页面的编写（主要使用了BootStrap），和dashboard模块后台（NodeJS+MongoDB)的编写，改进了连接MongoDB的链接方式。优化Schema结构，
+负责前端页面的编写（主要使用了BootStrap），和dashboard模块后台（NodeJS+MongoDB)的编写，改进了连接MongoDB的链接方式。优化Schema结构，系统内存占用率过高（7.G）
 
 ####  AMSS门户网站（React+Antd+NodeJS)
 负责[公司官网](http://www.amssasia.com.cn)新增页面的编写（react+antd),适应PC端、移动端。为网站表单数据的收集增加后端（NodeJS+MongoDB)，使每天定时发送用户提交的数据到指定的邮箱。Safari升级后点击弹窗无提示，后升级antd解决（解决后轮播图无法显示，修改源码解决）。
