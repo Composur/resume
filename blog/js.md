@@ -153,17 +153,22 @@ xhr.send(null)
 ### 面向对象
 + 工厂函数
     ```
-     function createBottle(name,price,isKeepWarm){
+    function createBottle(name,price,isKeepWarm){
         return {
             name:name,
             price:price,
-            isKeepWarm:isKeepWarm
+            isKeepWarm:isKeepWarm,
+            who:function(){
+                return console.log(name)
+            }
         }
     }
     var bottle1=new createBottle('保温杯1',100,true)
     var bottle2=new createBottle('保温杯2',100,true)
     var bottle3=new createBottle('保温杯3',100,true)
+    //如何证明这个杯子是杯子？question
     ```
++ 函数的arguments(类数组)，不要滥用，影响可读性。适合用于动态参数的场景
 ### 作用域
 
 + 在整个JavaScript中，全局变量的作用处处都存在。定义在script块中，在function函数外
@@ -211,8 +216,21 @@ var currentScope = 0;
 var newObj=JSON.parse(JSON.stringify(oldObject))
 ```
 
+#### 闭包
++ closure，是指有权访问其它函数作用域中变量的函数
+    ```
+    function clousure() {
+        var data = 123
+        function haha() {
+            return data
+        }
+        return haha
+    }
+    var test = clousure()
+    test()
 
-#### this
+    ```
+#### this（执行环境） 
 + 在全局执行上下文中（在任何函数体外部），this都指代全局对象（window,nodejs环境是global），上下文就是函数的执行环境
 + 在函数内部this的值取决于函数被调用的方式,看是谁去调用的（es6）
 + es6中this的指向是定义时this的指向

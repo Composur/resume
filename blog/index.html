@@ -16,14 +16,12 @@
         price:'100',
         isKeepWarm:true
     }
-    function createBottle(name,price,isKeepWarm){
-        return {
-            name:name,
-            price:price,
-            isKeepWarm:isKeepWarm
+    var clousure={
+        name:'tom',
+        data:function(){
+            console.log(this.name )
         }
     }
-    var bottle1=new createBottle('保温杯1',100,true)
-    var bottle2=new createBottle('保温杯2',100,true)
-    var bottle3=new createBottle('保温杯3',100,true)
+    var a=new clousure();
+    a.data()
 </script>
