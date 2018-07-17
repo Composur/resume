@@ -284,6 +284,7 @@ var app = {
 
 
 ### 原型和原型链
++ 原型是函数的一个属性，是一个对象
 ![原型图](./img/prototype.svg)
 ```
     var log=console.log.bind(console)
@@ -303,7 +304,17 @@ var app = {
     var p1=new Person('xiaoqi',18)
     log(p1.sayName())
 
+
+                    /*
+                        var obj = {}; //创建一个新的空对象this对象就指向了该变量
+                        obj.__proto__ = fn.prototype; //空对象的原型指向函数的原型
+                        console.log(obj.__proto__); //object{};
+                        fn.call(obj); //改变构造函数this的内部指向 obj继承了fn的属性和方法
+                    */
 ```
+
+
+
 + 变量是属性，函数是方法
 + 任何对象，都有创建者，这个创建者是个函数，普通的对象都是Object创建的
 + 创建这个对象的__proto__属性执行构造函数的prototype
