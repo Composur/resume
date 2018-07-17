@@ -171,3 +171,195 @@
     bye                     
     EOF
     ```
+### 其它
+##check version
+lsb_release -a
+#杀死进程
+sudo netstat -tulpn | grep :80
+
+sudo kill -9 1066
+$ pm2 delete 0           # 杀死指定的进程
+$ pm2 delete all         # 杀死全部进程
+pm2 monit               #监视每个 node 进程的 CPU 和内存的使用情况。
+#查看文件大小的命令：
+~$   ls  -l    filename
+
+#查看文件夹大小
+~$ cd  Foldename进到Foldename 目录
+~$  du    -sh
+#Linux命令行下修改文件或文件夹名
+$ mv file1 file2
+#查看磁盘的使用情况命令：
+
+~$  df    -h
+
+#压缩文件文件夹
+tar zcvf Retail.tar.gz Retail/
+#解压
+tar -xvf Retail.tar.gz
+#查看swap file
+~$ free -m 
+~$ top
+
+# 查看物理CPU个数
+  cat /proc/cpuinfo| grep "physical id" | sort| uniq | wc -l
+
+# 查看每个物理CPU中core的个数(即核数)
+  cat /proc/cpuinfo| grep "cpu cores"| uniq
+  
+# 查看逻辑CPU的个数
+  cat /proc/cpuinfo| grep "processor"| wc -l
+# 路由追踪
+	tracert ip
+#防火墙	
+sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口
+
+
+##查看已经连接的服务端口（ESTABLISHED）
+
+netstat -a
+
+##查看所有的服务端口（LISTEN，ESTABLISHED）
+
+netstat -ap
+
+##查看指定端口，可以结合grep命令：
+
+netstat -ap | grep 8080
+
+###也可以使用lsof命令：
+
+lsof -i:8888
+
+
+sudo lsof -i | grep ssh
+##若要关闭使用这个端口的程序，使用kill + 对应的pid
+
+kill -9 PID号
+
+##查看本机上所有cron服务
+ls -l /etc/init.d
+
+##备份mongo数据库
+mongodump --host=127.0.0.1 --db amss_backup --o /xt/amss_backup
+
+
+
+##
+ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs 
+
+
+1.安装phantomjs
+
+—-下载程序文件
+
+wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
+32位ubuntu下载链接是https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-i686.tar.bz2。
+
+—-解压文件
+
+tar -xvf phantomjs-1.9.7-linux-x86_64.tar.bz2
+–将程序移到一个合适的位置
+
+sudo mv phantomjs-1.9.7-linux-x86_64 /usr/local/src/phantomjs
+—-创建软链接到环境变量中。这样可以直接在shell中使用phantomjs命令
+
+sudo ln -sf /usr/local/src/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+—-检查是否正常工作
+2) Error: /node_modules/node-highcharts-exporting/node_modules/phantomjs/lib/phantom/bin/phantomjs: error while loading shared libraries: libfontconfig.so.1: cannot open shared object file: No such file or directory
+SOLUTION:
+TRY: 
+$ sudo apt-get install libfontconfig
+phantomjs
+
+##Windows远程桌面连接
+	mstsc
+	
+百度 ip119.75.217.109
+
+
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+
+
+2、启动pm2 start ./bin/www
+
+可以通过pm2 startup来实现开机自启动。细节可参考。大致流程如下
+
+通过pm2 save保存当前进程状态。
+通过 pm2 startup [ubuntu|centos|gentoo|systemd]生成开机自启动的命令。（记得查看控制台输出）
+将步骤2生成的命令，粘贴到控制台进行，搞定。
+
+
+# 删除软件及其配置文件
+apt-get --purge remove <package>
+# 删除没用的依赖包
+apt-get autoremove <package>
+# 此时dpkg的列表中有“rc”状态的软件包，可以执行如下命令做最后清理：
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
+关于部署;
+不要把代码发布在user home 如果删除user会删除application 要放到 var/www 目录下
+
+
+
+1、我们需要在虚拟机得Ubuntu系统安装ssh服务，其安装命令为：
+
+sudo apt-get install openssh-server
+
+查询其服务时候安装成功的命令：
+
+netstat -tlp 
+如显示如下结果，即表明服务启动成功：
+
+
+
+
+source /etc/network/interfaces.d
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto ens33
+iface ens33 inet static
+address 192.168.0.238
+netmask 255.255.255.0
+gateway 192.168.0.1
+
+dns-nameservers 8.8.8.8
+
+
+
+## ssh id_rsa
+ssh-keygen -t rsa
+# authorized_keys 不存在
+scp ~/.ssh/id_rsa.pub username@example.com:~/.ssh/authorized_keys
+# 无论存不存在
+ssh-copy-id username@example.com
+
+#提升用户权限，普通用户访问root文件夹
+chmod a+rx /root
+mkdir /root/a
+chmod 777 /root/a
+
+# 挂载硬盘 
+mount  /dev/sdb /root路径
+
+//开机自动挂载
+sudo vi /etc/fstab 
+add UUID=3736236a1d-11f4-4880-be50e-f3e3acd2a06634235 /root/mongo-data-newDisk exts4 defaults 0 0
+37366a1d-11f4-4880-be0e-f3e3acd2a0436624234234
+#find uuid 
+cd /dev/disk/by-uuid
+ll
+
+
+	
+//过滤cron日志
+grep CRON /var/log/syslog
+
+
+
+//To list all local users you can use:
+cut -d: -f1 /etc/passwd
