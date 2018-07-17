@@ -1,4 +1,4 @@
-### PM2 笔记
+### [PM2](https://wohugb.gitbooks.io/pm2/features/make_pm2_restart_on_server_reboot.html) 笔记
 可以通过pm2 startup来实现开机自启动。细节可参考。大致流程如下
 通过pm2 save保存当前进程状态。
 通过 pm2 startup [ubuntu|centos|gentoo|systemd]生成开机自启动的命令。（记得查看控制台输出）
