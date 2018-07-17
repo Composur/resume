@@ -149,6 +149,21 @@ xhr.send(null)
 + map让数组通过计算产生一个新数组
 + 
 
+
+### 面向对象
++ 工厂函数
+    ```
+     function createBottle(name,price,isKeepWarm){
+        return {
+            name:name,
+            price:price,
+            isKeepWarm:isKeepWarm
+        }
+    }
+    var bottle1=new createBottle('保温杯1',100,true)
+    var bottle2=new createBottle('保温杯2',100,true)
+    var bottle3=new createBottle('保温杯3',100,true)
+    ```
 ### 作用域
 
 + 在整个JavaScript中，全局变量的作用处处都存在。定义在script块中，在function函数外
