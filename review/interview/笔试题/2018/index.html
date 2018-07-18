@@ -119,6 +119,7 @@
     </ol>
 
     <script>
+        const log = console.log.bind(console)
         class unit {
             $(selector) {
                 return document.querySelector(selector)
@@ -128,8 +129,8 @@
             }
         }
 
-        let node=document.querySelector('.div')
-          
+        let node = document.querySelector('.div')
+
         function Tab(node) {
             //补全
             this.init(node)
@@ -146,18 +147,18 @@
             bind: function () {
                 var _this = this
                 this.tab.forEach((item, index) => {
-                    item.onclick = function () {                 
+                    item.onclick = function () {
                         node.classList.add(`div${index+1}`)
                         // node.classList.toggle(`div${index+1}`)
                         console.log(index)
-                       for(var i=0;i<node.classList.length;i++){
-                           if(index===0){
-                               index+=1
-                           }else if(index>node.classList.length){
-                            
-                           }
+                        for (var i = 0; i < node.classList.length; i++) {
+                            if (index === 0) {
+                                index += 1
+                            } else if (index > node.classList.length) {
+
+                            }
                             node.classList.remove(`div${index}`)
-                       }
+                        }
                         console.log(node.classList)
                         _this.tab.forEach((item) => {
                             item.classList.remove('spanActive')
@@ -188,6 +189,62 @@
                 xhr.send()
             }
         }
+
+        class unique {
+            index_Of(arr) {
+                if (Array.isArray(arr)) {
+                    let newArr = []
+                    for (var k in arr) {
+                        if (newArr.indexOf(arr[k]) === -1) {
+                            newArr.push(arr[k])
+                        }
+                    }
+                    return newArr
+                }
+            }
+            es6(arr) {
+                // return Array.from(new Set(arr))
+                return [...new Set(arr)]
+            }
+            obj(arr) {
+                let newObj = {}
+                for (let i = 0; i < arr.length; i++) {
+                    if (arr[i] in newObj) {
+
+                    } else {
+                        newObj[arr[i]] = true
+                    }
+                }
+                return Object.keys(newObj)
+
+            }
+        }
+        let arr = [34, 55, 4, 5, 463, 3, 5, 65, 7, 4, 56, 4532, 45, 3, 3, 3, 5455266, 5, 5]
+        let index_Of = new unique()
+        log(index_Of.index_Of(arr))
+        log(index_Of.es6(arr))
+        log(index_Of.obj(arr))
+
+
+        class testPrint {
+            sum(num) {
+                num += 10
+                return num
+            }
+            setName(obj) {
+                obj.name = 'ted'
+                obj = new Object()
+                obj.name = 'marry'
+            }
+        }
+        let test = new testPrint()
+        let num = 10
+        console.log(num)
+        console.log(test.sum(num))
+        let obj = new Object()
+        obj.name = 'haha'
+        test.setName(obj)
+        console.log(obj.name)//ted
     </script>
 </body>
 
