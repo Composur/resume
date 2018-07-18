@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            /* border: 2px solid black; */
+            display: flex;
+        }
+
+        .container {
+            width: 250px;
+            height: 250px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container>.div1 {
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .container>.div2 {
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container>.div3 {
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+
+        .container>.div4 {
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+        }
+
+        .container li {
+            display: none;
+        }
+
+        .container .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <ol>
+        <li>不考虑兼容性用javascript实现ajax
+            <br>
+            <pre>
+    function ajax(methods,url) {
+        var xhr = new XMLHttpRequest()
+        xhr.open(methods, url, true)
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                return xhr.responseText
+            }
+        }
+        xhr.send()
+    }
+    ajax('get','./data.json')
+</pre>
+        </li>
+        <li>宽高50div垂直水平居中</li>
+        <div class="wrap">
+            <div class="container">
+                <div class="div">
+                </div>
+            </div>
+
+            <div class="container">
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>6</li>
+                </ul>
+            </div>
+            <div>
+                <button class="toggle1">定位</button>
+                <button class="toggle2">切换</button>
+                <button class="toggle3">切换</button>
+                <button class="toggle4">切换</button>
+                <button class="toggle5">切换</button>
+            </div>
+        </div>
+
+    </ol>
+
+    <script>
+        class unit {
+            $(selector) {
+                return document.querySelector(selector)
+            }
+            $all(selector) {
+                return document.querySelectorAll(selector)
+            }
+        }
+
+        let node=document.querySelector('.div')
+          
+        function Tab(node) {
+            //补全
+            this.init(node)
+            this.bind()
+        }
+
+        Tab.prototype = {
+            constructor: Tab,
+            init: function (container) {
+                this.container = container
+                this.tab = this.container.querySelectorAll('button');
+                this.panel = this.container.querySelectorAll(' .container li')
+            },
+            bind: function () {
+                var _this = this
+                this.tab.forEach((item, index) => {
+                    item.onclick = function () {                 
+                        node.classList.add(`div${index+1}`)
+                        // node.classList.toggle(`div${index+1}`)
+                        console.log(index)
+                       for(var i=0;i<node.classList.length;i++){
+                           if(index===0){
+                               index+=1
+                           }else if(index>node.classList.length){
+                            
+                           }
+                            node.classList.remove(`div${index}`)
+                       }
+                        console.log(node.classList)
+                        _this.tab.forEach((item) => {
+                            item.classList.remove('spanActive')
+                            _this.panel.forEach((item) => {
+                                item.classList.remove('active')
+                            })
+                        })
+                        this.classList.add('spanActive')
+                        _this.panel[index].classList.add('active')
+                    }
+                });
+            },
+
+        }
+
+        const tab1 = new Tab(document.querySelectorAll('.wrap')[0])
+
+
+        class ajax {
+            ajax(methods, url) {
+                var xhr = new XMLHttpRequest()
+                xhr.open(methods, url, true)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        return xhr.responseText
+                    }
+                }
+                xhr.send()
+            }
+        }
+    </script>
+</body>
+
+</html>
