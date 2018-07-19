@@ -283,6 +283,12 @@ var app = {
 + 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
 
 
+### 继承（编程理念）
++ 继承可以子类具有父类的属性和方法，而不需要重复编写相同的代码
++ 继承就是一个对象直接使用另一个对象的属性和方法
++ Object.create()
+
+
 ### 原型和原型链
 + 原型是函数的一个属性，是一个对象
 ![原型图](./img/prototype.svg)
@@ -327,11 +333,6 @@ var app = {
     Array.prototype.__proto__===Object.prototype
     Object.prototype.__proto__===null
 ```
-
-### 继承
-+ 继承就是一个对象直接使用另一个对象的属性和方法
-+ Object.create()
-
 
 #### bind call apply
 + 函数的绑定，函数作用参数传递的同时，可以存储函数的作用域

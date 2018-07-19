@@ -44,3 +44,24 @@ class Person extends Animal{
 }
 
 var f= new Person()
+
+
+
+class getJson{
+  promise(){
+    return new Promise(function(resolve,reject){
+      
+    })
+  }
+  ajax(){
+    const xhr=new XMLHttpRequest()
+    xhr.open('GET','./package.json',true)
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4&&xhr.status===200){
+        
+      }
+    };
+    xhr.send()
+    }
+  }
+}

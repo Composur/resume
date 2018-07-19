@@ -244,7 +244,38 @@
         let obj = new Object()
         obj.name = 'haha'
         test.setName(obj)
-        console.log(obj.name)//ted
+        console.log(obj.name) //ted
+
+
+
+
+        var a = 1,
+            b = {
+                a: 2,
+                c: this.a + 10,
+                getA: function () {
+                    console.log(this.a)
+                }
+            }
+        setTimeout(() => {
+            b.getA() //2
+        }, 10);
+        console.log(window.b.c) // 11 ```````````````````````````````````````````````
+        b.getA() //2
+
+        setTimeout(function () {
+            console.log(1) 
+        }, 0)
+        new Promise(function (a, b) {
+            console.log(2) //2
+            for (var i = 0; i < 10; i++) {
+                i == 9 && a()
+            }
+            console.log(3)//3
+        }).then(function () { //这里是一个异步的将在所有同步脚本完成以后才会执行
+            console.log(4) 
+        })
+        console.log(5) //5
     </script>
 </body>
 
