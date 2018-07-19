@@ -9,7 +9,7 @@
 
  - Composure/男/1991 
  - 本科/河南理工大学/计算机科学与技术 
- - 工作年限：3年
+ - 工作年限：1年
  - 技术博客：https://blog.csdn.net/composurext
  - 技术博客：https://github.com/Composur/resume
  - Github：https://github.com/Composur 
