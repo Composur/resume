@@ -49,7 +49,7 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 首次接触前端，开发该项目所有HTML页面（HTML+CSS+JS+JQ），初步学习模块化，使用RequireJS来实现，后对首页进行过一次较大的改变,首次使用css3的动画，首次使用Addy Osmani的一行代码调试CSS.后半年负责常见JS特效的编写,以及活动营销页面的编写及校园超市项目的前端修改调试和开发工作。
 
 ## 开源项目和作品
-+ [北美电影top250] (https://composur.github.io/resume/projects/douban-movie/index.html)
++ [北美电影top250](https://composur.github.io/resume/projects/douban-movie/index.html) 
     + 使用豆瓣的个人版接口进行构建。
 + [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
     + 学习vue
