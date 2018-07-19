@@ -39,8 +39,6 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 + HTML/CSS/jQuery
 
 ### 2、富士康科技集团-运维工程师（2016/8-217/5)
-+ 保障所负责厂区办公网和产线网畅通、处理车间网络故障
-+ 负责与运营商（联通、移动）对接、机房搭建
 + liunx服务器运维，shell脚本编写、VLAN划分、无线网覆盖等、设备为Cisco
 ### 3、上海后钊科技有限公司（闪分期)-软件开发工程师（2015/9-2016/7)
 ####  网上商城
@@ -48,16 +46,23 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 
 首次接触前端，开发该项目所有HTML页面（HTML+CSS+JS+JQ），初步学习模块化，使用RequireJS来实现，后对首页进行过一次较大的改变,首次使用css3的动画，首次使用Addy Osmani的一行代码调试CSS.后半年负责常见JS特效的编写,以及活动营销页面的编写及校园超市项目的前端修改调试和开发工作。
 
-## 开源项目和作品
-+ [北美电影top250](https://composur.github.io/resume/projects/douban-movie/index.html) 
-    + 使用豆瓣的个人版接口进行构建。
-+ [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
-    + 学习vue
+## 开源项目和作品（更新中，个别未完善）
+
 + [vue-blog](https://github.com/Composur/vue-project)
-    + 学习vuex
-+ [canvas画版]()
-    + 学习canvas
-+ [网易云音乐移动端](https://composur.github.io/resume/projects/music_163/index.html)
-    + 复习jQuery css动画
+    + [预览]()， [源码](https://github.com/Composur/vue-project)
+    +
 + [node备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
-    + 为了熟悉express4
+    + [预览]()， [源码](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
+    + 
++ [北美电影top250](https://composur.github.io/resume/projects/douban-movie/index.html) 
+    + [预览](https://composur.github.io/resume/projects/douban-movie/index.html)， [源码]()
+    + 
++ [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
+    + [预览]()， [源码](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
+    +
++ [网易云音乐移动端](https://composur.github.io/resume/projects/music_163/index.html)
+   + [预览]()， [源码](https://composur.github.io/resume/projects/music_163/index.html)
+    +
++ [canvas画版]()
+    + [预览]()， [源码]()
+    +
