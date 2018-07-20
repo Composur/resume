@@ -44,6 +44,7 @@ function songsPlay(dataObj) {
 
     // 播放
     audio.src = `${dataObj.url}`
+    console.log(audio.src)
     audio.play()
 
     // 点击整个背景播放/暂停,同时play图标消失
