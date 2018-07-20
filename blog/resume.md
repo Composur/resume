@@ -9,7 +9,7 @@
 
  - Composure/男/1991 
  - 本科/河南理工大学/计算机科学与技术 
- - 工作年限：3年(前端1.5年)
+ - 工作年限：3年
  - 技术博客：https://blog.csdn.net/composurext
  - 技术博客：https://github.com/Composur/resume
  - Github：https://github.com/Composur 
@@ -65,17 +65,22 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
         3. cookies cookie处理模块
         4. mongoose 数据库操作模块
 + [node备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
-    + [预览]()， [源码](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
-    + 
+    + [预览](http://52.xiaoqi.info/)， [源码](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
+    + 完善中
 + [北美电影top250-移动端](https://composur.github.io/resume/projects/douban-movie/index.html) 
     + [预览](https://composur.github.io/resume/projects/douban-movie/index.html)， [源码]()
-    + 
+    + 数据获取使用豆瓣top250接口
+    + 采用webpack构建 
 + [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
-    + [预览]()， [源码](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
-    +
+    + [预览](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)， [源码](https://github.com/Composur/vue-project/tree/master/vue-resume)
+    + 数据双向绑定
+    + 另存为image
 + [网易云音乐-移动端](https://composur.github.io/resume/projects/music_163/index.html)
-   + [预览]()， [源码](https://composur.github.io/resume/projects/music_163/index.html)
-    +
-+ [canvas画版]()
-    + [预览]()， [源码]()
-    +
+   + [预览](https://composur.github.io/resume/projects/music_163/index.html)， [源码](https://github.com/Composur/resume/tree/master/projects/music_163)
+    + 推荐音乐
+    + 热歌榜
+    + 歌曲搜索
+    + 后端leancloud
++ ~~[canvas画版](http://xutong.top/)~~
+    + ~~[预览](http://xutong.top/)， [源码]()~~
+    + 还没写好
