@@ -42,25 +42,38 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 + liunx服务器运维，shell脚本编写、VLAN划分、无线网覆盖等、设备为Cisco
 ### 3、上海后钊科技有限公司（闪分期)-软件开发工程师（2015/9-2016/7)
 ####  网上商城
-该项目是一个面向在校大学生的购物分期付款网站,前期分为注册、登陆、首页、详情、热卖、分期、兼职等几个界面（全部有我编写）。开始有了前端意识以及有了代码复用的概念。
+该项目是一个面向在校大学生的购物分期付款网站,前期分为注册、登陆、首页、详情、热卖、分期、兼职等几个界面。开始有了前端意识以及有了代码复用的概念。
 
 首次接触前端，开发该项目所有HTML页面（HTML+CSS+JS+JQ），初步学习模块化，使用RequireJS来实现，后对首页进行过一次较大的改变,首次使用css3的动画，首次使用Addy Osmani的一行代码调试CSS.后半年负责常见JS特效的编写,以及活动营销页面的编写及校园超市项目的前端修改调试和开发工作。
 
 ## 开源项目和作品（更新中，个别未完善）
 
 + [vue-blog](https://github.com/Composur/vue-project)
-    + [预览]()， [源码](https://github.com/Composur/vue-project)
-    +
+    + [预览]()， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
+    * 前端
+        1. vue
+        2. vue-router 前端路由管理
+        3. axios 发送ajax请求
+        4. stylus css 预处理
+        5. element-ui 后台管理ui
+        6. marked.js 新建文章支持markdown语法
+        7. highlight.js 新建文章支持代码高亮
+
+    * 后端
+        1. express
+        2. body-parser 获取post请求内容
+        3. cookies cookie处理模块
+        4. mongoose 数据库操作模块
 + [node备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
     + [预览]()， [源码](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
     + 
-+ [北美电影top250](https://composur.github.io/resume/projects/douban-movie/index.html) 
++ [北美电影top250-移动端](https://composur.github.io/resume/projects/douban-movie/index.html) 
     + [预览](https://composur.github.io/resume/projects/douban-movie/index.html)， [源码]()
     + 
 + [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
     + [预览]()， [源码](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
     +
-+ [网易云音乐移动端](https://composur.github.io/resume/projects/music_163/index.html)
++ [网易云音乐-移动端](https://composur.github.io/resume/projects/music_163/index.html)
    + [预览]()， [源码](https://composur.github.io/resume/projects/music_163/index.html)
     +
 + [canvas画版]()
