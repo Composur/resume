@@ -49,7 +49,7 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 ## 开源项目和作品（更新中，个别未完善）
 
 + [vue-blog](https://github.com/Composur/vue-project)
-    + [预览]()， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
+    + [预览](http://47.94.237.28:8124)， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
     * 前端
         1. vue
         2. vue-router 前端路由管理
