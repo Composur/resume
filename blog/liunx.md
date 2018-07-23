@@ -67,6 +67,19 @@
     ```
     $scp -r username@host:path localpath
     ```
+
+    + 当scp定时脚本的时候要输入密码的时候我们可以这样免密码操作
+        
+        + 在脚本所在服务器上操作
+        ```
+            ssh-keygen -t rsa
+
+        ```
+        + 出来的提示可以用默认值,然后将产生的公共密钥传到目标机器
+
+       ```
+        scp ~/.ssh/id_rsa.pub username@IP:/home、username/.ssh/authorized_keys
+       ```
 ### 用户管理工具
 + 查看所有用户
     ```
