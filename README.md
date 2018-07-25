@@ -37,3 +37,6 @@
 - #### __[js笔记](https://github.com/Composur/resume/blob/master/blog/js.md)__
 
 - #### __[es6笔记](https://github.com/Composur/resume/blob/master/blog/es6.md)__
+- #### __[docker](https://github.com/Composur/resume/blob/master/blog/docker.md)__
+- #### __[log4js](https://github.com/Composur/resume/blob/master/blog/log4js.md)__
+- #### __[常用的NodeJS模块用法介绍](https://github.com/Composur/resume/blob/master/blog/%E5%B8%B8%E7%94%A8%E7%9A%84NodeJS%E6%A8%A1%E5%9D%97%E7%94%A8%E6%B3%95%E4%BB%8B%E7%BB%8D.md)__
