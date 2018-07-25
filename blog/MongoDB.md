@@ -68,3 +68,39 @@ db.getCollection('projects').find({ "createdAt" : { "$gte" : ISODate("2018-01-00
 ##ID
 db.getCollection('userdashboards').find({'_id':ObjectId("59fa7515b7cc5588cadffad9")})
 
+## MongoDB使用过程笔记
++ index（索引）
+	建索引是为了提高查询速度，要根据实际业务建立索引
+	```
+	const BaseModel=require('../models/base')
+	const mongoose=require('mongoose')
+	const {Schema}=mongoose
+	const {ObjectId}=Schema
+
+	const ReplySchema=new Schema({
+		content:{type:String,required:true},
+		topic_id:{type:ObjectId,required:true},
+		author_id:{type:ObjectId,required:true},
+		reply_id:{type:ObjectId},
+
+		create_at:{type:Date,default:Date.now},
+		update_at:{type:Date,default:Date.now},
+
+		ups:{type:Array,default:[]}
+	})
+
+	ReplySchema.plugin(BaseModel)
+
+	//建立查询索引
+	ReplySchema.index({topic_id:1,author_id:1});// schema level, 1是正序，-1是倒序
+	ReplySchema.index({topic_id:1,create_at:1})
+	```
++ 查询用时
+> executionStats：MongoDB运行查询优化器选择获胜的计划，执行计划，完成并返回成功，统计描述的胜利计划的执行
+	```
+	db.person.find({name:'xutong'+1000}).explain('executionStats')
+
+	```
+
+
+
