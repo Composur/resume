@@ -97,10 +97,13 @@ db.getCollection('userdashboards').find({'_id':ObjectId("59fa7515b7cc5588cadffad
 	```
 + 查询用时
 > executionStats：MongoDB运行查询优化器选择获胜的计划，执行计划，完成并返回成功，统计描述的胜利计划的执行
-	```
-	db.person.find({name:'xutong'+1000}).explain('executionStats')
 
-	```
+```
+db.person.find({name:'xutong'+1000}).explain('executionStats')
 
+```
 
+![建立索引前](./img/MongoDB_indexBeFore.jpg)
+![建立索引后](./img/MongoDB_indexAfter.jpg)
 
+> 二者相差462毫秒（我服务器太差劲！哈哈哈）
