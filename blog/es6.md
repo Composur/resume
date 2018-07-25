@@ -28,7 +28,14 @@
 + 全局环境中this会返回顶层对象，node模块和es6中this返回当前模块
 
 ### 变量的结构赋值
-+ 
++ 解构对象
+    ```
+    var o = {p: 42, q: true};
+    var {p, q} = o;
+
+    console.log(p); // 42
+    console.log(q); // true
+    ```
 
 ### class
 + es6中的class可以理解为构造函数的一种写法，必须使用new来调用，
