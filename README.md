@@ -4,7 +4,7 @@
 - #### __[Resume](https://github.com/Composur/resume/blob/master/blog/resume.md)__
 
 - #### __[可编辑的resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)__
-- #### __[node.js模块之xxx的用法总结](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)__
+- #### __[node.js模块之xxx的用法总结](https://github.com/Composur/resume/tree/master/blog/nodejs)__
 
 - #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
 
