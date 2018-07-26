@@ -47,7 +47,13 @@ Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决�
 首次接触前端，开发该项目所有HTML页面（HTML+CSS+JS+JQ），初步学习模块化，使用RequireJS来实现，后对首页进行过一次较大的改变,首次使用css3的动画，首次使用Addy Osmani的一行代码调试CSS.后半年负责常见JS特效的编写,以及活动营销页面的编写及校园超市项目的前端修改调试和开发工作。
 
 ## 开源项目和作品（更新中，个别未完善）
-
++ [node-server](https://github.com/Composur/react-practice)
+    0. 基于nodejs的数据服务为，客户端提供数据服务
+    1. 注册，登录，忘记密码，修改密码。
+    2. 获取用户信息，修改信息
+    3. 创建，修改，发布，回复话题等。
+    4. 图片上传依托七牛云
+    5. 设置跨域，设置域名拦截
 + [vue-blog](https://github.com/Composur/vue-project)
     + [预览](http://47.94.237.28:8124)， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
     * 前端
