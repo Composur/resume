@@ -4,12 +4,14 @@
 - #### __[Resume](https://github.com/Composur/resume/blob/master/blog/resume.md)__
 
 - #### __[可编辑的resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)__
+
 - #### __[node.js模块之xxx的用法总结](https://github.com/Composur/resume/tree/master/blog/nodejs)__
 
 - #### __[liunx笔记](https://github.com/Composur/resume/blob/master/blog/liunx.md)__
 
 - #### __[win笔记](https://github.com/Composur/resume/blob/master/blog/win.md)__
 
+- #### __[promise和async-await](https://github.com/Composur/resume/blob/master/blog/promise%E5%92%8Casync-await.md)__
 
 - #### __[实用代码片段](https://github.com/Composur/resume/blob/master/blog/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.md)__
 
