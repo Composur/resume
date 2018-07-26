@@ -27,3 +27,11 @@
     git pull
 ```
 
+### git branch HEAD detached at c49fac8
+
+```
+git symbolic-ref HEAD yields refs/heads/master
+The branch named “master” is checked out.
+git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
+
+```
