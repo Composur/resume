@@ -50,4 +50,16 @@
         let a=new Point()
     ```
 + 一个类必须有constructor方法，constructor方法默认返回实例对象（即this），没有定义的话会被默认的添加
-+ 
+
+#### super
+
+```
+class A {}
+class B extends A {
+  constructor() {
+    super();  // ES6 要求，子类的构造函数必须执行一次 super 函数，否则会报错。
+  }
+}
+```
+> 在 constructor 中必须调用 super 方法，因为子类没有自己的 this 对象，而是继承父类的 this 对象，然后对其进行加工,而 super 就代表了父类的构造函数。super 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 super 内部的 this 指的是 B，因此 super() 在这里相当于 ```A.prototype.constructor.call(this, props)``。
+处。
