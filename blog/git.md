@@ -35,3 +35,14 @@ The branch named “master” is checked out.
 git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
 
 ```
+
+### git clone branch
+
+```
+git branch -r/-a 查看远程/所有分支
+```
+然后
+```
+git checkout -b 本地分支名x origin/远程分支名x
+```
+会在本地新建分支x，并自动切换到该本地分支x
