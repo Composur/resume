@@ -28,3 +28,5 @@ class Child extends Component{
     }
 }
 ```
+### reducer
++ reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state。
