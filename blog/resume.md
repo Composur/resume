@@ -29,7 +29,7 @@
 ####  AMSS门户网站（React+Antd+NodeJS)项目
 公司门户网站用React编写主要用于公司的对特定客户的宣传及AMSS系统1-6个模块的的展示，为客户提供系统的试用版本，以及收集用户反馈的数据。
 
-
+### AMSS后台管理系统（React+Antd+NodeJS）
 负责[公司官网](http://www.amssasia.com.cn)新增页面的编写（react+antd),适应PC端、移动端。为网站表单数据的收集增加后端（NodeJS+MongoDB)。因MongoDB没有触发器，遂采用cron的方式进行轮询数据表，定时发送收集的客户反馈表到负责人邮箱。首屏的6个模块需要根据页面的大小进行适配，使用Measure标签, 计算响应组件的度量值
 Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决（解决后轮播图无法显示，修改源码解决）。
 
