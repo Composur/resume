@@ -3,7 +3,7 @@
 WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'
 WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
 ```
-#### 系统信息
+##### 系统信息
 
 ```
 LSB Version:	core-9.20160110ubuntu0.2-amd64:core-9.20160110ubuntu0.2-noarch:security-9.20160110ubuntu0.2-amd64:security-9.20160110ubuntu0.2-noarch
@@ -13,7 +13,7 @@ Release:	16.04
 Codename:	xenial
 ```
 
-#### 解决办法
+##### 解决办法
 
 ```
 sudo echo "never" > /sys/kernel/mm/transparent_hugepage/enabled
