@@ -48,3 +48,4 @@ systemctl enable mongod
 ```
 service mongod restart
 ```
++ [参考](https://askubuntu.com/questions/921753/failed-to-start-mongod-service-unit-mongod-service-not-found)
