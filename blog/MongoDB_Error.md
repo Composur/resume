@@ -26,3 +26,25 @@ sudo echo "never" >  /sys/kernel/mm/transparent_hugepage/defrag
 mongod –f /etc/mongod.conf
 
 ```
+#### Failed to start mongod.service: Unit mongod.service not found.
+> 错误环境
+```
+Distributor ID:	Ubuntu
+Description:	Ubuntu 16.04.5 LTS
+Release:	16.04
+Codename:	xenial
+```
+> root用户下安装MongoDB，启动的时候报错
+```
+Failed to start mongod.service: Unit mongod.service not found.
+```
+> 解决方法
++ step1
+```
+systemctl enable mongod
+
+```
++ step2
+```
+service mongod restart
+```
