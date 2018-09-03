@@ -46,6 +46,11 @@
     ```
     ps -fe | grep 19034
     ```
+    + 下载网页
+
+    ```
+    wget -p -H -e robots=off https://www.baidu.com ./
+    ```
 + ftp/sftp文件传输
     ```
     $sftp ID@host
