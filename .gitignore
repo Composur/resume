@@ -2,7 +2,7 @@
 /node_modules
 /migrations/.migrate
 /.vscode
-./blog/resume.md
+/blog/resume.md
 #VC files
 binding.sln
 *c_cpp_properties.json
