@@ -8,3 +8,13 @@ var fn={
      }
 }
 fn.fn1()
+
+var fn=function(){
+    var _this=this
+    var init=function(){
+        
+    }
+    var fn=function () { 
+
+     }
+}
