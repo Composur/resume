@@ -38,7 +38,7 @@
 - #### __[css基础](https://github.com/Composur/resume/blob/master/blog/css.md)__
 
 - #### __[js笔记](https://github.com/Composur/resume/blob/master/blog/js.md)__
-- #### __[http]https://github.com/Composur/resume/blob/master/blog/http.md)__
+- #### __[http](https://github.com/Composur/resume/blob/master/blog/http.md)__
 
 - #### __[es6笔记](https://github.com/Composur/resume/blob/master/blog/es6.md)__
 - #### __[docker](https://github.com/Composur/resume/blob/master/blog/docker.md)__
