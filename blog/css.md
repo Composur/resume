@@ -71,6 +71,19 @@
 div{border:1px solid red;padding-top:100%;}
 ```
 
- 
+### 文字超过div（或者input框等）宽度用省略号显示css
+```
+input{
+
+    width: 50px;  /*必须设置宽度*/
+
+    overflow: hidden;  /*溢出隐藏*/
+
+    text-overflow: ellipsis; /*以省略号...显示*/
+
+    white-space: nowrap;  /*强制不换行*/
+
+}
+```
 
 

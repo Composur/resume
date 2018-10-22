@@ -22,7 +22,7 @@ meta 有哪些常见的值？
 ### HTML常用的标签
 - div布局标签
 - header头部标签
-- input元素基于web表单创建交互式控件，常用来接受用户的输入
+-  元素基于web表单创建交互式控件，常用来接受用户的输入
 - button元素表示一个按钮
 - nav元素定义导航链接
 - main元素表示文档body或应用的主体部分
@@ -62,3 +62,13 @@ lt
 + doctype不是HTML标签是一个用于告诉浏览器当前HTML版本的指令
 + doctype必须在HTML文档的头部，HTML5中不区分大小写
 + [空标签 img button col br hr等](https://developer.mozilla.org/zh-CN/docs/Glossary/%E7%A9%BA%E5%85%83%E7%B4%A0)
+### 重要的标签
++ a标签和form标签一样都是用来发请求的，a标签是get一个页面，form是post一个页面
++ input标签，如果一个form标签总中只有一个input type=button；提交的过程中button会转化为submit只有一个button按钮也一样
+    + type=submit的时候回车可以自动提交
+    + label可以包含input，这样写可以不用写label的for属性，制自动光标聚焦
++ table中只能有
+    + colgroup是设置列的属性的例如每一列的宽度
+    + thead
+    + tboady
+    + tfoot
