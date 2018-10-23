@@ -92,5 +92,13 @@ input{
 
 }
 ```
+### 一般hover状态下，页面抖动可能是有border的边框的缘故
++ 让边框占位，设置边框为透明，hover的时候再显示
+### a标签与li
++ a设置padding等样式后的高度和li的高度不一致
++ 设置a的display:block;
+```
+<li><a></a></li>
+```
 
 
