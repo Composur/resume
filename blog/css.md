@@ -16,6 +16,13 @@
 - vertical-align实现居中（div中的img）
   ![](./img/vertical-align.jpg)
 - 设置父容器display:table-cell；vertical-align:middle(只对两种格式生效一种是行内元素另一种是表格元素)
+- 文字的垂直居中,如果有n行文字，行高设置为容器高度的n分之一
+  ```
+    .selector{
+      height:20px;
+      line-height:20px;
+    }
+  ```
 
 #### BFC是什么
 + 块级格式化上下文(block formatting context)是盒模型的渲染区域，并且有自己的一套渲染规则，它定义了容器中的元素如何的定位以及和其它元素的相互作用关系；且与不影响容器外部的布局
