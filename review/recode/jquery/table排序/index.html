@@ -10,7 +10,6 @@
     <style>
         table{
             border: 1px solid black;
-            cellspacing:0;
         }
     </style>
 </head>
@@ -42,6 +41,7 @@
     </table>
     <script>
         $(document).on('click', 'th', function () {
+            console.log('click')
             var table = $(this).parents('table').eq(0);
             var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
             this.asc = !this.asc;
