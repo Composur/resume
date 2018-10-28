@@ -22,6 +22,8 @@
 
 - #### __[网易云音乐移动端查看](https://composur.github.io/resume/projects/music_163/index.html)__
 
+- #### __[太极](https://composur.github.io/resume/projects/cssShapes/taichi.html)__
+
 
 - #### __[备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)__
 
