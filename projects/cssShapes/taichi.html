@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>太极</title>
+    <style>
+        .wrap {
+            margin-top: 15%;
+            margin-left: calc(50% - 80px);
+        }
+
+        .taiChi {
+            width: 96px;
+            box-sizing: content-box;
+            height: 48px;
+            border-style: solid;
+            border-width: 2px 2px 50px 2px;
+            border-radius: 100%;
+            position: relative;
+            -webkit-transform: rotate(360deg);
+            animation: rotation 8s linear infinite;
+            -moz-animation: rotation 8s linear infinite;
+            -webkit-animation: rotation 8s linear infinite;
+            -o-animation: rotation 8s linear infinite;
+        }
+
+        .taiChi:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            background: #eee;
+            border: 18px solid #000;
+            border-radius: 100%;
+            width: 12px;
+            height: 12px;
+            box-sizing: content-box;
+        }
+
+        .taiChi:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: #000;
+            border: 18px solid #fff;
+            border-radius: 100%;
+            width: 12px;
+            height: 12px;
+            box-sizing: content-box;
+        }
+
+        @-webkit-keyframes rotation {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .Rotation {
+           
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="taiChi"></div>
+    </div>
+</body>
+
+</html>
