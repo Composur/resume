@@ -1,0 +1,14 @@
+.header{
+    border: 1px solid black;
+}
+.header .logo{
+    border: 1px solid hotpink;
+    float: left;
+}
+.header nav ul{
+    float: right;
+    border: 1px solid red;
+}
+.header nav ul li{
+    float: left;
+}
