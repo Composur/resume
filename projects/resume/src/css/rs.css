@@ -12,3 +12,6 @@
 .header nav ul li{
     float: left;
 }
+.header nav ul li a{
+    font-size: 13px;
+}
