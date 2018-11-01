@@ -2,6 +2,7 @@
 /node_modules
 /migrations/.migrate
 /.vscode
+.DS_Store
 /blog/resume.md
 #VC files
 binding.sln
