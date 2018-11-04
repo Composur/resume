@@ -25,3 +25,9 @@ function isEmptyObjectES5(obj){
 
 console.log(isEmptyObjectES5( {} )); //true
 console.log(isEmptyObjectES5( {a:1} )); //false
+
+function isOorNotEmpty(obj){
+    return JSON.stringify(obj)==="{}"
+}
+console.log(isOorNotEmpty( {} )); //true
+console.log(isOorNotEmpty( {a:1} )); //false
