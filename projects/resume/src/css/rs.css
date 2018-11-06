@@ -1,9 +1,8 @@
 .header{
-    border: 1px solid red;
     position: relative;
 }
 .header .topNavBar .logo{
-    border: 1px solid black;
+    font-family: "Arial Black";
     float: left;
     margin: 10px 20px;
 }
@@ -19,19 +18,20 @@
     font-weight: bold;
 }
 .header .topNavBar>nav{
-    border: 1px solid gold;
     float: right;
-    margin:0 20px;
+    margin:4px 20px 0  20px;
 }
 .header .topNavBar>nav>ul li{
     float: left;
     margin: 20px 10px;
 }
 .header .topNavBar>nav>ul li a{
+    display: block;
     color: #B1B4B7;
     font-size: 13px;
     font-weight: bold;
     padding: 2px 0;
+    border-bottom: 3px solid transparent;
 }
 .header .topNavBar>nav>ul li a:hover{
     border-bottom: 3px solid #E6686E;
@@ -70,7 +70,6 @@
 }
 .main .basic-info .top {
     position: relative;
-    border: 1px solid red;
 }
 .main .basic-info .top .pic{
     position: absolute;
