@@ -36,3 +36,5 @@ const xhr =new XMLHttpRequest()
 xhr.open('get', 'http://www.baidu.com', true)
 xhr.send(null)
 ```
+#### 注意
++ ajax只能像同源网址（协议、域名、端口号都相同）
