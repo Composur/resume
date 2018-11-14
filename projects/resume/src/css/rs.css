@@ -1,37 +1,44 @@
-.header{
+.header {
     position: relative;
 }
-.header .topNavBar{
+
+.header .topNavBar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
-.header .topNavBar .logo{
+
+.header .topNavBar .logo {
     font-family: "Arial Black";
     float: left;
     margin: 10px 20px;
 }
-.header .topNavBar .logo .rs{
+
+.header .topNavBar .logo .rs {
     color: #E6686E;
     font-size: 30px;
     font-weight: bold;
     margin: 0 2px;
 }
-.header .topNavBar .logo .card{
-    color:#B1B4B7;
+
+.header .topNavBar .logo .card {
+    color: #B1B4B7;
     font-size: 25px;
     font-weight: bold;
 }
-.header .topNavBar>nav{
+
+.header .topNavBar>nav {
     float: right;
-    margin:4px 20px 0  20px;
+    margin: 4px 20px 0 20px;
 }
-.header .topNavBar>nav>ul li{
+
+.header .topNavBar>nav>ul li {
     float: left;
     margin: 20px 10px;
 }
-.header .topNavBar>nav>ul li a{
+
+.header .topNavBar>nav>ul li a {
     display: block;
     color: #B1B4B7;
     font-size: 13px;
@@ -39,10 +46,12 @@
     padding: 2px 0;
     border-bottom: 3px solid transparent;
 }
-.header .topNavBar>nav>ul li a:hover{
+
+.header .topNavBar>nav>ul li a:hover {
     border-bottom: 3px solid #E6686E;
 }
-.banner::before{
+
+.banner::before {
     content: '';
     display: block;
     position: absolute;
@@ -56,7 +65,8 @@
     opacity: 0.85;
     z-index: -1;
 }
-.banner{
+
+.banner {
     position: relative;
     height: 515px;
     background: url(../img/rs-cover-2-2-1-1.jpg);
@@ -65,34 +75,57 @@
     background-repeat: no-repeat;
     z-index: -2;
 }
-/* main */
-.main {
 
-}
-.basic-info{
+/* main */
+
+.main {}
+
+.basic-info {
     max-width: 940px;
     margin: 0 auto;
     border: 1px solid red;
 }
+
 .main .basic-info .top {
     /* position: relative; */
 }
-.main .basic-info .top .avatar{
+
+.main .basic-info .top .avatar {
     width: 295px;
     height: 318px;
 }
-.main .basic-info .top .avatar img{
-   width: 100%;
-   height: 100%;
+
+.main .basic-info .top .avatar img {
+    width: 100%;
+    height: 100%;
 }
-.main .basic-info .top .text{
-    
+
+.main .basic-info .top .text {}
+
+.basic-info .top .text .welcom {
+    position: relative;
+    display: inline-block;
+    padding: 3px 15px;
+    color: #fff;
+    background: #E6686E;
 }
- .basic-info .top .text .welcom{
-    border: 1px solid red;
-    padding: 3px 15px; 
+
+.welcom .triangle {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    display: block;
+    border: 20px solid black;
+    width: 0;
+    height: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #E6686E;
+    border-right-color: transparent;
+    border-top-width: 0;
 }
- .basic-info .top .text .welcom::after{
+
+.basic-info .top .text .welcom::after {
     /* content: '';
     display: block;
     width: 0;
