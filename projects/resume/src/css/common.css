@@ -2,4 +2,4 @@
 a{text-decoration: none;}
 ul,ol,li,dl{list-style: none}
 .clearfix:after {content:" "; display:block; height:0; visibility:hidden; clear:both; }
-html,body{position: relative;}
+body{background: #EFEFEF;}
