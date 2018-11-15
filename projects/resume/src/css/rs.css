@@ -83,10 +83,12 @@
 .basic-info {
     max-width: 940px;
     margin: 0 auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
 .main .basic-info .top {
+    padding: 55px 50px;
     /* position: relative; */
 }
 
@@ -100,14 +102,17 @@
     height: 100%;
 }
 
-.main .basic-info .top .text {}
+.main .basic-info .top .text {
+    margin-left: 90px;
+}
 
 .basic-info .top .text .welcom {
     position: relative;
     display: inline-block;
-    padding: 3px 15px;
+    padding: 7px 30px;
     color: #fff;
     background: #E6686E;
+    margin-bottom: 15px;
 }
 
 .welcom .triangle {
@@ -131,4 +136,40 @@
     width: 0;
     height: 0;
     border: 3px solid red; */
+}
+.job-title{
+    color: #B1B4B7;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.person-info{
+    width: 430px;
+}
+.person-info ul li{
+    width: 100%;
+    float: left;
+    margin-bottom: 13px;
+}
+.person-info ul li span{
+    display: block;
+    width: 70%;
+    color: #B1B4B7;
+}
+.person-info ul li strong{
+    display: block;
+    width: 30%;
+}
+.basic-info .contract-me{
+    background: #E6686E;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.basic-info .contract-me .iconfont{
+    display:inline-block; 
+    color: #fff;
+    vertical-align: top;
+    font-size: 20px;
+    /* margin: 0 20px; */
+    padding: 10px;
 }

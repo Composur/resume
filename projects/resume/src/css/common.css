@@ -1,5 +1,14 @@
+@import url('//at.alicdn.com/t/font_919474_b5qwf0pyxdj.js');
 *{margin: 0;padding: 0;box-sizing: border-box;}
 a{text-decoration: none;}
 ul,ol,li,dl{list-style: none}
 .clearfix:after {content:" "; display:block; height:0; visibility:hidden; clear:both; }
 body{background: #EFEFEF;}
+.fl{float: left;}
+.fr{float: right;}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
