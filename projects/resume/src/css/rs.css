@@ -82,9 +82,9 @@
 
 .basic-info {
     max-width: 940px;
-    margin: 0 auto;
-    /* border: 1px solid red; */
+    margin: -400px  auto 0;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    background: #FFF;
 }
 
 .main .basic-info .top {
@@ -172,4 +172,13 @@
     font-size: 20px;
     /* margin: 0 20px; */
     padding: 10px;
+}
+.download-rs-wrapper{
+    margin-top: 10px;
+    text-align: center;
+}
+.download-rs-wrapper .download-rs{
+    border: 1px solid red;
+    padding: 10px 30px;
+    display: inline-block;
 }
