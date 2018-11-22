@@ -174,11 +174,25 @@
     padding: 10px;
 }
 .download-rs-wrapper{
-    margin-top: 10px;
+    margin-top: 30px;
     text-align: center;
 }
 .download-rs-wrapper .download-rs{
-    border: 1px solid red;
-    padding: 10px 30px;
+    border: 1px solid #cbcdcf;
+    padding: 15px 80px;
     display: inline-block;
+    transition:box-shadow 0.3s;
+}
+.download-rs-wrapper .download-rs:hover{
+    opacity: 0.95;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.about-me-text{
+    max-width: 940px;
+    margin: 40px auto;
+    line-height: 1.5;
+    text-align: center;
+}
+.skill{
+    text-align: center;
 }
