@@ -195,4 +195,28 @@
 }
 .skill{
     text-align: center;
+    margin-bottom: 40px;
+}
+
+.skill-card{
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+}
+.skill-item{
+    float: left;
+    width: 50%;
+    padding: 10px 20px;
+}
+.skill-level{
+    height: 4px;
+    background: #FAE1E2;
+    border-radius: 2px;
+}
+.skill-level-bg{
+    width: 50%;
+    height: 100%;
+    border-radius: 2px;
+    background: #E6686E;
 }
