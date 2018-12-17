@@ -136,10 +136,12 @@ xhr.send(null)
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
 + 复杂类型（引用类型）
+
 ### NaN 
 + NaN(not a number)是一个全局对象的属性、不可配置、不可写在ES5中
 + typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
 + 一般用typeof value === 'number' && isNaN(value); 来判断一个值是否是NaN
+
 ### ==与===有什么区别？
 + “==”是比较强制类型转换之后的结果，“===”则是直接比较
 + “==”比较的时候会发生数据类型的转换当和一个Boolean值进行比较得时候javascript会将这个Boolean值转换为number类型再进行比较，赋值表达式不具有比较作用
@@ -239,6 +241,7 @@ var currentScope = 0;
     }());
   }());
 }());
+
 ```
 - **上面的嵌套函数时会形成闭包，当父函数立即执行后，内部函数也可以引用其外部封闭函数中存在的变量**
 - **JavaScript通过遍历的方式来查找变量**
@@ -264,7 +267,7 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
         return haha
     }
     var test = clousure()
-    test()
+    test() //123
 
     ```
 #### this（执行环境） 
