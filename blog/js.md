@@ -257,7 +257,13 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 ```
 
 #### 闭包
-+ closure，是指有权访问其它函数作用域中变量的函数
++ 闭包
+    + closure，是指有权访问其它函数作用域中变量的函数
+    + 在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
++ 作用 
+    + 读取函数内部的变量
+    + 让这些变量始终保存在内存中
+    
     ```
     function clousure() {
         var data = 123
@@ -276,6 +282,7 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + es6中this的指向是定义时this的指向
 + 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
 + (()=>{console.log(this)})()//this===windows.this 跳出箭头函数本身去外层find this
+
 ```
 function add(c, d) {
   return this.a + this.b + c + d;
