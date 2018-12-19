@@ -4,6 +4,7 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
     sourcemaps = require('gulp-sourcemaps'),//方便查找less文件
     notify = require('gulp-notify'),
     plumber = require('gulp-plumber'),
+    livereload = require('gulp-livereload');
     less = require('gulp-less');
 
 gulp.task('less', function () {
@@ -13,10 +14,12 @@ gulp.task('less', function () {
         .pipe(less())
         .pipe(cssmin())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('src/style')); //将会在src/css下生成index.css以及detail.css 
+        .pipe(gulp.dest('src/style'))
+        .pipe(livereload()); //将会在src/css下生成index.css以及detail.css 
 });
 
 gulp.task('default', function(){
+    livereload.listen()
     gulp.watch('src/less/*.less',['less'])
 }); //定义默认任务 elseTask为其他任务，该示例没有定义elseTask任务
 
