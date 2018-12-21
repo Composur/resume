@@ -141,7 +141,8 @@ xhr.send(null)
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
 + 复杂类型（引用类型）
-
+### 取反运算符
++ undefined、null、''、0、false、NaN取反都是true，其它都是false
 ### NaN 
 + NaN(not a number)是一个全局对象的属性、不可配置、不可写在ES5中
 + typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
