@@ -17,10 +17,27 @@
 > 主要出现在将字符串解析数值出错的场合
 ### 数据类型的转换
 > 如果两个运算子都是原始类型的值，则是先转成数值再比较。
-
 > 如果运算子是对象，会转为原始类型的值，再进行比较。会先调用valeOf,如果返回的还是对象接着会调用toString方法
 
+```
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean(NaN) // false
+Boolean('') // false
+
+```
+
 + 所有对象的布尔值都是true
++ 请注意，空对象{}和空数组[]也会被转成true。
+
+>&& 表达式从第一个开始,遇到值为false的表达式,则返回表达式本身,否则返回最后一个表达式 || 和 ! 逻辑运算符原理类似
+
+```
+var obj = new Boolean(false);
+console.log(obj && true);//true
+console.log(true && obj);//false
+```
 
 ### this上下文
 + 所需要的东西就是上下文
