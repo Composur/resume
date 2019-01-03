@@ -24,7 +24,6 @@ const fn = {
       if (fn.startDraw) {
         fn.endX=e.clientX
         fn.endY=e.clientY
-        fn.drawPoint(e.clientX, e.clientY)
         fn.drawLine(fn.startX,fn.startY,fn.endX,fn.endY)
         // 更新最后一个点的位置为当前的起始位置
         fn.startX=fn.endX
@@ -32,6 +31,7 @@ const fn = {
       }
     })
     context.addEventListener('mouseup', function (e) {
+      e.stopPropagation()
       fn.startDraw = false
     })
 
@@ -39,7 +39,7 @@ const fn = {
   drawPoint: function (X, Y) {
     const ctx = fn.context.getContext('2d');
     ctx.beginPath()
-    ctx.lineWidth = 1
+    ctx.lineWidth = 2
     ctx.arc(X, Y, 1, 0, Math.PI * 2, true);
     ctx.fillStyle = '#000'
     ctx.fill()
@@ -48,10 +48,7 @@ const fn = {
     const ctx = fn.context.getContext('2d');
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
-    ctx.stroke();
-  },
-  moveTo: function () {
-
+    ctx.stroke()
   }
 }
 fn.init()
