@@ -7,7 +7,7 @@ const fn = {
   context: document.querySelector('#canvas'),
   init: function () {
     this.draw()
-    this.moveTo()
+    this.getScreenSize()
   },
   $: function (ele) {
     return document.querySelector(ele)
@@ -18,7 +18,7 @@ const fn = {
       fn.startDraw = true
       fn.startX=e.clientX
       fn.startY=e.clientY
-      fn.drawPoint(e.clientX, e.clientY)
+      // fn.drawPoint(e.clientX, e.clientY)
     })
     context.addEventListener('mousemove', function (e) {
       if (fn.startDraw) {
@@ -39,16 +39,34 @@ const fn = {
   drawPoint: function (X, Y) {
     const ctx = fn.context.getContext('2d');
     ctx.beginPath()
-    ctx.lineWidth = 2
     ctx.arc(X, Y, 1, 0, Math.PI * 2, true);
     ctx.fillStyle = '#000'
     ctx.fill()
   },
   drawLine: function (startX,startY,endX,endY) {
     const ctx = fn.context.getContext('2d');
+    const size=fn.getScreenSize()
+    // fn.context.width=size.width
+    // fn.context.height=size.height
+    ctx.lineWidth = 3
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
     ctx.stroke()
+  },
+  clearDraw:function(){
+
+  },
+  getScreenSize:function(){//获取视口宽高
+    const canvas=fn.context
+    const screenSize={
+      width:document.documentElement.clientWidth,
+      height:document.documentElement.clientHeight
+    }
+    canvas.width=screenSize.width
+    canvas.height=screenSize.height
+    window.onresize=()=>{
+      fn.getScreenSize()
+    }
   }
 }
 fn.init()
