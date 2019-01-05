@@ -17,19 +17,11 @@ gulp.task('less', function () {
         .pipe(less())
         .pipe(cssmin())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('src/build/style'))
-        .pipe(livereload()); //将会在src/css下生成index.css以及detail.css 
+        .pipe(gulp.dest('src/css'))
+        // .pipe(livereload()); //将会在src/css下生成index.css以及detail.css 
 });
-gulp.task('minify', () => {
-    return gulp.src('./index.html')
-        .pipe(htmlmin({
-            collapseWhitespace: true
-        }))
-        .pipe(gulp.dest('src/build'));
-});
-
 gulp.task('default', function () {
-    livereload.listen()
+    // livereload.listen()
     gulp.watch('src/less/*.less', ['less'])
 }); //定义默认任务 elseTask为其他任务，该示例没有定义elseTask任务
 
