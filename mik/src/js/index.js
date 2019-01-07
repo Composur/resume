@@ -23,13 +23,13 @@ const fn = {
   $: function (ele) {
     return document.querySelector(ele)
   },
-  draw: function () {
+  draw: function () {//监听事件
     const context = this.$('#canvas')
     context.addEventListener("mousedown", function (e) {
+      fn.using = true//使用中的状态（画和清除等状态）
       if (fn.clear) { //清的时候就不能再画了
-        fn.ctx.clearRect(e.clientX, e.clientY, 10, 10);
+        fn.ctx.clearRect(e.clientX-5, e.clientY-5, 10, 10); //清除的时候减5是因为，清理坐标是左上角
       } else {
-        fn.using = true
         fn.startX = e.clientX
         fn.startY = e.clientY
       }
@@ -38,7 +38,7 @@ const fn = {
       // 鼠标移动的时候擦除
       if (fn.clear) {
         if (fn.using) {
-          fn.ctx.clearRect(e.clientX, e.clientY, 10, 10);
+          fn.ctx.clearRect(e.clientX-5, e.clientY-5, 10, 10);
         }
       } else {
         if (fn.using) {
@@ -70,7 +70,7 @@ const fn = {
       fn.clear = !fn.clear
     })
   },
-  getScreenSize: function () { //获取视口宽高
+  getScreenSize: function () { //获取视口宽高，动态改变画板的宽高，根据屏幕的缩放
     fn.context = fn.$('#canvas')
     fn.ctx = fn.context.getContext('2d')
     const canvas = fn.context
