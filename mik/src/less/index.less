@@ -11,7 +11,7 @@
         left: 0;
         padding: 20px;
         .erase {
-            display: inline-block;
+            display: none;
             padding: 0.3em 1.2em;
             margin: 0 0.3em 0.3em 0;
             border-radius: 2em;
@@ -26,6 +26,9 @@
             &:hover {
                 background-color: #4095c6;
             }
+        }
+        .active{
+            display: inline-block;
         }
         @media all and (max-width:30em) {
             .erase {

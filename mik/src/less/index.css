@@ -13,7 +13,7 @@
   padding: 20px;
 }
 .core-container .erase-wrap .erase {
-  display: inline-block;
+  display: none;
   padding: 0.3em 1.2em;
   margin: 0 0.3em 0.3em 0;
   border-radius: 2em;
@@ -28,6 +28,9 @@
 }
 .core-container .erase-wrap .erase:hover {
   background-color: #4095c6;
+}
+.core-container .erase-wrap .active {
+  display: inline-block;
 }
 @media all and (max-width: 30em) {
   .core-container .erase-wrap .erase {
