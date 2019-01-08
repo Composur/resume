@@ -34,7 +34,10 @@
 }
 @media all and (max-width: 30em) {
   .core-container .erase-wrap .erase {
-    display: block;
+    display: none;
     margin: 0.2em auto;
+  }
+  .core-container .erase-wrap .active {
+    display: inline-block;
   }
 }
