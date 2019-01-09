@@ -1,10 +1,11 @@
->这两个不在此列：**[<a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a>](#jump_10)** <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>;
-**[如果你觉得对你有帮助，欢迎点个赞](#jump_20)[^1]**
+>本文本着笔记的原则，没有那么的详细。**[<a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a>](#jump_10)** <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>二者不在此述;
+**[如果你觉得对你有帮助，欢迎点个赞](#jump_20)**
+***
+[不想看的这里有张图](https://i.loli.net/2017/08/22/599b9b3ca5bb7.png)
 
 ### 目录
+
 [TOC]
-
-
 
 ### 磁盘管理
 #### 基础命令
@@ -23,13 +24,43 @@
 + `kill -9 pid` 杀死相关进程
 + `top` 资源管理器，键入`top`后键入`P`(根据`CPU`大小排序),`M`(根据驻留内存大小排序),
 + 也可以安装`htop`功能更强大
+
 #### htop
- ```
- sudo apt-get install htop
- htop
- ```
+```
+sudo apt-get install htop
+htop
+```
+
+####top的表头含义
+| 表头 | 含义 |
+|-----|-----|
+| `PID` | 进程ID   | 
+| `USER` | 进程所属用户   |
+| `PRI` | 调度优先级   |
+| `NI` | nice值   |
+| `VIRT` | 虚拟内存大小   |
+| `RES` | 使用的物理内存   |
+| `SHR` | 共享内存   |
+| `%MEM` | 使用内存的比例   |
+| `S` | 进程状态   |
+| `%CPU` | CPU份额   |
+| `TIME+` | CPU时间（秒）   |
+| `COMMAND` | 具体的命令   |
+
 ### 操作文件、文件夹
 #### 基础操作
+#### find
+>find命令是一个无处不在命令，是linux中最有用的命令之一
+```
+find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]
+```
+上面的参数过于复杂，对我们来说不是那么的常用，让我们简化一下。
+```
+find [path...] [expression]
+find /dir -name filename  在/dir目录及其子目录下面查找名字为filename的文件 
+find . -name "*.c" 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
+```
+
 + 查看文件大小的命令：
 
   ```
@@ -59,7 +90,7 @@ mv file1 file2
 + 解压
 
   ```
- tar -xvf Retail.tar.gz
+ tar -xvf xxx.tar.gz
   ```
 #### 打印出一个命令的路径
 ```
@@ -124,45 +155,58 @@ fi
 ```
  netstat -antp | grep 27017
 ```
+##### netstat的常用参数含义
+| 表头 | 含义 |
+|-----|-----|
+| `-a（–all）` | 显示包括LISTEN状态的连接，默认没有。   | 
+| `-t（–tcp）` | TCP连接。   |
+| `-u（–udp）` | UDP连接   |
+| `-n（–numeric)` | 显示数字形式的地址，比如 localhost:mongodb 会展示为 127.0.0.1:27017   |
+| `-l（–listening）` | 仅显示处于监听状态的套接字   |
+| `-p（–program)` | 显示PID和程序名   |
+
 + 使用`ps`工具查询进程详情
+>ps命令用于输出当前系统的进程信息，和top的持续输出不同，ps输出的是一个快照。
 ```
-ps -fe | grep 19034
+ ps -fe | grep 19034 //-e所有进程，等同于 -A。-f可以看到更多的信息，比如完整的程序名。
 ```
 
 #### ftp/sftp文件传输
-
-    ```
-    sftp ID@host
-    get filename # 下载文件
-    put filename # 上传文件
-    ls # 列出host上当前路径的所有文件
-    cd # 在host上更改当前路径
-    lls # 列出本地主机上当前路径的所有文件
-    lcd # 在本地主机更改当前路径
-    ```
-
+```
+  sftp ID@host
+  get filename # 下载文件
+  put filename # 上传文件
+  ls # 列出host上当前路径的所有文件
+  cd # 在host上更改当前路径
+  lls # 列出本地主机上当前路径的所有文件
+  lcd # 在本地主机更改当前路径
+```
 #### 网络复制
 + 将本地localpath指向的文件上传到远程主机的path路径:
+
 ```
 scp localpath username@host:path
 ```
+
 + 以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:
+
 ```
 scp -r username@host:path localpath
 ```
+
 ### 用户管理工具
 #### 增加sudo用户
 + 查看所有用户
 
-```
-cut -d: -f1 /etc/passwd
-```
+  ```
+  cut -d: -f1 /etc/passwd
+  ```
 
 + 查看所有用户及权限
 
-    ```
-    more /etc/passwd
-    ```
+  ```
+  more /etc/passwd
+  ```
 + 更改读写权限
 
     ```
@@ -305,50 +349,42 @@ netstat -ap
     ```
     timedatectl set-timezone "Asia/Shanghai"
     ```
-### mongodb backup script
-    #!/bin/sh
-    # dump 命令执行路径，根据mongodb安装路径而定
-    DUMP=/usr/bin/mongodump
-    # 临时备份路径
-    #OUT_DIR=/var/mongodb-data-backup/uncompress
-    OUT_DIR=/root/mongo-data-newDisk/mongoDB_Backup/mongodb-data-backup/compress
-    # 压缩后的备份存放路径date
-    #TAR_DIR=/var/mongodb-data-backup/compress
-    TAR_DIR=/root/mongo-data-newDisk/mongoDB_Backup/mongodb-data-backup/uncompress
-    # 当前系统时间
-    DATE=`date +%Y-%m-%d`
-    # 数据库账号
-    //DB_USER=user
-    # 数据库密码
-    //DB_PASS=password
-    # 代表删除7天前的备份，即只保留近 7 天的备份
-    DAYS=7
-    # 最终保存的数据库备份文件
-    TAR_BAK="mongod_bak_$DATE.tar.gz"
-    cd $OUT_DIR
-    rm -rf $OUT_DIR/*
-    mkdir -p $OUT_DIR/$DATE
-    #$DUMP -h 127.0.0.1:27017 -u $DB_USER -p $DB_PASS -d dbname -o $OUT_DIR/$DATE
-    $DUMP -o $OUT_DIR/$DATE
-    # 压缩格式为 .tar.gz 格式
-    tar -zcvf $TAR_DIR/$TAR_BAK $OUT_DIR/$DATE
-    # 删除 7 天前的备份文件
-    find $TAR_DIR/ -mtime +$DAYS -delete
+***
 
-    exit
-### 备份到FTP
-    #!/bin/bash           
-    HOST=you-ftp-Address                   
-    USER=username                    
-    PASSWORD=pwd                    
-    ftp -inv $HOST <<EOF            
-    user $USER $PASSWORD
-    cd Ubuntu-mongoBackup/					
-    lcd /var/mongodb-data-backup/compress             
-    mput *.tar.gz                     
-    bye                     
-    EOF
-
-
-
+### 常见的自带命令
+| 操作 | 命令 |
+|-----|-----|
+| 进入目录 | `cd `  | 
+| 创建目录 | `mkdir 目录名`  |
+| 创建目录	 | `mkdir -p 目录路径`  |
+| 当前用户	 | `whoami ` |
+| --	 | --  |
+| 查看路径	 | `ls 路径` |
+| 查看路径	 | `ls -a 路径`  |
+| 查看路径	 | `ls -l 路径` |
+| 查看路径	 | `ls -al 路径`  |
+| --	 | --  |
+| 创建文件	 | `touch 文件名` |
+| 改变文件更新时间	 | `touch 文件名` |
+| 创建文件	 | `echo '文件内容' > 文件路径`  |
+| 强制创建文件	 | `echo '文件内容' > !文件路径`  |
+| 追加文件内容	 | `echo '文件内容' >> 文件路径`  |
+| --	 | --  |
+| 复制文件	 | `cp 源路径 目标路径`  |
+| 复制目录	 | `cp -r 源路径 目标路径`  |
+| --	 | --  |
+| 移动节点	 | `mv 源路径 目标路径`  |
+| --	 | --  |
+| 删除文件	 | `rm 文件路径`  |
+| 强制删除文件	 | `rm -f 文件路径` |
+| 删除目录	 | `rm -r 目录路径`  |
+| 强制删除目录	 | `rm -rf 目录路径`  |
+| --	 | --  |
+| 查看目录结构	 | `tree`  |
+| 建立软链接	 | `ln -s 真实文件 链接` |
+| --	 | --  |
+| 下载文件	 | `curl -L https://www.baidu.com > baidu.html`  |
+| 磁盘占用	 | `df -kh`  |
+| 当前目录大小	 | `du -sh .`  |
+| 各文件大小	 | `du -h`  |
 
