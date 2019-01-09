@@ -1,52 +1,13 @@
-### 打印出一个命令的路径
-```
-  type ls
-  ls is hashed (/usr/bin/ls)
-```
-### 创建自定义工程目录
-> $1代表你想定义的目录
-```
-   mkdir $1
-   cd $1
-   css js
-   touch index.html css/style.css js/main.js
-   exit
-```
-> 执行
-```
- script.sh demo
-```
-### 判断自定义的目录是否存在
+>这两个不在此列：**[<a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a>](#jump_10)** <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>;
+**[如果你觉得对你有帮助，欢迎点个赞](#jump_20)[^1]**
 
-```
-if [ -d $1 ]; then
-  echo 'error: dir exists'
-  exit
-else
-  mkdir $1
-  cd $1
-  mkdir css js
-  touch index.html css/style.css js/main.js
-  echo 'success'
-  exit
-fi
-```
-### ubuntu运行sh脚本sudo自动输入密码
-+ 第一种方法（文本块，重定向）
+### 目录
+[TOC]
 
-    ```
-    #!/bin/bash
-    sudo -S apt-get update << EOF 
-    Your password
-    EOF
-    ```
-+ 第二种方法（使用管道）
 
-    ```
-    #!/bin/bash
-    echo password | sudo -S apt-get update
-    ```
+
 ### 磁盘管理
+#### 基础命令
 + 查看磁盘空间 `df -h`
 + 查看目录大小 `du -sh`
 + 打包 `tar -cvf`
@@ -62,12 +23,13 @@ fi
 + `kill -9 pid` 杀死相关进程
 + `top` 资源管理器，键入`top`后键入`P`(根据`CPU`大小排序),`M`(根据驻留内存大小排序),
 + 也可以安装`htop`功能更强大
-
+#### htop
  ```
  sudo apt-get install htop
  htop
  ```
 ### 操作文件、文件夹
+#### 基础操作
 + 查看文件大小的命令：
 
   ```
@@ -99,31 +61,75 @@ mv file1 file2
   ```
  tar -xvf Retail.tar.gz
   ```
+#### 打印出一个命令的路径
+```
+  type ls
+  ls is hashed (/usr/bin/ls)
+```
+#### 创建自定义工程目录
+> $1代表你想定义的目录
+```
+   mkdir $1
+   cd $1
+   css js
+   touch index.html css/style.css js/main.js
+   exit
+```
+> 执行
+```
+ script.sh demo
+```
+#### 判断自定义的目录是否存在
 
-### 性能监控
-+ 查看CPU的使用频率
+```
+if [ -d $1 ]; then
+  echo 'error: dir exists'
+  exit
+else
+  mkdir $1
+  cd $1
+  mkdir css js
+  touch index.html css/style.css js/main.js
+  echo 'success'
+  exit
+fi
+```
+#### ubuntu运行sh脚本sudo自动输入密码
++ 第一种方法（文本块，重定向）
 
     ```
-    sar -u 1 2 //每秒采样一次，总共采样两次
+    #!/bin/bash
+    sudo -S apt-get update << EOF 
+    Your password
+    EOF
     ```
++ 第二种方法（使用管道）
+
+    ```
+    #!/bin/bash
+    echo password | sudo -S apt-get update
+    ```
+
+
+
 ### 网络工具
-+ 查询网络服务和端口
-    + 列出所有`TCP`端口号
 
-      ```
-    netstat -at
-      ```
-    + 使用`netstat`工具查询端口:
+#### 查询网络服务和端口
++ 列出所有`TCP`端口号
 
-     ```
-     netstat -antp | grep 27017
-     ```
-    + 使用`ps`工具查询进程详情
+```
+ netstat -at
+```
++ 使用`netstat`工具查询端口:
+```
+ netstat -antp | grep 27017
+```
++ 使用`ps`工具查询进程详情
+```
+ps -fe | grep 19034
+```
 
-      ```
-     ps -fe | grep 19034
-      ```
-+ `ftp/sftp`文件传输
+#### ftp/sftp文件传输
 
     ```
     sftp ID@host
@@ -134,24 +140,24 @@ mv file1 file2
     lls # 列出本地主机上当前路径的所有文件
     lcd # 在本地主机更改当前路径
     ```
-+ 网络复制
-    + 将本地localpath指向的文件上传到远程主机的path路径:
 
-      ```
-    scp localpath username@host:path
-      ```
-
-    + 以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:
-
-      ```
-    scp -r username@host:path localpath
-      ```
+#### 网络复制
++ 将本地localpath指向的文件上传到远程主机的path路径:
+```
+scp localpath username@host:path
+```
++ 以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:
+```
+scp -r username@host:path localpath
+```
 ### 用户管理工具
+#### 增加sudo用户
 + 查看所有用户
 
-    ```
-    cut -d: -f1 /etc/passwd
-    ```
+```
+cut -d: -f1 /etc/passwd
+```
+
 + 查看所有用户及权限
 
     ```
@@ -168,7 +174,96 @@ mv file1 file2
     ```
     sudo adduser new_username
     ```
+
++ [add sudo user](https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart)
 ### 系统管理
+#### 查看swap file
+
+```
+ free -m  
+ top
+```
+#### 查看CPU信息
+#### 性能监控
++ 查看CPU的使用频率
+
+    ```
+    sar -u 1 2 //每秒采样一次，总共采样两次
+    ```
++ 查看物理CPU个数
+
+  ```
+  cat /proc/cpuinfo| grep "physical id" | sort| uniq | wc -l
+  ```
++ 查看每个物理CPU中core的个数(即核数)
+
+  ```
+  cat /proc/cpuinfo| grep "cpu cores"| uniq
+  ```  
++ 查看逻辑CPU的个数
+
+  ```
+  cat /proc/cpuinfo| grep "processor"| wc -l
+  ```
++  路由追踪
+
+  ```
+tracert ip
+  ```
+
+####防火墙
+```
+sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口
+```
+####查看已经连接的服务端口（ESTABLISHED）
++ 
+```
+netstat -a
+```
++ 查看所有的服务端口（LISTEN，ESTABLISHED）
+
+  ```
+netstat -ap
+  ```
+
++ 查看指定端口，可以结合grep命令：
+
+  ```
+  netstat -ap | grep 8080
+  ```
++ 也可以使用lsof命令：
+
+  ```
+  lsof -i:8888
+  sudo lsof -i | grep ssh
+  ```
++ 若要关闭使用这个端口的程序，使用kill + 对应的pid
+
+  ```
+  kill -9 PID号
+  ```
++ 杀死进程
+
+  ```
+  sudo netstat -tulpn | grep :80
+  ```
+
+####CRON
++ 查看本机上所有cron服务
+  ```
+     ls -l /etc/init.d
+  ```
+
++ 过滤cron日志
+
+  ```
+  grep CRON /var/log/syslog
+  ```
+#### 过滤系统日志
+```
+   sed -n '/2018-09-01/,/2018-09-09/p'  path/xxx.log
+```
+#### 其它
 + 查看`liunx`版本
 
     ```
@@ -254,86 +349,6 @@ mv file1 file2
     bye                     
     EOF
 
-###查看swap file
-```
- free -m  
- top
-```
-### 查看CPU信息
-
-+ 查看物理CPU个数
-
-  ```
-  cat /proc/cpuinfo| grep "physical id" | sort| uniq | wc -l
-  ```
-+ 查看每个物理CPU中core的个数(即核数)
-
-  ```
-  cat /proc/cpuinfo| grep "cpu cores"| uniq
-  ```  
-+ 查看逻辑CPU的个数
-
-  ```
-  cat /proc/cpuinfo| grep "processor"| wc -l
-  ```
-+  路由追踪
-
-  ```
-tracert ip
-  ```
-
-###防火墙
-```
-sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口
-```
-###查看已经连接的服务端口（ESTABLISHED）
-+ 
-```
-netstat -a
-```
-+ 查看所有的服务端口（LISTEN，ESTABLISHED）
-
-  ```
-netstat -ap
-  ```
-
-+ 查看指定端口，可以结合grep命令：
-
-  ```
-  netstat -ap | grep 8080
-  ```
-+ 也可以使用lsof命令：
-
-  ```
-  lsof -i:8888
-  sudo lsof -i | grep ssh
-  ```
-+ 若要关闭使用这个端口的程序，使用kill + 对应的pid
-
-  ```
-  kill -9 PID号
-  ```
-+ 杀死进程
-
-  ```
-  sudo netstat -tulpn | grep :80
-  ```
-
-###CRON
-+ 查看本机上所有cron服务
-  ```
-     ls -l /etc/init.d
-  ```
-
-+ 过滤cron日志
-
-  ```
-  grep CRON /var/log/syslog
-  ```
-### 过滤系统日志
-```
-   sed -n '/2018-09-01/,/2018-09-09/p'  path/xxx.log
-```
 
 
 
