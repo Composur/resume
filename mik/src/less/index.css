@@ -3,6 +3,7 @@
 }
 .core-container .canvas {
   display: block;
+  border: 1px solid red;
 }
 .core-container .erase-wrap {
   position: absolute;
@@ -36,4 +37,9 @@
   .core-container .erase-wrap .active {
     display: inline-block;
   }
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }

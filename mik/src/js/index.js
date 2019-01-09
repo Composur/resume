@@ -9,13 +9,10 @@ const fn = {
   startY: undefined,
   endX: undefined,
   endY: undefined,
-  context: undefined,
+  context: document.querySelector('#canvas'),
   ctx: undefined,
   clear: false,
   init: function () {
-    window.onresize = function () {
-        fn.getScreenSize()
-      },
     this.draw()
     this.getScreenSize()
     this.clearDraw()
@@ -25,17 +22,17 @@ const fn = {
     return document.querySelector(ele)
   },
   draw: function () { //监听事件
-    const context = this.$('#canvas')
-    context.addEventListener("mousedown", function (e) {
+    fn.context.addEventListener("mousedown", function (e) {
       fn.using = true //使用中的状态（画和清除等状态）
       if (fn.clear) { //清的时候就不能再画了
         fn.ctx.clearRect(e.clientX - 5, e.clientY - 5, 10, 10); //清除的时候减5是因为，清理坐标是左上角
       } else {
         fn.startX = e.clientX
         fn.startY = e.clientY
+        console.log(fn.startX,fn.startY)
       }
     })
-    context.addEventListener('mousemove', function (e) {
+    fn.context.addEventListener('mousemove', function (e) {
       if (!fn.using) {
         return
       }
@@ -51,12 +48,12 @@ const fn = {
         fn.startY = fn.endY
       }
     })
-    context.addEventListener('mouseup', function (e) {
-      e.stopPropagation()
+    fn.context.addEventListener('mouseup', function (e) {
       fn.using = false
     })
   },
   drawLine: function (startX, startY, endX, endY) {
+    fn.ctx = fn.context.getContext('2d')
     const ctx = fn.ctx
     ctx.lineWidth = 3
     ctx.moveTo(startX, startY);
@@ -91,15 +88,22 @@ const fn = {
     }
   },
   getScreenSize: function () { //获取视口宽高，动态改变画板的宽高，根据屏幕的缩放
-    fn.context = fn.$('#canvas')
-    fn.ctx = fn.context.getContext('2d')
-    const canvas = fn.context
+    window.onresize=function(){
+      const screenSize = {
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      }
+      console.log(screenSize)
+      fn.context.width = screenSize.width
+      fn.context.height = screenSize.height
+    }
     const screenSize = {
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight
     }
-    canvas.width = screenSize.width
-    canvas.height = screenSize.height
+    console.log(screenSize)
+    fn.context.width = screenSize.width
+    fn.context.height = screenSize.height
   },
   checkMobileAndPC:function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
