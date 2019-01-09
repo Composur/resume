@@ -1,7 +1,7 @@
 >本文本着笔记的原则，没有那么的详细。**[<a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a>](#jump_10)** <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>二者不在此述;
 **[如果你觉得对你有帮助，欢迎点个赞](#jump_20)**
 ***
-[不想看的这里有张图](https://i.loli.net/2017/08/22/599b9b3ca5bb7.png)
+[不想看文字的这里有张图](https://i.loli.net/2017/08/22/599b9b3ca5bb7.png)
 
 ### 目录
 
@@ -158,12 +158,12 @@ fi
 ##### netstat的常用参数含义
 | 表头 | 含义 |
 |-----|-----|
-| `-a（–all）` | 显示包括LISTEN状态的连接，默认没有。   | 
-| `-t（–tcp）` | TCP连接。   |
-| `-u（–udp）` | UDP连接   |
-| `-n（–numeric)` | 显示数字形式的地址，比如 localhost:mongodb 会展示为 127.0.0.1:27017   |
-| `-l（–listening）` | 仅显示处于监听状态的套接字   |
-| `-p（–program)` | 显示PID和程序名   |
+| `-a`（–all）|显示包括LISTEN状态的连接，默认没有。   | 
+| `-t`（–tcp）| TCP连接。   |
+| `-u`（–udp） | UDP连接   |
+| `-n`（–numeric） | 显示数字形式的地址，比如 localhost:mongodb 会展示为 127.0.0.1:27017   |
+| `-l`（–listening） | 仅显示处于监听状态的套接字   |
+| `-p`（–program） | 显示PID和程序名   |
 
 + 使用`ps`工具查询进程详情
 >ps命令用于输出当前系统的进程信息，和top的持续输出不同，ps输出的是一个快照。
