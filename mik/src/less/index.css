@@ -2,15 +2,12 @@
   position: relative;
 }
 .core-container .canvas {
-  border: 1px solid rebeccapurple;
   display: block;
-  margin: 10px;
 }
 .core-container .erase-wrap {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 20px;
 }
 .core-container .erase-wrap .erase {
   display: none;
@@ -35,7 +32,6 @@
 @media all and (max-width: 30em) {
   .core-container .erase-wrap .erase {
     display: none;
-    margin: 0.2em auto;
   }
   .core-container .erase-wrap .active {
     display: inline-block;
