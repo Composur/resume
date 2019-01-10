@@ -7,6 +7,49 @@
 > 为了得到结果的一个计算式
 + `语句和表达式的区别`
 > 语句是为了进行某种操作，一般不需要返回值。表达式是为了得到返回值，一定有返回值。表达式没有分号。 
+
+### javascript中数据类型
++ 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol、object）
++ 复杂类型（引用类型）
+#### Number
+    + 
+
+### 取反运算符
++ undefined、null、''、0、false、NaN取反都是true，其它都是false
+### NaN 
++ NaN(not a number)是一个全局对象的属性、不可配置、不可写在ES5中
++ typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
++ 一般用typeof value === 'number' && isNaN(value); 来判断一个值是否是NaN
+
+### ==与===有什么区别？
+> 相等运算符（==）比较两个值是否相等，严格相等运算符（===）比较它们是否为“同一个值”。如果两个值不是同一类型，严格相等运算符（===）直接返回false，而相等运算符（==）会将它们转换成同一个类型，再用严格相等运算符进行比较
+
++ “==”是比较强制类型转换之后的结果，“===”则是直接比较
++ “==”比较的时候会发生数据类型的转换当和一个Boolean值进行比较得时候javascript会将这个Boolean值转换为number类型再进行比较，赋值表达式不具有比较作用
++ “===”是严格相等运算符即判断等号两侧的数据类型是否一致（不一致直接返回false），又判断value是否相等，比较的时候不会发生数据类型的转换
++ 一些特殊的比较示例
+    ```
+    false == ""  // true
+    false == []  // true
+    false == {}  // false
+    "" == 0      // true
+    "" == []     // true
+    "" == {}     // false
+    0 == []      // true
+    0 == {}      // false
+    0 == null    // false
+
+    ```
+### null和undefined
++ 二者在if语句中会自动转换为false
+### Boolean
++ 除了undefined、null、false、0、NaN、""/'' 都会转换为true
++ 空数组[]和空对象对应的Boolean值都是true
+
+### Array
++ forEach(item)让数组中每一项做一件事
++ map让数组通过计算产生一个新数组
++ 
 ### 数据类型
 + 基本类型
 > 数值、字符串、布尔也叫原始类型，及它们是最基本的类型不能再进行细分了
@@ -157,45 +200,7 @@ xhr.send(null)
 
         ```
         
-### javascript中数据类型
-+ 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol）
-+ 复杂类型（引用类型）
-### 取反运算符
-+ undefined、null、''、0、false、NaN取反都是true，其它都是false
-### NaN 
-+ NaN(not a number)是一个全局对象的属性、不可配置、不可写在ES5中
-+ typeof NaN是number 也是一种数字的特殊类型，代表不是一个数字，代表一些不能由数值范围表示的类型 NaN===NaN 结果为false 因为它们可能是不同的值
-+ 一般用typeof value === 'number' && isNaN(value); 来判断一个值是否是NaN
 
-### ==与===有什么区别？
-> 相等运算符（==）比较两个值是否相等，严格相等运算符（===）比较它们是否为“同一个值”。如果两个值不是同一类型，严格相等运算符（===）直接返回false，而相等运算符（==）会将它们转换成同一个类型，再用严格相等运算符进行比较
-
-+ “==”是比较强制类型转换之后的结果，“===”则是直接比较
-+ “==”比较的时候会发生数据类型的转换当和一个Boolean值进行比较得时候javascript会将这个Boolean值转换为number类型再进行比较，赋值表达式不具有比较作用
-+ “===”是严格相等运算符即判断等号两侧的数据类型是否一致（不一致直接返回false），又判断value是否相等，比较的时候不会发生数据类型的转换
-+ 一些特殊的比较示例
-    ```
-    false == ""  // true
-    false == []  // true
-    false == {}  // false
-    "" == 0      // true
-    "" == []     // true
-    "" == {}     // false
-    0 == []      // true
-    0 == {}      // false
-    0 == null    // false
-
-    ```
-### null和undefined
-+ 二者在if语句中会自动转换为false
-### Boolean
-+ 除了undefined、null、false、0、NaN、""/'' 都会转换为true
-+ 空数组[]和空对象对应的Boolean值都是true
-
-### Array
-+ forEach(item)让数组中每一项做一件事
-+ map让数组通过计算产生一个新数组
-+ 
 
 
 ### 面向对象
