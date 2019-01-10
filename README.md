@@ -15,7 +15,6 @@
 
 - #### __[实用代码片段](https://github.com/Composur/resume/blob/master/blog/%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.md)__
 
-
 - #### __[test豆瓣API移动端](https://composur.github.io/resume/projects/douban-movie/index.html)__
 
 - #### __[js-components](https://github.com/Composur/resume/tree/master/projects/js-component)__
@@ -24,6 +23,7 @@
 
 - #### __[太极](https://composur.github.io/resume/projects/cssShapes/taichi.html)__
 
+- #### __[canvas画板](https://composur.github.io/resume/mik/)__
 
 - #### __[备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)__
 
