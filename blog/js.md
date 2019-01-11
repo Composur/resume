@@ -14,7 +14,13 @@
 
 #### Object
 + `Object(value)`与`new Object(value)`两者的语义是不同的，`Object(value)`表示将`value`转成一个对象，`new Object(value)`则表示新生成一个对象，它的值是`value`。
-
++ `Object.prototype.toString`可以看出一个值到底是什么类型。
+```
+var type = function (o){
+  var s = Object.prototype.toString.call(o);
+  return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+};
+```
 
 #### Number
     + 
