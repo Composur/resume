@@ -11,6 +11,11 @@
 ### javascript中数据类型
 + 基本类型（值类型）指的的是可以直接存储的类型（null、undefined、Boolean、string、number、symbol、object）
 + 复杂类型（引用类型）
+
+#### Object
++ `Object(value)`与`new Object(value)`两者的语义是不同的，`Object(value)`表示将`value`转成一个对象，`new Object(value)`则表示新生成一个对象，它的值是`value`。
+
+
 #### Number
     + 
 
