@@ -23,7 +23,6 @@ var type = function (o){
 ```
 
 #### Number
-    + 
 
 ### 取反运算符
 + undefined、null、''、0、false、NaN取反都是true，其它都是false
