@@ -106,3 +106,4 @@ function getUserIP(onNewIP) {
 getUserIP(function (ip) {
     console.log("Got IP! :" + ip);
 });
+

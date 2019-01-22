@@ -55,7 +55,10 @@ var type = function (o){
 ### Boolean
 + 除了undefined、null、false、0、NaN、""/'' 都会转换为true
 + 空数组[]和空对象对应的Boolean值都是true
-
++ 所有对象对应的布尔值都是true 
+    ```
+        var 
+    ```
 ### Array
 + forEach(item)让数组中每一项做一件事
 + map让数组通过计算产生一个新数组
