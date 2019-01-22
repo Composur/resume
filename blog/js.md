@@ -57,7 +57,33 @@ var type = function (o){
 + 空数组[]和空对象对应的Boolean值都是true
 + 所有对象对应的布尔值都是true 
     ```
-        var 
+    Boolean(undefined) // false
+    Boolean(null) // false
+    Boolean(0) // false
+    Boolean('') // false
+    Boolean(NaN) // false
+
+    Boolean(1) // true
+    Boolean('false') // true
+    Boolean([]) // true
+    Boolean({}) // true
+    Boolean(function () {}) // true
+    Boolean(/foo/) // true
+    ```
++ 使用双重的否运算符（!）也可以将任意值转为对应的布尔值。
+    ```
+    !!undefined // false
+    !!null // false
+    !!0 // false
+    !!'' // false
+    !!NaN // false
+
+    !!1 // true
+    !!'false' // true
+    !![] // true
+    !!{} // true
+    !!function(){} // true
+    !!/foo/ // true
     ```
 ### Array
 + forEach(item)让数组中每一项做一件事
