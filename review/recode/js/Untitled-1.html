@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="./promise.js"></script>
 </head>
 
 <body>
+
+    <script>
+        function test(){
+            return new Promise(function(resolve,reject){
+                console.log(resolve)
+            })
+        }
+        test()
+    </script>
+    
     <!--form的action的value 这里是你的接口地址例如是subscribe -->
     <form action="subscribe" method="post">
         <p>First name:
