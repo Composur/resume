@@ -299,7 +299,15 @@ xhr.send(null)
 
 
 ### 面向对象
-+ 工厂函数
+#### 构造函数
+> 专门用来生成实例对象的函数
++ 函数体内部使用了this关键字，代表了所要生成的对象实例。
++ 生成对象的时候，必须使用new命令。
+#### new
+>`new`命令的作用，就是执行构造函数，返回一个实例对象。
++ 
+
+#### 工厂函数
     ```
     function createBottle(name,price,isKeepWarm){
         return {
