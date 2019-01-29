@@ -49,3 +49,16 @@
 + 5xx服务器内部错误
 + 500 通用错误，未给出具体的错误
 + 请求已成功，请求所希望的响应头或数据体将随此响应返回
+ ### Http缓存控制机制
+![Http缓存控制机制](./img/http-cache.jpg)
+***
+![Http缓存控制机制](./img/http-cach2.jpg)
+***
+![Http缓存控制机制](./img/http-cache3.jpg)
+***
+![Http缓存控制机制](./img/http-cache4.jpg)
+***
+![Http缓存控制机制](./img/http-cache5.jpg)
+***
+![Http缓存控制机制](./img/http-cache6.jpg)
+***
