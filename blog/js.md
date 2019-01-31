@@ -412,6 +412,8 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 
     ```
 #### this（执行环境） 
+##### 含义
++ `this`就是属性或方法“当前”所在的对象。`this`总是返回一个对象
 + 在全局执行上下文中（在任何函数体外部），this都指代全局对象（window,nodejs环境是global），上下文就是函数的执行环境
 + 在函数内部this的值取决于函数被调用的方式,看是谁去调用的（es6）
 + es6中this的指向是定义时this的指向
