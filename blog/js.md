@@ -466,6 +466,31 @@ var app = {
 ```
 + 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
 
+#### 绑定this
++ JavaScript 提供了`call、apply、bind`这三个方法，来切换/固定this的指向
+1. `call`
+    ```
+    var obj={}
+    var f=function(){
+        return this
+    }
+    f()===window //true
+    f.call(obj)===obj //true
+
+    var n = 123;
+    var obj = { n: 456 };
+
+    function a() {
+    console.log(this.n);
+    }
+
+    a.call() // 123
+    a.call(null) // 123
+    a.call(undefined) // 123
+    a.call(window) // 123
+    a.call(obj) // 456
+    ```
+
 
 ### 继承（编程理念）
 + 继承可以子类具有父类的属性和方法，而不需要重复编写相同的代码
