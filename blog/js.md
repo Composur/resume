@@ -309,7 +309,8 @@ xhr.send(null)
 #### new
 >`new`命令的作用，就是执行构造函数，返回一个实例对象。
 + 
-
+#### 对象的读取
+> 读取对象的某个属性时，JavaScript 引擎先寻找对象本身的属性，如果找不到，就到它的原型去找，如果还是找不到，就到原型的原型去找。如果直到最顶层的Object.prototype还是找不到，则返回undefined。如果对象自身和它的原型，都定义了一个同名属性，那么优先读取对象自身的属性，这叫做“覆盖”（overriding）。
 #### 工厂函数
     ```
     function createBottle(name,price,isKeepWarm){
