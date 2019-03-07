@@ -423,6 +423,21 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + es6中this的指向是定义时this的指向
 + 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
 + (()=>{console.log(this)})()//this===windows.this 跳出箭头函数本身去外层find this
++ 作为变量调用的函数里边的 this 都指向 window
+    ``` 
+    var name="Window";
+    var object={
+        name:"object",
+        getName:function (){
+            var a= function(){
+                return this.name;
+            };
+            console.log(a());"Window"
+            return a; //Window
+        }
+    }
+    object.getName()();
+    ```
 
 ```
 function add(c, d) {
