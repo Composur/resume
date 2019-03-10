@@ -555,7 +555,6 @@ var app = {
 + 变量是属性，函数是方法
 + 任何对象，都有创建者，这个创建者是个函数，普通的对象都是Object创建的
 + 创建这个对象的__proto__属性执行构造函数的prototype
-+ 例如数组是Array创建的，调用数组的方法[1,2].join()查找[1,2].proto.join()查找Arry.prototype.join().那么Array又是谁创建的,Array.prototype又是谁创建的
 + 一个对象查找自己的方法属性的时候先从自己的本身去找，然后找自己的原型__proto__,再去从创建它的那个函数的prototype去找，然后去Object.prototype上去找，最后找Object.prototype.__proto__===null找不到的结果
 
 ```
@@ -563,6 +562,25 @@ var app = {
     Function.__proto__===Function.__proto__
     Array.prototype.__proto__===Object.prototype
     Object.prototype.__proto__===null
+    var 对象 = new 函数()
+    对象.__proto__ === 对象的构造函数.prototype
+
+    // 推论
+    var number = new Number()
+    number.__proto__ = Number.prototype
+
+
+    var object = new Object()
+    object.__proto__ = Object.prototype
+
+
+    var function = new Function()
+    function.__proto__ = Function.prototype
+
+    // 另外，所有函数都是由 Function 构造出来的，所以
+    Number.__proto__ = Function.prototype // 因为 Number 是函数，是 Function 的实例
+    Object.__proto__ = Function.prototype // 因为 Object 是函数，是 Function 的实例
+    Function.__proto__ == Function.prototye // 因为 Function 是函数，是 Function 的实例！
 ```
 
 #### bind call apply
