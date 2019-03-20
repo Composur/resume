@@ -765,7 +765,10 @@ var isBlink = (isChrome || isOpera) && !!window.CSS;
 >cookie是服务器保存在浏览器的一小段文本信息
 + cookie是用来跟踪会话是客户端用来保存用户信息的一种机制，用来记录用户的一些信息，也是实现session的一种方式
 + cookie的参数，`Expires`、`Max-Age`(一年到期))、 `Domain` （哪些域名要带上cookie）、`Path `（指定哪些路径要带上cookie）
++ `Secure`指定浏览器只有在加密协议 HTTPS 下，才能将这个 Cookie 发送到服务器
 > HttpOnly属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是document.cookie属性、XMLHttpRequest对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。
+#### 删除cookie
+>过期时间设为1970年1月1月零点，就等同于删除了这个 Cookie。
 
 #### session
 + session是一种抽象的概念（存在文件、数据库、内存中），HTTP协议中定义在header中的字段。可以认为是session的一种后端无状态的实现。cookie是实际存在的东西
