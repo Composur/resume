@@ -761,10 +761,17 @@ var isBlink = (isChrome || isOpera) && !!window.CSS;
 ```
 
 ### session&cookie&localStorage
+#### cookie
+>cookie是服务器保存在浏览器的一小段文本信息
++ cookie是用来跟踪会话是客户端用来保存用户信息的一种机制，用来记录用户的一些信息，也是实现session的一种方式
++ cookie的参数，`Expires`、`Max-Age`(一年到期))、 `Domain` （哪些域名要带上cookie）、`Path `（指定哪些路径要带上cookie）
+> HttpOnly属性指定该 Cookie 无法通过 JavaScript 脚本拿到，主要是document.cookie属性、XMLHttpRequest对象和 Request API 都拿不到该属性。这样就防止了该 Cookie 被脚本读到，只有浏览器发出 HTTP 请求时，才会带上该 Cookie。
+
+#### session
 + session是一种抽象的概念（存在文件、数据库、内存中），HTTP协议中定义在header中的字段。可以认为是session的一种后端无状态的实现。cookie是实际存在的东西
 + 由于HTTP协议是无状态的的，当服务端需要记录用户的的状态时就需要某种机制，这种机制就是session。如购物车，这个session由服务端创建，并保存在服务端。
 + 而服务端如何识别特定的session如用户身份信息,每次HTTP请求的时候客户端都会发送相应的cookie到服务端，在第一次会话的时候，服务端会在HTTP协议中告诉客户端需要在cookie里面记录一个sessionID在以后的每次请求中都把这个ID发送到服务端，这一年服务的就知道是那个session，如果禁用cookie会使用一种叫做URL重写的技术来进行会话跟踪，每次HTTP交互，URL后面都会跟上以分sid=XXX这样的参数，服务端据此来识别用户
-+ cookie是用来跟踪会话是客户端用来保存用户信息的一种机制，用来记录用户的一些信息，也是实现session的一种方式
+#### localStorage
 + localStorage是HTML5中作为持久保存客户端数据（一般是5M）的方案取代了globalStorage相当于globalStorage[location.host],想访问同一个localStorage页面必须来自同一域名、协议、端口号
 
 
