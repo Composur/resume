@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #uploadProgress{
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: #ddd;
+}
+ 
+#upload{
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  background-color: #4CAF50;
+}
+ 
+#label{
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+    文件浏览：
+    <input type="file" id="files" multiple />
+    <input type="button" value="文件上传" onclick="readerBinary();" />
+    <br />
+    <input type="button" value="显示文件信息" onclick="showdatelists();" />
+    <div id="uploadProgress">
+        <div id="upload">
+            <div id="label">0%</div>
+        </div>
+    </div>
+
+    <script>
+        var showdatelists = function () {
+            var imageEle = document.getElementById("files");
+            var filelist = imageEle.files;
+            for (var i = 0; i < filelist.length; i++) {
+                var file = filelist[i];
+                div = document.createElement("div");
+                div.innerHTML = "第" + (i + 1) + "个文件名字是：" + file.name + ",文件大小是：" + file.size + "文件类型是：" + file.type;
+                document.body.appendChild(div);
+            }
+        }
+
+
+
+        var readerBinary = function () {
+            var elem = document.getElementById("upload");
+            var width = 0;
+
+            var reader = null;
+            if (FileReader) {
+                reader = new FileReader();
+            } else {
+                alert("不支持");
+            }
+            reader.readAsText(document.getElementById("files").files[0]);
+            var max = document.getElementById("files").files[0].size;
+            //读取不中断则触发该事件
+            reader.onprogress = function (evt) {
+                elem.style.width = evt.loaded / max * 100 + '%';
+                document.getElementById("label").innerHTML = evt.loaded / max * 100 + '%';
+            }
+        }
+    </script>
+</body>
+
+</html>
