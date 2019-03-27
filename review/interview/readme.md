@@ -374,8 +374,29 @@ function listen(element,eventType,selector,fn){
 + 安全，GET没有POST安全
 + 包，GET请求需要发一个包，POST需要发两个以上（POST有消息体）
 #### 跨域
-+ JSONP
-+ CROS
+##### JSONP（仅支持GET）
+> 网页通过添加一个`<script>`元素，向服务器请求 JSON 数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来
+```
+function addScriptTag(src) {
+  var script = document.createElement('script');
+  script.setAttribute("type","text/javascript");
+  script.src = src;
+  document.body.appendChild(script);
+}
+
+window.onload = function () {
+  addScriptTag('http://example.com/ip?callback=foo');
+}
+
+function foo(data) { //调用foo得到一个返回的对象
+  console.log('Your public IP address is: ' + data.ip);
+};
+```
+##### webSocket
+>该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。有一个字段是Origin，表示该请求的请求源（origin），即发自哪个域名。正是因为有了Origin这个字段，所以 WebSocket 才没有实行同源政策。因为服务器可以根据这个字段，判断是否许可本次通信。
+##### CROS
+>CORS 请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。
++ 简单请求就是简单的 HTTP 方法与简单的 HTTP 头信息的结合。
 + POSTMESSAGE
 
 ### VUE
