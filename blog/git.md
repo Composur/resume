@@ -97,3 +97,27 @@ git pull origin dev(远程分支名称)
 + 默认不用任何参数的话，git log 会按提交时间列出所有的更新
 + git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
 + Git 提供了 --word-diff 选项。我们可以将其添加到 git log -p 命令的后面，从而获取单词层面上的对比
+
+
+
+### 修改分支名称
+
++ 当前分支修改
+
+```
+git branch -m new-name
+```
++ 其它分支修改
+
+```
+git branch -m old-name new-name
+```
+
++ 重命名本地和远程分支
+
+```
+git push origin :old-name new-name
+
+git push origin -u new-name
+```
+
