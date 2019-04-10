@@ -16,7 +16,7 @@ cat ~/.ssh/id_rsa.pub
 ```
 ssh -T git@github.com
 ```
-+ 之后配置下git
++ 之后配置下git（这是全局配置，如果配置单个仓库，去掉global即可）
 ```
 git config --global user.name 你的英文名                                                   #此英文名不需要跟GitHub账号保持一致
 git config --global user.email 你的邮箱                                                      #此邮箱不需要跟GitHub账号保持一致
