@@ -89,8 +89,8 @@ git push origin :old-name new-name
 git push origin -u new-name
 ```
 
-### dev合并到master
-
+### 合并分支
++ dev合并到master
 ```
 git checkout master
 git pull origin master
