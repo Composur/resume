@@ -51,8 +51,16 @@ git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
 ```
 git pull origin dev(远程分支名称)
 ```
+### git 删除分支
 
-
++ 删除本地
+```
+git branch -d BranchName
+```
++ 删除远程
+```
+git push origin --delete BranchName
+```
 ### Git log
 + 默认不用任何参数的话，git log 会按提交时间列出所有的更新
 + git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
