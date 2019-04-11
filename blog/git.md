@@ -18,17 +18,81 @@ ssh -T git@github.com
 ```
 + 之后配置下git（这是全局配置，如果配置单个仓库，去掉global即可）
 ```
-git config --global user.name 你的英文名                                                   #此英文名不需要跟GitHub账号保持一致
-git config --global user.email 你的邮箱                                                      #此邮箱不需要跟GitHub账号保持一致
+git config --global user.name 你的英文名   #此英文名不需要跟GitHub账号保持一致                                                
+git config --global user.email 你的邮箱   #此邮箱不需要跟GitHub账号保持一致                                                   
 git config --global push.default matching
 git config --global core.quotepath false
 git config --global core.editor "vim"
 
 ```
 
+### git clone branch
+
+```
+git branch -r/-a 查看远程/所有分支
+```
+然后
+```
+git checkout -b 本地分支名x origin/远程分支名x
+```
+会在本地新建分支x，并自动切换到该本地分支x
+
+### git 拉取远程分支到本地
++ 这里本地已经与origin master建立连接
++ 把远程分支拉到本地
+```
+git fetch origin dev（dev为远程仓库的分支名）
+```
++ 在本地创建分支dev并切换到该分支
+```
+git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
+```
++ 把某个分支上的内容都拉取到本地
+```
+git pull origin dev(远程分支名称)
+```
 
 
-## Reset版本回退利器
+### Git log
++ 默认不用任何参数的话，git log 会按提交时间列出所有的更新
++ git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
++ Git 提供了 --word-diff 选项。我们可以将其添加到 git log -p 命令的后面，从而获取单词层面上的对比
+
+
+
+### 修改分支名称
+
++ 当前分支修改
+
+```
+git branch -m new-name
+```
++ 其它分支修改
+
+```
+git branch -m old-name new-name
+```
+
++ 重命名本地和远程分支
+
+```
+git push origin :old-name new-name
+
+git push origin -u new-name
+```
+
+### dev合并到master
+
+```
+git checkout master
+git pull origin master
+git merge dev
+git push origin master
+
+```
+
+
+### Reset版本回退利器
 #### 如果我们想回退到某个版本可以用git log查看，git log命令显示从最近到最远的提交日志如果嫌输出信息太多，可以试试加上--pretty=oneline参数;
 
 * reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引，而不动工作目录。
@@ -66,58 +130,7 @@ git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
 
 ```
 
-### git clone branch
-
-```
-git branch -r/-a 查看远程/所有分支
-```
-然后
-```
-git checkout -b 本地分支名x origin/远程分支名x
-```
-会在本地新建分支x，并自动切换到该本地分支x
-
-### git 拉取远程分支到本地
-+ 这里本地已经与origin master建立连接
-+ 把远程分支拉到本地
-```
-git fetch origin dev（dev为远程仓库的分支名）
-```
-+ 在本地创建分支dev并切换到该分支
-```
-git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
-```
-+ 把某个分支上的内容都拉取到本地
-```
-git pull origin dev(远程分支名称)
-```
-
-
-### Git 基础 - 查看提交历史 
-+ 默认不用任何参数的话，git log 会按提交时间列出所有的更新
-+ git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
-+ Git 提供了 --word-diff 选项。我们可以将其添加到 git log -p 命令的后面，从而获取单词层面上的对比
 
 
 
-### 修改分支名称
-
-+ 当前分支修改
-
-```
-git branch -m new-name
-```
-+ 其它分支修改
-
-```
-git branch -m old-name new-name
-```
-
-+ 重命名本地和远程分支
-
-```
-git push origin :old-name new-name
-
-git push origin -u new-name
-```
 
