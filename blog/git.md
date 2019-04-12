@@ -98,7 +98,62 @@ git merge dev
 git push origin master
 
 ```
+### git 同步fork的repo
++ 查看远程
 
+```
+git remote -v
+> origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+> origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+```
++ 增加远程fork的upstream
+
+```
+$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+$ git remote -v
+> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
+> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
+
+```
++ 更新
+
+```
+$ git fetch upstream
+> remote: Counting objects: 75, done.
+> remote: Compressing objects: 100% (53/53), done.
+> remote: Total 62 (delta 27), reused 44 (delta 9)
+> Unpacking objects: 100% (62/62), done.
+> From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
+>  * [new branch]      master     -> upstream/master
+```
+
+
+```
+$ git checkout master
+> Switched to branch 'master'
+```
+
+
++ 本地合并到upstream/master
+
+```
+$ git merge upstream/master
+> Updating a422352..5fdff0f
+> Fast-forward
+>  README                    |    9 -------
+>  README.md                 |    7 ++++++
+>  2 files changed, 7 insertions(+), 9 deletions(-)
+>  delete mode 100644 README
+>  create mode 100644 README.md
+```
+
++ 更新自己的repo
+
+```
+git push origin master
+```
 
 ### Reset版本回退利器
 #### 如果我们想回退到某个版本可以用git log查看，git log命令显示从最近到最远的提交日志如果嫌输出信息太多，可以试试加上--pretty=oneline参数;
