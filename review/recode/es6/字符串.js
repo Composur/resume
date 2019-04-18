@@ -9,3 +9,5 @@ var b = a; // 第2行
 a.x = a = {n: 2}; // 第3行
 console.log(a.x); // 第4行
 console.log(b); // 第5行
+
+log(['1','2','3'].map(parseInt))
