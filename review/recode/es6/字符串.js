@@ -11,3 +11,26 @@ console.log(a.x); // 第4行
 console.log(b); // 第5行
 
 log(['1','2','3'].map(parseInt))
+log('\'map\'')
+const  map=new Map([['a',2],['b',3]])
+log([...map])
+
+// function debounce(func, await){
+//     var timeout
+//     return function(){
+//         log(timeout)
+//         clearTimeout(timeout)
+//         timeout=setTimeout(func, await);
+//     }    
+// }
+
+function debounce(func, wait) {
+    var timeout;
+    return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(func, wait);
+    }
+}
+debounce(function(){
+    console.log(1)
+},5000)
