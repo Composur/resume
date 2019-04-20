@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防抖</title>
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" id="inputVal">
+    </div>
+    <p></p>
+    <script>
+        const $ = function (ele) {
+            return document.querySelector(ele)
+        }
+        let i = 0;
+        const handle = function () {
+            $('p').innerHTML = i++
+        }
+        $('.container').onmousemove = debounce(handle, 1000)
+
+        function debounce(func, wait) {
+            let timeOut = null;
+            const _this = this
+            return function (...args) {
+                clearTimeout(timeOut)
+                timeOut = setTimeout(function () {
+                    func.call(_this, args)
+                }, wait)
+            }
+        }
+    </script>
+</body>
+
+</html>
