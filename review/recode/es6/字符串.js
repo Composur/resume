@@ -34,3 +34,15 @@ function debounce(func, wait) {
 debounce(function(){
     console.log(1)
 },5000)
+
+
+function throttle(func,wait){
+    var now=+new Date()
+    var previous=0
+    var _this=this
+    var args=arguments
+    if(now-previous>wait){ //在特定的时间间隔一直执行
+        func.apply(_this,args)
+        previous=now
+    }
+}
