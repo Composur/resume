@@ -37,6 +37,12 @@ git checkout -b 本地分支名x origin/远程分支名x
 ```
 会在本地新建分支x，并自动切换到该本地分支x
 
+### git 放弃本地修改
+
+```
+git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态
+```
+
 ### git 拉取远程分支到本地
 + 这里本地已经与origin master建立连接
 + 把远程分支拉到本地
@@ -166,6 +172,11 @@ git push origin master
 
 * 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
 
+```
+git reset --hard HASH #返回到某个节点，不保留修改。
+git reset --soft HASH #返回到某个节点。保留修改
+```
+
 ## git pull 和 git fetch 的区别
 - 来一张珍藏的图
  ![](./img/git_pull.jpg)
@@ -192,6 +203,8 @@ The branch named “master” is checked out.
 git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
 
 ```
+
+
 
 
 
