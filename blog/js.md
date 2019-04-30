@@ -860,3 +860,11 @@ function ajax(obj){
     ```
     + 解构赋值中默认值生效条件是对象的属性值严格等于undefined
     + 解构赋值的规则是，只要等号右边的值不是对象或者数组，就先将其转换为对象由于undefined和null无法转换为对象，所以对他们进行赋值，都会报错
+
+
+
+### 发布订阅模式
+```
+    $ele.on('click',function(data){//do}) //订阅了$ele的‘click’事件
+    $ele.trigger('click',data) //发布
+```
