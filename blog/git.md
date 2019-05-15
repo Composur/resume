@@ -205,8 +205,34 @@ git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
 ```
 
 
+### git config
+
+查看全局配置
+
+```
+git config --global --list
+```
+git设置代理(非全局)
+地址和端口号在ss配置中查找
+```
+方法1: 在终端中直接运行命令
+export http_proxy=http://proxyAddress:port 
+这个办法的好处是简单直接，并且影响面很小（只对当前终端有效）。
+```
 
 
+git 取消代理 http_proxy以及https_proxy
+
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+```
+查看当前proxy
+
+```
+ env | grep -i proxy
+```
 
 
 
