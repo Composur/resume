@@ -175,6 +175,9 @@ git push origin master
 ```
 git reset --hard HASH #返回到某个节点，不保留修改。
 git reset --soft HASH #返回到某个节点。保留修改
+
+
+git push origin master --force  #强制覆盖远程master分支  gitlab 默认master有写保护 需要先取消写保护
 ```
 
 ## git pull 和 git fetch 的区别
@@ -195,14 +198,6 @@ git reset --soft HASH #返回到某个节点。保留修改
     git pull
 ```
 
-### git branch HEAD detached at c49fac8
-
-```
-git symbolic-ref HEAD yields refs/heads/master
-The branch named “master” is checked out.
-git rev-parse refs/heads/master yield 17a02998078923f2d62811326d130de991d1a95a
-
-```
 
 
 ### git config
