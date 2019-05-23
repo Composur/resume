@@ -65,3 +65,26 @@ class B extends A {
 ```
 > 在 constructor 中必须调用 super 方法，因为子类没有自己的 this 对象，而是继承父类的 this 对象，然后对其进行加工,而 super 就代表了父类的构造函数。super 虽然代表了父类 A 的构造函数，但是返回的是子类 B 的实例，即 super 内部的 this 指的是 B，因此 super() 在这里相当于 ```A.prototype.constructor.call(this, props)``。
 处。
+
+
+#### export 和 export default
+ + export 导出的对象或函数是具名的 需要import对应的名称,如果想重新命名需要使用as import 原名称 as 新名称
+ + export default 导出的对象或函数是匿名的 import的时候无需关心导出的对象或函数名称，重新命名即可
+
+ + 一个模块只能有一个默认输出，因此export default命令只能使用一次。所以，import命令后面才不用加大括号，因为只可能唯一对应export default命令。
+
+    ```
+    // 第一组
+    export default function crc32() { // 输出
+    // ...
+    }
+
+    import xxx from 'crc32'; // 输入
+
+    // 第二组
+    export function crc32() { // 输出
+    // ...
+    };
+
+    import {crc32} from 'crc32'; // 输入
+    ```

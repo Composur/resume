@@ -259,7 +259,7 @@ kill -9 PID号
 ls -l /etc/init.d
 
 ##备份mongo数据库
-mongodump --host=127.0.0.1 --db amss_backup --o /xt/amss_backup
+mongodump --host=127.0.0.1 --db ___backup --o /xt/___backup
 
 
 
