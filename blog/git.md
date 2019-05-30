@@ -173,8 +173,9 @@ git push origin master
 * 如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
 
 ```
+git reset --hard HEAD^ #回退到上个版本有多少个^就回退多少个版本
 git reset --hard HASH #返回到某个节点，不保留修改。
-git reset --soft HASH #返回到某个节点。保留修改
+git reset --soft HASH #返回到某个节点。保留修改。
 
 
 git push origin master --force  #强制覆盖远程master分支  gitlab 默认master有写保护 需要先取消写保护
