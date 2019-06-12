@@ -86,3 +86,8 @@ export function loginUserInfo (previousState = {}, action) {
   }
 }
 ```
+
+
+#### react-redux
+
++ connect()() 一个函数接收两个参数,前一个执行后return出来一个继续执行
