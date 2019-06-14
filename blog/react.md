@@ -91,3 +91,68 @@ export function loginUserInfo (previousState = {}, action) {
 #### react-redux
 
 + connect()() 一个函数接收两个参数,前一个执行后return出来一个继续执行
+
+
+
+#### react-loadable库的用法
+> 它可以帮助我们按需加载组件
+
+1. 首先准备一个loading组件
+
+```
+/**
+ * @desc 借助 react-loadable 进行 code-splitting 时的loading组件
+ */
+import React from 'react'
+
+ function Loading({ error }) {
+  if (error) {
+    console.log('react-loadable error')
+    console.log(error)
+    return 'error';
+  } else {
+    return <div></div>;
+  }
+}
+
+export default Loading
+
+```
+
+
+2. 然后引入react-loadable
+
+```
+import Loadable from 'react-loadable'
+import RouteLoading from 'components/RouteLoading/index'
+
+const Home = Loadable({
+  loader: () => import('./children/Home'),  //注意是import()方法，不是import关键字
+  loading: RouteLoading,
+})
+
+```
+
+3. 使用
+
+```
+ <Route path="/" exact component={Home} /> //这里就是home组件，路由匹配的时候才引入，而不是一开始全部引入
+```
+
+
+#### react-router-dom 
+
++ Router
+  + 所有路由组件共用的底层接口，在 4.x 中，你可以将各种组件及标签放进  <Router>  组件中 ,它只能有一个子元素
++ BrowserRouter
+  + HTML5 history API 
++ HashRouter
+  + HashRouter 是一种特定的 <Router> ,用于支持传统浏览器
+  + 使用window.location.hash来保持 UI 和 url 的同步
++ Route的用法
+
+  + <Route component> 当访问地址和路由匹配时，一个 React component 将会被渲染
+  + <Route render>  此方法适用于内联渲染，而且不会产生重复装载问题
++ Switch
+  + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
+  + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
