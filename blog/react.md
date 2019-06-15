@@ -6,6 +6,10 @@
 ```
 + 查找两次dom不同的过程叫DOM diff 
 
+
+### state、props
+> state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state
+
 ### react的context
 + 子组件要获取 context 里面的内容的话，就必须写 contextTypes 来声明和验证你需要获取的状态的类型，它也是必写的
 
@@ -156,3 +160,7 @@ const Home = Loadable({
 + Switch
   + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
   + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
+
+
+#### 高阶组件
+  +  组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件。（接收一个组件再返回一个组件）
