@@ -38,3 +38,26 @@ xhr.send(null)
 ```
 #### 注意
 + ajax只能像同源网址（协议、域名、端口号都相同）
+
+
+### promise只是封装了异步操作
+
+#### Promise.all()
++ all是与的关系，统一请求成功以后返回，返回的结果也是一个数组,是一种无脑的状态，不管先后
+
+    Promise.all([
+        fn1,fn2,fn3 //都是promise对象 
+    ]).then(arr=>arr,err=>err)
+
+#### Promise.race()
++ race
+
+  Promise.race 竞速，是或者的关系，谁先完成用谁，那个快用哪个，除非都失败才返回error，返回的是一个对象
+
+
+### async await
+
+async function(){
+    let results= await ajax() //等异步操作完成返回结果再往下执行
+    console.log(results) //同步拿到结果
+}
