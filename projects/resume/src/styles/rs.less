@@ -1,0 +1,236 @@
+.header {
+    position: relative;
+}
+
+.header .topNavBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.sticky{
+    background: #fff;
+    opacity: 0.9;
+    z-index: 100;
+}
+.header .topNavBar .logo {
+    font-family: "Arial Black";
+    float: left;
+    margin: 10px 20px;
+}
+
+.header .topNavBar .logo .rs {
+    color: #E6686E;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 2px;
+}
+
+.header .topNavBar .logo .card {
+    color: #B1B4B7;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.header .topNavBar>nav {
+    float: right;
+    margin: 4px 20px 0 20px;
+}
+
+.header .topNavBar>nav>ul li {
+    float: left;
+    margin: 20px 10px;
+}
+
+.header .topNavBar>nav>ul li a {
+    display: block;
+    color: #B1B4B7;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 2px 0;
+    border-bottom: 3px solid transparent;
+}
+
+.header .topNavBar>nav>ul li a:hover {
+    border-bottom: 3px solid #E6686E;
+}
+
+.banner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #313941;
+    opacity: 0.85;
+    z-index: -1;
+}
+
+.banner {
+    position: relative;
+    height: 515px;
+    background: url(../img/rs-cover-2-2-1-1.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+/* main */
+
+.main {}
+
+.basic-info {
+    max-width: 940px;
+    margin: -400px  auto 0;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    background: #FFF;
+}
+
+.main .basic-info .top {
+    padding: 55px 50px;
+    /* position: relative; */
+}
+
+.main .basic-info .top .avatar {
+    width: 295px;
+    height: 318px;
+}
+
+.main .basic-info .top .avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.main .basic-info .top .text {
+    margin-left: 90px;
+}
+
+.basic-info .top .text .welcom {
+    position: relative;
+    display: inline-block;
+    padding: 7px 30px;
+    color: #fff;
+    background: #E6686E;
+    margin-bottom: 15px;
+}
+
+.welcom .triangle {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    display: block;
+    border: 20px solid black;
+    width: 0;
+    height: 0;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: #E6686E;
+    border-right-color: transparent;
+    border-top-width: 0;
+}
+
+.basic-info .top .text .welcom::after {
+    /* content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: 3px solid red; */
+}
+.job-title{
+    color: #B1B4B7;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.person-info{
+    width: 430px;
+}
+.person-info ul li{
+    width: 100%;
+    float: left;
+    margin-bottom: 13px;
+}
+.person-info ul li span{
+    display: block;
+    width: 70%;
+    color: #B1B4B7;
+}
+.person-info ul li strong{
+    display: block;
+    width: 30%;
+}
+.basic-info .contract-me{
+    background: #E6686E;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.basic-info .contract-me .iconfont{
+    display:inline-block; 
+    color: #fff;
+    vertical-align: top;
+    font-size: 20px;
+    /* margin: 0 20px; */
+    padding: 10px;
+}
+.download-rs-wrapper{
+    margin-top: 30px;
+    text-align: center;
+}
+.download-rs-wrapper .download-rs{
+    border: 1px solid #cbcdcf;
+    padding: 15px 80px;
+    display: inline-block;
+    transition:box-shadow 0.3s;
+}
+.download-rs-wrapper .download-rs:hover{
+    opacity: 0.95;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.about-me-text{
+    max-width: 940px;
+    margin: 40px auto;
+    line-height: 1.5;
+    text-align: center;
+}
+.skill{
+    text-align: center;
+    margin: 40px auto;
+}
+
+.skill-card{
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+.skill-item{
+    float: left;
+    width: 50%;
+    padding: 10px 20px;
+}
+.skill-level{
+    height: 4px;
+    background: #FAE1E2;
+    border-radius: 2px;
+}
+.skill-level-bg{
+    width: 50%;
+    height: 100%;
+    border-radius: 2px;
+    background: #E6686E;
+}
+.portfolio-nav{
+    
+}
+.portfolio-nav ul{
+
+}
+.portfolio-nav ul li{
+    
+}

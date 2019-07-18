@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/Composur/resume#readme",
   "dependencies": {
+    "gulp-connect": "^5.7.0",
+    "gulp-less": "^4.0.1",
     "leancloud-storage": "^3.7.0",
+    "less": "^3.9.0",
     "nodemon": "^1.14.11",
     "t-get": "^1.2.0",
     "webpack": "^3.10.0"
