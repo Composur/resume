@@ -15,7 +15,7 @@
 </style>
 
 <body>
-  <div id="loadingWrap" class="loading-wrap show">
+  <div id="loadingWrap" class="loading-wrap">
     <div class="loading"></div>
   </div>
   <div class="container">
@@ -24,19 +24,19 @@
         <div class="logo"><a href="#"><span class="rs">RS</span><span class="card">card</span></a></div>
         <nav>
           <ul class="clearfix">
-            <li class="nav-item"><a href="#">关于</a>
+            <li class="nav-item"><a href="#aboutMe">关于</a>
               <ul class="nav-menu">
                 <li>哈哈哈哈</li>
                 <li>哈哈哈</li>
                 <li>哈哈</li>
               </ul>
             </li>
-            <li class="nav-item"><a href="#">关于</a>
+            <li class="nav-item"><a  href="#skill">技能</a>
               <ul class="nav-menu">
                 <li>哈哈</li>
               </ul>
             </li>
-            <li class="nav-item"><a href="#">关于</a>
+            <li class="nav-item"><a href="#">其它</a>
               <ul class="nav-menu">
                 <li>哈哈</li>
               </ul>
@@ -61,10 +61,10 @@
       </div>
     </div>
     <div class="banner"></div>
-    <div class="main">
+    <div class="main" >
       <!-- 中间悬浮卡片 -->
       <section>
-        <div class="basic-info">
+        <div id="aboutMe" class="basic-info">
           <div class="top clearfix">
             <div class="avatar fl">
               <img src="./src/img/person_photo.jpg" alt="myPhoto">
@@ -93,7 +93,10 @@
             <span><i class="iconfont icon-github"></i></span>
           </div>
         </div>
-        <div class="download-rs-wrapper">
+      </section>
+      <!-- 技能 -->
+      <section id="skill">
+        <div class="download-rs-wrapper" >
           <a href="JavaScript:void(0)" class="download-rs" download="">下载PDF简历</a>
         </div>
         <p class="about-me-text">Hello! I’m Robert Smith. Senior Web Developer specializing in front end development.
@@ -136,6 +139,9 @@
           </ul>
         </div>
         <h2 class="skill ">Portfolio</h2>
+      </section>
+      <section>
+           
         <div class="portfolio-nav">
           <ul>
             <li>All</li>
@@ -144,7 +150,6 @@
           </ul>
         </div>
         <div class="portfolio-content"></div>
-
       </section>
     </div>
     <div class="footer">
@@ -154,12 +159,12 @@
 </body>
 <script src="./src/js/rs.js"></script>
 <script>
-  var timer = setTimeout(function () {
-    loadingWrap.classList.remove('show')
-  }, 1000)
-  window.onscroll = function () {
-    window.scrollY > '0' ? topNavBar.classList.add('sticky') : topNavBar.classList.remove('sticky')
-  }
+  // var timer = setTimeout(function () {
+  //   loadingWrap.classList.remove('show')
+  // }, 1000)
+  // window.onscroll = function () {
+  //   window.scrollY > '0' ? topNavBar.classList.add('sticky') : topNavBar.classList.remove('sticky')
+  // }
 </script>
 
 </html>
