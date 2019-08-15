@@ -309,7 +309,7 @@ xhr.send(null)
 #### new
 >`new`命令的作用，就是执行构造函数，返回一个实例对象。
 ```
-var s = new String() 
+var s = new String() //可以理解为 var 对象 =new 函数 
 s的类型是对象 String的类型是对象函数function
 ```
 + 对象.__proto__===函数的.prototype 二者指向同一个对象·
