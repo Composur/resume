@@ -2,8 +2,9 @@
   const fn = {
     init() {
       this.navMenu()
-      window.onscroll=function(){
+      window.onscroll = function () {
         fn.heightLight()
+        window.scrollY>0?fn.$('#topNavBar').style.background = '#fff':fn.$('#topNavBar').style.background = 'none'
       }
     },
     navMenu: function () {
@@ -23,18 +24,15 @@
           e.preventDefault();
           const targetId = e.target.getAttribute("href")
           const top = fn.$(targetId).offsetTop
-          let currentY=window.scrollY
+          let currentY = window.scrollY
           // window.scrollTo(0, top - 100)
-          fn.scroll(currentY,top-80)
+          fn.scroll(currentY, top - 80)
         })
       })
     },
-
     scroll(currentY, targetY) {
       // 计算需要移动的距离
-
       let needScrollTop = targetY - currentY
-
       let _currentY = currentY
       const timer = setTimeout(() => {
         // 一次调用滑动帧数，每次调用会不一样
@@ -48,21 +46,21 @@
           window.scrollTo(_currentY, targetY)
           clearTimeout(timer)
         }
-      }, 16)
+      }, 40)
     },
-    heightLight:function(){
-      const itemArr=fn.$$('[data-y]') || []
-      const topY=window.scrollY
-      let minIndex=0
-      itemArr.forEach((item,index)=>{
-        const currentItmeTop=Math.abs(item.offsetTop-topY) //当前模块的高度
-        const minTop=Math.abs(itemArr[minIndex].offsetTop-topY) //离得最近的模块的高度
-        if(currentItmeTop<minTop){
-          minIndex=index
+    heightLight: function () {
+      const itemArr = fn.$$('[data-y]') || []
+      const topY = window.scrollY
+      let minIndex = 0
+      itemArr.forEach((item, index) => {
+        const currentItmeTop = Math.abs(item.offsetTop - topY) //当前模块的高度
+        const minTop = Math.abs(itemArr[minIndex].offsetTop - topY) //离得最近的模块的高度
+        if (currentItmeTop < minTop) {
+          minIndex = index
         }
       })
-      const navItems=fn.$$('.nav-item a')
-      navItems.forEach((item)=>{
+      const navItems = fn.$$('.nav-item a')
+      navItems.forEach((item) => {
         item.classList.remove('height-light')
       })
       navItems[minIndex].classList.add('height-light')
