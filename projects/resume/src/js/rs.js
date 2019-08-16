@@ -2,9 +2,12 @@
   const fn = {
     init() {
       this.navMenu()
+      window.onscroll=function(){
+        fn.heightLight()
+      }
     },
     navMenu: function () {
-      var navLis = fn.$('#topNavBar').querySelectorAll('.nav-item')
+      const navLis = fn.$('#topNavBar').querySelectorAll('.nav-item')
       navLis.forEach(element => {
         element.addEventListener('mouseenter', e => {
           element.children[1].classList.add('active')
@@ -46,6 +49,23 @@
           clearTimeout(timer)
         }
       }, 16)
+    },
+    heightLight:function(){
+      const itemArr=fn.$$('[data-y]') || []
+      const topY=window.scrollY
+      let minIndex=0
+      itemArr.forEach((item,index)=>{
+        const currentItmeTop=Math.abs(item.offsetTop-topY) //当前模块的高度
+        const minTop=Math.abs(itemArr[minIndex].offsetTop-topY) //离得最近的模块的高度
+        if(currentItmeTop<minTop){
+          minIndex=index
+        }
+      })
+      const navItems=fn.$$('.nav-item a')
+      navItems.forEach((item)=>{
+        item.classList.remove('height-light')
+      })
+      navItems[minIndex].classList.add('height-light')
     },
     $(ele) {
       return document.querySelector(ele)

@@ -78,7 +78,17 @@
 }
 
 .header .topNavBar>nav>ul li a:hover::after{
-    // border-bottom: 3px solid #E6686E;
+    content: '';
+    display: ruby;
+    position: absolute;
+    top:100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #E6686E;
+    animation: nav_bar_bottom_line 0.5s;
+}
+.header .topNavBar>nav>ul li a.height-light:after{
     content: '';
     display: ruby;
     position: absolute;
