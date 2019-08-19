@@ -272,6 +272,14 @@ xhr.send(null)
     + 当状态变更时候（unset、opened、loading、done）如果设置的有callback异步线程就会产生状态变更事件，将这个callback再放到事件队列中，由JS引擎的执行
 
 ### EventLoop
+>微任务包括 process.nextTick ，promise ，Object.observe ，MutationObserver
+宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UI
+rendering
+1. 执行同步代码，这属于宏任务
+2. 执行栈为空，查询是否有微任务需要执行
+3. 执行所有微任务
+4. 必要的话渲染 UI
+5. 然后开始下一轮 Event loop，执行宏任务中的异步代码
 + 这里是JS引擎运行机制的一些分析
 + JS分为同步任务和异步任务（同步任务在主线程上执行形成一个执行栈）
 + 主线程之外、事件触发的线程管理着一个任务队列、只要异步任务有了运行结果，就在任务队列中放置一个事件
