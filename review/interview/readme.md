@@ -15,10 +15,10 @@
 ### CSS
 ####  盒模型
 + content-box:width=内容区宽度
-+ border-box:width=内容区宽度+padding宽度
++ border-box:width=内容区宽度+padding宽度（不管IE的话 box-sizing:border-box;）
 #### css reset和normalize.css的区别
 + reset重置样式，抛弃之前的样式
-+ normalize让所有的浏览器的标签都根规定的默认样式一致（Linux、window平台下）
++ normalize让所有的浏览器的标签都跟规定的默认样式一致,各浏览器间统一（Linux、window平台下）
 #### 如何居中？
 + 七种实现方式
  - 水平居中
@@ -57,7 +57,7 @@
     function fn(){
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
-               resolve()或者reject() 
+               resolve() // 或者reject() 
             },3000)
         })
     }
@@ -179,13 +179,19 @@ asyncCall();
 
 ```
 #### 如何实现深拷贝
++  JSON.parse(JSON.stringify(object)) 来解决。
+局限
+1. 会忽略 undefined
+2. 不能序列化函数
+3. 不能解决循环引用的对象
+
 + JSON来深拷贝
     ```
     var a={...}
     var b=JSON.parse(JSON.stringify(a))//不支持函数
     undefined、正则、Date...
     ```
-+ 递归的方式
++ 递归的方式（只是思路，不能这么用）
 
     ```
         function clone(obj){
@@ -207,9 +213,19 @@ asyncCall();
 
             
     ```
++ 环
++ 正则的拷贝 date set symbol
 #### 数组去重
-+ 技术排序
++ map filter
 
+```
+function unique(arr) {
+    const res = new Map();
+    return arr.filter((a) => !res.has(a) && res.set(a, 1))
+}
+```
+
++ 技术排序（只能正整数）
 ```
    var a=[1,2,3,45,45,3,2,1]
     var hashTab={}
@@ -227,6 +243,7 @@ asyncCall();
     ``` var a=[1,2,3,45,45,3,2,1]
          Array.from(new Set(a))
     ```
+
 + 用正则实现string.trim()
 
 ```
@@ -311,7 +328,7 @@ class Person extends Animal{
 #### Dom事件模型
 + 捕获
 + 冒泡
-+ 如果这个元素是被点击的元素，那么捕获不一定会在冒泡之前，就是他自身不存在冒泡
++ 如果这个元素是被点击的元素，那么捕获不一定会在冒泡之前，就是他自身不存在冒泡（点击的就是它，不存在传播的过程），事件是由监听事件决定的
 #### 移动端的触摸事件
 + touchstart touchmove touchend touchcancel
 + 如何模拟swipe事件:记录两次touchmove的位置差，如果后一次在前一次的右面说明向右滑了
@@ -322,10 +339,20 @@ class Person extends Animal{
 ```
 function listen(element,eventType,selector,fn){
     element.addEventListener(eventType,e=>{
-        if(e.target.matches(selector)){
-            fn.call(el,e,el)
+        let el=e.target
+        while(!e.matches(selector)){
+            if(element===el){ //找到父元素就不在找了 ，break
+                el=null
+                break 
+            }
+            el=el.parentNode
         }
+        el && el.call(el,e,el)
+       // if(e.target.matches(selector)){
+         //   fn.call(el,e,el)
+       // }
     })
+    return element
 }
 ```
 
@@ -350,12 +377,18 @@ function listen(element,eventType,selector,fn){
 + 500-599：问题出在服务器端。
 
 #### 301和302的区别是什么?
-+ 301永久重定向（浏览器会缓存，直接重定向回去）
-+ 302临时重定向（浏览器不会记住，访问的时候特定的页面无法访问跳转到其它临时页面）
++ 301永久重定向（浏览器会缓存，直接重定向回去）haha.com => hh.com 
++ 302临时重定向（浏览器不会记住，访问的时候特定的页面无法访问跳转到其它临时页面）临时的
 #### HTTP缓存怎么做？
 + Cache-control:max-age=300
 + http://cdn.com/1.js?v=1 避开缓存
 #### Cache-Control和Etag的区别是什么？
+强缓存
++ Cache-Control 出现于 HTTP / 1.1，优先级高于 Expires 
++ Cache-control: max-age=30该属性表示资源会在30 秒后过期，需要再次请求。
+协商缓存
++ ETag 和 If-None-Match
++ ETag 类似于文件指纹，If-None-Match 会将当前 ETag 发送给服务器，询问该资源 ETag 是否变动，有变动的话就将新的资源发送回来。并且 ETag 优先级比 LastModified 高。
 #### cookie session?
 + cookie 
     + http相应通过Set-Cookie设置Cookie
@@ -370,9 +403,9 @@ function listen(element,eventType,selector,fn){
 + cookie大小一般在4K，localstorage一般在5M
 #### GET和POST的区别？
 + GET用来读数据,POST用来写数据，POST不幂等（幂等就是不管发多少次请求结果都一样）
-+ 参数，GET的参数放到URl的查询参数里(有长度限制，一般是1024字节)，POST的参数（没有长度限制）放在请求体里
++ 参数，GET的参数放到URl的查询参数里(有长度限制，一般是1024字节)，POST的参数（长度一般是4-10M）放在请求体里
 + 安全，GET没有POST安全
-+ 包，GET请求需要发一个包，POST需要发两个以上（POST有消息体）
++ 包，GET请求需要发一个包，POST需要发两个以上（因为POST有消息体）
 #### 跨域
 ##### JSONP（仅支持GET）
 > 网页通过添加一个`<script>`元素，向服务器请求 JSON 数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来
@@ -384,7 +417,7 @@ function addScriptTag(src) {
   document.body.appendChild(script);
 }
 
-window.onload = function () {
+window.onload = function () { 
   addScriptTag('http://example.com/ip?callback=foo');
 }
 
@@ -484,7 +517,7 @@ function foo(data) { //调用foo得到一个返回的对象
     + 使用code split
     + 写法 import('xxx').then(xxx=>console.log(xxx))
     + xxx模块就是按需加载
-+ 转移速度过慢
++ 转义速度过慢
     + 
 + webpack loader
     + 从右到左，链式执行
