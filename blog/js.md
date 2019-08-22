@@ -145,9 +145,35 @@ var type = function (o){
     + 
 
 
+### 函数
+>函数是一段可以重复调用的代码块
++ 函数如果没有返回值，默认返回undefined
++ 具名函数赋值
+```
+const {log}=console
+const fn1=function fn2(){}
+
+log(fn1)// fn2
+log(fn2)//not defined 作用域只限于fn2内部，外部无法访问到
+```
+  
++ 函数的name
+```
+const fn0=function(){}
+const fn1=function fn2(){}
+const fn2=new Function()
+
+log(fn0.name) //fn0
+log(fn1.name)//fn2
+log(fn2.name) //anonymous(匿名))
+```
+
+### 函数的调用
+
+
 ### 数据类型
 + 基本类型
-> 数值、字符串、布尔也叫原始类型，及它们是最基本的类型不能再进行细分了，这是JavaScript 原生提供的三个包装对象
+> 数值、字符串、布尔也叫原始类型，及它们是最基本的类型不能再进行细分了，这是JavaScript原生提供的三个包装对象
 > null undefined语法效果没什么区别 
 + 复杂类型
 > 狭义的对象（object）、数组（array）、函数（function）
