@@ -170,6 +170,29 @@ log(fn2.name) //anonymous(匿名))
 
 ### 函数的调用
 
+模仿函数的调用，忽略参数
+
+```
+const fun={
+  params:[],
+  fbody:'console.log(123)'
+}
+
+fun.call=function(){
+  return window.eval(fun.fbody)
+}
+fun.call()
+```
+### 函数堆栈（数据结构）先入后出
+函数的执行
+
+```
+const a=function(){ b.call(), console.log('a')}
+const b=function(){ c.call() ,console.log('b')}
+const c=function(){console.log('c')}
+
+a.call() // c b a
+```
 
 ### 数据类型
 + 基本类型
@@ -799,6 +822,13 @@ var isChrome = !!window.chrome && !!window.chrome.webstore;
 var isBlink = (isChrome || isOpera) && !!window.CSS;
 
 ```
+### http缓存
+Cache-Control
++ Cache-Control: max-age=30(请求头设置，30秒内不会再从新请求)
++ 更新缓存，修改请求路径即可 /xx.js 修改为 /xx.js?v=1等
+
+
+
 
 ### session&cookie&localStorage
 #### cookie
