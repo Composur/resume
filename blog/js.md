@@ -619,6 +619,22 @@ var _this=fn()
 + 继承就是一个对象直接使用另一个对象的属性和方法
 + Object.create()
 
+    ```
+    function Super() {}
+    Super.prototype.getNumber = function() {
+    return 1
+    }
+    function Sub() {}
+    let s = new Sub()
+    Sub.prototype = Object.create(Super.prototype, {
+    constructor: {
+    value: Sub,
+    enumerable: false,
+    writable: true,
+    configurable: true
+    }
+    ```
+
 ### 原型和原型链
 > 原型对象的作用，就是定义所有实例对象共享的属性和方法  
 + 原型是函数的一个属性，是一个对象
