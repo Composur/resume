@@ -13,7 +13,7 @@
     <script>
         setTimeout(() => {
             // 插入十万条数据
-            const total = 10000
+            const total = 100000
             // 一次插入 20 条，如果觉得性能不好就减少
             const once = 20
             // 渲染数据总共需要
@@ -41,7 +41,7 @@
                 }
             }
             loop();
-        }, 0);
+        }, 16.7);
     </script>
 </body>
 
