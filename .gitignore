@@ -34,3 +34,4 @@ binding.sln
 *.exe
 *.out
 *.app
+.vscode
