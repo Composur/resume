@@ -26,6 +26,12 @@ service nginx quit
 systemctl quit nginx
 
 ```
+无效的时候可以用 killall
+
+```
+killall nginx
+```
+
 #### 4.重启Nginx
 ```
 service nginx restart
@@ -57,4 +63,57 @@ systemctl -v nginx
 ```
 service nginx -h
 systemctl -h nginx
+```
+
+
+#### 单个项目配置文件详解
+```
+//端口的方式
+server {
+        listen  80;
+        location / {
+            root   /home/xt_one/fork/vue-project/vue-blog2/dist;
+            index  index.html index.htm;
+
+            #禁止IP访问
+            #deny 112.97.160.1/200 1-200 都不能访问
+
+            #白名单 先出现的设置会覆盖后出现的设置allow覆盖deny
+            #allow 112.97.160.1/200;
+            #deny all;剩下的都不能访问
+        }
+
+        #也可配置成网址
+        #error_page 404  http://xxx.com;
+        error_page 404  /404.html;
+        location = /404.html { 
+          root /var/www/html;
+        }
+        # =是精确匹配符 可以设置外部用户是否能够访问某个文件或文件夹,正则
+        location  ~\.js$ { 
+          deny all
+        }
+ }
+
+
+```
+
+域名的方式以及反向代理
++ proxy_set_header :在将客户端请求发送给后端服务器之前，更改来自客户端的请求头信息。
++ proxy_connect_timeout:配置Nginx与后端代理服务器尝试建立连接的超时时间。
++ proxy_read_timeout : 配置Nginx向后端服务器组发出read请求后，等待相应的超时时间。
++ proxy_send_timeout：配置Nginx向后端服务器组发出write请求后，等待相应的超时时间。
++ proxy_redirect :用于修改后端服务器返回的响应头中的Location和Refresh。
+```
+server{
+        listen 80;
+        server_name xxx.com;
+        location / {
+          root /usr/share/nginx/pc;
+          if ($http_user_agent ~* '(Android|webOS|iPhone|iPod|BlackBerry)') {
+              root /usr/share/nginx/mobile;
+          }
+          index index.html;
+        }
+}
 ```
