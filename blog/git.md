@@ -230,5 +230,27 @@ git config --global --unset https.proxy
  env | grep -i proxy
 ```
 
+### Message 规范
+#### 类型(type)定义
++ build: 版本发布
++ ci: 集成环境的变动
++ chore: 构建过程或者辅助工具的变动
++ docs: 文档
++ feat: 新功能
++ fix: 修复Bug
++ perf: 优化相关
++ refactor: 重构(即不是新增功能，也不是修改 Bug 的代码变动)
++ revert: commit 回滚
++ style: 代码格式(即不影响代码运行的变动)
++ test: 测试相关
+```
+type(scope?): <subject>
 
+<body>?
 
+<foot>?
+```
+
+type只能小写并且不能唯恐，scope只能小写，subject简短清晰的描述这次提交并且不能为空。
+
+body可以是你这次提交的详细描述，比如新增的方法的作用，foot可以是你这次提交的代码会带来什么影响，比如测试影响。
