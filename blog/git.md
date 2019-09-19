@@ -308,9 +308,27 @@ Merge made by the 'recursive' strategy.
 $ git stash list
 stash@{0}: WIP on dev: f52c633 add merge
 
-$ git stash apply 
+$ git stash apply  
 
 $ git stash apply stash@{0} 恢复指定的stash 
+```
+5. 关于git stash
+
+上述4恢复字后stash暂存区并不会自动删除，就是你提交暂存后也不会消失。`git stash list` 查暂存看依旧存在,可用`git stash drop`来删除；会删除全部暂存；另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
+```
+git stash pop
+Dropped refs/stash@{0} (98e7191bbb73bd9e6214f79ff2b528d95b6477bd)
+```
+
+6. 注意，此时我们只是修改了mater上的分支，当前的dev分支依然存在这个问题
+同样的bug，要在dev上修复，我们只需要把第`3`步的`merged bug fix 101`commit 头部信息 复制到`dev`分支就行；我们只是需要复制这个修改而不管其它的
+```
+$ git branch
+* dev
+  master
+$ git cherry-pick commit编码（例如：a264173）
+[master 1d4b803] fix bug 101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
 
