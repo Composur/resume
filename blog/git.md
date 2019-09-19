@@ -1,4 +1,4 @@
-### git初始化
+### 1.git初始化
 + 清空现有的key
 ```
 rm -rf ~/.ssh/*
@@ -26,7 +26,7 @@ git config --global core.editor "vim"
 
 ```
 
-### git clone branch
+### 2.git clone branch
 
 ```
 git branch -r/-a 查看远程/所有分支
@@ -37,13 +37,13 @@ git checkout -b 本地分支名x origin/远程分支名x
 ```
 会在本地新建分支x，并自动切换到该本地分支x
 
-### git 放弃本地修改
+### 3.git 放弃本地修改
 
 ```
 git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态
 ```
 
-### git 拉取远程分支到本地
+### 4.git 拉取远程分支到本地
 + 这里本地已经与origin master建立连接
 + 把远程分支拉到本地
 ```
@@ -57,7 +57,7 @@ git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
 ```
 git pull origin dev(远程分支名称)
 ```
-### git 删除分支
+### 5.git 删除分支
 
 + 删除本地
 ```
@@ -67,14 +67,14 @@ git branch -d BranchName
 ```
 git push origin --delete BranchName
 ```
-### Git log
+### 6.Git log
 + 默认不用任何参数的话，git log 会按提交时间列出所有的更新
 + git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
 + Git 提供了 --word-diff 选项。我们可以将其添加到 git log -p 命令的后面，从而获取单词层面上的对比
 
 
 
-### 修改分支名称
+### 7.修改分支名称
 
 + 当前分支修改
 
@@ -95,7 +95,7 @@ git push origin :old-name new-name
 git push origin -u new-name
 ```
 
-### 合并分支
+### 8.合并分支
 + dev合并到master
 ```
 git checkout master
@@ -104,7 +104,7 @@ git merge dev
 git push origin master
 
 ```
-### git 同步fork的repo
+### 9.git 同步fork的repo
 + 查看远程
 
 ```
@@ -161,7 +161,7 @@ $ git merge upstream/master
 git push origin master
 ```
 
-### Reset版本回退利器
+### 10.Reset版本回退利器
 #### 如果我们想回退到某个版本可以用git log查看，git log命令显示从最近到最远的提交日志如果嫌输出信息太多，可以试试加上--pretty=oneline参数;
 
 * reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引，而不动工作目录。
@@ -181,7 +181,7 @@ git reset --soft HASH #返回到某个节点。保留修改。
 git push origin master --force  #强制覆盖远程master分支  gitlab 默认master有写保护 需要先取消写保护
 ```
 
-## git pull 和 git fetch 的区别
+## 11.git pull 和 git fetch 的区别
 - 来一张珍藏的图
  ![](./img/git_pull.jpg)
 - git pull = git fetch + merge
@@ -191,7 +191,7 @@ git push origin master --force  #强制覆盖远程master分支  gitlab 默认ma
 
 
 
-### Git pull 强制覆盖本地文件
+### 12.git pull 强制覆盖本地文件
 
 ```
     git fetch --all  
@@ -201,7 +201,7 @@ git push origin master --force  #强制覆盖远程master分支  gitlab 默认ma
 
 
 
-### git config
+### 13.git config
 
 查看全局配置
 
@@ -230,7 +230,7 @@ git config --global --unset https.proxy
  env | grep -i proxy
 ```
 
-### Message 规范
+### 14.Message 规范
 #### 类型(type)定义
 + build: 版本发布
 + ci: 集成环境的变动
@@ -251,6 +251,66 @@ type(scope?): <subject>
 <foot>?
 ```
 
-type只能小写并且不能唯恐，scope只能小写，subject简短清晰的描述这次提交并且不能为空。
+type只能小写并且不能为空，scope只能小写，subject简短清晰的描述这次提交并且不能为空。
 
 body可以是你这次提交的详细描述，比如新增的方法的作用，foot可以是你这次提交的代码会带来什么影响，比如测试影响。
+
+### 15.分支管理
+
+* 功能（feature）分支
+* 预发布（release）分支
+* 修补bug（fixbug）分支
+这三种分支都属于临时性需要，使用完以后，应该删除，使得代码库的常设分支始终只有Master和Develop。
+
+#### 普通分支流程周期
+1. 新建分支
+```
+　git checkout -b feature-x develop
+```
+2. 合并分支
+```
+git checkout develop
+
+git merge  feature-x
+
+```
+3. 删除分支
+
+```
+git branch -d feature-x
+```
+#### bug分支流程
+
+1. 暂存当前dev分支（不提交到git服务器）
+```
+$ git stash
+Saved working directory and index state WIP on dev: f52c633 add merge
+```
+2. 确定bug在哪个分支上，checkout到对应的分支后新建bug分支
+```
+$ git checkout -b issue-101
+Switched to a new branch 'issue-101'
+```
+3. 修改完成后切换到对应的分支如master,然后进行merge
+```
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 6 commits.
+  (use "git push" to publish your local commits)
+
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+Merge made by the 'recursive' strategy.
+ readme.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+4. 继续切换到dev进行开发，解冻刚才的暂存
+```
+$ git stash list
+stash@{0}: WIP on dev: f52c633 add merge
+
+$ git stash apply 
+
+$ git stash apply stash@{0} 恢复指定的stash 
+```
+
+
