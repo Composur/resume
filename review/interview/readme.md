@@ -526,7 +526,7 @@ function foo(data) { //调用foo得到一个返回的对象
     + module 依赖
     + return && this.callback()
 ### 发散题
-+ 从URL到也面？
++ 从URL到浏览器呈现页面发送了啥？
     1、DNS查询
     2、建立TCP连接，三次握手
     3、发送HTTP请求（请求的四部分）
