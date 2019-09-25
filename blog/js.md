@@ -321,9 +321,14 @@ xhr.send(null)
     + 当状态变更时候（unset、opened、loading、done）如果设置的有callback异步线程就会产生状态变更事件，将这个callback再放到事件队列中，由JS引擎的执行
 
 ### EventLoop
->微任务包括 process.nextTick ，promise ，Object.observe ，MutationObserver
-宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UI
-rendering
+
+#### 1.js是单线程的
+假如在这个线程中，有 `var =1;get(/xxx.josn);`等，js引擎会执行同步代码`var=1`，异步的`get`请求会让浏览器的网络模块来做; 请求完后通知js引擎再执行回调；
+
+#### Chrome
+
+>微任务包括 process.nextTick ，promise ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UIrendering <br/>
+
 1. 执行同步代码，这属于宏任务
 2. 执行栈为空，查询是否有微任务需要执行
 3. 执行所有微任务
@@ -354,8 +359,24 @@ rendering
 
         ```
         
+#### NodeJS Event loop
+
+以下的每一个阶段都有一个队列
+
+ 1. timers 阶段
+    + 处理`setTimeout() setInterval()` 到时的函数
+    + 把函数塞到队列里面并记录什么时候该调用，到了就调用
+ 2. poll 阶段
+    + 轮询阶段，例如问操作系统文件读完了没有等不停的问。 这个阶段会停下来，完了后放到队列里。回到timer阶段执行回调
+ 3. check 阶段
+    + `setImmediatel()` 特殊的计时器，这个更快相比`setTimeout() setInterval()`(除了第一次轮询，因为第一次先执行timer阶段)，但是也要看`setImmediatel()`的执行时间小于`setTimeout()`的执行时间到check阶段顺带执行，大于的话还是先执行timer阶段，另外它没有第二个参数默认0; 
+还有一个process.nextTick()它不属于event loop但是在执行每个阶段前都要执行一下
 
 
+### 宏任务（Macro Task） 微任务（Micro Task）
+  > es规范里的东西，通过event loop实现的
+#### 1. 宏任务
++ setTimeout()
 
 ### 面向对象
 > 对象是单个实物的抽象。对象是一个容器，封装了属性（property）和方法（method）
