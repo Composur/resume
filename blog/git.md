@@ -67,6 +67,7 @@ git branch -d BranchName
 ```
 git push origin --delete BranchName
 ```
+
 ### 6.Git log
 + 默认不用任何参数的话，git log 会按提交时间列出所有的更新
 + git log -p -2 我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
@@ -332,3 +333,14 @@ $ git cherry-pick commit编码（例如：a264173）
 ```
 
 
+### 15. git 移除远程文件夹
+把不需要版本控制的文件提交到远程分支上后，需要删除远程分支上的文件，用以下操作即可
+```
+git rm -r --cached dirname //删除远程文件夹，但保留本地文件夹 
+git commit -m ‘say something’ //提交操作，并添加描述 
+git push origin master //推送
+```
+当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了, 可以使用
+```
+git rm file_path
+```
