@@ -203,12 +203,22 @@ git push origin master --force  #强制覆盖远程master分支  gitlab 默认ma
 
 
 ### 13.git config
+查看系统config
+```
+git config --system --list
+```
 
 查看全局配置
 
 ```
 git config --global --list
 ```
+
+查看当前仓库配置信息
+```
+git config --local  --list
+```
+
 git设置代理(非全局)
 地址和端口号在ss配置中查找
 ```
