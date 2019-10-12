@@ -1,83 +1,74 @@
 <!-- 
 # 联系方式
-- 手机：
-- Email： 
-- QQ/微信号：
+- 手机：18682361885
+- Email： xutong1107@gmail.com
 
 # 个人信息
-
- - 
- - 
- - 工作年限：3年
- - 技术博客：https://blog.csdn.net/composurext
- - 技术博客：https://github.com/Composur/resume
- - Github：https://github.com/Composur 
- - 期望薪资：13k~15k
+ - 姓名：许通
+ - 年龄：27
+ - 院校专业：河南理工大学-计算机科学网络技术
+ - 工作年限：4年
+ - 掘金：juejin.im/user/5d67c21d6fb9a06afe12aac3
+ - CSDN：blog.csdn.net/composurext
+ - GitHub：github.com/Composur 
+ - 笔记：composur.github.io
  - 期望职位：前端开发工程师
- - 期望城市：
 
 
 # 工作经历
-### ****有限公司-Web开发工程师 （2017/8-今）
 
-######  AMSS系统-前端项目
+### 海致星图科技有限公司-前端开发工程师 （2018/8-今）
+######  知识图谱
+> 基于图数据库与图形交互的“知识图谱”，node + jquery + react + webpack + d3 + gulp + artTemplate；开发环境为：supervisor；线上部署：pm2。<br/>
+1. 期间利用缓存减少HTTP请求次数。使用art-template解决复杂的模块开发。
+2. 期间使用nodejs编写BFF层，提高了首屏加载速度，使前端有能力自由组合后台数据，减少大量的业务沟通成本，加快了业务迭代的速度。
+3. 期间负责项目部署上线，以及上线后的bug解决
+
+### 安石亚洲软件科技有限公司-前端开发工程师 （2017/8-2018/9）
+
+######  AMSS测算系统
 >通过对购物中心、写字楼、酒店、销售物业、综合体各类物业的现金流预测、NOI静态回报率、IRR动态回报率测算，进行项目投资可行性分析。AMSS－1适用于项目投资、方案设计和建设等阶段。
 
 1. 前期熟悉项目主要负责系统的测试，使用Sahi等自动化测试工具，编写测试用例等。
 2. 后期主要负责前端页面的编写（主要使用了BootStrap AngularJS），和后台管理模块（NodeJS+MongoDB)的编写
-3. 改进了连接MongoDB的链接方式。服务器重启自动连接，优化Schema结构，以及数据的升级、迁移、容灾备份等、负责与其他公司的物业管理系统的对接、以及对客户的使用培训。后负责系统分析报告的编写，获取后端的数据进行报告的渲染使用chart.js
+3. 期间改进了连接MongoDB的链接方式。服务器重启自动连接，优化Schema结构，完成数据的、迁移、容灾备份等、负责与其他公司的物业管理系统的对接、以及对客户的使用培训。
 
-######  ***门户网站（React+Antd+NodeJS)前端项目
->公司门户网站用React编写主要用于公司的对特定客户的宣传及AMSS系统1-6个模块的的展示，为客户提供系统的试用版本，以及收集用户反馈的数据。
+######  门户网站
+>公司门户网站（React+Antd+Express+MongoDB)前端项目编写主要用于公司的对特定客户的宣传及AMSS系统1-6个模块的的展示，为客户提供系统的试用版本，以及收集用户反馈的数据。
 
 1. 采用组件化的方式进行编写,做到了组件复用
 2. 适配pc、table、mobile三种设备采用媒体查询平滑适应iPhone5-iPhone6p
-3. 首屏的6个模块需要根据页面的大小进行适配，使用Measure标签, 计算响应组件的度量值，Safari升级后点击弹窗无提示（Safari自身bug），后升级antd解决（解决后轮播图无法显示，修改源码解决）。
+3. 后台采用NodeJS,为前端提供接口采集数据，定时发送（cron）客户信息到指定邮箱。
 4. 项目整体使用webpack构建
-
-###### 管理系统（React+Antd+NodeJS）
-负责[公司官网](http://www.amssasia.com.cn)新增页面的编写（react+antd),适应PC端、移动端。为网站表单数据的收集增加后端（NodeJS+MongoDB)。因MongoDB没有触发器，遂采用cron的方式进行轮询数据表，定时发送收集的客户反馈表到负责人邮箱。整体流程为MVC结构：
-1. 创建对应的数据模型
-2. 创建对应的路由拦截
-3. 创建处理方法
-4. 开启服务
-5. 客户端去请求这个地址
-6. 客户端得到服务器的返回数据
-
-技术栈：React/Antd/ES6/Webpack/NodeJS/MongoDB
 
 ###### 宣传活动页面的编写。
 1. 技术栈:HTML/CSS/javascript
 2. 主要是公司活动的营销广告，微信推广等。
 3. 采用jQuery等常见的库进行特效的处理
 
-### 富士康科技集团-运维工程师（2016/8-2017/5)
+### 富士康科技集团-运维工程师（2015/9-2017/5)
 1.  网络故障处理、liunx服务器运维，shell脚本编写、VLAN划分、无线网覆盖等、设备为Cisco
 
-### 上海后钊科技有限公司（闪分期)-Web开发工程师（2015/9-2016/7)
-####  网上商城项目
-该项目是一个面向在校大学生的购物分期付款网站，分为分期商城和校园超市,前期分为注册、登陆、首页、详情、热卖、分期、兼职等几个界面。开始有了前端意识以及有了代码复用的概念。
-
-1. 负责闪分期商城和校园超市项目的前端修改调试和开发工作（HTML+CSS+JS+JQ）
-2. 使编写页面通过标准校验，兼容各主流浏览器
-3. 使用RequireJS来实现，后期对首页进行过一次较大的改变,使用css3的动画
-4. 后半年负责常见JS特效的编写,以及活动营销页面的编写及校园超市项目的前端修改调试和开发工作。
-## 技能清单
+## 技能清单(使用过)
 + 前端开发：HTML5/JavaScript(es6)/CSS3/NodeJS
 + 前端框架：Bootstrap/Jquery/Vue/React//Express
 + 前端工具：Gulp/SaSS/LeSS/Webpack
-+ 数据库相关：MongoDB//Robomongo/SQLite
++ 数据库相关：MongoDB
 + 版本管理、自动化部署工具：Svn/Git/PM2/Nginx
-## 开源项目和作品
-+ [node-server](https://github.com/Composur/react-practice)
-    >  基于nodejs的数据服务为，为客户端提供数据服务
-    1. 注册，登录，忘记密码，修改密码。
-    2. 获取用户信息，修改信息
-    3. 创建，修改，发布，回复话题等。
-    4. 图片上传依托七牛云
-    5. 设置跨域，设置域名拦截
+## 个人项目
++ [react-chat](https://github.com/Composur/react-practice/tree/master/react-chat)
+    > 注册，登录。聊天，发布信息。
+     * 前端
+        1. React
+        2. React-Router 前端路由管理
+        3. axios 发送ajax请求
+        4. socket.io 及时通讯
+        5. Ant Design Mobile 界面UI
+    * 后端
+        1. express
+        2. mongoose 数据库操作模块
 + [vue-blog](https://github.com/Composur/vue-project)
-    + [预览](http://47.94.237.28:8124)， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
+    + [预览](http://xutong.top)， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
     * 前端
         1. vue
         2. vue-router 前端路由管理
@@ -86,27 +77,11 @@
         5. element-ui 后台管理ui
         6. marked.js 新建文章支持markdown语法
         7. highlight.js 新建文章支持代码高亮
-
     * 后端
         1. express
         2. body-parser 获取post请求内容
         3. cookies cookie处理模块
         4. mongoose 数据库操作模块
-+ [node备忘录](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
-    + [预览](http://52.xiaoqi.info/)， [源码](https://github.com/Composur/resume/tree/master/projects/stickyNotes)
-    + 组件化编写，使用less
-    + Express搭建网站
-    + 调用GitHub登录接口
-    + webpack构建
-+ [北美电影top250-移动端](https://composur.github.io/resume/projects/douban-movie/index.html) 
-    + [预览](https://composur.github.io/resume/projects/douban-movie/index.html)， [源码]()
-    + 数据获取使用豆瓣top250接口
-    + 采用webpack构建 
-+ [vue-resume](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)
-    + [预览](https://composur.github.io/vue-project/vue-resume/docs/index.html#/)， [源码](https://github.com/Composur/vue-project/tree/master/vue-resume)
-    + 数据双向绑定
-    + 另存为image
-    + 在线修改简历
 + [网易云音乐-移动端](https://composur.github.io/resume/projects/music_163/index.html)
    + [预览](https://composur.github.io/resume/projects/music_163/index.html)， [源码](https://github.com/Composur/resume/tree/master/projects/music_163)
     + 推荐音乐
@@ -114,4 +89,4 @@
     + 歌曲搜索
     + 后端leancloud
 
-     -->
+--> 

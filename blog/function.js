@@ -29,3 +29,17 @@ const c=function(){console.log('c')}
 
 a.call() // c b a
 
+
+// 4 3 2 1
+setTimeout(() => {
+  console.log(1)
+}, 501);
+setTimeout(() => {
+  console.log(2)
+}, 500);
+setImmediate(()=>{
+  console.log(3)
+})
+process.nextTick(()=>{
+  console.log(4)
+})
