@@ -70,8 +70,10 @@
    + [预览](https://composur.github.io/resume/projects/music_163/index.html)， [源码](https://github.com/Composur/resume/tree/master/projects/music_163)
     + 推荐音乐/热歌榜/歌曲搜索/后端leancloud
     + 防抖，移动端适配
-
-
+## 技术文章
+#### 海致前端公众号(千人左右)
++ [43期：模块化 React 和 Redux 应用](https://mp.weixin.qq.com/s/TooCW3B1aTlwmxp3alVEtA)
++ [23期：前端常用的Linux命令](https://mp.weixin.qq.com/s/m5PBPRztkFe1p3uxdEYxXA)
 
 
     
