@@ -18,6 +18,9 @@
 + 解包 tar -xvf
 + 压缩 zip ./test.zip ./* -r （递归）-m (删除压缩的文件)
 + 解压缩 unzip test.zip 
+### 文件管理
+#### cp、echo
++ echo   role user charts | xargs -n 1 cp-v -r ./home 复制home文件夹到多个目录没有会新建
 ### 进程管理
 + lsof(list open files)，列举系统中已经被打开的文件！
 + ps -ef | grep user 查询当前用户下的进程

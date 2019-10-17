@@ -162,6 +162,8 @@ $ git merge upstream/master
 git push origin master
 ```
 
+
+
 ### 10.Reset版本回退利器
 #### 如果我们想回退到某个版本可以用git log查看，git log命令显示从最近到最远的提交日志如果嫌输出信息太多，可以试试加上--pretty=oneline参数;
 
@@ -353,4 +355,11 @@ git push origin master //推送
 当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了, 可以使用
 ```
 git rm file_path
+```
+
+### 16. git 修改远程仓库地址
+```
+	
+git remote set-url origin 新地址
+
 ```
