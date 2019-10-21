@@ -54,23 +54,16 @@
 + 前端工具：Gulp/SaSS/LeSS/Webpack
 + 数据库相关：MongoDB
 + 版本管理、自动化部署工具：Svn/Git/PM2/Nginx
-## 个人项目
-+ [React-Chat](https://github.com/Composur/react-practice/tree/master/react-chat)
+## 开源项目
++ [通用后台管理系统](https://github.com/Composur/react-manage)
+    > 包括前端 PC 应用和后端应用,包括用户管理 / 商品分类管理 / 商品管理 / 权限管理等功能模块
+    * 前端: 使用 React 全家桶 + Antd + Axios + ES6 + Webpack 等技术
+    * 后端: 使用 Node + Express + Mongodb 等技术
++ [个人求职平台](https://github.com/Composur/react-practice/tree/master/react-chat)
     > 此项目为一个前后台分离的聊天 SPA, 包括前端应用和后端应用注册，包括用户注册/登陆, 管理员/普通用户列表, 实时聊天，消息等模块
     * 前端: 使用 React 全家桶+ES6+Webpack 等技术
      * 后端: 使用 Node + express + mongodb + socketIO 等技术
      * 采用模块化、组件化、工程化的模式开发
-+ [Vue-Blog](https://github.com/Composur/vue-project)
-    + [预览](http://xutong.top)， [源码](https://github.com/Composur/vue-project/tree/master/vue-blog2)
-    *  完全使用ajax交互, 无服务端模版渲染
-    *   vue/ vue-router 前端路由管理/ axios 发送ajax请求
-     *  marked.js 新建文章支持markdown语法
-     *   highlight.js 新建文章支持代码高亮
-     *  body-parser 获取post请求内容\cookies cookie处理模块\mongoose 数据库操作模块
-+ [云音乐播放器-移动端](https://composur.github.io/resume/projects/music_163/index.html)
-   + [预览](https://composur.github.io/resume/projects/music_163/index.html)， [源码](https://github.com/Composur/resume/tree/master/projects/music_163)
-    + 推荐音乐/热歌榜/歌曲搜索/后端leancloud
-    + 防抖，移动端适配
 ## 技术文章
 #### 海致前端公众号(千人左右)
 + [43期：模块化 React 和 Redux 应用](https://mp.weixin.qq.com/s/TooCW3B1aTlwmxp3alVEtA)
