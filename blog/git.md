@@ -57,7 +57,7 @@ git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
 ```
 git pull origin dev(远程分支名称)
 ```
-### 5.git 删除分支
+### 5.git 删除本地/远程分支
 
 + 删除本地
 ```
@@ -194,12 +194,16 @@ git push origin master --force  #强制覆盖远程master分支  gitlab 默认ma
 
 
 
-### 12.git pull 强制覆盖本地文件
+### 12.git pull/push 强制覆盖本地文件/远程仓库
 
 ```
     git fetch --all  
     git reset --hard origin/master 
     git pull
+```
+
+```
+  git push origin master --force
 ```
 
 

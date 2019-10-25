@@ -384,3 +384,13 @@ grep CRON /var/log/syslog
 
 //To list all local users you can use:
 cut -d: -f1 /etc/passwd
+
+
+### root 修改其它用户密码
+输入新密码即可，无需旧密码
+键入
+```
+passwd username
+
+```
+输入要修改成的密码即可
