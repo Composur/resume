@@ -372,6 +372,10 @@ xhr.send(null)
     + `setImmediatel()` 特殊的计时器，这个更快相比`setTimeout() setInterval()`(除了第一次轮询，因为第一次先执行timer阶段)，但是也要看`setImmediatel()`的执行时间小于`setTimeout()`的执行时间到check阶段顺带执行，大于的话还是先执行timer阶段，另外它没有第二个参数默认0; 
 还有一个process.nextTick()它不属于event loop但是在执行每个阶段前都要执行一下
 
+```
+
+```
+
 
 ### 宏任务（Macro Task） 微任务（Micro Task）
   > es规范里的东西，通过event loop实现的
@@ -802,13 +806,59 @@ var xiaoming=create(person)
 ```
 
 ### Promise（es6原生对象）
++ 当前的事件循环得不到结果，但是未来的事件循环得到，简称渣男
 + 简单来说Promise就是一个容器，里面保存着未来才会结束的事件（通常是一个异步操作）
 + Promise有三种状态padding（进行中）、fulfilled（成功）、rejected（fulfilled）promise对象的改变只有从pending变为fulfilled或rejected，改变后状态就凝固了，然后在.then(result)就会得到这个结果
 + Promise的构造函数接收一个执行函数，执行函数执行完同步或则异步操作后，调用它的两个参数resolve和rejected
++ 任何一个rejected状态且后面没有catch的promise，都会造成浏览器的/node环境的全局错误
++ 执行 then 和 catch 会返回一个新 Promise，该 Promise 最终状态根据 then 和catch 的回调函数的执行结果决定
+    + 如果回调函数最终是 throw，该 Promise 是 rejected 状态
+    + 如果回调函数最终是 return，该 Promise 是 resolved 状态
+    + 但如果回调函数最终 return 了一个 Promise ，该 Promise 会和回调函数 return 的Promise 状态保持一致
 ```
-    
-```
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve({
+      test: [1, 2, 3]
+    })
+    // reject(new Error('error'))
+  }, 500)
+})
 
+setTimeout(()=>{
+  promise.then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
+},300)
+```
+### async/await
++ async/await
+    + async function 是 Promise 的语法糖封装
+    + 异步编程的终极方案 – 以同步的方式写异步
+        + await 关键字可以“暂停”async function的执行
+        + await 关键字可以以同步的写法获取 Promise 的执行结果
+        + try-catch 可以获取 await 所得到的错误
+    + 一个穿越事件循环存在的 function
+
+```
+const promise =(
+  function(){
+    return new Promise(resolve=>{
+      resolve()
+    })
+}
+)()
+
+const asyncFn= (
+  async function(){
+  
+  }
+)()
+console.log(promise) //Promise { undefined }
+console.log(asyncFn) //Promise { undefined }
+```
 
 #### JSON规范
 + 首先json是一种用于数据交换的文本格式，是一种文本格式
