@@ -20,11 +20,15 @@
 #####  基于图数据库与图形交互的“知识图谱”
 1. 负责图谱详情模块的开发，期间使用`nodejs`编写`BFF`层，为用户侧提供`HTTP`服务，使用`Q.all`并发请求提高了首屏加载速度，使用`Q.defer`自定义`promise`生成器，用于处理nodejs`request`请求的数据，和抛出的异常。这样做使前端有能力自由组合后台数据，减少大量的业务沟通成本，加快了业务迭代的速度。
 2. 负责图谱集团派系的重构，利用react进行重构
-3. 阅读过nodejs源码，如`os`模块等。c
+3. 阅读过nodejs源码，如`os`模块等。
+##### 知识图谱移动端
+1. 负责移动端项目二次开发
+2. 优化应用性能，配置`Nginx`，使用缓存，减少`HTTP`请求，提升访问速度，优化`webpack`构建，使打包静态资源加上md5后缀来命中缓存。
 #####  企业级智能CRM
 1. 期间利用缓存减少HTTP请求次数`fn.cacheObj[fn.tadId]=res`。解决复杂的业务交互，一个小模块中存在大量的业务层级嵌套，使用`art-template`解决。
 2. 使用node层进行权限控制，很好的解决了登录角色权限控制。
 3. 优化前端部署脚本一键部署，简化了部署流程。
+. 
 
 ### 安石亚洲软件科技有限公司-前端开发工程师 （2017/8-2018/9）
 
@@ -67,4 +71,5 @@
 ## 技术文章
 #### 海致前端公众号(千人左右)
 + [43期：模块化 React 和 Redux 应用](https://mp.weixin.qq.com/s/TooCW3B1aTlwmxp3alVEtA)
-+ [23期：前端常用的Linux命令](https://mp.weixin.qq.com/s/m5PBPRztkFe1p3uxdEYxXA) -->
++ [23期：前端常用的Linux命令](https://mp.weixin.qq.com/s/m5PBPRztkFe1p3uxdEYxXA)
+ -->
