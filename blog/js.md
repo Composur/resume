@@ -102,15 +102,16 @@ var type = function (o){
             + `^` 表示字符串的开始位置
             + `$` 表示字符串的结束位置
             ```
-            // test必须出现在开始位置
+            #test必须出现在开始位置
             /^test/.test('test123') // true
 
-            // test必须出现在结束位置
+            #test必须出现在结束位置
             /test$/.test('new test') // true
 
-            // 从开始位置到结束位置只有test
+            #从开始位置到结束位置只有test
             /^test$/.test('test') // true
             /^test$/.test('test test') // false
+
             ```
             + `|`标识或
             ```
@@ -267,8 +268,7 @@ xhr.send(null)
 - 把每个节点绘制到屏幕上 (painting)
 - 浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上
 - 渲染完毕就是load事件，之后就是JS逻辑处理
-
-    (loading)[./img/loading.jpg]
+ ![loading](./img/loading.jpg)
 #### load事件与DOMContentLoaded事件的先后
 + 当DOMContentLoaded事件触发时，仅仅是DOM加载完成、不包含css、img
 + onload事件触发、页面上所以的dom、css、img、js等都加载完毕（也就是页面渲染完毕了）
@@ -325,28 +325,57 @@ xhr.send(null)
 #### 1.js是单线程的
 假如在这个线程中，有 `var =1;get(/xxx.josn);`等，js引擎会执行同步代码`var=1`，异步的`get`请求会让浏览器的网络模块来做; 请求完后通知js引擎再执行回调；
 
-#### Chrome
-
->微任务包括 process.nextTick ，promise ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UIrendering <br/>
-
-1. 执行同步代码，这属于宏任务
-2. 执行栈为空，查询是否有微任务需要执行
-3. 执行所有微任务
-4. 必要的话渲染 UI
-5. 然后开始下一轮 Event loop，执行宏任务中的异步代码
-+ 这里是JS引擎运行机制的一些分析
+#### 2. 任务队列（task queue)
+>微任务包括 process.nextTick ，Promise.then catch finally ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UIrendering <br/>
 + JS分为同步任务和异步任务（同步任务在主线程上执行形成一个执行栈）
 + 主线程之外、事件触发的线程管理着一个任务队列、只要异步任务有了运行结果，就在任务队列中放置一个事件
-+ 一旦主进程空闲（执行栈）执行完毕，系统就会读取任务队列中的事件，将满足条件的异步任务添加到执行栈中
++ 一旦主进程空闲（执行栈）执行完毕（同步任务执行完毕），系统就会读取任务队列中的事件，将满足条件的异步任务添加到执行栈中
     ![task queue](./img/event.jpg)
     ![task queue](./img/event-loop.jpg)
     + 主线程运行时会产生执行栈，栈中的代码调用某些api时，它们会在事件队列中添加各种事件（当满足触发条件后，如ajax请求完毕）
     + 而栈中的代码执行完毕，就会读取事件队列中的事件，去执行那些回调
-    + 如此循环(总是要等待栈中的代码执行完毕后才会去读取事件队列中的事件,这就是为什么setTimeout(fn(),0)后执行)
+    + 如此循环(总是要等待栈中的代码执行完毕后才会去读取事件队列中的事件。
+*通俗解释一下*
+*首先分开解释*
++ 任务
+    + 每个语句就是一个任务，下面就是两个任务
+        ```
+        console.log('Hi!')
+        console.log('你好！')
+        ```
++ 队列就是承载任务的容器
++ `JavaScript`的`EventLoop`会不断的询问这个队列有没有要执行的任务，有了立即执行。
++ 异步任务
+    + 队列中有异步任务的情况，执行到它时会先注册一个回调函数再去执行其它同步任务，因为异步任务耗时，等所需的耗时结束时且当前执行栈没有其它同步任务，再去执行注册的那个回调函数。
++ 看个例子
+```
 
-    #### 用setTimeout模拟setInterval（定时器中给出的时间间隔不是时间到了立即去执行，而是时间到后加入任务队列，如果任务对列中没有别的事件那么就会执行，如果有其它事情可能会延迟执行）
-    + setTimeout的执行时间间隔是延迟时间+代码执行时间
-    + setInterval的执行时间的间隔是设置的最小延迟时间（执行时间小于等于延迟时间）最大执行时间（执行时间大与设定的延迟时间）
+setTimeout(()=>{ // 异步任务，先在当前执行栈注册一个回调函数，主线程继续往下执行，当这个异步任务有了结果就在任务队列放置一个事件
+  console.log('setTimeout')
+})
+
+console.log('start') // 同步任务，首先打印输出’start‘
+
+Promise.resolve(()=>{ // 异步任务，放到任务队列
+  console.log('promise 1') 
+  // 这里的promise返回了一个undefined 
+}).then(()=>{ // 同样是异步任务为啥promise2先执行，因为Promise.then是微任务，优先级比较高
+  console.log('promise 2') //同步任务
+})
+
+console.log('end') // 同步任务，打印输出
+//打印顺序
+start
+end
+promise 2
+setTimeout
+```
+*结合上面的看下图*
+![task queue](./img/1572938636963.jpg)
+#### 用setTimeout模拟setInterval
++ 定时器中给出的时间间隔不是时间到了立即去执行，而是时间到后加入任务队列，如果任务对列中没有别的事件那么就会执行，如果有其它事情可能会延迟执行
++ setTimeout的执行时间间隔是延迟时间+代码执行时间
++ setInterval的执行时间的间隔是设置的最小延迟时间（执行时间小于等于延迟时间）最大执行时间（执行时间大与设定的延迟时间）
 
         ```
         var time=function(a){
@@ -376,11 +405,6 @@ xhr.send(null)
 
 ```
 
-
-### 宏任务（Macro Task） 微任务（Micro Task）
-  > es规范里的东西，通过event loop实现的
-#### 1. 宏任务
-+ setTimeout()
 
 ### 面向对象
 > 对象是单个实物的抽象。对象是一个容器，封装了属性（property）和方法（method）
