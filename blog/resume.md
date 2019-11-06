@@ -71,5 +71,4 @@
 ## 技术文章
 #### 海致前端公众号(千人左右)
 + [43期：模块化 React 和 Redux 应用](https://mp.weixin.qq.com/s/TooCW3B1aTlwmxp3alVEtA)
-+ [23期：前端常用的Linux命令](https://mp.weixin.qq.com/s/m5PBPRztkFe1p3uxdEYxXA)
- -->
++ [23期：前端常用的Linux命令](https://mp.weixin.qq.com/s/m5PBPRztkFe1p3uxdEYxXA) -->
