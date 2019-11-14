@@ -107,3 +107,10 @@ db.person.find({name:'xutong'+1000}).explain('executionStats')
 ![建立索引后](./img/MongoDB_indexAfter.jpg)
 
 > 二者相差462毫秒（我服务器太差劲！哈哈哈）
+
+
+### 常用操作
+1. 查询用户列表；过滤0表示不返回，1表示返回，sort排序 正序or倒序
+```
+ UserModel.find({username: {'$ne': 'admin'}},{password:0,__v:0}).sort({"_id": -1})
+```
