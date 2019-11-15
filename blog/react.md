@@ -8,7 +8,18 @@
 
 
 ### state、props
-> state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state
+> state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。**构造函数是唯一可以给 this.state 赋值的地方**
+
+
+### setState
+1. 出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`State` 的更新可能是异步的
+2. 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
+```
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
 
 ### react的context
 + 子组件要获取 context 里面的内容的话，就必须写 contextTypes 来声明和验证你需要获取的状态的类型，它也是必写的
@@ -171,3 +182,4 @@ const Home = Loadable({
     + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
   + 子传父
     + 父组件中通过ref得到子组件的标签对象
+    + 通过this.refs.current.xxx()得到子组件的方法
