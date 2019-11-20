@@ -18,6 +18,7 @@
   + 数据只保存在组件内部的 `state` 的话，是非受控组件（因为外部没办法直接控制 `state`)
 
 ### setState
+#### 异步的
 1. 出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`State` 的更新可能是异步的
 2. 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
 ```
@@ -25,7 +26,20 @@ this.setState((state, props) => ({
   counter: state.counter + props.increment
 }));
 ```
-
+#### setState何时异步
+1. 在`react`的监听回调中是异步的（React中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
+2. 在`react`的生命周期钩子函数中是异步的
+#### setState何时同步(在render之后)
+1. 定时器
+2. 元素的DOM事件（ref获取到原生的dom）
+3. promise(下面的data是实时更新的)
+```
+Promise.resolve().then(data=>{
+  console.log(this.state.data)
+  this.setState({data})
+  console.log(this.state.data)
+})
+```
 
 ### react的context
 + 子组件要获取 context 里面的内容的话，就必须写 contextTypes 来声明和验证你需要获取的状态的类型，它也是必写的
