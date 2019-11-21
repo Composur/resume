@@ -29,8 +29,8 @@ this.setState((state, props) => ({
 #### setState何时异步
 1. 在`react`的监听回调中是异步的（React中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在`react`的生命周期钩子函数中是异步的
-#### setState何时同步(在render之后)
-1. 定时器
+#### setState何时同步(都在在render之后才执行setState)
+1. 定时器中
 2. 元素的DOM事件（ref获取到原生的dom）
 3. promise(下面的data是实时更新的)
 ```
