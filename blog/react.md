@@ -71,30 +71,38 @@ class Child extends Component{
     }
 }
 ```
-### reducer
-+ reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
 
-```
-export function loginUserInfo (previousState = {}, action) {
-  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
-    return action.data.userInfo || {}
-  } else if (action.type === LOGOUT) {
-    return {}
-  } else {
-    return previousState
-  }
-}
-```
+#### 高阶组件
+  +  组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件。（接收一个组件再返回一个组件）
 
-### redux
-> 应⽤中所有的 state 都以⼀个对象树的形式储存在⼀个单⼀的 store 中。惟⼀改变 state 的办法是触发action,⼀个描述发⽣什么的对象。为了描述 action 如何改变 state 树，你需要编写 reducers。
+#### 父子传参
 
+  + 父传子
+    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
+  + 子传父
+    + 父组件中通过ref得到子组件的标签对象
+    + 通过this.refs.current.xxx()得到子组件的方法
 ### react中的render()
 >如果不在render()中使用某些东西，那么它就不应该在状态中
 
+### redux
+> 应⽤中所有的 state 都以⼀个对象树的形式储存在⼀个单⼀的 store 中。惟⼀改变 state 的办法是触发action,⼀个描述发⽣什么的对象。为了描述 action 如何改变 state 树，你需要编写 reducers。<br/>
+
++ 多个组件共享数据的时候可以考虑使用redux
 
 
-### actionType、action方法和reducer方法的命名
+#### action
+1. 异步的 `action` （三种状态）
+  + 异步操作进行中 `dispatch(loading)`
+  + 异步操作完成 `dispatch(success)`
+  + 异步操作失败 `dispatch(error)`
+2. 同步的 `action`
+  + 用上面的结果 `dispatch` 对应的三个同步 `action`
+  ```
+  export unAsync=(data)=>(type:import type,result:data)
+  ```
+
+#### actionType、action方法和reducer方法的命名
 1. actionType常量采用下划线命名法
 2. action、reducer采用驼峰命名法，适当可使用下划线
 3. actionType名称与action的名称，结构都动宾结构：‘V+N’
@@ -121,11 +129,47 @@ export function loginUserInfo (previousState = {}, action) {
   }
 }
 ```
+#### reducer
++ reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
 
+```
+export function loginUserInfo (previousState = {}, action) {
+  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
+    return action.data.userInfo || {}
+  } else if (action.type === LOGOUT) {
+    return {}
+  } else {
+    return previousState
+  }
+}
+```
 
 #### react-redux
 
 + connect()() 一个函数接收两个参数,前一个执行后return出来一个继续执行
+
+
+
+#### 扩展redux
+1. 中间件
+  > + 中间件是一些函数用于定制对特定请求的处理过程，
+  > + 是一个函数，返回一个接收next参数的函数
+```
+function middleWare({dispatch,getState}){
+  return function(next){
+      return function(action){
+         //do...
+        return next(action)//处理完后调用下一个中间件
+    }
+  }
+}
+
+// es6写法
+({dispatch,getState})=>next=>action=>next(action)
+```
+2. redux-thunk
++ 为了解决异步action问题
++ 检查传入的action是不是函数，不是就放行，是函数就执行把结果返回（用传进来的dispatch，和getState）
 
 
 
@@ -175,7 +219,7 @@ const Home = Loadable({
 ```
 
 
-#### react-router-dom 
+### react-router-dom 
 
 + Router
   + 所有路由组件共用的底层接口，在 4.x 中，你可以将各种组件及标签放进  <Router>  组件中 ,它只能有一个子元素
@@ -193,13 +237,3 @@ const Home = Loadable({
   + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
 
 
-#### 高阶组件
-  +  组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件。（接收一个组件再返回一个组件）
-
-#### 父子传参
-
-  + 父传子
-    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
-  + 子传父
-    + 父组件中通过ref得到子组件的标签对象
-    + 通过this.refs.current.xxx()得到子组件的方法
