@@ -146,8 +146,7 @@ export function loginUserInfo (previousState = {}, action) {
 
 #### react-redux
 
-+ connect()() 一个函数接收两个参数,前一个执行后return出来一个继续执行
-+ connect()是一个高阶函数执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件
++ connect()()是一个高阶函数执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件
 
 
 
