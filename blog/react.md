@@ -29,7 +29,7 @@ this.setState((state, props) => ({
 #### setState何时异步
 1. 在`react`的监听回调中是异步的（React中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在`react`的生命周期钩子函数中是异步的
-#### setState何时同步(都在在render之后才执行setState)
+#### setState何时同步(都在render之后才执行setState)
 1. 定时器中
 2. 元素的DOM事件（ref获取到原生的dom）
 3. promise(下面的data是实时更新的)
@@ -79,17 +79,36 @@ class Child extends Component{
 
   + 父传子
     + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
-  + 子传父
+  + 子传父 
     + 父组件中通过ref得到子组件的标签对象
     + 通过this.refs.current.xxx()得到子组件的方法
+    ```
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+      }
+      render() {
+        return <Children ref={this.myRef} />;
+      }
+    }
+
+    ```
 ### react中的render()
->如果不在render()中使用某些东西，那么它就不应该在状态中
+>如果不在render()中使用某些东西，那么它就不应该在状态。
 
-### redux
-> 应⽤中所有的 state 都以⼀个对象树的形式储存在⼀个单⼀的 store 中。惟⼀改变 state 的办法是触发action,⼀个描述发⽣什么的对象。为了描述 action 如何改变 state 树，你需要编写 reducers。<br/>
+### redux (多个组件共享数据的时候可以考虑使用redux)
+> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action`,⼀个描述发⽣什么的对象。为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`<br/>
 
-+ 多个组件共享数据的时候可以考虑使用redux
+### createStore()
+1. 接收的参数为 `reducer` 函数，返回 `store`
+  + `store` 的方法
+    + `getState()` 返回值为 `store` 内部保存的数据
+    + `dispatch()` 参数为 `action` 对象，触发 `reducer`，更新 `store` 触发 `subscribe` 监听，更新视图
+    + `subscribe()` 参数为监听内部 `state` 更新的回调函数 
 
+### combineReducers()
++ 接收包含`n`个 `reducer` 的对象，返回一个新的 `reducer` 函数
 
 #### action
 1. 异步的 `action` （三种状态）
@@ -102,33 +121,7 @@ class Child extends Component{
   export unAsync=(data)=>(type:import type,result:data)
   ```
 
-#### actionType、action方法和reducer方法的命名
-1. actionType常量采用下划线命名法
-2. action、reducer采用驼峰命名法，适当可使用下划线
-3. actionType名称与action的名称，结构都动宾结构：‘V+N’
-4. reducer方法的命名为action名去掉动词部分的宾语（名词）部分
 
-以获取登录用户信息为例子：
-```
-// actionType常量
-GET_LOGIN_USER_INFO = 'GET_LOGIN_USER_INFO'
-
-// action方法
-export function getLoginUserInfo () {
-  ...
-}
-
-//reducer
-export function loginUserInfo (previousState = {}, action) {
-  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
-    return action.data.userInfo || {}
-  } else if (action.type === LOGOUT) {
-    return {}
-  } else {
-    return previousState
-  }
-}
-```
 #### reducer
 + reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
 
@@ -171,6 +164,35 @@ function middleWare({dispatch,getState}){
 + 为了解决异步action问题
 + 检查传入的action是不是函数，不是就放行，是函数就执行把结果返回（用传进来的dispatch，和getState）
 
+
+#### actionType、action方法和reducer方法的命名
+1. actionType常量采用下划线命名法
+2. action、reducer采用驼峰命名法，适当可使用下划线
+3. actionType名称与action的名称，结构都动宾结构：‘V+N’
+4. reducer方法的命名为action名去掉动词部分的宾语（名词）部分
+
+以获取登录用户信息为例子：
+
+```
+// actionType常量
+GET_LOGIN_USER_INFO = 'GET_LOGIN_USER_INFO'
+
+// action方法
+export function getLoginUserInfo () {
+  ...
+}
+
+//reducer
+export function loginUserInfo (previousState = {}, action) {
+  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
+    return action.data.userInfo || {}
+  } else if (action.type === LOGOUT) {
+    return {}
+  } else {
+    return previousState
+  }
+}
+```
 
 
 #### react-loadable库的用法
@@ -235,21 +257,3 @@ const Home = Loadable({
 + Switch
   + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
   + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
-
-
-
-
-+ 情景(Situation)
-  + 业务的背景，价值。
-    + 背景
-      关于鄞州项目，当时的项目背景对于我来说是刚刚起步、百废待兴。大家的劲头都很足，因为是从头到尾要跟一个新的项目。
-    + 价值
-      + 鄞州银行智能CRM作为公司的CRM平台产品，目的是为鄞州银行客户经理对其客户全生命周期的营销管理、风险管理提供有力的帮助。
-+ 任务(Task)
-  + 你在这个工作中所承担的任务或者职责。
-    + 当时我的工作是CRM前端开发，具体为对公客户详情模块、产品管理模块，以及和其它系统对接等
-      + 
-  + 当时遇到的问题和挑战点，难点。
-    + 刚入职对公司的技术架构、编码规范、插件使用规则等等还未适应，加上内网办公资料查询较为不便自身因素
-    + 行方的要求（自己把自己推翻、个别系统对接的时候大家对某一件事的认知的偏差，例如：当时有个其它系统的页面要嵌入到CRM中，对方系统比较老旧，给我一个jsp的单文件实现这个页面的功能，对放以为把这个页面放进CRM就完事特别简单，忽略了jsp文件执行的环境，它需要一个容器，我们没有这个容器，对方很坚持场面略微尴尬，对接人还在坚持，最后我叫上后端行方项目经理大家一起说了一下。我罗列了需要用到的，以及这样做的不合理性。最后的结论了这个功能放弃。）像这样的事情非常的多，以及电脑卡顿，浏览器打不开等等，这些无关系统的问题。都会找到前端去解决。行方大多操作系统老旧，ie版本混乱。
-    对此的解决办法是：在不影响项目进度的情况下去解决，太无关的进行拒绝。编写代码的时候尽量考虑兼容性。
