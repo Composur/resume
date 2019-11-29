@@ -139,9 +139,10 @@ export function loginUserInfo (previousState = {}, action) {
 
 #### react-redux
 
-+ connect()()是一个高阶函数执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件
-
-
+1. `Provider` 组件，接收 `store` 属性让所有组件都看到 `store`，通过 `store` 读取、更新状态
+2. `connect()()` 是一个高阶函数,执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件
+    + `mapStateToProps:`一个函数，指定向UI组件传递哪些一般属性，必须返回一个对象
+    + `mapDispatchToProps:`可以是对象，对象所定义的方法名将作为属性名；每个方法将返回一个新的函数；也可以是函数通过`dispatch`显式分发`action`,目的是向UI组件传递函数
 
 #### 扩展redux
 1. 中间件
