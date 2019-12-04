@@ -2,7 +2,41 @@
 > nginx作为Web服务器的基础知识，前端应该了解一些重要的Nginx命令。
 
 **下列命令默认需要管理员权限**
-#### 1.启动Nginx
+
+#### 0.安装
+先更新一下镜像源，如果长时间没有响应[参考这里](https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/)替换镜像源
++ 更新
+```
+brew update
+```
++ 查看信息
+
+```
+brew search nginx
+```
++ 安装
+
+```
+brew install nginx
+```
++ 操作
+
+```
+# 启动
+brew services start nginx
+# 重启
+brew services restart nginx
+# 暂停
+brew services stop nginx
+
+# 重新加载config文件
+
+nginx -s reload
+```
+
+
+#### 1.启动Nginx (非 brew 安装)
+如果是 brew 安装参考上面的方式
 ```
 service nginx start
 ```
