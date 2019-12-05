@@ -29,8 +29,7 @@ brew services restart nginx
 # 暂停
 brew services stop nginx
 
-# 重新加载config文件
-
+# 重新加载config文件 不成功就重启
 nginx -s reload
 ```
 

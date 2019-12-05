@@ -4,36 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>canvas</title>
-    <style>
-        #canvas{
-            width: 500px;
-            height: 500px;
-            border: 1px solid red;
-        }
-    </style>
+    <link rel="stylesheet" href="./src/css/index.css">
+    <title>画板</title>
 </head>
 <body>
-    <h1>canvas</h1>
-    <canvas id="canvas" ></canvas>
-    <script>
-        class unit{
-            $(selector){
-                return document.querySelector(selector)
-            }
-        }
-        let canvas=new unit()
-        let context=canvas.$('#canvas').getContext('2d')
-        context.fillRect(20,20,10,10)
-        context.strokeRect(80,80,20,20)
-
-        context.beginPath()
-        context.moveTo(50,50)
-        context.lineTo(50,70)
-        // context.lineTo(100,100)
-        context.closePath()
-        context.stroke()
-        context.fill()
-    </script>
+    <div class="core-container">
+        <canvas id="canvas" class="canvas"></canvas>
+        <div class="erase-wrap">
+            <a href="JavaScript:void(0)" id="pen" class="erase ">画笔</a>
+            <a href="JavaScript:void(0)" id="erase" class="erase active">橡皮擦</a>
+        </div>
+    </div>
 </body>
+<script src="./src/js/index.js"></script>
 </html>
