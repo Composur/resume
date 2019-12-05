@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <blockquote>
+        <p>这两个不在此列：<strong><a href="#jump_10"><a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a></a></strong> <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>;
+        <strong><a href="#jump_20">如果你觉得对你有帮助，欢迎点个赞</a>[^1]</strong></p>
+      </blockquote>
+      
+      <h3 id="">目录</h3>
+      
+      <p>[TOC]</p>
+      
+      <h3 id="-1">磁盘管理</h3>
+      
+      <h4 id="-2">基础命令</h4>
+      
+      <ul>
+      <li>查看磁盘空间 <code>df -h</code></li>
+      
+      <li>查看目录大小 <code>du -sh</code></li>
+      
+      <li>打包 <code>tar -cvf</code></li>
+      
+      <li>解包 <code>tar -xvf</code></li>
+      
+      <li>压缩 <code>gzip</code></li>
+      
+      <li>解压缩 <code>gunzip bzip</code></li>
+      </ul>
+      
+      <h3 id="-3">进程管理</h3>
+      
+      <ul>
+      <li><code>lsof</code>(list open files)，列举系统中已经被打开的文件！</li>
+      
+      <li><code>ps -ef | grep user</code> 查询当前用户下的进程</li>
+      
+      <li><code>lsof -i:27017</code> 查看端口占用的状态</li>
+      
+      <li><code>lsof +d mydir/</code> 查看指定文件夹下被进程开启的文件</li>
+      
+      <li><code>kill pid</code> (process ID)杀死指定的PID进程</li>
+      
+      <li><code>kill -9 pid</code> 杀死相关进程</li>
+      
+      <li><code>top</code> 资源管理器，键入<code>top</code>后键入<code>P</code>(根据<code>CPU</code>大小排序),<code>M</code>(根据驻留内存大小排序),</li>
+      
+      <li>也可以安装<code>htop</code>功能更强大</li>
+      </ul>
+      
+      <h4 id="htop">htop</h4>
+      
+      <pre><code>sudo apt-get install htop
+      htop
+      </code></pre>
+      
+      <h3 id="-4">操作文件、文件夹</h3>
+      
+      <h4 id="-5">基础操作</h4>
+      
+      <ul>
+      <li><p>查看文件大小的命令：</p>
+      
+      <pre><code>ls  -l    filename
+      </code></pre></li>
+      
+      <li><p>查看文件夹大小</p>
+      
+      <pre><code>cd  Foldename进到Foldename 目录
+      du    -sh
+      </code></pre></li>
+      
+      <li><p>修改文件或文件夹名</p>
+      
+      <pre><code>mv file1 file2
+      </code></pre></li>
+      
+      <li><p>查看磁盘的使用情况命令：</p>
+      
+      <pre><code>df    -h
+      </code></pre></li>
+      
+      <li><p>压缩文件文件夹</p>
+      
+      <pre><code>tar zcvf Retail.tar.gz Retail/
+      </code></pre></li>
+      
+      <li><p>解压</p>
+      
+      <pre><code>tar -xvf xxx.tar.gz
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-6">打印出一个命令的路径</h4>
+      
+      <pre><code>  type ls
+        ls is hashed (/usr/bin/ls)
+      </code></pre>
+      
+      <h4 id="-7">创建自定义工程目录</h4>
+      
+      <blockquote>
+        <p>$1代表你想定义的目录</p>
+      </blockquote>
+      
+      <pre><code>   mkdir $1
+         cd $1
+         css js
+         touch index.html css/style.css js/main.js
+         exit
+      </code></pre>
+      
+      <blockquote>
+        <p>执行</p>
+      </blockquote>
+      
+      <pre><code> script.sh demo
+      </code></pre>
+      
+      <h4 id="-8">判断自定义的目录是否存在</h4>
+      
+      <pre><code>if [ -d $1 ]; then
+        echo 'error: dir exists'
+        exit
+      else
+        mkdir $1
+        cd $1
+        mkdir css js
+        touch index.html css/style.css js/main.js
+        echo 'success'
+        exit
+      fi
+      </code></pre>
+      
+      <h4 id="ubuntushsudo">ubuntu运行sh脚本sudo自动输入密码</h4>
+      
+      <ul>
+      <li><p>第一种方法（文本块，重定向）</p>
+      
+      <pre><code>#!/bin/bash
+      sudo -S apt-get update &lt;&lt; EOF 
+      Your password
+      EOF
+      </code></pre></li>
+      
+      <li><p>第二种方法（使用管道）</p>
+      
+      <pre><code>#!/bin/bash
+      echo password | sudo -S apt-get update
+      </code></pre></li>
+      </ul>
+      
+      <h3 id="-9">网络工具</h3>
+      
+      <h4 id="-10">查询网络服务和端口</h4>
+      
+      <ul>
+      <li>列出所有<code>TCP</code>端口号</li>
+      </ul>
+      
+      <pre><code> netstat -at
+      </code></pre>
+      
+      <ul>
+      <li>使用<code>netstat</code>工具查询端口:</li>
+      </ul>
+      
+      <pre><code> netstat -antp | grep 27017
+      </code></pre>
+      
+      <ul>
+      <li>使用<code>ps</code>工具查询进程详情</li>
+      </ul>
+      
+      <pre><code>ps -fe | grep 19034
+      </code></pre>
+      
+      <h4 id="ftpsftp">ftp/sftp文件传输</h4>
+      
+      <pre><code>```
+      sftp ID@host
+      get filename # 下载文件
+      put filename # 上传文件
+      ls # 列出host上当前路径的所有文件
+      cd # 在host上更改当前路径
+      lls # 列出本地主机上当前路径的所有文件
+      lcd # 在本地主机更改当前路径
+      ```
+      </code></pre>
+      
+      <h4 id="-11">网络复制</h4>
+      
+      <ul>
+      <li>将本地localpath指向的文件上传到远程主机的path路径:</li>
+      </ul>
+      
+      <pre><code>scp localpath username@host:path
+      </code></pre>
+      
+      <ul>
+      <li>以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:</li>
+      </ul>
+      
+      <pre><code>scp -r username@host:path localpath
+      </code></pre>
+      
+      <h3 id="-12">用户管理工具</h3>
+      
+      <h4 id="sudo">增加sudo用户</h4>
+      
+      <ul>
+      <li>查看所有用户</li>
+      </ul>
+      
+      <pre><code>cut -d: -f1 /etc/passwd
+      </code></pre>
+      
+      <ul>
+      <li><p>查看所有用户及权限</p>
+      
+      <pre><code>more /etc/passwd
+      </code></pre></li>
+      
+      <li><p>更改读写权限</p>
+      
+      <pre><code>chmod a+x main         对所有用户给文件main增加可执行权限
+      chmod g+w blogs        对组用户给文件blogs增加可写权限
+      </code></pre></li>
+      
+      <li><p>增加用户</p>
+      
+      <pre><code>sudo adduser new_username
+      </code></pre></li>
+      
+      <li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart">add sudo user</a></p></li>
+      </ul>
+      
+      <h3 id="-13">系统管理</h3>
+      
+      <h4 id="swapfile">查看swap file</h4>
+      
+      <pre><code> free -m  
+       top
+      </code></pre>
+      
+      <h4 id="cpu">查看CPU信息</h4>
+      
+      <h4 id="-14">性能监控</h4>
+      
+      <ul>
+      <li><p>查看CPU的使用频率</p>
+      
+      <pre><code>sar -u 1 2 //每秒采样一次，总共采样两次
+      </code></pre></li>
+      
+      <li><p>查看物理CPU个数</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "physical id" | sort| uniq | wc -l
+      </code></pre></li>
+      
+      <li><p>查看每个物理CPU中core的个数(即核数)</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "cpu cores"| uniq
+      </code></pre>
+      
+      <p></p></li>
+      
+      <li><p>查看逻辑CPU的个数</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "processor"| wc -l
+      </code></pre></li>
+      
+      <li><p>路由追踪</p>
+      
+      <pre><code>tracert ip
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-15">防火墙</h4>
+      
+      <pre><code>sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口
+      </code></pre>
+      
+      <h4 id="established">查看已经连接的服务端口（ESTABLISHED）</h4>
+      
+      <ul>
+      <li><pre><code>netstat -a
+      </code></pre></li>
+      
+      <li><p>查看所有的服务端口（LISTEN，ESTABLISHED）</p>
+      
+      <pre><code>netstat -ap
+      </code></pre></li>
+      
+      <li><p>查看指定端口，可以结合grep命令：</p>
+      
+      <pre><code>netstat -ap | grep 8080
+      </code></pre></li>
+      
+      <li><p>也可以使用lsof命令：</p>
+      
+      <pre><code>lsof -i:8888
+      sudo lsof -i | grep ssh
+      </code></pre></li>
+      
+      <li><p>若要关闭使用这个端口的程序，使用kill + 对应的pid</p>
+      
+      <pre><code>kill -9 PID号
+      </code></pre></li>
+      
+      <li><p>杀死进程</p>
+      
+      <pre><code>sudo netstat -tulpn | grep :80
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="cron">CRON</h4>
+      
+      <ul>
+      <li><p>查看本机上所有cron服务</p>
+      
+      <pre><code> ls -l /etc/init.d
+      </code></pre></li>
+      
+      <li><p>过滤cron日志</p>
+      
+      <pre><code>grep CRON /var/log/syslog
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-16">过滤系统日志</h4>
+      
+      <pre><code>   sed -n '/2018-09-01/,/2018-09-09/p'  path/xxx.log
+      </code></pre>
+      
+      <h4 id="-17">其它</h4>
+      
+      <ul>
+      <li><p>查看<code>liunx</code>版本</p>
+      
+      <pre><code>lsb_release -a
+      </code></pre></li>
+      
+      <li><p>查看<code>CPU</code>的核的个数</p>
+      
+      <pre><code>cat /proc/cpuinfo | grep processor | wc -l
+      </code></pre></li>
+      
+      <li><p>查看内存信息</p>
+      
+      <pre><code>cat /proc/meminfo
+      </code></pre></li>
+      
+      <li><p>设置系统时间</p>
+      
+      <pre><code>date -s 2018-05-05 00:00:00
+      </code></pre></li>
+      
+      <li><p>设置时区</p>
+      
+      <pre><code>tzselect
+      </code></pre></li>
+      
+      <li><p>强制把系统时间写入CMOS</p>
+      
+      <pre><code>clock -w
+      </code></pre></li>
+      
+      <li><p>查看当前时间状态</p>
+      
+      <pre><code>timedatectl status
+      </code></pre></li>
+      
+      <li><p>修改时区为上海</p>
+      
+      <pre><code>timedatectl set-timezone "Asia/Shanghai"
+      </code></pre></li>
+      </ul>
+      
+      <hr />
+      
+      <h3 id="-18">常见的自带命令</h3>
+      
+      <p>| 操作 | 命令 |
+      |-----|-----|
+      | 进入目录 | <code>cd</code>  | 
+      | 创建目录 | <code>mkdir 目录名</code>  |
+      | 创建目录     | <code>mkdir -p 目录路径</code>  |
+      | 当前用户     | <code>whoami</code> |
+      | --     | --  |
+      | 查看路径     | <code>ls 路径</code> |
+      | 查看路径     | <code>ls -a 路径</code>  |
+      | 查看路径     | <code>ls -l 路径</code> |
+      | 查看路径     | <code>ls -al 路径</code>  |
+      | --     | --  |
+      | 创建文件     | <code>touch 文件名</code> |
+      | 改变文件更新时间     | <code>touch 文件名</code> |
+      | 创建文件     | <code>echo '文件内容' &gt; 文件路径</code>  |
+      | 强制创建文件     | <code>echo '文件内容' &gt; !文件路径</code>  |
+      | 追加文件内容     | <code>echo '文件内容' &gt;&gt; 文件路径</code>  |
+      | --     | --  |
+      | 复制文件     | <code>cp 源路径 目标路径</code>  |
+      | 复制目录     | <code>cp -r 源路径 目标路径</code>  |
+      | --     | --  |
+      | 移动节点     | <code>mv 源路径 目标路径</code>  |
+      | --     | --  |
+      | 删除文件     | <code>rm 文件路径</code>  |
+      | 强制删除文件     | <code>rm -f 文件路径</code> |
+      | 删除目录     | <code>rm -r 目录路径</code>  |
+      | 强制删除目录     | <code>rm -rf 目录路径</code>  |
+      | --     | --  |
+      | 查看目录结构     | <code>tree</code>  |
+      | 建立软链接     | <code>ln -s 真实文件 链接</code> |
+      | --     | --  |
+      | 下载文件     | <code>curl -L https://www.baidu.com &gt; baidu.html</code>  |
+      | 磁盘占用     | <code>df -kh</code>  |
+      | 当前目录大小     | <code>du -sh .</code>  |
+      | 各文件大小     | <code>du -h</code>  |</p><blockquote>
+        <p>这两个不在此列：<strong><a href="#jump_10"><a href="https://github.com/Composur/resume/blob/master/blog/git.md" target="_blank">git</a></a></strong> <a href="https://coolshell.cn/articles/5426.html" target="_black">vim</a>;
+        <strong><a href="#jump_20">如果你觉得对你有帮助，欢迎点个赞</a>[^1]</strong></p>
+      </blockquote>
+      
+      <h3 id="">目录</h3>
+      
+      <p>[TOC]</p>
+      
+      <h3 id="-1">磁盘管理</h3>
+      
+      <h4 id="-2">基础命令</h4>
+      
+      <ul>
+      <li>查看磁盘空间 <code>df -h</code></li>
+      
+      <li>查看目录大小 <code>du -sh</code></li>
+      
+      <li>打包 <code>tar -cvf</code></li>
+      
+      <li>解包 <code>tar -xvf</code></li>
+      
+      <li>压缩 <code>gzip</code></li>
+      
+      <li>解压缩 <code>gunzip bzip</code></li>
+      </ul>
+      
+      <h3 id="-3">进程管理</h3>
+      
+      <ul>
+      <li><code>lsof</code>(list open files)，列举系统中已经被打开的文件！</li>
+      
+      <li><code>ps -ef | grep user</code> 查询当前用户下的进程</li>
+      
+      <li><code>lsof -i:27017</code> 查看端口占用的状态</li>
+      
+      <li><code>lsof +d mydir/</code> 查看指定文件夹下被进程开启的文件</li>
+      
+      <li><code>kill pid</code> (process ID)杀死指定的PID进程</li>
+      
+      <li><code>kill -9 pid</code> 杀死相关进程</li>
+      
+      <li><code>top</code> 资源管理器，键入<code>top</code>后键入<code>P</code>(根据<code>CPU</code>大小排序),<code>M</code>(根据驻留内存大小排序),</li>
+      
+      <li>也可以安装<code>htop</code>功能更强大</li>
+      </ul>
+      
+      <h4 id="htop">htop</h4>
+      
+      <pre><code>sudo apt-get install htop
+      htop
+      </code></pre>
+      
+      <h3 id="-4">操作文件、文件夹</h3>
+      
+      <h4 id="-5">基础操作</h4>
+      
+      <ul>
+      <li><p>查看文件大小的命令：</p>
+      
+      <pre><code>ls  -l    filename
+      </code></pre></li>
+      
+      <li><p>查看文件夹大小</p>
+      
+      <pre><code>cd  Foldename进到Foldename 目录
+      du    -sh
+      </code></pre></li>
+      
+      <li><p>修改文件或文件夹名</p>
+      
+      <pre><code>mv file1 file2
+      </code></pre></li>
+      
+      <li><p>查看磁盘的使用情况命令：</p>
+      
+      <pre><code>df    -h
+      </code></pre></li>
+      
+      <li><p>压缩文件文件夹</p>
+      
+      <pre><code>tar zcvf Retail.tar.gz Retail/
+      </code></pre></li>
+      
+      <li><p>解压</p>
+      
+      <pre><code>tar -xvf xxx.tar.gz
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-6">打印出一个命令的路径</h4>
+      
+      <pre><code>  type ls
+        ls is hashed (/usr/bin/ls)
+      </code></pre>
+      
+      <h4 id="-7">创建自定义工程目录</h4>
+      
+      <blockquote>
+        <p>$1代表你想定义的目录</p>
+      </blockquote>
+      
+      <pre><code>   mkdir $1
+         cd $1
+         css js
+         touch index.html css/style.css js/main.js
+         exit
+      </code></pre>
+      
+      <blockquote>
+        <p>执行</p>
+      </blockquote>
+      
+      <pre><code> script.sh demo
+      </code></pre>
+      
+      <h4 id="-8">判断自定义的目录是否存在</h4>
+      
+      <pre><code>if [ -d $1 ]; then
+        echo 'error: dir exists'
+        exit
+      else
+        mkdir $1
+        cd $1
+        mkdir css js
+        touch index.html css/style.css js/main.js
+        echo 'success'
+        exit
+      fi
+      </code></pre>
+      
+      <h4 id="ubuntushsudo">ubuntu运行sh脚本sudo自动输入密码</h4>
+      
+      <ul>
+      <li><p>第一种方法（文本块，重定向）</p>
+      
+      <pre><code>#!/bin/bash
+      sudo -S apt-get update &lt;&lt; EOF 
+      Your password
+      EOF
+      </code></pre></li>
+      
+      <li><p>第二种方法（使用管道）</p>
+      
+      <pre><code>#!/bin/bash
+      echo password | sudo -S apt-get update
+      </code></pre></li>
+      </ul>
+      
+      <h3 id="-9">网络工具</h3>
+      
+      <h4 id="-10">查询网络服务和端口</h4>
+      
+      <ul>
+      <li>列出所有<code>TCP</code>端口号</li>
+      </ul>
+      
+      <pre><code> netstat -at
+      </code></pre>
+      
+      <ul>
+      <li>使用<code>netstat</code>工具查询端口:</li>
+      </ul>
+      
+      <pre><code> netstat -antp | grep 27017
+      </code></pre>
+      
+      <ul>
+      <li>使用<code>ps</code>工具查询进程详情</li>
+      </ul>
+      
+      <pre><code>ps -fe | grep 19034
+      </code></pre>
+      
+      <h4 id="ftpsftp">ftp/sftp文件传输</h4>
+      
+      <pre><code>```
+      sftp ID@host
+      get filename # 下载文件
+      put filename # 上传文件
+      ls # 列出host上当前路径的所有文件
+      cd # 在host上更改当前路径
+      lls # 列出本地主机上当前路径的所有文件
+      lcd # 在本地主机更改当前路径
+      ```
+      </code></pre>
+      
+      <h4 id="-11">网络复制</h4>
+      
+      <ul>
+      <li>将本地localpath指向的文件上传到远程主机的path路径:</li>
+      </ul>
+      
+      <pre><code>scp localpath username@host:path
+      </code></pre>
+      
+      <ul>
+      <li>以ssh协议，遍历下载path路径下的整个文件系统，到本地的localpath:</li>
+      </ul>
+      
+      <pre><code>scp -r username@host:path localpath
+      </code></pre>
+      
+      <h3 id="-12">用户管理工具</h3>
+      
+      <h4 id="sudo">增加sudo用户</h4>
+      
+      <ul>
+      <li>查看所有用户</li>
+      </ul>
+      
+      <pre><code>cut -d: -f1 /etc/passwd
+      </code></pre>
+      
+      <ul>
+      <li><p>查看所有用户及权限</p>
+      
+      <pre><code>more /etc/passwd
+      </code></pre></li>
+      
+      <li><p>更改读写权限</p>
+      
+      <pre><code>chmod a+x main         对所有用户给文件main增加可执行权限
+      chmod g+w blogs        对组用户给文件blogs增加可写权限
+      </code></pre></li>
+      
+      <li><p>增加用户</p>
+      
+      <pre><code>sudo adduser new_username
+      </code></pre></li>
+      
+      <li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart">add sudo user</a></p></li>
+      </ul>
+      
+      <h3 id="-13">系统管理</h3>
+      
+      <h4 id="swapfile">查看swap file</h4>
+      
+      <pre><code> free -m  
+       top
+      </code></pre>
+      
+      <h4 id="cpu">查看CPU信息</h4>
+      
+      <h4 id="-14">性能监控</h4>
+      
+      <ul>
+      <li><p>查看CPU的使用频率</p>
+      
+      <pre><code>sar -u 1 2 //每秒采样一次，总共采样两次
+      </code></pre></li>
+      
+      <li><p>查看物理CPU个数</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "physical id" | sort| uniq | wc -l
+      </code></pre></li>
+      
+      <li><p>查看每个物理CPU中core的个数(即核数)</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "cpu cores"| uniq
+      </code></pre>
+      
+      <p></p></li>
+      
+      <li><p>查看逻辑CPU的个数</p>
+      
+      <pre><code>cat /proc/cpuinfo| grep "processor"| wc -l
+      </code></pre></li>
+      
+      <li><p>路由追踪</p>
+      
+      <pre><code>tracert ip
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-15">防火墙</h4>
+      
+      <pre><code>sudo ufw allow from 192.168.1.1 允许此IP访问所有的本机端口
+      </code></pre>
+      
+      <h4 id="established">查看已经连接的服务端口（ESTABLISHED）</h4>
+      
+      <ul>
+      <li><pre><code>netstat -a
+      </code></pre></li>
+      
+      <li><p>查看所有的服务端口（LISTEN，ESTABLISHED）</p>
+      
+      <pre><code>netstat -ap
+      </code></pre></li>
+      
+      <li><p>查看指定端口，可以结合grep命令：</p>
+      
+      <pre><code>netstat -ap | grep 8080
+      </code></pre></li>
+      
+      <li><p>也可以使用lsof命令：</p>
+      
+      <pre><code>lsof -i:8888
+      sudo lsof -i | grep ssh
+      </code></pre></li>
+      
+      <li><p>若要关闭使用这个端口的程序，使用kill + 对应的pid</p>
+      
+      <pre><code>kill -9 PID号
+      </code></pre></li>
+      
+      <li><p>杀死进程</p>
+      
+      <pre><code>sudo netstat -tulpn | grep :80
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="cron">CRON</h4>
+      
+      <ul>
+      <li><p>查看本机上所有cron服务</p>
+      
+      <pre><code> ls -l /etc/init.d
+      </code></pre></li>
+      
+      <li><p>过滤cron日志</p>
+      
+      <pre><code>grep CRON /var/log/syslog
+      </code></pre></li>
+      </ul>
+      
+      <h4 id="-16">过滤系统日志</h4>
+      
+      <pre><code>   sed -n '/2018-09-01/,/2018-09-09/p'  path/xxx.log
+      </code></pre>
+      
+      <h4 id="-17">其它</h4>
+      
+      <ul>
+      <li><p>查看<code>liunx</code>版本</p>
+      
+      <pre><code>lsb_release -a
+      </code></pre></li>
+      
+      <li><p>查看<code>CPU</code>的核的个数</p>
+      
+      <pre><code>cat /proc/cpuinfo | grep processor | wc -l
+      </code></pre></li>
+      
+      <li><p>查看内存信息</p>
+      
+      <pre><code>cat /proc/meminfo
+      </code></pre></li>
+      
+      <li><p>设置系统时间</p>
+      
+      <pre><code>date -s 2018-05-05 00:00:00
+      </code></pre></li>
+      
+      <li><p>设置时区</p>
+      
+      <pre><code>tzselect
+      </code></pre></li>
+      
+      <li><p>强制把系统时间写入CMOS</p>
+      
+      <pre><code>clock -w
+      </code></pre></li>
+      
+      <li><p>查看当前时间状态</p>
+      
+      <pre><code>timedatectl status
+      </code></pre></li>
+      
+      <li><p>修改时区为上海</p>
+      
+      <pre><code>timedatectl set-timezone "Asia/Shanghai"
+      </code></pre></li>
+      </ul>
+      
+      <hr />
+      
+      <h3 id="-18">常见的自带命令</h3>
+      
+      <p>| 操作 | 命令 |
+      |-----|-----|
+      | 进入目录 | <code>cd</code>  | 
+      | 创建目录 | <code>mkdir 目录名</code>  |
+      | 创建目录     | <code>mkdir -p 目录路径</code>  |
+      | 当前用户     | <code>whoami</code> |
+      | --     | --  |
+      | 查看路径     | <code>ls 路径</code> |
+      | 查看路径     | <code>ls -a 路径</code>  |
+      | 查看路径     | <code>ls -l 路径</code> |
+      | 查看路径     | <code>ls -al 路径</code>  |
+      | --     | --  |
+      | 创建文件     | <code>touch 文件名</code> |
+      | 改变文件更新时间     | <code>touch 文件名</code> |
+      | 创建文件     | <code>echo '文件内容' &gt; 文件路径</code>  |
+      | 强制创建文件     | <code>echo '文件内容' &gt; !文件路径</code>  |
+      | 追加文件内容     | <code>echo '文件内容' &gt;&gt; 文件路径</code>  |
+      | --     | --  |
+      | 复制文件     | <code>cp 源路径 目标路径</code>  |
+      | 复制目录     | <code>cp -r 源路径 目标路径</code>  |
+      | --     | --  |
+      | 移动节点     | <code>mv 源路径 目标路径</code>  |
+      | --     | --  |
+      | 删除文件     | <code>rm 文件路径</code>  |
+      | 强制删除文件     | <code>rm -f 文件路径</code> |
+      | 删除目录     | <code>rm -r 目录路径</code>  |
+      | 强制删除目录     | <code>rm -rf 目录路径</code>  |
+      | --     | --  |
+      | 查看目录结构     | <code>tree</code>  |
+      | 建立软链接     | <code>ln -s 真实文件 链接</code> |
+      | --     | --  |
+      | 下载文件     | <code>curl -L https://www.baidu.com &gt; baidu.html</code>  |
+      | 磁盘占用     | <code>df -kh</code>  |
+      | 当前目录大小     | <code>du -sh .</code>  |
+      | 各文件大小     | <code>du -h</code>  |</p>
+</body>
+</html>
