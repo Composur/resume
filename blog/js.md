@@ -777,6 +777,7 @@ function create(Con, ...args) {
 #### 混合继承
 + 解决了共享实例和无法向父级传递参数的问题
     ![](./img/构造函数的继承.jpg)
++ 问题实例化了两次，调用了两次，可以借助下方 替换 new Father() 的操作 Son.prototype = create(Father)
 #### 原型继承
     ```
     function create(o){

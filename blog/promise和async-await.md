@@ -1,3 +1,72 @@
+### Promise 
+1. Promise的用法
+```
+const promise = new Promise((resolve,reject)=>{
+    if(操作成功){
+        resolve(value)
+    }else{
+        reject(error)
+    }
+})
+promise.then(function(value){
+    成功的value
+},function(error){
+    失败的error
+})
+
+```
+2. 手写一个Promise，满足基本的功能
+    + 三种状态 pending| fulfilled | rejected
+    + 当处于 pending 状态的时候，可以转移到 fulfilled(resolved)或者rejected状态
+    + 当处于fulfilled(resolved)状态或者 rejected 状态的时候，就不可变。
+    + 必须有一个then异步执行方法，then接受两个参数且必须返回一个promise
+    ```
+    function Promise_(construstor){
+         let self=this; 
+
+        this.status = 'pending' //初始状态
+        this.value = undefined // resolved 状态
+        this.reason = undefined // rejected 状态
+
+        // 成功的回调
+        function resolve(value){
+            if(self.status==='pending'){
+                self.value = value 
+                self.status = 'resolved'
+            }
+        }
+
+        // 失败的回调
+         function reject(error){
+            if(self.status==='pending'){
+                self.value = error 
+                self.status = 'rejected'
+            }
+        }
+
+        // 异常捕获
+        try{
+            constructor(resolve,reject)
+        }catch(e){
+             reject(e)
+        }
+    }
+      // 在原型链上定义 then 方法
+       Promise_.prototype.then=function(onFullfilled,onRejected){
+            let self=this;
+            switch(self.status){
+                case "resolved":
+                    onFullfilled(self.value);
+                    break;
+                case "rejected":
+                    onRejected(self.reason);
+                    break;
+                default:       
+            }
+        }
+    ```
+
+
 ### async/await的基础用法
 
 > 致谢：[888](https://www.jianshu.com/p/ffa5cbe9ab29)

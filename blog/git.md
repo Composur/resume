@@ -192,6 +192,19 @@ git push origin master --force  #强制覆盖远程master分支  gitlab 默认ma
 - merge 动作的默认目标是当前分支
 - merge 动作的来源则取决于你是否有 tracking
 
+### rebase 和 merge 的用法
+  + 它们做的事情是一样的
+  + merge 它是一个安全的操作,现有的分支不会被更改，但是会引入一个外来的合并提交
+    ```
+    git checkout feature
+    git merge master    
+    ```
+  + rebase 作为 merge 的替代选择 rebase 最大的好处是你的项目历史会非常整洁, 但是你看不到 feature 分支中并入了上游的哪些更改
+  ```
+    git checkout feature
+    git rebase master
+  ```
+
 
 
 ### 12.git pull/push 强制覆盖本地文件/远程仓库
