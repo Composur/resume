@@ -321,12 +321,13 @@ xhr.send(null)
     + 当状态变更时候（unset、opened、loading、done）如果设置的有callback异步线程就会产生状态变更事件，将这个callback再放到事件队列中，由JS引擎的执行
 
 ### EventLoop
-
+> main script运行结束后，会有微任务队列和宏任务队列。微任务先执行，之后是宏任务。宏任务>微任务>宏任务
 #### 1.js是单线程的
 假如在这个线程中，有 `var =1;get(/xxx.josn);`等，js引擎会执行同步代码`var=1`，异步的`get`请求会让浏览器的网络模块来做; 请求完后通知js引擎再执行回调；
 
 #### 2. 任务队列（task queue)
->微任务包括 process.nextTick ，Promise.then catch finally ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate ，I/O ，UIrendering <br/>
+>微任务包括 process.nextTick ，Promise.then catch finally ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate(该方法用来把一些需要长时间运行的操作放在一个回调函数里，在浏览器完成后面的其他语句后，就立刻执行这个回调函数。) ，I/O ，UIrendering 
+ <br/>
 + JS分为同步任务和异步任务（同步任务在主线程上执行形成一个执行栈）
 + 主线程之外、事件触发的线程管理着一个任务队列、只要异步任务有了运行结果，就在任务队列中放置一个事件
 + 一旦主进程空闲（执行栈）执行完毕（同步任务执行完毕），系统就会读取任务队列中的事件，将满足条件的异步任务添加到执行栈中
@@ -666,27 +667,23 @@ var _this=fn()
 
 ```
 
+### new 操作符
+> new 操作符会返回一个对象，这个对象就是构造函数中的this，可以访问挂载到构造函数上的属性。
+```
+function create(Con, ...args) {
+  let obj = {} //创建一个空对象
+  Object.setPrototypeOf(obj, Con.prototype) //给实例化的空对象设置原型
+  let result = Con.apply(obj, args) //改变空对象的this指向，使可以访问到原型上的属性
+  return result instanceof Object ? result : obj
+}
+
+```
+
 
 ### 继承（编程理念）
-+ 继承可以子类具有父类的属性和方法，而不需要重复编写相同的代码
++ 继承可以使子类具有父类的属性和方法，而不需要重复编写相同的代码
 + 继承就是一个对象直接使用另一个对象的属性和方法
-+ Object.create()
 
-    ```
-    function Super() {}
-    Super.prototype.getNumber = function() {
-    return 1
-    }
-    function Sub() {}
-    let s = new Sub()
-    Sub.prototype = Object.create(Super.prototype, {
-    constructor: {
-    value: Sub,
-    enumerable: false,
-    writable: true,
-    configurable: true
-    }
-    ```
 
 ### 原型和原型链
 > 原型对象的作用，就是定义所有实例对象共享的属性和方法  
@@ -711,12 +708,12 @@ var _this=fn()
     log(p1.sayName())
 
 
-                    /*
-                        var obj = {}; //创建一个新的空对象this对象就指向了该变量
-                        obj.__proto__ = fn.prototype; //空对象的原型指向函数的原型
-                        console.log(obj.__proto__); //object{};
-                        fn.call(obj); //改变构造函数this的内部指向 obj继承了fn的属性和方法
-                    */
+    /*
+        var obj = {}; //创建一个新的空对象this对象就指向了该变量
+        obj.__proto__ = fn.prototype; //空对象的原型指向函数的原型
+        console.log(obj.__proto__); //object{};
+        fn.call(obj); //改变构造函数this的内部指向 obj继承了fn的属性和方法
+    */
 ```
 
 
@@ -751,6 +748,62 @@ var _this=fn()
     Object.__proto__ = Function.prototype // 因为 Object 是函数，是 Function 的实例
     Function.__proto__ == Function.prototye // 因为 Function 是函数，是 Function 的实例！
 ```
+#### 原型链继承
++ 存在的问题：
+    1. 共享实例
+    2. 不能像父级传递参数
+    ```
+    function Father(name){
+        this.name=name
+        this.fatherProperty = true;
+    }
+    Father.prototype.sayName=function(){
+        return this.name
+    }
+    function Son(name){
+        this.name=name
+        this.sonProperty=false
+    }
+    Son.prototype = new Father()
+    var test = new Son()
+   
+    ```
+    ![](./img/原型继承.jpg)
+#### 构造函数继承
++ 解决了共享实例和无法向父级传递参数的问题
+    ![](./img/混合继承.jpg)
++ 存在的问题  
+    1. 方法都在构造函数中定义
+#### 混合继承
++ 解决了共享实例和无法向父级传递参数的问题
+    ![](./img/构造函数的继承.jpg)
+#### 原型继承
+    ```
+    function create(o){
+        function F(){}
+        F.prototype = o 
+        return new F()
+    }
+    ```
+#### 
++ Object.create()
+
+```
+    function Super() {}
+    Super.prototype.getNumber = function() {
+        return 1
+    }
+    function Sub() {}
+    let s = new Sub()
+    Sub.prototype = Object.create(Super.prototype, {
+        constructor: {
+        value: Sub,
+        enumerable: false,
+        writable: true,
+        configurable: true
+    }
+```
+
 
 #### bind call apply
 + 函数的绑定，函数作用参数传递的同时，可以存储函数的作用域
@@ -883,8 +936,11 @@ const asyncFn= (
 console.log(promise) //Promise { undefined }
 console.log(asyncFn) //Promise { undefined }
 ```
+### Async的then和Promise的then的优先级
 
-#### JSON规范
+![Async的then和Promise的then的优先级](./img/promise_async.js)
+
+### JSON规范
 + 首先json是一种用于数据交换的文本格式，是一种文本格式
 + json类型对值和类型有严格的规范
 + 复杂类型不能是function、regexp、date
@@ -895,7 +951,7 @@ console.log(asyncFn) //Promise { undefined }
 + 空数组和空对象也是合格的JSON值,null也是合格的json值
 + JSON对象提供了两种方法JSON.stringfiy()和JSON.parse()
 
-#### 事件
+### 事件
 + javascript采用异步事件驱动编程模型
 + 事件的三种模型：事件冒泡、事件捕获、DOM事件流（事件捕获阶段、处于目标阶段、事件冒泡阶段，首先发生的是事件捕获、为截取事件提供机会、然后实际目标接受事件，最后是冒泡阶段）
 + 事件处理程序，事件侦听器（listener）就是响应某个事件的方法N
@@ -906,7 +962,7 @@ console.log(asyncFn) //Promise { undefined }
 ![事件冒泡](http://7xpvnv.com2.z0.glb.qiniucdn.com/4bc08396-78b0-48e3-a8bb-f846e86e9d73) ![事件捕获](http://7xpvnv.com2.z0.glb.qiniucdn.com/0faaa7bb-5dcf-4f3c-93ff-62b134d987dd) ![DOM2事件流](http://7xpvnv.com2.z0.glb.qiniucdn.com/8ddedb2e-f55e-4872-bd36-79c44b71d3f1)
 
 
-### 阻止传播
+#### 阻止传播
 + event.preventDefault() 如果事件可以取消，则取消该事件，但是不影响事件的下一步传播
 + event.stopPropagation()阻止捕获和冒泡阶段中当前事件的进一步传播
 + event.target()事件代理，或则事件委托在子元素的上级结点（一般是父节点）处理子元素的上的触发事件

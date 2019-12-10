@@ -161,11 +161,14 @@ http{
   gzip on;
   gzip_disable "msie6";
 
+  # 是否在http header中添加Vary: Accept-Encoding，建议开启
   # gzip_vary on;
   # gzip_proxied any;
   # gzip_comp_level 6;
   # gzip_buffers 16 8k;
   # gzip_http_version 1.1;
   # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+  # nginx对于静态文件的处理模块，开启后会寻找以.gz结尾的文件，直接返回，不会占用cpu进行压缩，如果找不到则不进行压缩
+  # gzip_static on|off;
 }
 ```
