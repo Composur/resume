@@ -606,6 +606,12 @@ var app = {
 + 每个新定义的函数都有它自己的 this值(箭头函数不绑定this，它使用封闭执行上下文中的this值)
 
 #### 绑定this(箭头函数除外)
++ 箭头函数没有原型属性
+```
+var foo = () => {};
+console.log(foo.prototype) //undefined
+
+```
 ##### 使用new绑定，this绑定的是最新创建的对象
 ```
 var _this=new fn()
@@ -628,6 +634,7 @@ var _this=obj2.fn()
 var _this=fn()
 ```
 ##### es6箭头函数的this根据外层函数或者全局作用域来绑定this
+
 + JavaScript 提供了`call、apply、bind`这三个方法，来切换/固定this的指向
 1. `call`
     ```
