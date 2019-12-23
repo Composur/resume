@@ -138,6 +138,15 @@ $ git fetch upstream
 
 
 ```
+$ git rebase upstream 
+
+# 上面两步合为一步
+
+$ git pull upstream  branch_name --rebase
+```
+
+
+```
 $ git checkout master
 > Switched to branch 'master'
 ```
