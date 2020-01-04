@@ -1117,3 +1117,4 @@ function ajax(obj){
     $ele.on('click',function(data){//do}) //订阅了$ele的‘click’事件
     $ele.trigger('click',data) //发布
 ```
+
