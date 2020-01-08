@@ -326,7 +326,7 @@ xhr.send(null)
 假如在这个线程中，有 `var =1;get(/xxx.josn);`等，js引擎会执行同步代码`var=1`，异步的`get`请求会让浏览器的网络模块来做; 请求完后通知js引擎再执行回调；
 
 #### 2. 任务队列（task queue)
->微任务包括 process.nextTick ，Promise.then catch finally ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate(该方法用来把一些需要长时间运行的操作放在一个回调函数里，在浏览器完成后面的其他语句后，就立刻执行这个回调函数。) ，I/O ，UIrendering 
+>微任务包括 process.nextTick ，Promise.then catch finally ，Object.observe ，MutationObserver;宏任务包括 script ， setTimeout ，setInterval ，setImmediate(该方法用来把一些需要长时间运行的操作放在一个回调函数里，在浏览器完成后面的其他语句后，就立刻执行这个回调函数。) ，I/O ，UIrendering 。另外Promise的executor是一个同步函数，即非异步，立即执行的一个函数，因此他应该是和当前的任务一起执行的。而Promise的链式调用then，每次都会在内部生成一个新的Promise，然后执行then，在执行的过程中不断向微任务(microtask)推入新的函数，因此直至微任务(microtask)的队列清空后才会执行下一波的macrotask。
  <br/>
 + JS分为同步任务和异步任务（同步任务在主线程上执行形成一个执行栈）
 + 主线程之外、事件触发的线程管理着一个任务队列、只要异步任务有了运行结果，就在任务队列中放置一个事件
@@ -945,8 +945,9 @@ console.log(promise) //Promise { undefined }
 console.log(asyncFn) //Promise { undefined }
 ```
 ### Async的then和Promise的then的优先级
-
 ![Async的then和Promise的then的优先级](./img/promise_async.js)
++  async/await仅仅影响的是函数内的执行，而不会影响到函数体外的执行顺序
++  await async2()相当于一个Promise
 
 ### JSON规范
 + 首先json是一种用于数据交换的文本格式，是一种文本格式
