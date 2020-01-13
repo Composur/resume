@@ -1,4 +1,17 @@
-const count = require('./test')
-setTimeout(function () {
-  console.log('read count after 1000ms in commonjs is', count)
-}, 1000)
+function Super() {}
+Super.prototype.getNumber = function () {
+  return 1
+}
+
+function Sub() {}
+
+Sub.prototype = Object.create(Super.prototype, {
+  constructor: {
+    value: Sub,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  }
+})
+let s = new Sub()
+console.dir(s)

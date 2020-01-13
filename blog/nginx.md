@@ -32,7 +32,10 @@ brew services stop nginx
 # 重新加载config文件 不成功就重启
 nginx -s reload
 ```
-
++ 查看安装目录
+```
+brew info nginx 
+```
 
 #### 1.启动Nginx (非 brew 安装)
 如果是 brew 安装参考上面的方式
