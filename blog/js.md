@@ -542,7 +542,7 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 + 在函数内部this的值取决于函数被调用的方式,看是谁去调用的（es6）
 + es6中this的指向是定义时this的指向
 + 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
-+ (()=>{console.log(this)})()//this===windows.this 跳出箭头函数本身去外层find this
++ (()=>{console.log(this)})()//this===windows.this 跳出函数本身去外层find this
 
     ``` 
     var name="Window";
