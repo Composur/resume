@@ -118,6 +118,7 @@ var type = function (o){
             /11|22/.test('911') // true
             ```
             + 脱字符如果方括号内的第一个字符是[`^`]，则表示除了字符类之中的字符，其他字符都可以匹配。比如，[`^xyz`]表示除了`x、y、z`之外都可以匹配。
+                
                 > 脱字符只有在字符类的第一个位置才有特殊含义，否则就是字面含义。
             + 连字符（`-`）,`[abc]`可以写成`[a-c]`，`[0123456789]`可以写成`[0-9]`，同理`[A-Z]`表示26个大写字母。
     + 预定义模式
@@ -157,7 +158,7 @@ const fn1=function fn2(){}
 log(fn1)// fn2
 log(fn2)//not defined 作用域只限于fn2内部，外部无法访问到
 ```
-  
+
 + 函数的name
 ```
 const fn0=function(){}
@@ -347,6 +348,7 @@ xhr.send(null)
 + 队列就是承载任务的容器
 + `JavaScript`的`EventLoop`会不断的询问这个队列有没有要执行的任务，有了立即执行。
 + 异步任务
+    
     + 队列中有异步任务的情况，执行到它时会先注册一个回调函数再去执行其它同步任务，因为异步任务耗时，等所需的耗时结束时且当前执行栈没有其它同步任务，再去执行注册的那个回调函数。
 + 看个例子
 ```
@@ -386,9 +388,9 @@ setTimeout
                 _this.time(_a)
             },1000)
         }
-
+    
         ```
-        
+    
 #### NodeJS Event loop
 
 以下的每一个阶段都有一个队列
@@ -536,12 +538,21 @@ var newObj=JSON.parse(JSON.stringify(oldObject))
 ![this](./img/this.png)
 ##### 含义
 + `this`就是属性或方法“当前”所在的对象。`this`总是返回一个对象
+
 + 在全局执行上下文中（在任何函数体外部），this都指代全局对象（window,nodejs环境是global），上下文就是函数的执行环境
+
 + 作为变量调用的函数里边的 this 都指向 window
+
 + `this`绑定是上下文对象，并不是函数自身，也不是函数的词法作用域
+
+    + 一般为 fn.xx() ；需要注意的是：对象属性链中只有最后一层会影响到调用位置，fn.xx.xxx() this 上下文是xx 而不是 fn
+
 + 在函数内部this的值取决于函数被调用的方式,看是谁去调用的（es6）
+
 + es6中this的指向是定义时this的指向
+
 + 如果把this的值从一个执行上下文传到另一个（改变this的指向）用到call或apply方法
+
 + (()=>{console.log(this)})()//this===windows.this 跳出函数本身去外层find this
 
     ``` 
@@ -624,6 +635,8 @@ var _this=fn.call(obj1)
 ```
 ##### 在某个上下文对象中调用（隐式绑定），this绑定的是那个上下文对象
 
++ 隐式绑定的时候前面需要有个对象 例如 `obj2`
+
 ```
 var _this=obj2.fn()
 ```
@@ -633,25 +646,45 @@ var _this=obj2.fn()
 ```
 var _this=fn()
 ```
+##### 丢失的情况
+
++ 一般像 var xx = xxx.xxx  然后执行 xx() 这样的赋值操作都会丢失 this ；this 指向 window 除非执行 xx() 的时候硬绑定 this  xx.call(this) 
+
+```javascript
+function sayHi(){
+    console.log('Hello,', this.name);
+}
+var person = {
+    name: 'YvetteLau',
+    sayHi: sayHi
+}
+var name = 'Wiliam';
+var Hi = person.sayHi;
+Hi(); // 调用的时候，这种不是隐式绑定 ，this 不是 person 而是 window
+```
+
+
+
 ##### es6箭头函数的this根据外层函数或者全局作用域来绑定this
 
 + JavaScript 提供了`call、apply、bind`这三个方法，来切换/固定this的指向
 1. `call`
+    
     ```
     var obj={}
     var f=function(){
         return this
     }
     f()===window //true
-    f.call(obj)===obj //true
-
+f.call(obj)===obj //true
+    
     var n = 123;
-    var obj = { n: 456 };
-
+var obj = { n: 456 };
+    
     function a() {
     console.log(this.n);
-    }
-
+}
+    
     a.call() // 123
     a.call(null) // 123
     a.call(undefined) // 123
@@ -773,7 +806,7 @@ function create(Con, ...args) {
     }
     Son.prototype = new Father()
     var test = new Son()
-   
+      
     ```
     ![](./img/原型继承.jpg)
 #### 构造函数继承
