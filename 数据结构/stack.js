@@ -54,3 +54,4 @@ const dec2bin = function (num) {
   return result
 }
 console.log(dec2bin(10))//1010
+

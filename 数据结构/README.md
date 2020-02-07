@@ -16,6 +16,8 @@
 
   - 后进先出。
 
+  - 
+
   - 例如：十进制转二进制的计算过程，除2取余法。
 
     <img src="/Users/haizhi/personal/resume/数据结构/img/stackq02.jpg" style="zoom:80%;" />
@@ -96,9 +98,23 @@
   console.log(s)//Stack { itmes: [ 1, 2 ] }
   ```
 
-+ 
-
 + 队列
+
+  + 受限的线性结构，先进先出（FIFO）
+
+  + 例如：排队购票，打印机打印。
+
+  + 队列的实现
+
+    + 数组
+
+      ```javascript
+      
+      ```
+
+      
+
+    + 链表
 
 + 链表
 
