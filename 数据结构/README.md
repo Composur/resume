@@ -92,6 +92,16 @@ console.log(dec2bin(10))//1010
 
 > 答案 C 。3 4 6 5 2 1->压入6，压入5，压入4，压入3，弹出3，弹出4，*弹出5，弹出6*，压入2，弹出2，压入1
 
+  + 路由前进回退
+
+    ```javascript
+    history.pushState({},'','home')
+    history.back() //回退
+    history.forward() //前进
+    ```
+
+    
+
 #### 3.队列
 
 > 受限的线性结构，先进先出（FIFO）,例如：排队购票，打印机打印纸张。
