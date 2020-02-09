@@ -11,9 +11,9 @@
 <body>
   <script>
     /**
- * 链表
- * 每个节点保存的有数据，且保存的有指向下一个节点的指针
- */
+     * 链表
+     * 每个节点保存的有数据，且保存的有指向下一个节点的指针
+     */
     class Node {
       constructor(ele) {
         this.node = ele
@@ -37,24 +37,27 @@
         } else {
           // 链表不为空，数据怎么放，因为 this.head 保存的有指针，
           let currentNode = this.head
+
           // 一个一个往下指看哪个没有next,那个的next就等于新增的节点
           while (currentNode.next) {
-            currentNode = currentNode.next
+            currentNode = currentNode.next // 更新当前节点
           }
+
           currentNode.next = NODE
         }
+        // 添加的节点
         this.lenght++
       }
       toString() {
         // 链表的toString方法
         // 1.定义两个变量
-        var current = this.head
-        var listString = ""
+        let current = this.head
+        let listString = ""
 
         // 2.循环获取链表中所有的元素
         while (current) {
           console.log(current)
-          listString += "," + current.next
+          listString += "," + current.node
           current = current.next
         }
 
@@ -66,7 +69,8 @@
     linkedList.append(1)
     linkedList.append(2)
     linkedList.append(3)
-    console.log(linkedList.toString())</script>
+    console.log('toString=', linkedList.toString())
+  </script>
 </body>
 
 </html>
