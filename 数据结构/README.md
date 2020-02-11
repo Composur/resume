@@ -199,6 +199,61 @@ console.log(dec2bin(10))//1010
 
 上图就是一个简单的单向链表
 
++ 缺点
+  + 无法回到上一个节点（如文本编辑器的光标）
+
+##### 4.2 双向链表
+
+*相比较于单向链表多了一个向前的链接引用，有一个head指针指向头部，tail指针指向尾部*
+
+![Doubly_linked_list](./img/Doubly_linked_list.jpg)
+
++ 优点，使用方便。
+
++ 缺点
+  + 每次插入、删除的时候需要考虑四个节点，单向链表只需要考虑两个
+  + 占用内存空间大
+
+###### 4.2.1 双向列表插入
+
+```javascript
+  // 添加到指定位置
+      insert(position, node) {
+        let index = 0
+        const insertNode = new Node(node)
+        if (!this.head) {
+          this.head = insertNode
+          this.tail = insertNode
+          return
+        }
+        if (position === 0) {
+          let temp = this.head
+          this.head = insertNode
+          this.head.next = temp
+          temp.prev = insertNode
+          return
+        } else if (this.length === position) {
+          insertNode.prev = this.tail
+          this.tail.next = insertNode
+          this.tail = insertNode
+          return
+        }
+        let currentNode = this.head
+        let previous = null
+        while (index++ < position) {
+          previous = currentNode
+          currentNode = currentNode.next
+        }
+        // 画个图帮助理解
+        previous.next = insertNode
+        insertNode.next = currentNode
+        currentNode.prev = insertNode
+        insertNode.prev = previous
+      }
+```
+
+
+
 
 
 ## 算法

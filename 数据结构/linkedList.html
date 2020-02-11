@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>链表</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         this.lenght = 0
         this.head = null
       }
-      // 封装每个节点的信息
+
       // 向列表尾部添加一个新的项
       append(ele) {
         let NODE = new Node(ele)
@@ -47,6 +47,116 @@
         }
         // 添加的节点
         this.lenght++
+      }
+
+      //链表的插入 1.插入的位置 2.插入的元素
+      insert(position, ele) {
+        // 判断是否越界
+        if (position < 0 || position > this.lenght) {
+          return false
+        } else {
+          const insertNode = new Node(ele)
+          let currentNode = this.head
+          let index = 0
+          let previous = null
+
+          // 头部插入
+          if (position === 0) {
+            // 替换 head 以及指针
+            insertNode.next = currentNode
+            this.head = insertNode
+          } else {
+            while (index++ < position) {
+              // 过程中保存上一个和下一个节点
+              previous = currentNode
+              currentNode = currentNode.next
+            }
+            // 循环结束后得到插入节点的上一个节点（previous）和下一个节点（currentNode）
+            previous.next = insertNode
+            insertNode.next = currentNode
+          }
+          this.lenght++
+          return true
+        }
+      }
+      // 根据位置移除元素 
+      // 和插入类似 移除添加的next就可以
+      removeAt(position) {
+        // 判断是否越界
+        if (position < 0 || position > this.lenght) {
+          return false
+        } else {
+          let currentNode = this.head
+          let index = 0
+          let previous = null
+          // 头部删除
+          if (position === 0) {
+            this.head = currentNode.next
+          } else {
+            while (index++ < position) {
+              // 过程中保存上一个和下一个节点
+              previous = currentNode
+              currentNode = currentNode.next
+            }
+            // 循环结束后得到插入节点的上一个节点（previous）和下一个节点（currentNode）
+            previous.next = currentNode.next
+          }
+          this.lenght--
+          return true
+        }
+      }
+      // 根据元素移除
+      remove(node) {
+        // this.removeAt(this.indexOf(node))
+        let current = this.head
+        let previous = null
+        if (current.node === node) {
+          this.head = current.next
+          return
+        }
+        while (current) {
+          if (current.node === node) {
+            previous.next = current.next
+          }
+          previous = current
+          current = current.next
+        }
+      }
+      // 获取对应位置的元素
+      get(position) {
+        if (position < 0 || position > this.lenght) return false
+        let index = 0
+        let current = this.head
+        while (index++ < position) {
+          current = current.next
+        }
+        console.log('get', current.node)
+        return current.node
+      }
+      // 获取元素的索引值
+      indexOf(node) {
+        let index = 0
+        let current = this.head
+        if (this.head.node === node) return index
+        while (current) {
+          if (current.node == node) {
+            return index
+          }
+          index++
+          current = current.next
+        }
+        return -1
+      }
+      // 修改元素
+      update(position, newNode) {
+        if (position < 0 || position > this.lenght) return false
+        let current = this.head
+        while (current) {
+          if (current.node === this.get(position)) {
+            current.node = newNode
+          }
+          current = current.next
+        }
       }
       toString() {
         // 链表的toString方法
@@ -69,6 +179,13 @@
     linkedList.append(1)
     linkedList.append(2)
     linkedList.append(3)
+    linkedList.append(4)
+    linkedList.insert(1, 5)
+    // linkedList.removeAt(2)
+    linkedList.get(1)
+    linkedList.update(1, 'jjjj')
+    linkedList.remove(1)
+    console.log('indexOf', linkedList.indexOf(3))
     console.log('toString=', linkedList.toString())
   </script>
 </body>

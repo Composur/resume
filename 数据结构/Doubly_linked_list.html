@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Doubly_linked_list</title>
+</head>
+
+<body>
+  <script>
+    class Node {
+      constructor(node) {
+        this.node = node
+        this.prev = null
+        this.next = null
+      }
+    }
+    class DoublyLinkedList {
+      constructor(node) {
+        this.length = 0
+        this.head = null
+        this.tail = null
+      }
+      // 添加到列表尾部
+      append(node) {
+        const appendNode = new Node(node)
+        let prev = null
+        if (!this.head) {
+          this.head = appendNode
+          this.tail = appendNode
+        } else {
+          appendNode.prev = this.tail
+          this.tail.next = appendNode
+          this.tail = appendNode
+        }
+        this.length++
+      }
+      // 添加到指定位置
+      insert(position, node) {
+        let index = 0
+        const insertNode = new Node(node)
+        if (!this.head) {
+          this.head = insertNode
+          this.tail = insertNode
+          return
+        }
+        if (position === 0) {
+          let temp = this.head
+          this.head = insertNode
+          this.head.next = temp
+          temp.prev = insertNode
+          return
+        } else if (this.length === position) {
+          insertNode.prev = this.tail
+          this.tail.next = insertNode
+          this.tail = insertNode
+          return
+        }
+        let currentNode = this.head
+        let previous = null
+        while (index++ < position) {
+          previous = currentNode
+          currentNode = currentNode.next
+        }
+        // 画个图帮助理解
+        previous.next = insertNode
+        insertNode.next = currentNode
+        currentNode.prev = insertNode
+        insertNode.prev = previous
+      }
+      // 获取元素
+      get(position) {
+        if(position<0 || position > this.length) return false
+        let current ;
+        // 少比较一些
+        this.length/2<position? current = this.head: current = this.tail
+        let index = 0;
+        while (index++ < position) {
+          current = current.next
+        }
+        return current.node
+      }
+      // 返回下标值
+      indexOf(node){
+        let index =0
+        let current = this.head
+        while(current){
+          if(current.node === node){
+            return index
+          }
+          current = current.next
+          index++
+        }
+        return -1
+      }
+      
+      forwardToString() {
+        let current = this.head
+        let string = ''
+        while (current) {
+          string += "," + current.node
+          current = current.next
+        }
+        return string.slice(1)
+      }
+      backwardToString() {
+        let current = this.tail
+        let string = ''
+        while (current) {
+          string += current.node + ','
+          current = current.prev
+        }
+        return string.slice(0, string.length - 1)
+      }
+     
+    }
+
+    const dLinkList = new DoublyLinkedList()
+    dLinkList.append(1)
+    dLinkList.append(2)
+    dLinkList.append(3)
+    dLinkList.append(4)
+    dLinkList.insert(4, '位置1')
+    console.log(dLinkList)
+    console.log('indexOf(0)',dLinkList.indexOf(3))
+    console.log('get', dLinkList.get(4))
+    console.log(dLinkList.forwardToString())
+    // console.log(dLinkList.backwardToString())
+  </script>
+</body>
+
+</html>
