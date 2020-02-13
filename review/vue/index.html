@@ -10,8 +10,8 @@
 <body>
   <div id="app">
     <div v-text=text></div>
-    <div v-html=text></div>
-    <div v-on:click=text></div>
+    <div v-html=a></div>
+    <div v-on:click=click>click</div>
     <div>{{test}}</div>
     <div class="pacman">ff
      <ul>
@@ -28,9 +28,15 @@ new Vue({
   data(){
     return {
       test:'124',
-      text:'文本'
+      text:'文本',
+      a:'<a href="#">a标签</a>'
     }
-  }
+  },
+  methods: {
+    click(e){
+      console.log(e)
+    }
+  },
 })
 </script>
 </body>

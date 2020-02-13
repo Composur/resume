@@ -37,9 +37,8 @@ class Compile {
         // 处理 vue 指令
         const [, directive] = name.split('-')
         const [vueName,eventName] = directive.split(':')
-        console.log(vueName,eventName)
         // 处理传入的 数据
-        compilUtil(vueName,eventName,value,this.vm)
+        compilUtil[vueName](node,value,this.vm,eventName)
       }
         else {
 
@@ -78,5 +77,21 @@ class Vue {
     if (this.$el) {
       new Compile(this.$el, this)
     }
+  }
+}
+
+const compilUtil = {
+  text(node, value, vm) {
+    // console.log(node, value,vm.$data())
+    node.textContent = vm.$data()[value]
+  },
+  html(node, value, vm) {
+    // console.log(node, value,vm.$data())
+    node.innerHTML = vm.$data()[value]
+  },
+  on(node, value, vm, eventName) {
+    node.addEventListener(eventName, e => {
+      vm.$options.methods[value](e)
+    })
   }
 }
