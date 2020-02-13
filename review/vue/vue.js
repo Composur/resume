@@ -16,10 +16,10 @@ class Compile {
     [...childNodes].forEach(child => {
       // 判断每个节点的类型，是元素还是文本，分别进行处理
       if (this.isNodeElement(child)) {
-        console.log('元素',child)
+        // console.log('元素',child)
         this.compileElement(child)
       } else {
-        console.log('文本', child)
+        // console.log('文本', child)
         this.compileText(child)
       }
       // 递归
@@ -29,10 +29,29 @@ class Compile {
     })
   }
   compileElement(node){
+    // 在这里处理指令 v-text v-html
+    [...node.attributes].forEach(ele=>{
+      // console.dir(ele)
+      const { name,value } =ele
+      if (this.isVueDirective(name)) {
+        // 处理 vue 指令
+        const [, directive] = name.split('-')
+        const [vueName,eventName] = directive.split(':')
+        console.log(vueName,eventName)
+        // 处理传入的 数据
+        compilUtil(vueName,eventName,value,this.vm)
+      }
+        else {
+
+      }
+    })
 
   }
   compileText(text){
-    
+
+  }
+  isVueDirective(name){
+    return name.startsWith('v-')
   }
   // 是否是元素节点
   isNodeElement(node) {

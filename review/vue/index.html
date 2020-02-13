@@ -9,6 +9,9 @@
 </head>
 <body>
   <div id="app">
+    <div v-text=text></div>
+    <div v-html=text></div>
+    <div v-on:click=text></div>
     <div>{{test}}</div>
     <div class="pacman">ff
      <ul>
@@ -24,7 +27,8 @@ new Vue({
   el:'#app',
   data(){
     return {
-      test:'124'
+      test:'124',
+      text:'文本'
     }
   }
 })

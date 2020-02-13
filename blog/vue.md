@@ -6,6 +6,11 @@
 
 3. 编译（complie）
 
+   1. 判断传入的节点类型
+      1. 元素节点
+         1. 解析所有节点的 attributes的name，区分自有属性 vue指令等。
+      2. 文本节点
+
 4. ```javascript
    // 接收一个函数 ，函数渲染成 DOM 替换挂载的根节点 ,传入一个标签
    render((createElement)=>{ 
