@@ -28,28 +28,37 @@ class Compile {
       }
     })
   }
-  compileElement(node){
+  compileElement(node) {
     // 在这里处理指令 v-text v-html
-    [...node.attributes].forEach(ele=>{
+    [...node.attributes].forEach(ele => {
       // console.dir(ele)
-      const { name,value } =ele
+      const {
+        name,
+        value
+      } = ele
       if (this.isVueDirective(name)) {
         // 处理 vue 指令
         const [, directive] = name.split('-')
-        const [vueName,eventName] = directive.split(':')
+        const [vueName, eventName] = directive.split(':')
         // 处理传入的 数据
-        compilUtil[vueName](node,value,this.vm,eventName)
-      }
-        else {
+        compilUtil[vueName](node, value, this.vm, eventName)
+
+        // 删除指令 v- ??
+        node.removeAttribute('v-'+directive)
+      } else {
 
       }
     })
 
   }
-  compileText(text){
-
+  compileText(node) {
+    // 处理双大括号 {{}}
+    const {textContent} = node
+    if(/\{\{(.+?)\}\}/.test(textContent)){
+      compilUtil['text'](node,textContent,this.vm)
+    }
   }
-  isVueDirective(name){
+  isVueDirective(name) {
     return name.startsWith('v-')
   }
   // 是否是元素节点
@@ -82,24 +91,29 @@ class Vue {
 
 const compilUtil = {
   text(node, expr, vm) {
-    // console.log(node, value,vm.$data())
-    node.textContent = this.getVal(expr,vm)
+    if (expr.indexOf('{{') === -1) {
+      node.textContent = this.getVal(expr, vm)
+    } else {
+      //获取字符串中 {{}} 的key 进行替换
+      expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+        node.textContent = this.getVal(args[1], vm)
+      })
+    }
+   
   },
   html(node, expr, vm) {
-    // console.log(node, value,vm.$data())
-    node.innerHTML = this.getVal(expr,vm)
+    node.innerHTML = this.getVal(expr, vm)
   },
   model(node, expr, vm) {
-    node.textContent = this.getVal(expr,vm)
-    node.addEventListener('input',e=>{
+    node.value = this.getVal(expr, vm)
+    node.addEventListener('input', e => {
       console.log(e.target.value)
-      // vm.$data()
     })
   },
   on(node, expr, vm, eventName) {
-    node.addEventListener(eventName, e => {
-      vm.$options.methods[expr](e)
-    })
+    const fn = vm.$options.methods[expr]
+    // 注意这里要绑定一下 vm 实例 
+    node.addEventListener(eventName,fn.bind(vm))
   },
   getVal(expr, vm) {
     return expr.split('.').reduce((pre, current) => {
