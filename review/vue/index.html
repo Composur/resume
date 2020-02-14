@@ -10,8 +10,11 @@
 <body>
   <div id="app">
     <div v-text=text></div>
+    <div v-text=obj.name.name></div>
     <div v-html=a></div>
     <div v-on:click=click>click</div>
+    <input type="text" v-model = model value=model >
+    <h1 v-text=model></h1>
     <div>{{test}}</div>
     <div class="pacman">ff
      <ul>
@@ -29,6 +32,12 @@ new Vue({
     return {
       test:'124',
       text:'文本',
+      model:'model',
+      obj:{
+        name:{
+          name:'obj.name.name'
+        }
+      },
       a:'<a href="#">a标签</a>'
     }
   },

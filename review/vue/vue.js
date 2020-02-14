@@ -81,17 +81,29 @@ class Vue {
 }
 
 const compilUtil = {
-  text(node, value, vm) {
+  text(node, expr, vm) {
     // console.log(node, value,vm.$data())
-    node.textContent = vm.$data()[value]
+    node.textContent = this.getVal(expr,vm)
   },
-  html(node, value, vm) {
+  html(node, expr, vm) {
     // console.log(node, value,vm.$data())
-    node.innerHTML = vm.$data()[value]
+    node.innerHTML = this.getVal(expr,vm)
   },
-  on(node, value, vm, eventName) {
-    node.addEventListener(eventName, e => {
-      vm.$options.methods[value](e)
+  model(node, expr, vm) {
+    node.textContent = this.getVal(expr,vm)
+    node.addEventListener('input',e=>{
+      console.log(e.target.value)
+      // vm.$data()
     })
+  },
+  on(node, expr, vm, eventName) {
+    node.addEventListener(eventName, e => {
+      vm.$options.methods[expr](e)
+    })
+  },
+  getVal(expr, vm) {
+    return expr.split('.').reduce((pre, current) => {
+      return pre[current]
+    }, vm.$data())
   }
 }
