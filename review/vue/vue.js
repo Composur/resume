@@ -84,6 +84,9 @@ class Vue {
     this.$data = options.data
     this.$options = options
     if (this.$el) {
+      // 1.数据劫持 observe
+      new Observer(this.$data)
+      // 2.指令解析 compile
       new Compile(this.$el, this)
     }
   }
@@ -118,6 +121,6 @@ const compilUtil = {
   getVal(expr, vm) {
     return expr.split('.').reduce((pre, current) => {
       return pre[current]
-    }, vm.$data())
+    }, vm.$data)
   }
 }
