@@ -105,7 +105,11 @@ const compilUtil = {
    
   },
   html(node, expr, vm) {
+    new Watcher(expr,vm,(newValue)=>{
+      node.innerHTML = newValue
+    })
     node.innerHTML = this.getVal(expr, vm)
+
   },
   model(node, expr, vm) {
     node.value = this.getVal(expr, vm)
