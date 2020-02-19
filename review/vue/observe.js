@@ -12,8 +12,7 @@ class Watcher { // 什么时候绑定？ 在解析、更新数据的时候
     // 调用 watcher 的 update 方法后得到的就是新值
     const newValue = compilUtil.getVal(this.expr, this.vm)
     if (newValue !== this.oldValue) {
-      // 通知 Dep
-      this.cb(newValue)
+        this.cb(newValue)
     }
   }
   getOldValue() {

@@ -44,7 +44,7 @@ class Compile {
         compilUtil[vueName](node, value, this.vm, eventName)
 
         // 删除指令 v- ??
-        node.removeAttribute('v-'+directive)
+        node.removeAttribute('v-' + directive)
       } else {
 
       }
@@ -53,9 +53,11 @@ class Compile {
   }
   compileText(node) {
     // 处理双大括号 {{}}
-    const {textContent} = node
-    if(/\{\{(.+?)\}\}/.test(textContent)){
-      compilUtil['text'](node,textContent,this.vm)
+    const {
+      textContent
+    } = node
+    if (/\{\{(.+?)\}\}/.test(textContent)) {
+      compilUtil['text'](node, textContent, this.vm)
     }
   }
   isVueDirective(name) {
@@ -88,43 +90,77 @@ class Vue {
       new Observer(this.$data)
       // 2.指令解析 compile
       new Compile(this.$el, this)
+      // 3. 代理一下 this.$data.obj === this.obj
+      this.proxyData(this.$data)
+    }
+  }
+  proxyData(data){
+    for(const key in data){
+      Object.defineProperty(this,key,{
+        get(){
+          return data[key]
+        },
+        set(value){
+          data[key] = value
+        }
+      })
     }
   }
 }
 
 const compilUtil = {
   text(node, expr, vm) {
+    //  {{text}} 
     if (expr.indexOf('{{') === -1) {
+      new Watcher(expr, vm, (newValue) => {
+        node.textContent = newValue
+      })
       node.textContent = this.getVal(expr, vm)
     } else {
-      //获取字符串中 {{}} 的key 进行替换
+      //获取字符串中 {{obj.key}} 的key 进行替换
       expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+        new Watcher(expr, vm, (newValue) => {
+          node.textContent = this.getContent(expr, vm)
+        })
         node.textContent = this.getVal(args[1], vm)
       })
     }
-   
+
   },
   html(node, expr, vm) {
-    new Watcher(expr,vm,(newValue)=>{
+    new Watcher(expr, vm, (newValue) => {
       node.innerHTML = newValue
     })
     node.innerHTML = this.getVal(expr, vm)
 
   },
   model(node, expr, vm) {
+    // new Watcher(expr, vm, (newValue) => {
+    //   node.value = newValue
+    // })
     node.value = this.getVal(expr, vm)
     node.addEventListener('input', e => {
-      console.log(e.target.value)
+      this.setVal(expr, vm ,e.target.value)
     })
   },
   on(node, expr, vm, eventName) {
     const fn = vm.$options.methods[expr]
     // 注意这里要绑定一下 vm 实例 
-    node.addEventListener(eventName,fn.bind(vm))
+    node.addEventListener(eventName, fn.bind(vm))
   },
   getVal(expr, vm) {
     return expr.split('.').reduce((pre, current) => {
       return pre[current]
+    }, vm.$data)
+  },
+  getContent(expr, vm) {
+    return expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+      return this.getVal(args[1], vm)
+    })
+  },
+  setVal(expr, vm ,inputVal) {
+    return expr.split('.').reduce((pre, current) => {
+        pre[current] = inputVal
     }, vm.$data)
   }
 }

@@ -11,14 +11,13 @@
 <body>
   <div id="app">
     <div v-text=text></div>
-    <div v-text=obj.name.name></div>
+    <div v-text=obj.name></div>
     <div v-html=a></div>
-    <div v-on:click=click>click</div>
+    <div v-on:click=click>点击更新name</div>
     <input type="text" v-model = model value=model >
     <h1 v-text=model></h1>
     <div>{{test}}</div>
-    <div>{{test}}</div>
-    <div class="pacman">ff
+    <div class="pacman">ff 
      <ul>
        <li>4</li>
        <li>4</li>
@@ -31,19 +30,19 @@
 const vm = new Vue({
   el:'#app',
   data:{
-      test:'test字符串',
+      test:'{{test}}',
       text:'文本',
       model:'model',
       obj:{
-        name:{
-          name:'obj.name.name'
-        }
+       name:'obj.name'
       },
       a:'<a href="#">a标签</a>'
   },
   methods: {
     click(e){
-      console.log(e,this)
+      // this.$data.obj.name = '更新name'
+      this.obj.name= 'proxy'
+      // 代理一下就能获取到 this.obj 
     }
   },
 })
