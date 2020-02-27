@@ -2,7 +2,7 @@
 
 #### 1.基本概念
 
-Promise 是对异步的封装
+`Promise`  是对异步的封装。接收一个参数 **executor** 然后构造函数立即执行这个带有 `resolve` 和 `reject` 两个参数的函数。
 
 ```JavaScript
 const promise = new Promise((resolve,reject)=>{
