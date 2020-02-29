@@ -1,83 +1,201 @@
-### React的思想 
-+ 虚拟DOM 
+## React 笔记
+
+### 1. React的思想 
+
++ 虚拟 DOM 
+
 + 标签就是函数，标签的属性就是函数的参数
-```
-<Parent name={this.state.name}/>
-```
-+ 查找两次dom不同的过程叫DOM diff 
+
+  ```jsx
+  <Parent name={this.state.name}/>
+  ```
 
 
-### state、props
+### 2. state、props
 > state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。**构造函数是唯一可以给 this.state 赋值的地方**
 
 
-### 受控和非受控组件
-1. 受控
+### 3. 受控和非受控组件
   + 用 `props` 传入数据的话，组件可以被认为是受控
-2. 非受控
-  + 数据只保存在组件内部的 `state` 的话，是非受控组件（因为外部没办法直接控制 `state`)
 
-### setState
-#### 异步的
-1. 出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`State` 的更新可能是异步的
-2. 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
+  + 数据只保存在组件内部的 `state` 的话，是非受控组件（因为外部没办法直接控制 `state`)。
+
+### 4. virtual DOM
+
++ 采用广度优先，层层比较的方式，算法时间复杂度 o(n)。
+
+  ![image-20200229202859371](./img/domdiff01.jpg)
+
+  情况一：A B 节点的属性、位置发送了变化，进行位置交换。
+
+  情况二：节点类型发生变化会直删除节点，重新渲染新节点。
+
++ 为什么要这样进行 DOM diff
+
+  + 基于假设组件的 DOM 结构是非常稳定的
+  + 类型相同的兄弟节点可以被唯一标识 key
+
+### 5. 高阶组件（HOC）
+
+​	是一种设计模式，不是 React 独有。
+
++ 普通组件 
+  + 将 props 转换为 UI
+
+  + 高阶组件（一个函数），帮助去实现一些逻辑，自身并不包含任何 UI 展现。
+
+      +  接收一个参数作为组件，再返回一个组件。目的是将组件转换为另一个组件。
+
++  适应场景
+
+   例如一个时钟的显示，封装成一个高阶组件 A 进行导出，在组件 B 中使用。B 就可以获取到高阶组件 A 的 属性 
+
+   ```jsx
+   // 高阶组件 A
+   export default function A (WrapComponent){
+     return class extends Component {
+       state = {time:new Date()}
+     }
+   	render(){
+       return (
+       	<WrapComponent time={this.state.time} ...this.props />
+       )
+     }
+   }
+   // 组件 B
+   import A from 'xxx'
+   class B extends Component {
+     render(){
+       return (
+       	<div>{this.props.time}</div>
+       )
+     }
+   }
+   export default A(B) // 这样就可以获得 A 组件的属性 
+   ```
+
+   上面可以看到，并没有复用 A 组件。
+
+### 6. Cotext API 及使用场景
+
+​	出现的意义是为了解决组件间通信的问题，因为组件间数据的层层传递非常麻烦。redux 依赖此API。共享全局状态。
+
+​	![](./img/context.api.jpg)
+
+使用场景：主题、语言切换等。
+
+```jsx
+// Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
+// 为当前的 theme 创建一个 context（“light”为默认值）。
+const ThemeContext = React.createContext('light'); 
+
+class App extends React.Component {
+  render() {
+    // 使用一个 Provider 来将当前的 theme 传递给以下的组件树。
+    // 无论多深，任何组件都能读取这个值。
+    // 在这个例子中，我们将 “dark” 作为当前的值传递下去。
+    return (
+      <ThemeContext.Provider value="dark">
+        <Toolbar />
+      </ThemeContext.Provider>
+    );
+  }
+}
+
+// 中间的组件再也不必指明往下传递 theme 了。
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+class ThemedButton extends React.Component {
+  render(){
+    return (
+    	<ThemeContext.Consumer>
+       {/* 以函数作为子组件，放到 Consumer 里面才会生效 */}
+      	{
+          theme => <Button theme={theme} {...props}/>
+        }
+      </ThemeContext.Consumer>
+    )
+  }
+}
 ```
+
+如果增加一些功能，点击切换主题，道理是一样的，切换的时候传给 Context 的 provider 传入主题的值让其层层传递就可以。这样就做到了实时更新数据。
+
+**为什么不采用写一个外部配置文件的方式进行主题更改？**
+
+如果写成一个配置文件去切换，那么你还需要监听数据的变化然后再进行更新（forceUpdate）的的操作。因为外部的数据并不属于组件内部的一个状态。
+
+### 5. setState
+
+#### 4.1 异步的
+1. 出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的
+2. 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
+```jsx
 this.setState((state, props) => ({
   counter: state.counter + props.increment
 }));
 ```
-#### setState何时异步
-1. 在`react`的监听回调中是异步的（React中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
-2. 在`react`的生命周期钩子函数中是异步的
-#### setState何时同步(都在render之后才执行setState)
+#### 4.2 setState 何时异步
+1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
+2. 在 `react` 的生命周期钩子函数中是异步的 
+#### 4.3 setState 何时同步(都在 render 之后才执行 setState )
 1. 定时器中
 2. 元素的DOM事件（ref获取到原生的dom）
 3. promise(下面的data是实时更新的)
-```
+```jsx
 Promise.resolve().then(data=>{
   console.log(this.state.data)
   this.setState({data})
   console.log(this.state.data)
-})
+}
 ```
 
-### react的context
+### 5.react 的 context
+
 + 子组件要获取 context 里面的内容的话，就必须写 contextTypes 来声明和验证你需要获取的状态的类型，它也是必写的
 
-```
-class Index extends Component{
-    static childContextTypes={
-        color:ProTypes.string
-    }
-    constructor(){
-        super()
-        this.state={
-            color:'red'
-        }
-    }
-}
+  ```jsx
+  class Index extends Component{
+      static childContextTypes={
+          color:ProTypes.string
+      }
+      constructor(){
+          super()
+          this.state={
+              color:'red'
+          }
+      }
+  }
+  
+  
+  class Child extends Component{
+      static contextTypes={
+          color:ProTypes.string
+      }
+      render(){
+          return(
+              <div>
+                  <h1 style={color:this.context.color}></h1>
+              </div>
+          )
+      }
+  }
+  ```
 
+  
 
-class Child extends Component{
-    static contextTypes={
-        color:ProTypes.string
-    }
-    render(){
-        return(
-            <div>
-                <h1 style={color:this.context.color}></h1>
-            </div>
-        )
-    }
-}
-```
-
-#### 高阶组件
-  +  组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件。（接收一个组件再返回一个组件）
+  +  
 
 #### 父子传参
 
   + 父传子
+    
     + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
   + 子传父 
     + 父组件中通过ref得到子组件的标签对象
@@ -94,10 +212,10 @@ class Child extends Component{
     }
 
     ```
-### react中的render()
+### 6.react中的render()
 >如果不在render()中使用某些东西，那么它就不应该在状态。
 
-### redux (多个组件共享数据的时候可以考虑使用redux)
+### 7.redux (多个组件共享数据的时候可以考虑使用redux)
 > 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action`,⼀个描述发⽣什么的对象。为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`<br/>
 
 ### createStore()
