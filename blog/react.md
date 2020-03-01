@@ -1,4 +1,4 @@
-## React 笔记
+## React & Redux 进阶
 
 ### 1. React的思想 
 
@@ -11,8 +11,41 @@
   ```
 
 
-### 2. state、props
+### 2. state、props、setState
 > state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。**构造函数是唯一可以给 this.state 赋值的地方**
+
+#### 2.1 异步的
+
+出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的。要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个`state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
+
+```jsx
+  this.setState((state, props) => ({
+    counter: state.counter + props.increment
+  }));
+```
+
+#### 2.2 setState 何时异步
+
+1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
+2. 在 `react` 的生命周期钩子函数中是异步的 
+
+#### 2.3 setState 何时同步(都在 render 之后才执行 setState )
+
+1. 定时器中
+
+2. 元素的DOM事件（ref获取到原生的dom）
+
+3. promise(下面的data是实时更新的)
+
+   ```js
+   Promise.resolve().then(data=>{
+     console.log(this.state.data)
+     this.setState({data})
+     console.log(this.state.data)
+   }
+   ```
+
+   
 
 
 ### 3. 受控和非受控组件
@@ -44,7 +77,7 @@
 
   + 高阶组件（一个函数），帮助去实现一些逻辑，自身并不包含任何 UI 展现。
 
-      +  接收一个参数作为组件，再返回一个组件。目的是将组件转换为另一个组件。
+      +  接收一个参数（参数是一个组件），再返回一个组件。目的是将组件转换为另一个组件。
 
 +  适应场景
 
@@ -131,142 +164,70 @@ class ThemedButton extends React.Component {
 
 如果写成一个配置文件去切换，那么你还需要监听数据的变化然后再进行更新（forceUpdate）的的操作。因为外部的数据并不属于组件内部的一个状态。
 
-### 5. setState
 
-#### 4.1 异步的
-1. 出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的
-2. 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
-```jsx
-this.setState((state, props) => ({
-  counter: state.counter + props.increment
-}));
-```
-#### 4.2 setState 何时异步
-1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
-2. 在 `react` 的生命周期钩子函数中是异步的 
-#### 4.3 setState 何时同步(都在 render 之后才执行 setState )
-1. 定时器中
-2. 元素的DOM事件（ref获取到原生的dom）
-3. promise(下面的data是实时更新的)
-```jsx
-Promise.resolve().then(data=>{
-  console.log(this.state.data)
-  this.setState({data})
-  console.log(this.state.data)
-}
-```
 
-### 5.react 的 context
+### 7. Redux
 
-+ 子组件要获取 context 里面的内容的话，就必须写 contextTypes 来声明和验证你需要获取的状态的类型，它也是必写的
+> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action`,⼀个描述发⽣什么的对象。为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`
 
-  ```jsx
-  class Index extends Component{
-      static childContextTypes={
-          color:ProTypes.string
-      }
-      constructor(){
-          super()
-          this.state={
-              color:'red'
-          }
-      }
-  }
-  
-  
-  class Child extends Component{
-      static contextTypes={
-          color:ProTypes.string
-      }
-      render(){
-          return(
-              <div>
-                  <h1 style={color:this.context.color}></h1>
-              </div>
-          )
-      }
-  }
-  ```
++ React 的模式是 state 到 DOM，是组件内部的状态。
 
-  
++ Redux 的模式是把状态移动到了组件之外，全局的状态，放到一个唯一的 store 树上。
++ Redux 的特性是纯函数更新 store，根据传入的 state 和 action 生成新的 state 。
 
-  +  
+#### 7.1 createStore()
 
-#### 父子传参
-
-  + 父传子
-    
-    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
-  + 子传父 
-    + 父组件中通过ref得到子组件的标签对象
-    + 通过this.refs.current.xxx()得到子组件的方法
-    ```
-    class MyComponent extends React.Component {
-      constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-      }
-      render() {
-        return <Children ref={this.myRef} />;
-      }
-    }
-
-    ```
-### 6.react中的render()
->如果不在render()中使用某些东西，那么它就不应该在状态。
-
-### 7.redux (多个组件共享数据的时候可以考虑使用redux)
-> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action`,⼀个描述发⽣什么的对象。为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`<br/>
-
-### createStore()
-1. 接收的参数为 `reducer` 函数，返回 `store`
+1. 接收的参数为 `reducer` 函数，返回 `store`。这样就产生了一个 store 。
   + `store` 的方法
     + `getState()` 返回值为 `store` 内部保存的数据
     + `dispatch()` 参数为 `action` 对象，触发 `reducer`，更新 `store` 触发 `subscribe` 监听，更新视图
     + `subscribe()` 参数为监听内部 `state` 更新的回调函数 
 
-### combineReducers()
-+ 接收包含`n`个 `reducer` 的对象，返回一个新的 `reducer` 函数
+#### 7.3 action
 
-#### action
-1. 异步的 `action` （三种状态）
-  + 异步操作进行中 `dispatch(loading)`
-  + 异步操作完成 `dispatch(success)`
-  + 异步操作失败 `dispatch(error)`
-2. 同步的 `action`
-  + 用上面的结果 `dispatch` 对应的三个同步 `action`
-  ```
-  export unAsync=(data)=>(type:import type,result:data)
-  ```
+##### 7.3.1 bindActionCreators(actionCreators, dispatch)
 
+1. `actionCreators` (*Function* or *Object*): 一个 [action creator](https://www.redux.org.cn/docs/Glossary.html#action-creator)，或者一个 value 是 action creator 的对象。
+2. `dispatch` (*Function*): 一个由 [`Store`](https://www.redux.org.cn/docs/api/Store.html) 实例提供的 [`dispatch`](https://www.redux.org.cn/docs/api/Store.html#dispatch) 函数。
 
-#### reducer
-+ reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
-
-```
-export function loginUserInfo (previousState = {}, action) {
-  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
-    return action.data.userInfo || {}
-  } else if (action.type === LOGOUT) {
-    return {}
-  } else {
-    return previousState
-  }
+```jsx
+// action 
+function plus(){
+  return { type:'PLUS',payload:{count:1} }
 }
+// 用store 分发一个 action 
+store.dispatch(plus())
 ```
 
-#### react-redux
+用 bindActionCreators 进行改写
 
-1. `Provider` 组件，接收 `store` 属性让所有组件都看到 `store`，通过 `store` 读取、更新状态
-2. `connect()()` 是一个高阶函数,执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件
-    + `mapStateToProps:`一个函数，指定向UI组件传递哪些一般属性，必须返回一个对象
-    + `mapDispatchToProps:`可以是对象，对象所定义的方法名将作为属性名；每个方法将返回一个新的函数；也可以是函数通过`dispatch`显式分发`action`,目的是向UI组件传递函数
+```JS
+// action 
+function plus(){
+  return { type:'PLUS',payload:{count:1} }
+}
+function minus(){
+  return { type:'MINUS',payload:{count:1} }
+}
 
-#### 扩展redux
-1. 中间件
-  > + 中间件是一些函数用于定制对特定请求的处理过程，
-  > + 是一个函数，返回一个接收next参数的函数
+const action = bindActionCreators({plus,minus},store.dispatch) 
+
+// 内部会执行 dispatch
+action.plus()
+action.minus()
 ```
+
+##### 7.3.2 异步 action 流程
+
+![](./img/action_async.jpg)
+
+流程说明：
+
+在 View 进行 click 触发一个**异步 action** 然后被中间件（redux-thunk）截获，处理完成后，进行dispatch 到reducer 然后到到 state 进行处理，更新 State 触发 View 更新。
+
+*中间件是一些函数用于定制对特定请求的处理过程*
+
+```js
 function middleWare({dispatch,getState}){
   return function(next){
       return function(action){
@@ -278,21 +239,86 @@ function middleWare({dispatch,getState}){
 
 // es6写法
 ({dispatch,getState})=>next=>action=>next(action)
+
+
+// store
+import {createStore,applyMiddleware} from 'redux'
+import ReduxThunk from 'redux-thunk'
+export default createStore(appReducer,(applyMiddleware(ReduxThunk)))
 ```
-2. redux-thunk
-+ 为了解决异步action问题
-+ 检查传入的action是不是函数，不是就放行，是函数就执行把结果返回（用传进来的dispatch，和getState）
+
+*`redux-thunk` 截获异步请求的依据就是判断这个  `action` 是不是一个函数 （`Promise`）是的话就执行这个函数，执行后再 `diapatch` 这个 `action`*
 
 
-#### actionType、action方法和reducer方法的命名
-1. actionType常量采用下划线命名法
-2. action、reducer采用驼峰命名法，适当可使用下划线
-3. actionType名称与action的名称，结构都动宾结构：‘V+N’
-4. reducer方法的命名为action名去掉动词部分的宾语（名词）部分
+
+#### 7.4 reducer 
+
+reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
+
+```js
+export function loginUserInfo (previousState = {}, action) {
+  if (action.type === GET_LOGIN_USER_INFO || action.type === LOGIN) {
+    return action.data.userInfo || {}
+  } else if (action.type === LOGOUT) {
+    return {}
+  } else {
+    return previousState
+  }
+}
+```
+
+#### 7.4.1  combineReducers()
+
++ 接收包含`n`个 `reducer` 的对象，返回一个新的 `reducer` 函数
+
+### 8. react-redux
+
+#### 8.1 connect()
+
+connect() 是一个高阶函数,执行后返回一个高阶组件，接收一个UI组件，返回一个容器组件。
+
+从左到右看。
+
+![](./img/connect.jpg)
+
+
+
+参数为：
+
++ `mapStateToProps:`一个函数，指定向UI组件传递哪些一般属性，必须返回一个对象
++ `mapDispatchToProps:`可以是对象，对象所定义的方法名将作为属性名；每个方法将返回一个新的函数；也可以是函数通过`dispatch`显式分发`action`,目的是向UI组件传递函数
+
+#### 8.2 Provider
+
+`Provider` 组件，接收 `store` 属性让所有组件都看到 `store`，通过 `store` 读取、更新状态。
+
+```jsx
+export default App extends Component {
+  render(){
+    return (
+    	<Provider store = { store } >
+      
+      </Provider>
+    )
+  }
+}
+```
+
+### 9. 如何组织 redux 
+
++ 单个 `action` 和 `reducer` 放在同一个文件，利于改写不用来回切换文件。
++  统一在 `action.js` 和 `reducer.js` 导入所有的 `action` 和 `reducer`
+
+#### 9.1 actionType、action 方法和 reducer 方法的命名
+
+1. `actionType `常量采用下划线命名法
+2. `action、reducer` 采用驼峰命名法，适当可使用下划线
+3. `actionType `名称与 `action`的名称，结构都动宾结构：`‘V+N’`
+4. `reducer`方法的命名为`action`名去掉动词部分的宾语（名词）部分
 
 以获取登录用户信息为例子：
 
-```
+```jsx
 // actionType常量
 GET_LOGIN_USER_INFO = 'GET_LOGIN_USER_INFO'
 
@@ -313,13 +339,75 @@ export function loginUserInfo (previousState = {}, action) {
 }
 ```
 
+### 10.不可变数据
+
+#### 10.1 redux 运行的基础
+
+![](./img/immutable_data.jpg)
+
+如上图：我们更新左边图的一个点，无论你怎么更新都需要复制一份（深、浅拷贝）包含修改的部分，右图绘制**绿色的点**需要更新的点，其它没有改变的点无需更新。没有改变的点就是不可变数据。
+
+#### 10.2 redux 需要不可变数据的原因
+
++ 性能优化
+  + reducer 根据传入的 state 和 action 生成了一个新的 state 而不是修改原有的 state 
+  + 这个时候就可以比较新旧 state 不需要比较值，不需要进行深层次的遍历，比较引用就可以。从而确定是否需要更新组件。
++ 易于调试跟踪
+  + 可以追踪到新旧 state 
++ 易于推测
+  + 推测 action 的状态 ，是否正确。
+
+#### 10.3 操作不可变数据
+
++ 原生的两种方法，`Object.assign()` ,` {...} `。
+
++ `Immutability-helper` （节点很深可以用这个，用法类似 `Object.assign()`）
+
++ `Immer`
+
+  Immer 的用法，性能没有原生的`Object.assign()`好。
+
+  ```js
+  import produce from 'immer'
+  
+  // 接收旧的 state ，回调函数里可以直观的进行修改，类似在原有的 state 上进行修改，采用代理的方式。
+  produce(state,drafState=>{
+    drafState.todos.push('xxx')
+  })
+  ```
+
+
+
+### 11. react-router-dom 
+
++ Router
+  + 所有路由组件共用的底层接口，在 4.x 中，你可以将各种组件及标签放进  <Router>  组件中 ,它只能有一个子元素
++ BrowserRouter
+  + HTML5 history API 
++ HashRouter
+  + HashRouter 是一种特定的 <Router> ,用于支持传统浏览器
+  + 使用window.location.hash来保持 UI 和 url 的同步
++ Route的用法
+
+  + <Route component> 当访问地址和路由匹配时，一个 React component 将会被渲染
+  + <Route render>  此方法适用于内联渲染，而且不会产生重复装载问题
++ Switch
+  + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
+  + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
+
+
+
+
+
+
 
 #### react-loadable库的用法
+
 > 它可以帮助我们按需加载组件
 
 1. 首先准备一个loading组件
 
-```
+```jsx
 /**
  * @desc 借助 react-loadable 进行 code-splitting 时的loading组件
  */
@@ -336,13 +424,12 @@ import React from 'react'
 }
 
 export default Loading
-
 ```
 
 
 2. 然后引入react-loadable
 
-```
+```jsx
 import Loadable from 'react-loadable'
 import RouteLoading from 'components/RouteLoading/index'
 
@@ -355,24 +442,51 @@ const Home = Loadable({
 
 3. 使用
 
-```
+```jsx
  <Route path="/" exact component={Home} /> //这里就是home组件，路由匹配的时候才引入，而不是一开始全部引入
 ```
 
 
-### react-router-dom 
 
-+ Router
-  + 所有路由组件共用的底层接口，在 4.x 中，你可以将各种组件及标签放进  <Router>  组件中 ,它只能有一个子元素
-+ BrowserRouter
-  + HTML5 history API 
-+ HashRouter
-  + HashRouter 是一种特定的 <Router> ,用于支持传统浏览器
-  + 使用window.location.hash来保持 UI 和 url 的同步
-+ Route的用法
 
-  + <Route component> 当访问地址和路由匹配时，一个 React component 将会被渲染
-  + <Route render>  此方法适用于内联渲染，而且不会产生重复装载问题
-+ Switch
-  + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
-  + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
+
+#### 组件通信
+
+  + 父传子
+
+    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
+
+  + 子传父 
+
+    + 父组件中通过 ref 得到子组件的标签对象
+    + 通过 this.myRef.current.xxx() 得到子组件的方法
+
+    ```jsx
+    // 父组件
+    class Parent extends React.Component {
+      constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+      }
+      test(){
+        const childMethodResult = this.myRef.current.xxx() // 'child methods'
+      }
+      render() {
+        return <Children ref={this.myRef} />;
+      }
+    }
+    // 子组件
+    class Child extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+      xxx(){
+        return 'child methods'
+      }
+      render() {
+        return null;
+      }
+    }
+    ```
+
+    

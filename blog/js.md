@@ -851,47 +851,7 @@ console.dir(s)
 ```
 
 
-#### bind call apply
-+ 函数的绑定，函数作用参数传递的同时，可以存储函数的作用域
-+ bind的实现是对作用域的绑定，第一个参数表示作用域，更改作用域不执行参数,还可以传递参数,执行bind后返回了一个新的函数，可以用来改变回调函数的作用域,bind的实现利用call和apply
-```
-function bind(fn, content) {
-    // bind(返回的函数，绑定函数，传入的参数)
-    var args=Array.prototype.slice.call(arguments,2)
-    // 返回一个新的函数
-    return function () {
-        // 获取执行函数时传递的参数
-        var lave=Array.prototype.slice.call(arguments)
-        //把原来的参数与fn的参数拼接
-        var nowArr=args.concat(lave)
-        fn().apply(content, nowArr)
-    }
-}
-bind('当前函数','绑定的作用域函数',arguments)
 
-var log=bind(console.log,console)//log()
-
-var log =  console.log.bind(console)//log()
-```
-+ call和apply，都是在使用（使用即执行）的时候改变作作用域，第一个参数都表示作用域，一旦改变作用域函数就执行了
-```
-var obj = {
-    speed: 0
-}
-
-function call() {
-    console.log(this.speed)
-}
-
-var newCall = call.bind(obj, undefined) //返回新函数
-newCall() //o
-call() //undefined
-call.call(obj, undefined) //0
-call.apply(obj, [undefined]) //0
-```
-
-+ call从第二个参数开始表示传递参数
-+ apply第二个参数是数组（每一个成员表示一个将被传入的参数）
 #### 函数柯里化
 + 一个接收多个参数的函数，我们可以一个一个传递参数，当函数执行的时候传递剩余的参数
 + 增强函数的适用性，类似于重载（重载是在内部实现的，柯里化是在外部实现的）
