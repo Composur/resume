@@ -376,8 +376,6 @@ export function loginUserInfo (previousState = {}, action) {
   })
   ```
 
-
-
 ### 11. react-router-dom 
 
 + Router
