@@ -168,12 +168,14 @@ class ThemedButton extends React.Component {
 
 ### 7. Redux
 
-> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action`,⼀个描述发⽣什么的对象。为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`
+> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action `⼀个描述发⽣了什么的对象。
+>
+> 为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`
 
 + React 的模式是 state 到 DOM，是组件内部的状态。
 
 + Redux 的模式是把状态移动到了组件之外，全局的状态，放到一个唯一的 store 树上。
-+ Redux 的特性是纯函数更新 store，根据传入的 state 和 action 生成新的 state 。
++ Redux 的特性是纯函数更新 store，reducer 根据传入的 state 和 action 生成新的 state 。
 
 #### 7.1 createStore()
 
@@ -378,22 +380,55 @@ export function loginUserInfo (previousState = {}, action) {
 
 ### 11. react-router-dom 
 
-+ Router
-  + 所有路由组件共用的底层接口，在 4.x 中，你可以将各种组件及标签放进  <Router>  组件中 ,它只能有一个子元素
-+ BrowserRouter
-  + HTML5 history API 
-+ HashRouter
-  + HashRouter 是一种特定的 <Router> ,用于支持传统浏览器
-  + 使用window.location.hash来保持 UI 和 url 的同步
-+ Route的用法
+#### 11.1 为什么需要路由
 
-  + <Route component> 当访问地址和路由匹配时，一个 React component 将会被渲染
-  + <Route render>  此方法适用于内联渲染，而且不会产生重复装载问题
-+ Switch
-  + 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect>
-  + <Switch> 下的子节点只能是 <Route> 或 <Redirect>
++ 单页应用需要来回切换
++ 通过 `URL` 可以定位到页面
++ 可以清晰（语义化）的划分资源
 
+#### 11.2 实现方式
 
+1. URL 模式
+
+   1. 通过 `BrowserRouter` 实现，HTML5 history API 。
+
+   ```jsx
+    <BrowserRouter>
+     <Switch>{/* 该组件只渲染第一个与当前访问地址匹配的  <Route>  或  <Redirect> */}
+       <Route exact path={'/login'}  component={Login}></Route>
+       <Route path={'/'} component={Admin}></Route>
+     </Switch>
+    </BrowserRouter>
+   ```
+
+2. hash 模式
+
+   1. 通过 `HashRouter` 实现
+   2. 支持低版本浏览器。使用window.location.hash来保持 UI 和 url 的同步。
+
+3. 内存模式
+
+   1. 通过 `MemoryRouter` 实现。
+   2. 服务端渲染的时候用，存在内存中，URL 地址无变化 。
+
+#### 11.3 参数定义、路由嵌套
+
++ 通过 URL 传递参数
+
+  + 应用场景：一般需要复制链接到别处仍可以看到当前组件内部的数据。不需要根据 URL 传递到组件，组件再请求数据，复制 URL 后直接就去请求了。
+
+  ```jsx
+  <Link to = {'/user/123'}> render user123 </Link>
+  
+  <Router path = {'/user:id'} .../>
+  ```
+
++ 如何获取参数
+
+  ```jsx
+  {/* 获取上面的 id */}
+  this.props.match.params.id 
+  ```
 
 
 
