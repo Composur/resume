@@ -454,51 +454,109 @@ Facebook 开源的 JS 单元测试框架
    + 副作用少，尽量使用纯函数
 6. 易于扩展
 
+### 14. 性能问题
 
+#### 14.1 常见的性能问题场景
 
-#### react-loadable库的用法
++ 键盘输入
+  + 出现卡顿，采用事件节流。
++ 鼠标移动
+  + 滚动卡顿，采用防抖。
+
+#### 14.2 代码的性能
+
++ 组件拆分
+
+  根据 `React` 的虚拟 DOM DIFF 算法 `o(n)`。组件根据情况拆分的越细，`React` 性能越高。因为组件细了后就可以作为一个纯组件对待，可以整体看成是一个 `dom` ，组件状态未发生改变的时候，就不会更新这个 `dom` 节点，对应的也就不会进行 Dom diff 的操作。
+
++ 网络优化，按需加载
+
+  + 借助 webpack  `import` 进行动态加载。
+
+  + 使用 react-loadable库。
+
+    ```jsx
+    /**
+     * @desc 借助 react-loadable 进行 code-splitting 时的loading组件
+     */
+     function Loading({ error }) {
+      if (error) {
+        return 'error';
+      } else {
+        return <div></div>;
+      }
+    }
+    
+    /**
+     * @desc 引入，注意是import()方法，不是import关键字
+     */
+    import Loadable from 'react-loadable'
+    const Home = Loadable({
+      loader: () => import('./children/Home'),  
+      loading: Loading,
+    })
+    
+    
+    /**
+     * @desc 路由匹配成功的时候才引入，而不是一开始全部引入 
+     */
+    <Route path="/home" exact component={Home} /> 
+    ```
+
+  +  React 的 `Suspense`  api
+
+  ```jsx
+  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+  import React, { Suspense, lazy } from 'react';
+  
+  const Home = lazy(() => import('./routes/Home'));
+  const About = lazy(() => import('./routes/About'));
+  
+  const App = () => (
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/about" component={About}/>
+        </Switch>
+      </Suspense>
+    </Router>
+  );
+  ```
+
+  
+
+#### 14.3 注意可重构代码
+
++ 什么的代码可重构？
+  + 功能独立，不依赖（较少依赖）外部变量。
+  + 也被其它组件依赖
+
+#### 14.4 利用工具进行定位问题
+
++ React dev-tool
+
+#### 的用法
 
 > 它可以帮助我们按需加载组件
 
-1. 首先准备一个loading组件
+1. 
 
 ```jsx
-/**
- * @desc 借助 react-loadable 进行 code-splitting 时的loading组件
- */
-import React from 'react'
 
- function Loading({ error }) {
-  if (error) {
-    console.log('react-loadable error')
-    console.log(error)
-    return 'error';
-  } else {
-    return <div></div>;
-  }
-}
-
-export default Loading
 ```
 
 
-2. 然后引入react-loadable
+2. 
 
 ```jsx
-import Loadable from 'react-loadable'
-import RouteLoading from 'components/RouteLoading/index'
-
-const Home = Loadable({
-  loader: () => import('./children/Home'),  //注意是import()方法，不是import关键字
-  loading: RouteLoading,
-})
 
 ```
 
 3. 使用
 
 ```jsx
- <Route path="/" exact component={Home} /> //这里就是home组件，路由匹配的时候才引入，而不是一开始全部引入
+
 ```
 
 
