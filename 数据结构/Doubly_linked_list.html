@@ -7,9 +7,19 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Doubly_linked_list</title>
 </head>
-
+<button id="a">click</button>
 <body>
   <script>
+
+    a.addEventListener('click',function(e){
+      e.stopPropagation()
+      console.log('fn1',e)
+    })
+    a.addEventListener('click',function(e){
+      e.stopPropagation()
+      console.log('fn2',e)
+    })
+
     class Node {
       constructor(node) {
         this.node = node

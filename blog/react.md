@@ -29,13 +29,13 @@
 1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在 `react` 的生命周期钩子函数中是异步的 
 
-#### 2.3 setState 何时同步(都在 render 之后才执行 setState )
+#### 2.3 setState 何时同步
 
 1. 定时器中
 
-2. 元素的DOM事件（ref获取到原生的dom）
+2. 元素的 `DOM`事件（ `ref` 获取到原生的 `dom` ）
 
-3. promise(下面的data是实时更新的)
+3. `Promise` (下面的 data 是实时更新的)
 
    ```js
    Promise.resolve().then(data=>{
@@ -51,7 +51,7 @@
 ### 3. 受控和非受控组件
   + 用 `props` 传入数据的话，组件可以被认为是受控
 
-  + 数据只保存在组件内部的 `state` 的话，是非受控组件（因为外部没办法直接控制 `state`)。
+  + 数据只保存在组件内部 `state` 上的是非受控组件（因为外部没办法直接控制 `state`)。
 
 ### 4. virtual DOM
 
@@ -59,18 +59,18 @@
 
   ![image-20200229202859371](./img/domdiff01.jpg)
 
-  情况一：A B 节点的属性、位置发送了变化，进行位置交换。
+  情况一：A B 节点的属性、位置发生了变化，进行位置交换。
 
   情况二：节点类型发生变化会直删除节点，重新渲染新节点。
 
-+ 为什么要这样进行 DOM diff
++ React 为什么要这样进行 DOM diff
 
-  + 基于假设组件的 DOM 结构是非常稳定的
-  + 类型相同的兄弟节点可以被唯一标识 key
+  + 是基于组件的 DOM 结构是非常稳定的（一般 HTML 树是非常稳定的）
+  + 是基于类型相同的兄弟节点可以被唯一标识 key
 
 ### 5. 高阶组件（HOC）
 
-​	是一种设计模式，不是 React 独有。
+​	它是一种设计模式，不是 React 独有。
 
 + 普通组件 
   + 将 props 转换为 UI
@@ -111,7 +111,7 @@
 
 ### 6. Cotext API 及使用场景
 
-​	出现的意义是为了解决组件间通信的问题，因为组件间数据的层层传递非常麻烦。redux 依赖此API。共享全局状态。
+出现的意义是为了解决组件间通信的问题，因为组件间数据的层层传递非常麻烦。Redux 就依赖此API。来共享全局状态。
 
 ​	![](./img/context.api.jpg)
 
@@ -162,9 +162,7 @@ class ThemedButton extends React.Component {
 
 **为什么不采用写一个外部配置文件的方式进行主题更改？**
 
-如果写成一个配置文件去切换，那么你还需要监听数据的变化然后再进行更新（forceUpdate）的的操作。因为外部的数据并不属于组件内部的一个状态。
-
-
+如果写成一个配置文件去切换，那么你还需要监听数据的变化然后再进行更新（forceUpdate）的操作。因为外部的数据并不属于组件内部的一个状态。
 
 ### 7. Redux
 
@@ -255,7 +253,7 @@ export default createStore(appReducer,(applyMiddleware(ReduxThunk)))
 
 #### 7.4 reducer 
 
-reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的state和传入的action生成一个新的state，会有好多个reducer函数
+reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的 state 和传入的 action 生成一个新的 state，会有好多个 reducer 函数
 
 ```js
 export function loginUserInfo (previousState = {}, action) {
@@ -404,7 +402,7 @@ export function loginUserInfo (previousState = {}, action) {
 2. hash 模式
 
    1. 通过 `HashRouter` 实现
-   2. 支持低版本浏览器。使用window.location.hash来保持 UI 和 url 的同步。
+   2. 支持低版本浏览器。使用 window.location.hash 来保持 UI 和 url 的同步。
 
 3. 内存模式
 
@@ -467,7 +465,7 @@ Facebook 开源的 JS 单元测试框架
 
 + 组件拆分
 
-  根据 `React` 的虚拟 DOM DIFF 算法 `o(n)`。组件根据情况拆分的越细，`React` 性能越高。因为组件细了后就可以作为一个纯组件对待，可以整体看成是一个 `dom` ，组件状态未发生改变的时候，就不会更新这个 `dom` 节点，对应的也就不会进行 Dom diff 的操作。
+  根据 `React` 的虚拟 DOM DIFF 算法 `O(n)`。组件根据情况拆分的越细，`React` 性能越高。因为组件细了后就可以作为一个纯组件对待，可以整体看成是一个 `dom` ，组件状态未发生改变的时候，就不会更新这个 `dom` 节点，对应的也就不会进行 Dom diff 的操作。
 
 + 网络优化，按需加载
 
@@ -535,33 +533,6 @@ Facebook 开源的 JS 单元测试框架
 #### 14.4 利用工具进行定位问题
 
 + React dev-tool
-
-#### 的用法
-
-> 它可以帮助我们按需加载组件
-
-1. 
-
-```jsx
-
-```
-
-
-2. 
-
-```jsx
-
-```
-
-3. 使用
-
-```jsx
-
-```
-
-
-
-
 
 #### 组件通信
 
