@@ -25,6 +25,10 @@ git config --global core.quotepath false
 git config --global core.editor "vim"
 
 ```
++ 增加 origin
+```
+ git remote add origin  https://github.com/Composur/vue-admin.git
+```
 
 ### 2.git clone branch
 
@@ -145,6 +149,17 @@ $ git rebase upstream
 $ git pull upstream  branch_name --rebase
 ```
 
+
++ 提交到代码（remote origin）
+  + 初次 push
+  ```
+  git push --set-upstream origin branch_name
+  ```
+  + 非初次 push 
+
+  ```
+  git push
+  ```
 
 ```
 $ git checkout master

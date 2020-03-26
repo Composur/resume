@@ -6,30 +6,29 @@
 
 # 个人信息
  - 许通/男/28
- - 本科/河南理工大学/计算机科学网络技术
- - 工作年限：5年（2年运维、3年前端）
+ - 本科/河南理工大学/计算机专业
  - 掘金：juejin.im/user/5d67c21d6fb9a06afe12aac3
  - CSDN：blog.csdn.net/composurext
  - GitHub：github.com/Composur 
  - 笔记：composur.github.io
  - 期望职位：前端开发工程师
+ 
 
 
 # 工作经历
 
 ### 海致星图科技有限公司-前端开发工程师 （2018/9-今）
 
-##### 知识图谱移动端（ Vue ）
-1. 加入风险推送、监控等功能。借助 ArangoBD,使用 D3.js 进行力图，关系图的绘制。
+##### 知识图谱移动端（ Vue 全家桶 ）
+1. 重构路由，加入权限管理（侧边栏渲染）。借助 ArangoBD,使用 D3.js 进行力图，关系图的绘制。
 2. 使用 Cordova 进行原生（IOS、Android）APP 的打包，内嵌原生APP，通过 JSBridge 与原生应用交互等。
 3. 组件封装、性能优化，组件懒加载等，如优化 `Nginx `配置，提升访问速度，优化 `webpack` 构建等。
 
-#####  基于图数据库与图形交互的“知识图谱” ( React D3 jQuery NodeJS )
-1. 负责图谱详情模块的开发，期间使用`nodejs`编写`BFF`层，为用户侧提供`HTTP`服务，使用`Q.all`并发请求提高了首屏加载速度，使用`Q.defer`自定义`promise`生成器，用于处理nodejs`request`请求的数据，和抛出的异常。减少大量的业务沟通成本，加快了业务迭代的速度。
-2. 利用React进行页面重构，在 `redux` 中增加增强器接口实现打印日志功能，方便开发调试。
-3. 优化文件大文件上传（前端切片上传，后端合并的方式），计算文件 hash 确保唯一性。
-4. nginx 优化，缩短了首屏加载时间由8.4s到3.66s。
-5. Node 层压力测试，性能优化（转移中间件计算量）。
+#####  基于图数据库与图形交互的“知识图谱” ( React全家桶 D3.js jQuery NodeJS )
+1. 负责图谱详情模块的开发，期间使用`nodejs`编写`BFF`层，为用户侧提供`HTTP`服务。减少大量的业务沟通成本，加快了业务迭代的速度。
+2. 利用 React 进行页面重构，在 `redux` 中增加增强器接口实现打印日志功能，方便开发调试。优化文件上传（前端切片上传，后端合并的方式），计算文件 hash 确保唯一性。
+3. nginx 优化，缩短了首屏加载时间由 8.4s 到 3.66s。
+4. Node 层压力测试，性能优化（转移中间件计算量），加入心跳检测，内存溢出检测，方便错误上报。
 
 #####  企业级智能CRM ( jQuery NodeJS )
 1. 加入 node 层进行解耦，前后端分离，互不依赖。
@@ -69,7 +68,7 @@
 + 版本管理、自动化部署工具：Svn/Git/PM2/Nginx
 ## 开源项目
 + [通用后台管理系统](https://github.com/Composur/react-manage)
-    > 包括前端 PC 应用和后端应用,包括用户管理 / 商品分类管理 / 商品管理 / 权限管理等功能模块
+    > 包括前端 PC 应用和后端应用,包括用户管理 / 文件管理 / 组件排序 / 权限管理等功能模块
     * 前端: 使用 React 全家桶 + Antd + Axios + ES6 + Webpack 等技术
     * 后端: 使用 Node + Express + Mongodb 等技术
 + [个人求职平台](https://github.com/Composur/react-practice/tree/master/react-chat)

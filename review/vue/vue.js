@@ -17,9 +17,11 @@ class Compile {
       // 判断每个节点的类型，是元素还是文本，分别进行处理
       if (this.isNodeElement(child)) {
         // console.log('元素',child)
+        // 处理 v-modal
         this.compileElement(child)
       } else {
         // console.log('文本', child)
+        // 处理插值
         this.compileText(child)
       }
       // 递归
@@ -36,6 +38,7 @@ class Compile {
         name,
         value
       } = ele
+      // 判断是否是指令
       if (this.isVueDirective(name)) {
         // 处理 vue 指令
         const [, directive] = name.split('-')
@@ -67,11 +70,14 @@ class Compile {
   isNodeElement(node) {
     return node.nodeType === 1
   }
-  // 节点碎片
+  // 节点碎片-把节点移动到内存中
+  // 操作好这个 dom 后再 innerHtml 到页面上，减少了页面的 重绘 和 回流
   nodeFragment(el) {
     const f = document.createDocumentFragment()
     let node;
     while (node = el.firstChild) {
+      // appendChild 具有移动性 没移动一个 el节点就或少一个子元素直到没有
+      // 这样页面中就少一个元素 内存中就多一个元素
       f.appendChild(node)
     }
     return f

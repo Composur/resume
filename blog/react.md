@@ -9,14 +9,26 @@
   ```jsx
   <Parent name={this.state.name}/>
   ```
+  
++ 我们自定义组件的时候必须要**大写开头**，因为只有这样 `createElement` 把组件当成一个变量而不是字符串。
 
+  ![jsx](./img/jsx.jpg)
+
+  
+
+  
 
 ### 2. state、props、setState
+
 > state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。**构造函数是唯一可以给 this.state 赋值的地方**
+
++ 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
 
 #### 2.1 异步的
 
-出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的。要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个`state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
++ 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的。
++ 第二：保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state`也不直接更新，都是在`flush`的时候更新
++ 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个`state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
 
 ```jsx
   this.setState((state, props) => ({
@@ -49,9 +61,35 @@
 
 
 ### 3. 受控和非受控组件
-  + 用 `props` 传入数据的话，组件可以被认为是受控
+  + 用 `props` 传入数据的话，组件可以被认为是受控。<small>受控标签都接受一个 `value` 属性</small>
+
+      + react `input` 输入框，由 react 控制表单的输入。
+      + 使 react 的 `state` 成为唯一的数据源
+
+    ```jsx
+    this.setState({
+    	value: event.target.value
+    })
+    render(){
+      return (
+      <input type="text" value={this.state.value} onChange={this.handleChange} />
+      )
+    }
+    ```
+
+    
 
   + 数据只保存在组件内部 `state` 上的是非受控组件（因为外部没办法直接控制 `state`)。
+
+      + 下面 `input` 它的 `value` 只读，所以它是 React 中的一个**非受控**组件
+
+    ```jsx
+    <input type="file" />
+    ```
+
+    + 非受控组件数据交给 `Dom`来处理
+      +  [使用 ref](https://zh-hans.reactjs.org/docs/refs-and-the-dom.html) 来从 DOM 节点中获取表单数据。
+      + 数据都存在真实的 DOM 节点上
 
 ### 4. virtual DOM
 
@@ -109,7 +147,7 @@
 
    上面可以看到，并没有复用 A 组件。
 
-### 6. Cotext API 及使用场景
+### 6. createContext API 及使用场景
 
 出现的意义是为了解决组件间通信的问题，因为组件间数据的层层传递非常麻烦。Redux 就依赖此API。来共享全局状态。
 
