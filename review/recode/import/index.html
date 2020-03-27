@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="./export.js" type="module"></script>
 </head>
 <body>
-  <script>  
-  console.log(window.obj)
+  <p>test</p>
+  <script type="module">
+    // 导入firstBlood模块
+    import { pColor ,a } from './export.js';
+    // 设置颜色为红色
+    pColor('red');
+    a.test='124'
+    a.b=1234
   </script>
 </body>
 </html>

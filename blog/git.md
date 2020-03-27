@@ -131,7 +131,7 @@ $ git remote -v
 + 更新
 
 ```
-$ git fetch upstream
+$ git fetch upstream branch_name
 > remote: Counting objects: 75, done.
 > remote: Compressing objects: 100% (53/53), done.
 > remote: Total 62 (delta 27), reused 44 (delta 9)
@@ -142,7 +142,7 @@ $ git fetch upstream
 
 
 ```
-$ git rebase upstream 
+$ git rebase upstream branch_name
 
 # 上面两步合为一步
 

@@ -1,6 +1,6 @@
 ## React & Redux 进阶
 
-### 1. React的思想 
+### 1. React 的思想 
 
 + 虚拟 DOM 
 
@@ -17,6 +17,87 @@
   
 
   
+
++ 在 `react` 中一切皆可 `props`
+  + 包括基本数据类型，React 元素以及函数。
+
+#### 1.1 react 的创建更新过程
+
+`react` 中有三种创建更新的方式
+
++ 通过 `ReactDom.render()` || `hydrate` 初次渲染
++ 通过 `setState` 更新
++ 通过 `forceState` 更新
+
+##### 1.1.1 ReactDom.render 的过程
+
++ 先创建一个 `ReactRoot` 顶点对象
+
+  app.js
+
+  ```jsx
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+  import App from './App';
+  
+  // 给 createElement 传了一个 APP 类
+  ReactDOM.render(<App />, document.getElementById('root'));
+  ```
+
+  ```js
+  // 源码 ReactDOM.js
+  function ReactRoot(
+    container: DOMContainer,
+    isConcurrent: boolean,
+    hydrate: boolean,
+  ) {
+    // 这个 root 指的是 FiberRoot
+    // createContainer 平台、任务调度的东西  
+    // createContainer => return createFiberRoot(containerInfo, isConcurrent, hydrate);
+    const root = createContainer(container, isConcurrent, hydrate);
+    this._internalRoot = root;
+  }
+  ```
+
+  到这里就创建了一个 root 对象
+
+  接下来进行 `render` 的操作
+
++ 在创建 `FiberRoot` 和 `RootFiber`，二者是非常重要的 `api` 
+
+  ```js
+  ReactRoot.prototype.render = function(
+    children: ReactNodeList,
+    callback: ?() => mixed,
+  ): Work {
+    // 这里指 FiberRoot
+    const root = this._internalRoot;
+    // ReactWork 的功能就是为了在组件渲染或更新后把所有传入
+    // ReactDom.render 中的回调函数全部执行一遍
+    const work = new ReactWork();
+    callback = callback === undefined ? null : callback;
+    // 如果有 callback，就 push 进 work 中的数组
+    if (callback !== null) {
+      work.then(callback);
+    }
+    // work._onCommit 就是用于执行所有回调函数的，就是我们传进来的 callback
+   	// updateContainer(<App/>,'root节点',parentComponent,callback)
+    // 这里的 parentComponent react采用了硬编码直接为 null 
+    updateContainer(children, root, null, work._onCommit);
+    return work;
+  };
+  ```
+
+  
+
++ 创建更新，进入更新调度阶段。
+
+  ```js
+  // 进入任务调度 有更新产生 需要更新
+  scheduleWork(current,expirationTime)
+  ```
+
+  + 因为有 react 16 有任务优先级的概念，同一时间有任务优先级不同的任务。
 
 ### 2. state、props、setState
 

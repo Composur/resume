@@ -662,7 +662,7 @@ var name = 'Wiliam';
 var Hi = person.sayHi;
 Hi(); // 调用的时候，这种不是隐式绑定 ，this 不是 person 而是 window
 ```
-
+**如果在一个对象上使用点或者方括号来访问属性或方法，这个对象就成了 this。如果并没有使用“点”运算符调用某个对象，那么 this 将指向全局对象（global object**
 
 
 ##### es6箭头函数的this根据外层函数或者全局作用域来绑定this
