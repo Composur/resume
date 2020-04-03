@@ -16,18 +16,51 @@
 
   
 
-  
+  + 组件名不能是表达式，应该是以大写字母开头的变量。
 
 + 在 `react` 中一切皆可 `props`
+
   + 包括基本数据类型，React 元素以及函数。
+
+  + `props`的默认值为 `true` 
+
+    ```jsx
+    <Com loading />
+    // 二者等价
+    <Com loading={true} />
+    ```
+
+    
+
++ jsx 可以进行字符串字面量转移，防止 xss(跨站脚本攻击) 。
 
 #### 1.1 react 的创建更新过程
 
 `react` 中有三种创建更新的方式
 
 + 通过 `ReactDom.render()` || `hydrate` 初次渲染
+
 + 通过 `setState` 更新
+
 + 通过 `forceState` 更新
+
+  ```jsx
+   <div class='container'>
+        parent
+        <p><span>span</span></p>
+        <div>div</div>
+    </div>
+  // 转换为 每一个节点都需要 React.createElement 进行创建
+    React.createElement("div", {
+      class: "container"
+    }, "parent",
+    React.createElement("p", null,React.createElement("span", null, "span")), 
+    React.createElement("div", null, "div"));
+  ```
+
+  
+
+![createElement](./img/createElement.jpg)
 
 ##### 1.1.1 ReactDom.render 的过程
 
@@ -36,11 +69,8 @@
   app.js
 
   ```jsx
-  import React from 'react';
-  import ReactDOM from 'react-dom';
-  import App from './App';
   
-  // 给 createElement 传了一个 APP 类
+  // 根据给 createElement 传了一个 APP 类
   ReactDOM.render(<App />, document.getElementById('root'));
   ```
 
@@ -59,45 +89,168 @@
   }
   ```
 
-  到这里就创建了一个 root 对象
+  到这里就创建了一个 root 对象，react 在创建对象的时候会把根节点内的所有元素都移除。我们一般都写成 `<div id="root"></div>` 没有子元素
 
-  接下来进行 `render` 的操作
++ 再创建 `FiberRoot` 和 `RootFiber`，二者是非常重要的 `api` 
 
-+ 在创建 `FiberRoot` 和 `RootFiber`，二者是非常重要的 `api` 
+  + `fiber` 和 Fiber 是两个不一样的东西，前者代表着数据结构，后者代表着新的架构。
+  + 每一个`dom` 节点对应着一个 `fiber` 对象
+  + **`FiberRoot` 就是整个 `fiber` 树的根节点**
 
   ```js
-  ReactRoot.prototype.render = function(
-    children: ReactNodeList,
-    callback: ?() => mixed,
-  ): Work {
-    // 这里指 FiberRoot
-    const root = this._internalRoot;
-    // ReactWork 的功能就是为了在组件渲染或更新后把所有传入
-    // ReactDom.render 中的回调函数全部执行一遍
-    const work = new ReactWork();
-    callback = callback === undefined ? null : callback;
-    // 如果有 callback，就 push 进 work 中的数组
-    if (callback !== null) {
-      work.then(callback);
-    }
-    // work._onCommit 就是用于执行所有回调函数的，就是我们传进来的 callback
-   	// updateContainer(<App/>,'root节点',parentComponent,callback)
-    // 这里的 parentComponent react采用了硬编码直接为 null 
-    updateContainer(children, root, null, work._onCommit);
-    return work;
-  };
-  ```
-
+  function ReactRoot(
+    container: DOMContainer,
+    isConcurrent: boolean,
+    hydrate: boolean,
+  ) {
+    // 这个 root 指的是 FiberRoot 这里创建了一个 FiberRoot
+    const root = createContainer(container, isConcurrent, hydrate);
+    this._internalRoot = root;
+  }
   
-
-+ 创建更新，进入更新调度阶段。
-
-  ```js
-  // 进入任务调度 有更新产生 需要更新
-  scheduleWork(current,expirationTime)
+  
+  
   ```
 
   + 因为有 react 16 有任务优先级的概念，同一时间有任务优先级不同的任务。
+
+##### 1.1.2 FiberRoot
+
++ FiberRoot 是整个应用的起点
++ 包含应用挂载的目标节点（<APP/>）
++ 记录整个应用更新过程的各种信息
+  + 在 react 里面，通过 this.props.child 拿到子节点
+
+```js
+// react fiberRoot 中的数据结构
+type BaseFiberRootProperties = {
+   // 容器，也就是 render 的第二个参数
+  containerInfo: any,
+  // Used only by persistent updates.
+  // 只在持续更新中使用
+  pendingChildren: any,
+  // The currently active root fiber. This is the mutable root of the tree.
+  // 当前的 fiber 对象，也就是 root fiber
+  current: Fiber, // 指向 RootFiber
+   // 用来存放 update，也就是用来记录改变状态的 
+  updateQueue: UpdateQueue <any> | null,
+  ...
+}
+```
+
+##### 1.1.3 RootFiber
+
+* `fiber` 会组成一个树结构，内部使用了单链表树结构，每个节点及组件都会对应一个` fiber`
+
++ 父节点只有一个子节点，而每个子节点又有兄弟节点（`sibling`）,还有一个 `return` 指回了父节点。
+
+  ![fiber](./img/fiber.jpg)
+
++ 对应 `Dom` 结构如下
+
+  ![fiber-dom](./img/fiber-dom.jpg)
+
+##### 1.1.4 render
+
++ `updateContainer`
++ `currentTime`  代表 `react` 初始化的时间
++ `expirationTime` 代表更新的优先级
+  + 指一个任务的过期时间，`expirationTime` 大于当前时间 `react`就会延迟执行这个任务
+    + sync 的数字是最大的，所以优先级也是最高的
+    + 交互事件 优先级较高
+    +  异步事件 优先级最低
+  + 高优先级可以打断低优先级的执行
+    + 这样就造成了某些生命周期函数的多次执行
+
+```js
+ReactRoot.prototype.render = function(
+  children: ReactNodeList,
+  callback: ?() => mixed,
+): Work {
+  // 这里指 FiberRoot
+  // document.querySelector('#root')._reactRootContainer 可进行查看
+  const root = this._internalRoot;
+  // ReactWork 的功能就是为了在组件渲染或更新后把所有传入
+  // ReactDom.render 中的回调函数全部执行一遍
+  const work = new ReactWork();
+  callback = callback === undefined ? null : callback;
+  // 如果有 callback，就 push 进 work 中的数组
+  if (callback !== null) {
+    work.then(callback);
+  }
+  // work._onCommit 就是用于执行所有回调函数的，就是我们传进来的 callback
+ 	// updateContainer(<App/>,'root节点',parentComponent,callback)
+  // 这里的 parentComponent react采用了硬编码直接为 null 
+  updateContainer(children, root, null, work._onCommit);
+  return work;
+};
+
+
+// 非常重要的 api
+export function updateContainer(
+  element: ReactNodeList,
+  container: OpaqueRoot,
+  parentComponent: ?React$Component<any, any>,
+  callback: ?Function,
+): ExpirationTime {
+  // 取出容器的 fiber 对象，也就是 fiber root
+  const current = container.current;
+  // 计算时间 (react 初始化用了多少时间)
+  const currentTime = requestCurrentTime();
+  // expirationTime 代表优先级，数字越大优先级越高（指的是一个任务的过期时间）
+  // sync 的数字是最大的，所以优先级也是最高的
+  // 交互事件 优先级较高
+  // 异步事件 优先级最低
+  const expirationTime = computeExpirationForFiber(currentTime, current);
+  return updateContainerAtExpirationTime(
+    element,
+    container,
+    parentComponent,
+    expirationTime,
+    callback,
+  );
+}
+```
+
+##### 1.1.5 update (和 setState 相关)
+
+```js
+
+export function createUpdate(expirationTime: ExpirationTime): Update<*> {
+  
+  // 这里指的是 React.render(payload,callback)
+  return {
+    expirationTime: expirationTime,
+
+    tag: UpdateState,
+    // setState 的第一二个参数
+    payload: null,
+    callback: null,
+  
+    // 用于在队列中找到下一个节点
+    next: null,
+    nextEffect: null,
+  };
+}
+```
+
+
+
++ 用于记录组件状态的改变
++ 存放于 `updateQueue` 中
++ 多个 update 可以同时存在 （串联）
+
+
+
+##### 1.1.5 进入调度
+
++ 最后创建更新，进入更新调度阶段。
+  + 主要靠 expirationTime 
+
+```js
+// 进入任务调度 有更新产生 需要更新
+scheduleWork(current,expirationTime)
+```
 
 ### 2. state、props、setState
 
@@ -105,7 +258,49 @@
 
 + 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
 
-#### 2.1 异步的
+#### 2.1 props & 组件通信
+
+  + 父传子
+
+    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
+
+  + 子传父 
+
+    + 父组件中通过 ref 得到子组件的标签对象
+    + 通过 this.myRef.current.xxx() 得到子组件的方法
+
+```jsx
+// 父组件
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  test(){
+    const childMethodResult = this.myRef.current.xxx() // 'child methods'
+  }
+  render() {
+    return <Children ref={this.myRef} />;
+    //return <Children ref={ el => this.myRef = el} />; 推荐这样创建 ref
+  }
+}
+// 子组件
+class Child extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  xxx(){
+    return 'child methods'
+  }
+  render() {
+    return null;
+  }
+}
+```
+
+
+
+#### 2.2setState 为什么是异步的
 
 + 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的。
 + 第二：保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state`也不直接更新，都是在`flush`的时候更新
@@ -117,12 +312,12 @@
   }));
 ```
 
-#### 2.2 setState 何时异步
+#### 2.3 setState 何时异步
 
 1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在 `react` 的生命周期钩子函数中是异步的 
 
-#### 2.3 setState 何时同步
+#### 2.4 setState 何时同步
 
 1. 定时器中
 
@@ -174,7 +369,11 @@
 
 ### 4. virtual DOM
 
+#### 4.1 怎么进行 dom diff
+
 + 采用广度优先，层层比较的方式，算法时间复杂度 o(n)。
+
+  + 只比较同层节点，从上到下，从左到右。
 
   ![image-20200229202859371](./img/domdiff01.jpg)
 
@@ -187,21 +386,28 @@
   + 是基于组件的 DOM 结构是非常稳定的（一般 HTML 树是非常稳定的）
   + 是基于类型相同的兄弟节点可以被唯一标识 key
 
+#### 4.2 虚拟 DOM 的优势
+
+它优化了触发浏览器 `reflow` 和 `repaint` 的步骤，把众多页面节点改动集中到一次来进行触发。在用 `setState` 顺利触发了`component` 的 `render` 后，`react` 会对 `Virtual DOM` 进行操作，而这些操作并不会触发浏览器的 `reflow` 和 `repaint` ，因为 `Virtual DOM` 它只是存在内存中的一个有着 `DOM`层级关系的数据而已。 当最终形成了新的 `Virtual DOM` 后，转换成真实的 `DOM `这一步才会触发浏览器的 `reflow` 和 `repaint `。
+
 ### 5. 高阶组件（HOC）
 
 ​	它是一种设计模式，不是 React 独有。
 
-+ 普通组件 
-  + 将 props 转换为 UI
++ 普通组件是将 props 转换为 UI
 
-  + 高阶组件（一个函数），帮助去实现一些逻辑，自身并不包含任何 UI 展现。
++ 高阶组件是将组件转换为另一个组件
 
-      +  接收一个参数（参数是一个组件），再返回一个组件。目的是将组件转换为另一个组件。
+  + 借助高阶组件（一个函数）去实现一些逻辑，高阶组件自身并不包含任何 UI 展现。
+  + 接收一个参数（参数是一个组件），再返回一个组件。目的是将组件转换为另一个组件。
+  + 接收的组件就是用于返回的组件，目的是挂载一些 `props`
 
 +  适应场景
 
-   例如一个时钟的显示，封装成一个高阶组件 A 进行导出，在组件 B 中使用。B 就可以获取到高阶组件 A 的 属性 
+   例如一个时钟的显示，封装成一个高阶函数组件 `<A/>` 进行导出，然后在组件 B 中使用。
 
+   `<B/>` 就可以获取到高阶组件 `<A/>` 的 `props` 
+   
    ```jsx
    // 高阶组件 A
    export default function A (WrapComponent){
@@ -223,12 +429,14 @@
        )
      }
    }
-   export default A(B) // 这样就可以获得 A 组件的属性 
+export default A(B) // 这样就可以获得 A 组件的属性 
    ```
-
+   
    上面可以看到，并没有复用 A 组件。
 
 ### 6. createContext API 及使用场景
+
+#### 6.1 基本用法
 
 出现的意义是为了解决组件间通信的问题，因为组件间数据的层层传递非常麻烦。Redux 就依赖此API。来共享全局状态。
 
@@ -239,7 +447,8 @@
 ```jsx
 // Context 可以让我们无须明确地传遍每一个组件，就能将值深入传递进组件树。
 // 为当前的 theme 创建一个 context（“light”为默认值）。
-const ThemeContext = React.createContext('light'); 
+// 如果有其它的 context 同理从新写一遍即可
+const ThemeContext = React.createContext('light');  
 
 class App extends React.Component {
   render() {
@@ -269,7 +478,7 @@ class ThemedButton extends React.Component {
     	<ThemeContext.Consumer>
        {/* 以函数作为子组件，放到 Consumer 里面才会生效 */}
       	{
-          theme => <Button theme={theme} {...props}/>
+          theme => <Button theme={theme} {...props}/> // theme === 'dark'
         }
       </ThemeContext.Consumer>
     )
@@ -282,6 +491,29 @@ class ThemedButton extends React.Component {
 **为什么不采用写一个外部配置文件的方式进行主题更改？**
 
 如果写成一个配置文件去切换，那么你还需要监听数据的变化然后再进行更新（forceUpdate）的操作。因为外部的数据并不属于组件内部的一个状态。
+
+#### 6.2 contextType
+
+项目只有一个 `createContext`的情况下可以采用简写的形式，上面中我们获取 provider 提供的 value 需要在 render中的函数里得到，利用 contextType 我们可以不写函数也能得到
+
+```jsx
+class ThemedButton extends React.Component {
+	static contextType = ThemeContext; // 静态方法
+  render(){
+    const theme = this.context // 调用 context 直接返回
+    return (
+    	<ThemeContext.Consumer>
+       {/* 以函数作为子组件，放到 Consumer 里面才会生效 */}
+      	{
+          theme => <Button theme={theme} {...props}/> // theme === 'dark'
+        }
+      </ThemeContext.Consumer>
+    )
+  }
+}
+```
+
+
 
 ### 7. Redux
 
@@ -622,11 +854,13 @@ Facebook 开源的 JS 单元测试框架
 
   +  React 的 `Suspense`  api
 
+  借助 webpack 、 import 动态导入。
+  
   ```jsx
   import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
   import React, { Suspense, lazy } from 'react';
   
-  const Home = lazy(() => import('./routes/Home'));
+  const Home = lazy(() => import('./routes/Home')); 
   const About = lazy(() => import('./routes/About'));
   
   const App = () => (
@@ -638,10 +872,26 @@ Facebook 开源的 JS 单元测试框架
         </Switch>
       </Suspense>
     </Router>
-  );
+);
   ```
-
   
+  + 错误捕获
+  + 借助生命周期 `componentDidCatch`，进行 `render` 错误的渲染。 
+  
+  **总结：**
+  
+  +  `pureComponent`，提供简单的对比算法比较新旧 props state 减少性能开销。
+    + `pureComponent`只能直接对比值，值的内部发生改变无法对比。 
+  + 函数组件没有 `state` 可以借助 `memo` 达到同样的效果。 
+  
+  它们都是使用 `Object.is(new,old)` 进行对比。和 `===` 区别的
+  
+  ```js
+  Object.is(+0,-0) // false
+  Object.IS(Number.NaN,NaN) // true
+  +0===-0 // true
+  NaN===NaN // false
+  ```
 
 #### 14.3 注意可重构代码
 
@@ -653,43 +903,339 @@ Facebook 开源的 JS 单元测试框架
 
 + React dev-tool
 
-#### 组件通信
 
-  + 父传子
 
-    + 将父组件的方法以函数的形式传递给子组件，在子组件中调用
+### 15. Hooks
 
-  + 子传父 
+> *Hook* 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
 
-    + 父组件中通过 ref 得到子组件的标签对象
-    + 通过 this.myRef.current.xxx() 得到子组件的方法
+#### 15.1 Hooks 出现的原因:
+
+##### 15.1.1 class 的不足之处
+
++ 状态逻辑难以复用
+
+  + `render`、` props` 或者高阶组件（HOC）都在外层包裹了一层组件，无端增加代码层级。
+  + 函数组件等到有自己状态的时候，要改成 `class` 组件就会难以维护。
+
++ 事件的绑定解绑在不同的生命周期
+
+  + 在 `componentDidMount` 中注册事件以及其他的逻辑，在 `componentWillUnmount` 中卸载事件。
+
++ `this` 指向问题
+
+  + 构造函数显示 `bind(this)`
+
+  + `render` 函数显式 `bind(this)`
+
+  + 箭头函数绑定
+
+  + 静态类属性
 
     ```jsx
-    // 父组件
-    class Parent extends React.Component {
-      constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
-      }
-      test(){
-        const childMethodResult = this.myRef.current.xxx() // 'child methods'
-      }
-      render() {
-        return <Children ref={this.myRef} />;
-      }
-    }
-    // 子组件
-    class Child extends React.Component {
-      constructor(props) {
-        super(props);
-      }
-      xxx(){
-        return 'child methods'
-      }
-      render() {
-        return null;
-      }
-    }
+     handleClick = () => {
+            this.setState({
+                num: this.state.num + 1,
+            })
+      };
+     render() {
+            return (<div>
+                <button onClick={this.handleClick}>click me</button>
+            </div>)
+        }
     ```
 
     
+
+##### 15.1.2 Hooks 的特点
+
++ 解决了上述的几类问题。
+
++ 可以复用状态逻辑（自定义 Hooks）。
+
++ 新的 `api` 使用范围广。
+
++ 副作用关注点分离
+
+  + 每个 `useEffet` 对应一个副作用，不用像 `class` 那样都写到对应的生命周期函数中去。
+
+  
+
+##### 15.1.3 使用注意事项
+
++ *每一个 Hooks 相互独立*
+
+  + 不同函数调用同一个 Hooks 他们的状态时各自独立的，互不影响。
+
++ **只能在 React 的函数组件中调用 Hook**
+
++ **必须把 Hooks 写在函数的最外层*不能写在 `if...else` 等条件语句当中***
+
+  + 就是靠这样确保每次调用次序的一致性，而保证多个 `useState` 是相互独立的。
+    + 是根据调用的顺序而保证 `useState` 是相互独立的
+    + 每次调用的次序、数量必须一致，不能多也不能少。
+    + 就是利用了全局唯一性。
+
+  + 不然就会打乱`useState`的调用次序
+
+#### 15.2 useState
+
+##### 15.2.1 useState 的概念
+
++ 它是一个函数，接收一个唯一的参数 `state` ，返回一个数组。
++ 返回数组的第一项是 `state` 第二项是操作 `state`的方法`setState`
++ 与类组件中的 `this.setState` 的区别是 `setState` 是直接用新的 `state`替换旧的`state`。而 `this.setState` 是拿新的 `state` 和旧的 `state` 进行合并。
++ 另外可以有多个 `useState` 就像我们定义 `this.state` 那样有多个状态。相应的每个状态对应一个改变它的 `setState` 。
+
+##### 15.2.2 useState 的使用
+
+点击按钮 count 就会自动更新，**如果 count 的值没有变化就不会进行重新渲染。**
+
+`setState` 使用 `Object.is(oldState,newState)` 进行判断新旧值是否相等
+
+<small>和'==='的区别是'==='将数字值 `-0` 和 `+0` 视为相等，并认为 [`Number.NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/NaN) 不等于 [`NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN)。</small>
+
+```jsx
+function HooksUseState() {
+  // 数组的解构 参数0是state的初始值 返回的变量
+  // 等价于 const _useState = useState(0)
+  // 等价于 const count =  _useState[0]
+  // 等价于 const setCount =  _useState[1]
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h1>{count}</h1>
+       <button onClick={()=>setCount(count+1)}>+</button>
+    </div>
+  );
+}
+```
+
+*合并更新对象的多个属性*
+
+```jsx
+  function Counter() {
+    const [counter, setCounter] = useState({
+      name: "计数器",
+      number: 0,
+      count: 0
+    });
+    return (
+      <>
+        <p>
+          {counter.name}number:{counter.number}count:{counter.count}
+        </p>
+        <button
+          onClick={() =>
+            setCounter({
+              ...counter,
+              number: counter.number + 1,
+              count: counter.count + 1
+            })
+          }
+        >
+          +
+        </button>
+      </>
+    );
+  }
+
+```
+
+##### 15.2.3 优化 useState 
+
+`Class` 有 `pureComponent`，函数组件有 `React.memo`，它们通过比较新旧 `state`来减少组件的渲染次数。那么 `useState`该如何做呢？
+
+上面我们已经说了如果 `useState`接收到的属性不变，则不会重新渲染函数。但是 `useState` 每次都会重新执行，接受到的 `state` 尽管是同一个它还是会把它当成新的 `state` 
+
+解决办法：
+
+```js
+// 给初始值传入一个函数来执行 fn 这样 fn 就执行一次，否则直接传入 fn() 每次更新都会执行 fn
+useState(()=> fn())
+```
+
+#### 15.3 useEffect
+
+> 用来处理副作用的操作，例如：事件绑定与解绑、发送网络请求、操作DOM。
+
+`useEffect` 相当于 `componentDidMount`和 `componentDidUpdate`、`componentWillUnmount`
+
+适用于组件挂载前、挂载后、更新后。如需清除上一次的副作用，可返回一个函数，函数内部执行清除副作用的操作。
+
+##### 15.2.1 如何使用
+
+```jsx
+let timer;
+function ajax() {
+  return new Promise((resolve, reject) => {
+    timer = setTimeout(() => {
+      resolve("我是后台返回的内容");
+    }, 2000);
+  });
+}
+
+function Hooks() {
+  const [content, setContent] = useState("loading");
+  // 异步请求 ，清除 timeout
+  useEffect(() => {
+    ajax().then(data => {
+      setContent(data);
+    });
+  	// 清除定时器  
+    return function clear() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }); 
+  return (
+    <div>
+      <div style={{ padding: "30px" }}>
+        <Row gutter={16}>
+          <Col span={8}>
+            <Card title="useEffect" >
+              2s 后从后台获取 content：
+              {content}
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    </div>
+  );
+}
+export default Hooks;
+
+```
+
+##### 15.3.1 useEffect 的第二个参数
+
+第二个参数是一个数组，只有数组的每一项都不变才会阻止 `useEffect` 的调用。
+
+为什么要用第二个参数？
+
+因为其它函数引起 Hooks 函数渲染的的时候  `useEffect` 每次都会执行，浪费性能。等于每执行一个其它操作都要请求一次。
+
+```js
+//  useEffect 每次都会执行
+useEffect(() => {
+    document.title = `点击了${count}次`;
+});
+
+ // 因为第一次执行的时候是空数组，第二次也是空数组他们一样，所以这个useEffect只更新一次
+useEffect(() => {
+    ajax().then(data => {
+      setContent(data);
+    });
+  	// 清除定时器  
+    return function clear() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+},[]); 
+```
+
+手动触发更新：
+
+```jsx
+// 异步请求 ，清除 timeout
+  useEffect(() => {
+    console.log('useEffect render')
+    const getData = async ()=>{
+      const res = await ajax(query)
+      console.log(res)
+      setContent(res)
+    }
+    getData()
+    return function clear() {
+      if (timer) {
+        console.log('clear timer')
+        clearTimeout(timer);
+      }
+    };
+  },[query]); // 传空数组只会执行一次
+
+
+// 手动改变 query 的值触发 useEffect 的更新调用渲染
+ <Button
+   size="small"
+   type="primary"
+   onClick={() => setQuery(query+1)}
+   >
+```
+
+#### 15.4 useContext
+
+类似` static contextType` 的用法
+
+```jsx
+const ThemeContext = React.createContext();
+function Context() {
+  // 类似 contextType
+  const test = useContext(ThemeContext);
+  debugger
+  return <span>{test}</span>; // dark
+}
+
+export default function Hooks(){
+  return (
+  	 <ThemeContext.Provider value={'dark'}>
+      <Context />
+    </ThemeContext.Provider>
+  )
+}
+```
+
+#### 15.5 useMemo
+
+##### 15.5.1 useMemo vs memo
+
+`memo` 和 `PureComponent` 一样是为了判断组件是否重复渲染，达到性能优化的目的。`memo` 主要用于函数组件 <small>它没有 `state` </small> 。`PureComponent` 用于类组件。
+
+`useMemo` 是用于判断一段函数逻辑是否重复执行。
+
++ `useMemo` 对应函数 `fn`
++ `memo` 对应函数组件 `<Foo/>`
++ 都是为了性能优化，不做业务逻辑处理。
+
+##### 15.5.1 useMemo vs useEffect vs useCallback
+
++ `useMemo` 是在渲染期间完成，且返回值可用作渲染。
+
++ `useEffect` 是在渲染完成后执行有副作用的操作。
+
++ 二者写法类似，第二次参数都是数组，用来对比。
+
++ 如果 `useMemo`的返回值是一个函数可以用 `useCallback`代替 `useMemo`
+
+  ```jsx
+  const [testUseMemo,setTestUseMemo] = useState(0)
+  const testUseCallBack = useMemo(()=>{
+    return function(){
+      setTestUseMemo(testUseMemo+1)
+    }
+  },[])
+  // 等价于上面的写法
+  const testUseCallBack = useCallback(()=>{
+      setTestUseMemo(testUseMemo+1)
+  },[])
+  
+  ```
+
+
+
+它们主要应用于给子组件传递参数的时候，是否渲染子组件，达到性能优化的效果**
+
+#### 15.6 useRef
+
+在函数组件中我们有三种方式创建 `ref`
+
++ String ref 不推荐
++ CreateRef
++ Callback ref 推荐
+
+但是在函数组件中，我们使用 `useRef` 创建 `ref`
+
+
+
