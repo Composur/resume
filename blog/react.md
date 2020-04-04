@@ -1127,12 +1127,6 @@ useEffect(() => {
     ajax().then(data => {
       setContent(data);
     });
-  	// 清除定时器  
-    return function clear() {
-      if (timer) {
-        clearTimeout(timer);
-      }
-    };
 },[]); 
 ```
 
@@ -1148,12 +1142,6 @@ useEffect(() => {
       setContent(res)
     }
     getData()
-    return function clear() {
-      if (timer) {
-        console.log('clear timer')
-        clearTimeout(timer);
-      }
-    };
   },[query]); // 传空数组只会执行一次
 
 
@@ -1164,6 +1152,10 @@ useEffect(() => {
    onClick={() => setQuery(query+1)}
    >
 ```
+
+**要使用 useEffect 清除定时器，需要使用 useRef，具体请看 15.6 useRef**
+
+
 
 #### 15.4 useContext
 
@@ -1229,13 +1221,87 @@ export default function Hooks(){
 
 #### 15.6 useRef
 
+> Ref 主要为了获取 dom 以及获取子组件。
+
 在函数组件中我们有三种方式创建 `ref`
 
 + String ref 不推荐
 + CreateRef
 + Callback ref 推荐
 
+注意：在函数组件上我们不能用上述方法创建 `ref` ，因为只有类组件才可以实例化。
+
 但是在函数组件中，我们使用 `useRef` 创建 `ref`
+
+##### 15.6.1 useRef 的使用
+
++ 获取 `dom` 句柄或子组件
+
++ 获取组件上传渲染的数据，同步到 ref 在下次渲染的时候获得。
+
+  + 当子组件 count 的值为 3 的时候清除定时器
+
+  ```jsx
+   const refTimer = useRef();
+   const [count, setCount] = useState(0);
+    // 用 ref 保存变量
+    useEffect(() => {
+      refTimer.current = setInterval(() => {
+        setCount(count => count + 1);
+      }, 1000);
+    }, []);
+    useEffect(() => {
+      if (count >= 3) {
+        clearTimeout(refTimer.current);
+      }
+    });
+  ```
+
+为什么不使用变量保存定时器然后清除？
+
+因为组件每次都会重新渲染，拿到的变量无意义。
+
+#### 16. 自定义 Hooks
+
+没什么好说的把原有的逻辑放到以函数名为`use`开头的自定义函数中。
+
+**目的就是为了复用代码**
+
+```jsx
+// 自定义 Hooks 函数名必须以 use 开头
+function useNumber(defaultNumber) {
+  let [number, setNumber] = useState(defaultNumber);
+  const ref = useRef()
+  useEffect(() => {
+   ref.current = setInterval(() => {
+      setNumber(number => number + 1);
+    }, 1000);
+  }, []);
+  useEffect(()=>{
+    if(number>=10){
+      clearTimeout(ref.current)
+    }
+  })
+  return [number, setNumber];
+}
+function Counter() {
+  let [number, setNumber] = useNumber(0);
+  return (
+    <Button
+      type="primary"
+      onClick={() => {
+        setNumber(number + 10);
+      }}
+    >
+      点击加10 : {number}
+    </Button>
+  );
+}
+```
+
+
+
+
 
 
 
