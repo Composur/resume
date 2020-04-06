@@ -517,9 +517,15 @@ class ThemedButton extends React.Component {
 
 ### 7. Redux
 
-> 应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。惟⼀改变 `state` 的办法是触发 `action `⼀个描述发⽣了什么的对象。
->
-> 为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`
+Redux 的原则 ：
+
++ 单一数据源
++ 状态不可变
++ 纯函数修改状态
+
+应⽤中所有的 `state` 都以⼀个对象树的形式储存在⼀个单⼀的 `store` 中。唯一改变 `state` 的办法是触发 `action  ` ⼀个描述发⽣了什么的对象。
+
+为了描述 `action` 如何改变 `state` 树，你需要编写 `reducers。`
 
 + React 的模式是 state 到 DOM，是组件内部的状态。
 
@@ -987,6 +993,8 @@ Facebook 开源的 JS 单元测试框架
 + 与类组件中的 `this.setState` 的区别是 `setState` 是直接用新的 `state`替换旧的`state`。而 `this.setState` 是拿新的 `state` 和旧的 `state` 进行合并。
 + 另外可以有多个 `useState` 就像我们定义 `this.state` 那样有多个状态。相应的每个状态对应一个改变它的 `setState` 。
 
+**当你觉得现在的 state 满足不了需求的时候不防增加一个 state 变量试试**
+
 ##### 15.2.2 useState 的使用
 
 点击按钮 count 就会自动更新，**如果 count 的值没有变化就不会进行重新渲染。**
@@ -1041,6 +1049,10 @@ function HooksUseState() {
   }
 
 ```
+
++ 如何强制渲染 Hooks 组件
+  + 声明一个无关的 `useState`
+  + 更新这个 `state` 就会强制渲染当前的 Hooks 组件。
 
 ##### 15.2.3 优化 useState 
 
@@ -1221,7 +1233,7 @@ export default function Hooks(){
 
 #### 15.6 useRef
 
-> Ref 主要为了获取 dom 以及获取子组件。
+> Ref 主要为了获取 dom 以及获取子组件。不支持传入函数参数进行初始化。
 
 在函数组件中我们有三种方式创建 `ref`
 
@@ -1237,7 +1249,7 @@ export default function Hooks(){
 
 + 获取 `dom` 句柄或子组件
 
-+ 获取组件上传渲染的数据，同步到 ref 在下次渲染的时候获得。
++ 获取组件上次渲染的数据，同步到 ref 中在下次渲染的时候获得。（获取上次的 state）
 
   + 当子组件 count 的值为 3 的时候清除定时器
 
@@ -1265,7 +1277,7 @@ export default function Hooks(){
 
 没什么好说的把原有的逻辑放到以函数名为`use`开头的自定义函数中。
 
-**目的就是为了复用代码**
+**目的就是为了复用代码** 
 
 ```jsx
 // 自定义 Hooks 函数名必须以 use 开头
@@ -1298,6 +1310,101 @@ function Counter() {
   );
 }
 ```
+
+#### 17. Hooks  使用注意事项
+
+##### 17.1 写法和配置上
+
++ Hooks 函数必须在函数顶层调用，不能在 `if...else` 等条件语句中使用。
+  + 确保执行 `useState ` 中 `state` 的唯一性，有序性。
++ 只能在函数组件，自定义 Hooks 中使用，为了确保能够在 Hooks 上下文中调用。
+  + 自定义 Hooks 函数，函数名要以 `use` 开头。
+
++ 安装官方推荐的 Hooks 插件[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+
+  + 配置 package.json
+
+  ```json
+  "eslintConfig": {
+      "extends": "react-app",
+      "plugins": [
+        "react-hooks"
+      ],
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+      }
+    }
+  ```
+
+  
+
+  
+
+##### 17.2 class 组件的生命周期函数与 Hooks 的映射
+
+```js
+import React,{useState,useEffect,memo, useRef} from 'react'
+class ExampleComponent extends React.Component {
+
+  // 用于初始化 state
+  constructor() {}
+  useState()
+
+  // 用于替换 `componentWillReceiveProps` ，该函数会在初始化和 `update` 时被调用
+  // 因为该函数是静态函数，所以取不到 `this`
+  // 如果需要对比 `prevProps` 需要单独在 `state` 中维护
+  static getDerivedStateFromProps(nextProps, prevState) {}
+  useState()
+
+  static getDerivedStateFromError(){}
+  // Hooks 暂未实现组件错误处理的功能
+
+  // 判断是否需要更新组件，多用于组件性能优化
+  shouldComponentUpdate(nextProps, nextState) {}
+  memo() // memo 用于函数组件和 Hooks 关系不大
+
+  // 组件挂载后调用
+  // 可以在该函数中进行请求或者订阅
+  componentDidMount() {}
+  useEffect(()=>{
+    componentDidMount() {}
+    return ()=>{
+      componentWillUnmount() {}
+    }
+  },[])
+
+  // 用于获得最新的 DOM 数据
+  getSnapshotBeforeUpdate() {}
+  useEffect() 结合 useRef() 用 useRef() 保存上传的状态
+
+  // 组件即将销毁
+  // 可以在此处移除订阅，定时器等等
+  componentWillUnmount() {}
+  useEffect()
+
+  // 组件销毁后调用
+  componentDidUnMount() {}
+  
+  // 组件更新后调用
+  componentDidUpdate() {}
+  useEffect()
+
+  // 渲染组件函数
+  render() {}
+  
+
+
+  // 以下函数不建议使用
+  UNSAFE_componentWillMount() {}
+  UNSAFE_componentWillUpdate(nextProps, nextState) {}
+  UNSAFE_componentWillReceiveProps(nextProps) {}
+}
+```
+
+
+
+
 
 
 
