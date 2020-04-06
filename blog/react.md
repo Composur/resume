@@ -32,7 +32,7 @@
 
     
 
-+ jsx 可以进行字符串字面量转移，防止 xss(跨站脚本攻击) 。
++ `jsx` 可以进行字符串字面量转移，防止 `xss` (跨站脚本攻击) 。
 
 #### 1.1 react 的创建更新过程
 
@@ -156,9 +156,9 @@ type BaseFiberRootProperties = {
 + `currentTime`  代表 `react` 初始化的时间
 + `expirationTime` 代表更新的优先级
   + 指一个任务的过期时间，`expirationTime` 大于当前时间 `react`就会延迟执行这个任务
-    + sync 的数字是最大的，所以优先级也是最高的
+    + `sync `的数字是最大的，所以优先级也是最高的
     + 交互事件 优先级较高
-    +  异步事件 优先级最低
+    + 异步事件 优先级最低
   + 高优先级可以打断低优先级的执行
     + 这样就造成了某些生命周期函数的多次执行
 
@@ -254,7 +254,9 @@ scheduleWork(current,expirationTime)
 
 ### 2. state、props、setState
 
-> state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。**构造函数是唯一可以给 this.state 赋值的地方**
+> state 和 props 之间最重要的区别是：props 由父组件传入，而 state 由组件本身管理。组件不能修改 props，但它可以修改 state。
+>
+> 构造函数是唯一可以给 this.state 赋值的地方
 
 + 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
 
@@ -300,10 +302,10 @@ class Child extends React.Component {
 
 
 
-#### 2.2setState 为什么是异步的
+#### 2.2 setState 为什么是异步的
 
-+ 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用,`state` 的更新可能是异步的。
-+ 第二：保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state`也不直接更新，都是在`flush`的时候更新
++ 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用，`state` 的更新可能是异步的。
++ 第二：为了保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state` 也不直接更新，都是在`flush`的时候更新。
 + 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个`state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
 
 ```jsx
@@ -314,7 +316,7 @@ class Child extends React.Component {
 
 #### 2.3 setState 何时异步
 
-1. 在 `react `的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
+1. 在 `react 的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在 `react` 的生命周期钩子函数中是异步的 
 
 #### 2.4 setState 何时同步
@@ -502,13 +504,8 @@ class ThemedButton extends React.Component {
   render(){
     const theme = this.context // 调用 context 直接返回
     return (
-    	<ThemeContext.Consumer>
-       {/* 以函数作为子组件，放到 Consumer 里面才会生效 */}
-      	{
-          theme => <Button theme={theme} {...props}/> // theme === 'dark'
-        }
-      </ThemeContext.Consumer>
-    )
+   			 <Button theme={theme} {...props}/> // theme === 'dark'
+      ）
   }
 }
 ```
@@ -580,7 +577,7 @@ action.minus()
 
 流程说明：
 
-在 View 进行 click 触发一个**异步 action** 然后被中间件（redux-thunk）截获，处理完成后，进行dispatch 到reducer 然后到到 state 进行处理，更新 State 触发 View 更新。
+在 View 进行 click 触发一个**异步 action** 然后被中间件（redux-thunk）截获，处理完成后，进行`dispatch` 到`reducer` 然后到到 `state` 进行处理，更新 `state` 触发 View 更新。
 
 *中间件是一些函数用于定制对特定请求的处理过程*
 
@@ -610,7 +607,9 @@ export default createStore(appReducer,(applyMiddleware(ReduxThunk)))
 
 #### 7.4 reducer 
 
-reducer 是不允许有副作用的。你不能在里面操作 DOM，也不能发 Ajax 请求，更不能直接修改 state，它要做的仅仅是 —— 初始化和计算新的 state. 就是根据老的 state 和传入的 action 生成一个新的 state，会有好多个 reducer 函数
+`reducer` 是不允许有副作用的。你不能在里面操作 `DOM`，也不能发 `Ajax` 请求，更不能直接修改 `state`，它要做的仅仅是 —— 初始化和计算新的 `state`。就是根据老的 `state` 和传入的 `action` 生成一个新的 `state`。一般在一个项目中会有好多个 `reducer` 函数。
+
+例如：一个获取登录用户信息的 reducer
 
 ```js
 export function loginUserInfo (previousState = {}, action) {
@@ -642,8 +641,8 @@ connect() 是一个高阶函数,执行后返回一个高阶组件，接收一个
 
 参数为：
 
-+ `mapStateToProps:`一个函数，指定向UI组件传递哪些一般属性，必须返回一个对象
-+ `mapDispatchToProps:`可以是对象，对象所定义的方法名将作为属性名；每个方法将返回一个新的函数；也可以是函数通过`dispatch`显式分发`action`,目的是向UI组件传递函数
++ `mapStateToProps:`一个函数，指定向 UI 组件传递哪些一般属性，必须返回一个对象。
++ `mapDispatchToProps:`可以是对象，对象所定义的方法名将作为属性名；也可以是函数通过`dispatch`显式分发`action`，每个方法将返回一个新的带有`(dispatch,getState)`参数的函数，目的是向UI组件传递方法。
 
 #### 8.2 Provider
 
@@ -680,8 +679,19 @@ export default App extends Component {
 GET_LOGIN_USER_INFO = 'GET_LOGIN_USER_INFO'
 
 // action方法
-export function getLoginUserInfo () {
-  ...
+export function  getLoginUserInfo (params) {
+  return async (dispatch,getState)=>{
+    const res = await reqLogin(loginInfo)
+      if (res.status === 0) {
+        // 分发一个同步action
+        dispatch(
+          {
+            type:LOGIN_USER_INFO,
+            data:res.data
+          }
+        )
+      } 
+  }
 }
 
 //reducer
@@ -706,17 +716,17 @@ export function loginUserInfo (previousState = {}, action) {
 
 #### 10.2 redux 需要不可变数据的原因
 
-+ 性能优化
-  + reducer 根据传入的 state 和 action 生成了一个新的 state 而不是修改原有的 state 
-  + 这个时候就可以比较新旧 state 不需要比较值，不需要进行深层次的遍历，比较引用就可以。从而确定是否需要更新组件。
-+ 易于调试跟踪
-  + 可以追踪到新旧 state 
-+ 易于推测
-  + 推测 action 的状态 ，是否正确。
++ 为了性能优化
+  + `reducer` 根据传入的 `state` 和 `action` 生成了一个新的 `state` 而不是修改原有的 `state` 。
+  + 这个时候就可以比较新旧 `state` 而不需要比较值，继而不需要进行深层次的遍历，只比较它们的引用就可以，从而确定是否需要更新组件。
++ 为了易于调试跟踪
+  + 可以追踪到新旧 `state` 。
++ 为了易于推测
+  + 推测 `action` 的状态 ，是否正确。
 
-#### 10.3 操作不可变数据
+#### 10.3 如何操作不可变数据
 
-+ 原生的两种方法，`Object.assign()` ,` {...} `。
++ 原生的两种方法，`Object.assign()` 和 `{...} `。
 
 + `Immutability-helper` （节点很深可以用这个，用法类似 `Object.assign()`）
 
@@ -745,7 +755,7 @@ export function loginUserInfo (previousState = {}, action) {
 
 1. URL 模式
 
-   1. 通过 `BrowserRouter` 实现，HTML5 history API 。
+   1. 通过 `BrowserRouter` 实现，HTML5 中 `history` API 。
 
    ```jsx
     <BrowserRouter>
@@ -894,7 +904,7 @@ Facebook 开源的 JS 单元测试框架
   
   ```js
   Object.is(+0,-0) // false
-  Object.IS(Number.NaN,NaN) // true
+  Object.is(Number.NaN,NaN) // true
   +0===-0 // true
   NaN===NaN // false
   ```
