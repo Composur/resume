@@ -163,7 +163,7 @@ $ git pull upstream  branch_name --rebase
 
 ```
 $ git checkout master
-> Switched to branch 'master'
+> Switched to branc 'master'
 ```
 
 
@@ -404,3 +404,17 @@ git rm file_path
 git remote set-url origin 新地址
 
 ```
+
+### 17. 强制远程覆盖本地
+
+```shell
+// 从远程拉取所有内容
+git fetch --all
+
+// reset 本地代码
+git reset --hard origin/master
+
+// 重启拉取对齐
+git pull
+```
+

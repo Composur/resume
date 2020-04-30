@@ -1,4 +1,29 @@
+### 开启端口
+
++ 查询开启的端口号
+
+  ```sh
+  netstat -ntlp
+  ```
+
++ 查询单个端口号占用情况
+
+  ```sh
+  lsof -i tcp:80
+  ```
+
++ 开启 TCP 端口号，重启防火墙
+
+  ```sh
+  sudo firewall-cmd --permanent --zone=public --add-port=8080/tcp
+  sudo firewall-cmd --reload
+  success # 表示成功
+  ```
+
+  
+
 ### ubuntu运行sh脚本sudo自动输入密码
+
 + 第一种方法（文本块，重定向）
     ```
     #!/bin/bash
@@ -77,7 +102,7 @@
     ```
 
     + 当scp定时脚本的时候要输入密码的时候我们可以这样免密码操作
-        
+      
         + 在脚本所在服务器上操作
         ```
             ssh-keygen -t rsa
@@ -174,9 +199,9 @@
     tar -zcvf $TAR_DIR/$TAR_BAK $OUT_DIR/$DATE
     # 删除 7 天前的备份文件
     find $TAR_DIR/ -mtime +$DAYS -delete
-
+    
     exit
-
+    
     ```
 ### 备份到FTP
     ```
@@ -227,7 +252,7 @@ tar -xvf Retail.tar.gz
 
 # 查看每个物理CPU中core的个数(即核数)
   cat /proc/cpuinfo| grep "cpu cores"| uniq
-  
+
 # 查看逻辑CPU的个数
   cat /proc/cpuinfo| grep "processor"| wc -l
 # 路由追踪
@@ -376,7 +401,7 @@ cd /dev/disk/by-uuid
 ll
 
 
-	
+​	
 //过滤cron日志
 grep CRON /var/log/syslog
 

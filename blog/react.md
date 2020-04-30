@@ -268,8 +268,8 @@ scheduleWork(current,expirationTime)
 
   + 子传父 
 
-    + 父组件中通过 ref 得到子组件的标签对象
-    + 通过 this.myRef.current.xxx() 得到子组件的方法
+    + 父组件中通过 `ref` 得到子组件的标签对象
+    + 通过 `this.myRef.current.xxx()` 得到子组件的方法
 
 ```jsx
 // 父组件
@@ -316,7 +316,7 @@ class Child extends React.Component {
 
 #### 2.3 setState 何时异步
 
-1. 在 `react 的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
+1. 在 `react` 的监听回调中是异步的（ React 中的事件监听不是用的原生的事件监听，用的是合成的自定义的事件监听）
 2. 在 `react` 的生命周期钩子函数中是异步的 
 
 #### 2.4 setState 何时同步
@@ -325,7 +325,7 @@ class Child extends React.Component {
 
 2. 元素的 `DOM`事件（ `ref` 获取到原生的 `dom` ）
 
-3. `Promise` (下面的 data 是实时更新的)
+3. `Promise` (下面的 `data` 是实时更新的)
 
    ```js
    Promise.resolve().then(data=>{
@@ -432,9 +432,10 @@ class Child extends React.Component {
      }
    }
 export default A(B) // 这样就可以获得 A 组件的属性 
-   ```
    
-   上面可以看到，并没有复用 A 组件。
+   
+    上面可以看到，并没有复用 A 组件。
+   ```
 
 ### 6. createContext API 及使用场景
 
@@ -1326,10 +1327,12 @@ function Counter() {
 ##### 17.1 写法和配置上
 
 + Hooks 函数必须在函数顶层调用，不能在 `if...else` 等条件语句中使用。
+  
   + 确保执行 `useState ` 中 `state` 的唯一性，有序性。
 + 只能在函数组件，自定义 Hooks 中使用，为了确保能够在 Hooks 上下文中调用。
-  + 自定义 Hooks 函数，函数名要以 `use` 开头。
-
+  
++ 自定义 Hooks 函数，函数名要以 `use` 开头。
+  
 + 安装官方推荐的 Hooks 插件[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
 
   + 配置 package.json
@@ -1411,7 +1414,6 @@ class ExampleComponent extends React.Component {
   UNSAFE_componentWillReceiveProps(nextProps) {}
 }
 ```
-
 
 
 
