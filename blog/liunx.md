@@ -20,7 +20,22 @@
   success # 表示成功
   ```
 
-  
+
+### Mac 添加永久路由
+
+```sh
+<!-- 查看网卡名称列表 -->
+networksetup -listallnetworkservices
+
+
+<!-- 添加永久路由 -->
+networksetup -setadditionalroutes "WI-FI" ip地址 子网掩码 网关
+
+ <!-- 查看添加路由 -->
+networksetup -getadditionalroutes "WI-FI"
+```
+
+
 
 ### ubuntu运行sh脚本sudo自动输入密码
 

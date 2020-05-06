@@ -119,7 +119,7 @@
 + FiberRoot 是整个应用的起点
 + 包含应用挂载的目标节点（<APP/>）
 + 记录整个应用更新过程的各种信息
-  + 在 react 里面，通过 this.props.child 拿到子节点
+  + 在 react 里面，通过 `this.props.child` 拿到子节点
 
 ```js
 // react fiberRoot 中的数据结构
@@ -497,7 +497,7 @@ class ThemedButton extends React.Component {
 
 #### 6.2 contextType
 
-项目只有一个 `createContext`的情况下可以采用简写的形式，上面中我们获取 provider 提供的 value 需要在 render中的函数里得到，利用 contextType 我们可以不写函数也能得到
+项目只有一个 `createContext`的情况下可以采用简写的形式，上面中我们获取 `provider` 提供的 `value` 需要在 `render` 中的函数里得到，利用 `contextType` 我们可以不写函数也能得到
 
 ```jsx
 class ThemedButton extends React.Component {
@@ -532,7 +532,7 @@ Redux 的原则 ：
 
 #### 7.1 createStore()
 
-1. 接收的参数为 `reducer` 函数，返回 `store`。这样就产生了一个 store 。
+1. 接收的参数为 `reducer` 函数，返回 `store`。这样就产生了一个 `store` 。
   + `store` 的方法
     + `getState()` 返回值为 `store` 内部保存的数据
     + `dispatch()` 参数为 `action` 对象，触发 `reducer`，更新 `store` 触发 `subscribe` 监听，更新视图
