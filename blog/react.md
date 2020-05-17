@@ -12,37 +12,34 @@
   
 + 我们自定义组件的时候必须要**大写开头**，因为只有这样 `createElement` 把组件当成一个变量而不是字符串。
 
-  ![jsx](./img/jsx.jpg)
+  ```js
+  function createElement(type, config, children) {
+    //...
+  	 return ReactElement(
+      type,
+      key,
+      ref,
+      self,
+      source,
+      ReactCurrentOwner.current,
+      props,
+    );
+  }
+  // 创建 ele 内部有 $$typeof 标识这是一个 ReactElement
+  const ReactElement = function(type, key, ref, self, source, owner, props) {
+    const element = {
+      $$typeof: REACT_ELEMENT_TYPE,
+      type: type,
+      key: key,
+      ref: ref,
+      props: props,
+      _owner: owner,
+    };
+    return element;
+  };
+  ```
 
   
-
-  + 组件名不能是表达式，应该是以大写字母开头的变量。
-
-+ 在 `react` 中一切皆可 `props`
-
-  + 包括基本数据类型，React 元素以及函数。
-
-  + `props`的默认值为 `true` 
-
-    ```jsx
-    <Com loading />
-    // 二者等价
-    <Com loading={true} />
-    ```
-
-    
-
-+ `jsx` 可以进行字符串字面量转移，防止 `xss` (跨站脚本攻击) 。
-
-#### 1.1 react 的创建更新过程
-
-`react` 中有三种创建更新的方式
-
-+ 通过 `ReactDom.render()` || `hydrate` 初次渲染
-
-+ 通过 `setState` 更新
-
-+ 通过 `forceState` 更新
 
   ```jsx
    <div class='container'>
@@ -60,7 +57,76 @@
 
   
 
+  **ReactElement 的核心是 $$typeof**
+
+  
+
+  
+
+  ![jsx](./img/jsx.jpg)
+
+  
+
+  + 组件名不能是表达式，应该是以大写字母开头的变量。
+  + 我们写的 `<Com/>` 代表 `ReactElement` ，`Com` 代表 `Component`
+
 ![createElement](./img/createElement.jpg)
+
++ 在 `react` 中一切皆可 `props`
+
+  + 包括基本数据类型，React 元素以及函数。
+
+  + `props`的默认值为 `true` 
+
+    ```jsx
+    <Com loading />
+    // 二者等价
+    <Com loading={true} />
+    ```
+
+    
+
++ `jsx` 可以进行字符串字面量转移，防止 `xss` (跨站脚本攻击) 。
+
+#### 1.1 组件的创建更新过程
+
+`<Foo/>` 组件，`Foo` 代表 `React Component`
+
+我们看下组件的构造函数
+
+```js
+// updater 是 react-dom 的内容
+function Component(props, context, updater) {
+  this.props = props;
+  this.context = context;
+  this.refs = emptyObject;
+  this.updater = updater || ReactNoopUpdateQueue;
+}
+
+Component.prototype.isReactComponent = {};
+
+Component.prototype.setState = function(partialState, callback) {
+  this.updater.enqueueSetState(this, partialState, callback, 'setState');
+};
+
+Component.prototype.forceUpdate = function(callback) {
+  this.updater.enqueueForceUpdate(this, callback, 'forceUpdate');
+};
+```
+
+
+
+`react` 中有三种创建更新的方式
+
++ 通过 `ReactDom.render()` || `hydrate` 初次渲染
+
++ 通过 `setState` 更新
+
++ 通过 `forceState` 更新
+
+  
+
+
 
 ##### 1.1.1 ReactDom.render 的过程
 
@@ -212,6 +278,23 @@ export function updateContainer(
 }
 ```
 
+渲染有两个阶段：
+
+**Reconciliation**阶段：
+
++ `componentWillMount`
++ `componentWillReceiveProps`
++ `shouldComponentUpdate`
++ `componentWillUpdate`
+
+**Commit** 阶段
+
++ `componentDidMount`
++ `componentDidUpdate`
++ `componentWillUnmount`
+
+`reconciliation` 可以被打断，可能会出现多次调用的情况，除了 ``shouldComponentUpdate`` 其它应该避免调用，已经有了替代方案。`getDerivedStateFromProps` 会在初始化和更新的时候调用，`getSnapshotBeforeUpdate` 用来替换 `componentWillUpdate` 会在组件 `update` 后 `DOM` 更新前调用，用来获取最新的 `DOM` 数据。
+
 ##### 1.1.5 update (和 setState 相关)
 
 ```js
@@ -300,11 +383,34 @@ class Child extends React.Component {
 }
 ```
 
++ Ref 
 
+  ```js
+  
+  // 通过 current 属性去拿 ref
+  export function createRef(): RefObject {
+    const refObject = {
+      current: null,
+    };
+    return refObject;
+  }
+  ```
+
++ 在函数组件中获取 `ref`，函数组件没有实例不能直接获取 `ref`，需借助 `React.forwardRef()`
+
+  ```js
+  const FancyButton = React.forwardRef((props, ref) => (
+    <button ref={ref} className="FancyButton">
+      {props.children}
+    </button>
+  ))
+  ```
+
+  
 
 #### 2.2 setState 为什么是异步的
 
-+ 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用，`state` 的更新可能是异步的。
++ 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用，把多次调用放到一个队列。在合适的时候统一更新。减少浏览器的重绘，减小性能开销。
 + 第二：为了保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state` 也不直接更新，都是在`flush`的时候更新。
 + 要解决这个问题，可以让 `setState()` 接收一个函数而不是一个对象。这个函数用上一个`state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
 
@@ -533,6 +639,25 @@ Redux 的原则 ：
 #### 7.1 createStore()
 
 1. 接收的参数为 `reducer` 函数，返回 `store`。这样就产生了一个 `store` 。
+
+ 源码分析：
+
+```js
+// preloadedState 初始值
+// enhancer 是一个组合 store creator 的高阶函数，返回一个新的强化过的 store creator
+export default function createStore(reducer, preloadedState, enhancer) {
+  // 对 preloadedState 初始 state 进行判断，缺省的情况处理
+	if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
+    enhancer = preloadedState
+    preloadedState = undefined
+  }
+   return enhancer(createStore)(reducer, preloadedState)
+  
+}
+```
+
+
+
   + `store` 的方法
     + `getState()` 返回值为 `store` 内部保存的数据
     + `dispatch()` 参数为 `action` 对象，触发 `reducer`，更新 `store` 触发 `subscribe` 监听，更新视图
@@ -626,7 +751,68 @@ export function loginUserInfo (previousState = {}, action) {
 
 #### 7.4.1  combineReducers()
 
-+ 接收包含`n`个 `reducer` 的对象，返回一个新的 `reducer` 函数
++ 接收包含`n`个 `reducer` 的对象，过滤后，返回一个新的 `combination` 函数，然后遍历执行每个 `reducer` ,对比新旧 `state` ，然后将 `state` 返回。
+
+```js
+// reducer
+export default (state=user,action)=>{
+  switch(action.type){
+    case LOGIN_USER_INFO:
+      return action.data;
+    case LOG_OUT:
+      return {};
+    default :
+      return state;
+  } 
+}
+
+// combinReducer
+/**
+ * @description 接收多个reducer合并成一个reducer
+ * @default 接收的 reducer 返回的 state 对象不能是 undefined
+ */
+export default combineReducers({
+  loginUserInfo
+})
+
+```
+
+#### 分析一下源码：
+
+```js
+export default function combineReducers(reducers) {
+	const reducerKeys = Object.keys(reducers)
+  // 获取有效的 reducer
+  const finalReducers = {}
+  for (let i = 0; i < reducerKeys.length; i++) {
+    const key = reducerKeys[i]
+    if (typeof reducers[key] === 'function') {
+      finalReducers[key] = reducers[key]
+    }
+  }
+  
+  // 处理有效的 reducer
+  const finalReducerKeys = Object.keys(finalReducers)
+  return function combination(state = {}, action) { // state 为总的 state 
+     let hasChanged = false
+     const nextState = {} // 新的 state 
+     for (let i = 0; i < finalReducerKeys.length; i++) {
+       const key = finalReducerKeys[i]
+       const reducer = finalReducers[key] // 每个 reducer 函数
+      // state 的 key 和 finalReducers 的 key 是对应的
+       const previousStateForKey = state[key]
+       // 执行 reduer 得到新的 state
+       const nextStateForKey = reducer(previousStateForKey, action)
+				nextState[key] = nextStateForKey
+       // 比较新旧 state
+      	hasChanged = hasChanged || nextStateForKey !== previousStateForKey
+     }
+    return hasChanged ? nextState : state
+  }
+}
+```
+
+
 
 ### 8. react-redux
 
