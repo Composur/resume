@@ -61,6 +61,12 @@ git checkout -b dev(本地分支名称) origin/dev(远程分支名称)
 ```
 git pull origin dev(远程分支名称)
 ```
+
++ 建立本地分支和远程分支的关联，使用
+```
+git branch --set-upstream branch-name origin/branch-name
+```
+
 ### 5.git 删除本地/远程分支
 
 + 删除本地
@@ -138,12 +144,13 @@ $ git fetch upstream branch_name
 > Unpacking objects: 100% (62/62), done.
 > From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
 >  * [new branch]      master     -> upstream/master
-```
 
 
-```
 $ git rebase upstream branch_name
+```
 
+
+```
 # 上面两步合为一步
 
 $ git pull upstream  branch_name --rebase
@@ -417,4 +424,3 @@ git reset --hard origin/master
 // 重启拉取对齐
 git pull
 ```
-
