@@ -408,7 +408,7 @@ class Child extends React.Component {
 
   
 
-#### 2.2 setState 为什么是异步的
+#### 2.2 setState 为什么是异步的 
 
 + 第一：出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用，把多次调用放到一个队列。在合适的时候统一更新。减少浏览器的重绘，减小性能开销。
 + 第二：为了保持内部一致性：`props` 的更新是异步的，因为`re-render`父组件的时候，传入子组件的`props`才变化；为了保持数据一致，`state` 也不直接更新，都是在`flush`的时候更新。
