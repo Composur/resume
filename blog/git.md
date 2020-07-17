@@ -76,6 +76,7 @@ git branch -d BranchName
 + 删除远程
 ```
 git push origin --delete BranchName
+
 ```
 
 ### 6.Git log
