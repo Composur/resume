@@ -342,6 +342,8 @@ git branch -d feature-x
 ```
 #### bug分支流程
 
+**git stash 不会把新增的文件暂存，如果想 stash 后切换分支，你需要先 git add xxx 后 git stash**
+
 1. 暂存当前dev分支（不提交到git服务器）
 ```
 $ git stash
@@ -375,14 +377,15 @@ $ git stash apply stash@{0} 恢复指定的stash
 ```
 5. 关于git stash
 
-上述4恢复字后stash暂存区并不会自动删除，就是你提交暂存后也不会消失。`git stash list` 查暂存看依旧存在,可用`git stash drop`来删除；会删除全部暂存；另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
+   上述4恢复字后stash暂存区并不会自动删除，就是你提交暂存后也不会消失。`git stash list` 查暂存看依旧存在,可用`git stash drop`来删除；会删除全部暂存；另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
+
 ```
 git stash pop
 Dropped refs/stash@{0} (98e7191bbb73bd9e6214f79ff2b528d95b6477bd)
 ```
 
-6. 注意，此时我们只是修改了mater上的分支，当前的dev分支依然存在这个问题
-同样的bug，要在dev上修复，我们只需要把第`3`步的`merged bug fix 101`commit 头部信息 复制到`dev`分支就行；我们只是需要复制这个修改而不管其它的
+6. 注意，此时我们只是修改了mater上的分支，当前的dev分支依然存在这个问题同样的bug，要在dev上修复，我们只需要把第`3`步的`merged bug fix 101`commit 头部信息 复制到`dev`分支就行；我们只是需要复制这个修改而不管其它的
+
 ```
 $ git branch
 * dev
@@ -392,8 +395,17 @@ $ git cherry-pick commit编码（例如：a264173）
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
+7. 删除 stash
+
+```sh
+# 清空所有 stash
+git stash clear
+```
+
+
 
 ### 15. git 移除远程文件夹
+
 把不需要版本控制的文件提交到远程分支上后，需要删除远程分支上的文件，用以下操作即可
 ```
 git rm -r --cached dirname //删除远程文件夹，但保留本地文件夹 
