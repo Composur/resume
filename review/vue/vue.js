@@ -14,13 +14,13 @@ class Compile {
   compile(fragment) {
     const childNodes = fragment.childNodes;
     [...childNodes].forEach(child => {
+      // 根据 nodeType 进行节点类型的判断 1元素 
       // 判断每个节点的类型，是元素还是文本，分别进行处理
       if (this.isNodeElement(child)) {
-        // console.log('元素',child)
         // 处理 v-modal
         this.compileElement(child)
       } else {
-        // console.log('文本', child)
+        // 文本节点
         // 处理插值
         this.compileText(child)
       }
@@ -55,10 +55,10 @@ class Compile {
 
   }
   compileText(node) {
-    // 处理双大括号 {{}}
     const {
       textContent
     } = node
+    // 处理双大括号 {{}} '.+' 表示匹配任意字符 ’()‘ 表示分组
     if (/\{\{(.+?)\}\}/.test(textContent)) {
       compilUtil['text'](node, textContent, this.vm)
     }
@@ -76,7 +76,7 @@ class Compile {
     const f = document.createDocumentFragment()
     let node;
     while (node = el.firstChild) {
-      // appendChild 具有移动性 没移动一个 el节点就或少一个子元素直到没有
+      // appendChild 具有移动性每移动一个 el节点就或少一个子元素直到没有
       // 这样页面中就少一个元素 内存中就多一个元素
       f.appendChild(node)
     }
@@ -100,13 +100,13 @@ class Vue {
       this.proxyData(this.$data)
     }
   }
-  proxyData(data){
-    for(const key in data){
-      Object.defineProperty(this,key,{
-        get(){
+  proxyData(data) {
+    for (const key in data) {
+      Object.defineProperty(this, key, {
+        get() {
           return data[key]
         },
-        set(value){
+        set(value) {
           data[key] = value
         }
       })
@@ -146,7 +146,7 @@ const compilUtil = {
     // })
     node.value = this.getVal(expr, vm)
     node.addEventListener('input', e => {
-      this.setVal(expr, vm ,e.target.value)
+      this.setVal(expr, vm, e.target.value)
     })
   },
   on(node, expr, vm, eventName) {
@@ -164,9 +164,9 @@ const compilUtil = {
       return this.getVal(args[1], vm)
     })
   },
-  setVal(expr, vm ,inputVal) {
+  setVal(expr, vm, inputVal) {
     return expr.split('.').reduce((pre, current) => {
-        pre[current] = inputVal
+      pre[current] = inputVal
     }, vm.$data)
   }
 }
