@@ -457,7 +457,7 @@ git stash clear
 
 把不需要版本控制的文件提交到远程分支上后，需要删除远程分支上的文件，用以下操作即可
 
-```
+```bash
 git rm -r --cached dirname //删除远程文件夹，但保留本地文件夹
 git commit -m ‘say something’ //提交操作，并添加描述
 git push origin master //推送
@@ -465,16 +465,14 @@ git push origin master //推送
 
 当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了, 可以使用
 
-```
+```bash
 git rm file_path
 ```
 
 ### 16. git 修改远程仓库地址
 
-```
-
+```bash
 git remote set-url origin 新地址
-
 ```
 
 ### 17. 强制远程覆盖本地
@@ -490,10 +488,19 @@ git reset --hard origin/master
 git pull
 ```
 
-### git 删除本地存在但远程不存在的分支
+### 18. git 删除本地存在但远程不存在的分支
 
 使本地和远程保持同步
 
 ```shell
 git remote prune origin
 ```
+
+### 19. git 修改 commit message 信息
+
+最近一次的
+
+```bash
+git commit --amend
+```
+
