@@ -17,3 +17,4 @@ new Promise(function (resolve) {
 process.nextTick(function () {
   console.log('nextTick 2')
 })
+console.log(process.memoryUsage());
