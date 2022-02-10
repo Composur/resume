@@ -12,7 +12,7 @@
   "dependencies": {
     "element-ui": "^2.3.9",
     "leancloud-storage": "^3.7.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.0",
     "nrm": "^1.0.2",
     "scss-loader": "0.0.1",
